@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robotics Consulting | Automatizācija, kas pelna</title>
+  <meta name="description" content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
+  <meta name="i18n-version" content="2026-04-25-01">
+  <style>
+    :root {
+      --bg: #060c1a;
+      --bg-soft: #0f1a30;
+      --card: rgba(17, 25, 44, 0.72);
+      --text: #edf2ff;
+      --muted: #b3c1dc;
+      --line: #2a3e63;
+      --accent-a: #2ba9f1;
+      --accent-b: #1d5fa8;
+      --accent-c: #f3ac2d;
+      --shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; }
+
+    body {
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1300px 680px at -10% -20%, rgba(43, 169, 241, 0.24), transparent 50%),
+        radial-gradient(1200px 760px at 110% -10%, rgba(29, 95, 168, 0.28), transparent 46%),
+        radial-gradient(900px 600px at 50% 120%, rgba(243, 172, 45, 0.12), transparent 45%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    .container {
+      width: min(1140px, 92vw);
+      margin: 0 auto;
+    }
+
+    .glass {
+      background: linear-gradient(170deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    header {
+      padding: 24px 0 16px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, rgba(7, 11, 20, 0.88), rgba(7, 11, 20, 0.55), transparent);
+      backdrop-filter: blur(6px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand img {
+      width: 345px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
+      background: transparent;
+      padding: 0;
+      display: block;
+    }
+
+    .mini-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mini-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid #294068;
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(17, 29, 50, 0.86);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid #294068;
+      background: rgba(17, 29, 50, 0.86);
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      color: #09223e;
+      background: linear-gradient(120deg, var(--accent-c), #ffd36f);
+    }
+
+    .hero {
+      padding: 46px 0 24px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .hero-main {
+      padding: 34px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      border: 1px solid #375c90;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: #d7e8ff;
+      background: rgba(26, 43, 74, 0.58);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 54ch;
+      color: var(--muted);
+      font-size: clamp(17px, 2.1vw, 20px);
+    }
+
+    .cta {
+      margin-top: 26px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 11px;
+      padding: 11px 16px;
+      border: 1px solid transparent;
+      transition: 160ms ease;
+      display: inline-block;
+      color: inherit;
+    }
+
+    .btn-main {
+      background: linear-gradient(120deg, var(--accent-c), #ffd36f);
+      color: #1d2433;
+    }
+
+    .btn-alt {
+      border-color: #3d5f93;
+      background: rgba(24, 37, 64, 0.8);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-side {
+      padding: 22px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .concept-board {
+      position: relative;
+      overflow: hidden;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid #2d4976;
+      background: linear-gradient(180deg, rgba(15, 28, 50, 0.94), rgba(10, 20, 38, 0.94));
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.32);
+      margin-bottom: 6px;
+    }
+
+    .concept-board::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(from 180deg, rgba(43, 169, 241, 0), rgba(43, 169, 241, 0.16), rgba(243, 172, 45, 0.18), rgba(43, 169, 241, 0));
+      animation: boardSpin 13s linear infinite;
+      pointer-events: none;
+    }
+
+    .concept-board::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 13px;
+      background: linear-gradient(180deg, rgba(15, 28, 50, 0.96), rgba(10, 20, 38, 0.96));
+      pointer-events: none;
+    }
+
+    .concept-top {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .concept-box {
+      border-radius: 10px;
+      border: 1px solid #385a90;
+      background: rgba(18, 31, 53, 0.88);
+      min-height: 58px;
+      padding: 10px;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .concept-board > .concept-box {
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-box strong {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      color: #d9e7ff;
+      text-transform: uppercase;
+    }
+
+    .concept-box span {
+      font-size: 11px;
+      color: #9cb3d8;
+    }
+
+    .concept-mid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .center-orb {
+      border-radius: 10px;
+      border: 1px solid #355685;
+      background: rgba(19, 32, 54, 0.9);
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      color: #d6e5ff;
+      text-align: center;
+      padding: 8px;
+    }
+
+    .center-orb {
+      border-color: #4973b0;
+      background:
+        radial-gradient(80px 40px at 50% 30%, rgba(43, 169, 241, 0.35), transparent 60%),
+        radial-gradient(70px 50px at 60% 70%, rgba(243, 172, 45, 0.25), transparent 60%),
+        rgba(18, 32, 55, 0.94);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-height: 108px;
+      position: relative;
+      animation: pulseCore 2.8s ease-in-out infinite;
+      gap: 6px;
+      align-content: center;
+    }
+
+    .orb-kicker {
+      font-size: 11px;
+      color: #98b6e3;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .orb-main {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      line-height: 0.9;
+    }
+
+    .concept-bottom {
+      position: relative;
+      z-index: 1;
+      border-radius: 10px;
+      border: 1px dashed #4a72ac;
+      margin-top: 6px;
+      padding: 12px 12px;
+      font-size: 15px;
+      line-height: 1.35;
+      color: #b5c8ea;
+      text-align: center;
+      background: linear-gradient(90deg, rgba(21, 47, 78, 0.65), rgba(29, 61, 98, 0.38));
+    }
+
+    @keyframes boardSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulseCore {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(43, 169, 241, 0.22); }
+      50% { box-shadow: 0 0 0 8px rgba(43, 169, 241, 0); }
+    }
+
+    @keyframes sweep {
+      0% { left: -45%; }
+      100% { left: 110%; }
+    }
+
+    .kpi {
+      background: rgba(13, 23, 40, 0.76);
+      border: 1px solid #2b446f;
+      border-radius: 14px;
+      padding: 14px 15px 12px;
+    }
+
+    .kpi-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .kpi-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid #4d75ae;
+      background: radial-gradient(circle at 30% 30%, rgba(43, 169, 241, 0.5), rgba(18, 35, 60, 0.9));
+      display: grid;
+      place-items: center;
+      color: #e7f2ff;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .kpi strong {
+      display: block;
+      font-size: 21px;
+      margin-bottom: 0;
+      line-height: 1.1;
+    }
+
+    .kpi p {
+      margin: 0;
+      color: #bdd0ee;
+      font-size: 14px;
+    }
+
+    .kpi-meter {
+      position: relative;
+      margin-top: 9px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(25, 41, 68, 0.9);
+      border: 1px solid #365684;
+      overflow: hidden;
+    }
+
+    .kpi-meter::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: var(--meter, 80%);
+      background: linear-gradient(90deg, #2ba9f1, #f3ac2d);
+      border-radius: 999px;
+    }
+
+    .offer-card {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .offer-pill {
+      text-align: center;
+      padding: 13px 10px;
+      border-radius: 12px;
+      border: 1px solid #355685;
+      background: rgba(18, 30, 53, 0.78);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    main { padding-bottom: 48px; }
+
+    section { margin-top: 16px; }
+
+    .section-card {
+      padding: 26px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 4vw, 32px);
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 66ch;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .panel {
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #2d456f;
+      background: rgba(17, 27, 47, 0.84);
+    }
+
+    .panel h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .flow {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .step {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid #324f80;
+      background: linear-gradient(180deg, rgba(18, 30, 53, 0.9), rgba(12, 22, 39, 0.9));
+    }
+
+    .step small {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #84a9df;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      border: 1px solid #385a90;
+      background: rgba(21, 35, 60, 0.9);
+      color: #d5e4ff;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .services-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .cta-box {
+      margin-top: 16px;
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid #395b90;
+      background:
+        radial-gradient(700px 280px at 10% 0%, rgba(43, 169, 241, 0.24), transparent 60%),
+        radial-gradient(700px 280px at 90% 100%, rgba(243, 172, 45, 0.2), transparent 60%),
+        rgba(18, 28, 49, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-box h2 { margin: 0 0 6px; }
+    .cta-box p { margin: 0; color: var(--muted); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px) scale(0.985);
+      transition: opacity 620ms ease, transform 620ms ease;
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: opacity, transform;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    footer {
+      border-top: 1px solid #23395d;
+      padding: 20px 0 32px;
+      color: #8ca3ca;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero, .grid-3, .grid-2, .flow { grid-template-columns: 1fr; }
+      header { position: static; }
+      .hero-main, .hero-side { padding: 24px; }
+      h1 { max-width: 100%; }
+      .concept-top, .concept-mid { grid-template-columns: 1fr; }
+      .brand img { width: 270px; height: auto; }
+      .center-orb { min-height: 94px; }
+      .orb-main { font-size: 32px; }
+      .concept-bottom { font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .concept-board::before,
+      .center-orb,
+      .reveal {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <div class="brand">
+        <img src="./assets/logo-transparent.png" alt="Robotics Consulting logo">
+      </div>
+      <div class="header-actions">
+        <nav class="mini-nav">
+          <a href="#pakalpojumi" data-i18n="nav_services">Pakalpojumi</a>
+          <a href="#process" data-i18n="nav_process">Process</a>
+          <a href="#tech" data-i18n="nav_tech">Tehnoloģijas</a>
+        </nav>
+        <div class="lang-switch" aria-label="Language switch">
+          <button class="lang-btn active" type="button" data-lang="lv">LV</button>
+          <button class="lang-btn" type="button" data-lang="ru">RU</button>
+          <button class="lang-btn" type="button" data-lang="en">ENG</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero reveal">
+      <article class="hero-main glass reveal" style="--reveal-delay: 80ms;">
+        <h1 data-i18n="hero_title">Ietaupiet laiku un izmaksas, automatizējot manuālus biznesa procesus.</h1>
+        <p class="lead" data-i18n="hero_lead">
+          Mēs ne tikai izstrādājam tehnisku risinājumu - mēs sakārtojam procesu tā, lai komanda strādā ātrāk, ar mazāk
+          kļūdām, un uzņēmums var augt bez operacionālā “bottleneck”.
+        </p>
+        <div class="cta">
+          <a class="btn btn-main" href="mailto:hello@example.com" data-i18n="hero_cta_main">Sākt sarunu</a>
+          <a class="btn btn-alt" href="#pakalpojumi" data-i18n="hero_cta_alt">Redzēt, ko var automatizēt</a>
+        </div>
+      </article>
+
+      <aside class="hero-side glass reveal" style="--reveal-delay: 150ms;">
+        <div class="concept-board" aria-label="Automation concept layout">
+          <div class="concept-top">
+            <div class="concept-box">
+              <strong data-i18n="concept_app_title">Aplikācijas biznesam</strong>
+              <span data-i18n="concept_app_sub">Iekšējie rīki un dashboardi</span>
+            </div>
+            <div class="concept-box">
+              <strong data-i18n="concept_proto_title">Prototips</strong>
+              <span data-i18n="concept_proto_sub">2-3 dienās</span>
+            </div>
+          </div>
+          <div class="concept-box">
+            <strong data-i18n="concept_auto_title">Automatizēts process</strong>
+            <span data-i18n="concept_auto_sub">No datiem uz rezultātu: mazāk kļūdu, ātrāka izpilde, lielāka peļņa.</span>
+          </div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-head">
+            <div class="kpi-icon">⏱</div>
+            <strong data-i18n="kpi_1_title">10+ gadi</strong>
+          </div>
+          <p data-i18n="kpi_1_sub">pieredze IT un sistēmu integrācijās</p>
+          <div class="kpi-meter" style="--meter: 92%;"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-head">
+            <div class="kpi-icon">🚀</div>
+            <strong data-i18n="kpi_2_title">2-3 dienās</strong>
+          </div>
+          <p data-i18n="kpi_2_sub">pirmā prototipa versija idejas validācijai</p>
+          <div class="kpi-meter" style="--meter: 84%;"></div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-head">
+            <div class="kpi-icon">🎯</div>
+            <strong data-i18n="kpi_3_title">Pragmatiska pieeja</strong>
+          </div>
+          <p data-i18n="kpi_3_sub">fokusā biznesa rezultāts, nevis buzzwordi</p>
+          <div class="kpi-meter" style="--meter: 96%;"></div>
+        </div>
+        <div class="offer-card">
+          <div class="offer-pill" data-i18n="offer_1">Aplikācijas biznesam</div>
+          <div class="offer-pill" data-i18n="offer_2">Integrācijas ar mājaslapām</div>
+          <div class="offer-pill" data-i18n="offer_3">Video novērošana</div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="pakalpojumi" class="glass section-card reveal">
+      <h2 class="section-title" data-i18n="services_title">Kur rodas lielākais efekts</h2>
+      <p class="section-sub" data-i18n="services_sub">Viss, kas ir atkārtojams, ir automatizējams. Un viss, kas ir automatizējams, var kļūt par tavu konkurences priekšrocību.</p>
+      <div class="grid grid-3">
+        <article class="panel reveal" style="--reveal-delay: 40ms;">
+          <h3 data-i18n="services_card_1_title">Backoffice automatizācija</h3>
+          <p data-i18n="services_card_1_sub">Pasūtījumi, rēķini, datu validācija, failu apstrāde, paziņojumi un citi rutīnas darbi bez manuālas klikšķināšanas.</p>
+        </article>
+        <article class="panel reveal" style="--reveal-delay: 110ms;">
+          <h3 data-i18n="services_card_2_title">Sistēmu savienošana</h3>
+          <p data-i18n="services_card_2_sub">Mājaslapa, noliktava, maksājumi, e-pasti un iekšējie rīki strādā kā viens vesels.</p>
+        </article>
+        <article class="panel reveal" style="--reveal-delay: 180ms;">
+          <h3 data-i18n="services_card_3_title">Specifiski iekšējie rīki</h3>
+          <p data-i18n="services_card_3_sub">Ja gatavs produkts neder, izstrādājam tieši jums pielāgotu rīku ar skaidru mērķi un izmērāmu ieguvumu.</p>
+        </article>
+      </div>
+      <div class="panel reveal" style="margin-top: 12px; --reveal-delay: 220ms;">
+        <h3 data-i18n="services_help_title">Nodrošinām arī:</h3>
+        <ul class="services-list">
+          <li data-i18n="services_li_1">Iekšējo rīku un specializētu sistēmu izveidi biznesam</li>
+          <li data-i18n="services_li_2">Pasūtījumu un rēķinu plūsmu automatizāciju</li>
+          <li data-i18n="services_li_3">Excel / CSV datu importu un validāciju</li>
+          <li data-i18n="services_li_4">Mājaslapas savienošanu ar citām biznesa sistēmām</li>
+          <li data-i18n="services_li_5">Video novērošanas risinājumu ieviešanu procesos</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="process" class="glass section-card reveal">
+      <h2 class="section-title" data-i18n="process_title">Kā notiek sadarbība</h2>
+      <p class="section-sub" data-i18n="process_sub">Ātrs, caurspīdīgs process bez liekas birokrātijas.</p>
+      <div class="flow">
+        <article class="step reveal" style="--reveal-delay: 30ms;">
+          <small>01 / Audit</small>
+          <p data-i18n="process_step_1">Saprotam, kur šobrīd zūd laiks un nauda. Definējam “quick wins”.</p>
+        </article>
+        <article class="step reveal" style="--reveal-delay: 100ms;">
+          <small>02 / Prototype</small>
+          <p data-i18n="process_step_2">Īsā laikā izstrādājam darba prototipu, lai redzat rezultātu pirms pilnas ieviešanas.</p>
+        </article>
+        <article class="step reveal" style="--reveal-delay: 170ms;">
+          <small>03 / Rollout</small>
+          <p data-i18n="process_step_3">Ieviešana reālajā plūsmā, ar datu drošību, monitoringu un fallback plānu.</p>
+        </article>
+        <article class="step reveal" style="--reveal-delay: 240ms;">
+          <small>04 / Improve</small>
+          <p data-i18n="process_step_4">Turpinām optimizāciju: mazāk kļūdu, vairāk ātruma, labāka mērogojamība.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="tech" class="glass section-card reveal">
+      <h2 class="section-title" data-i18n="tech_title">Tehnoloģijas, ar kurām var uzvarēt</h2>
+      <p class="section-sub" data-i18n="tech_sub">Instrumenti tiek izvēlēti pēc biznesa vajadzības, nevis “modīguma”.</p>
+      <div class="stack">
+        <span class="chip reveal" style="--reveal-delay: 20ms;">Automation Pipelines</span>
+        <span class="chip reveal" style="--reveal-delay: 55ms;">System Integrations</span>
+        <span class="chip reveal" style="--reveal-delay: 90ms;">Python / Node.js</span>
+        <span class="chip reveal" style="--reveal-delay: 125ms;">Cloud (AWS)</span>
+        <span class="chip reveal" style="--reveal-delay: 160ms;">Data Import & ETL</span>
+        <span class="chip reveal" style="--reveal-delay: 195ms;">Custom Dashboards</span>
+        <span class="chip reveal" style="--reveal-delay: 230ms;">Process Monitoring</span>
+      </div>
+    </section>
+
+    <section class="cta-box reveal">
+      <div>
+        <h2 data-i18n="cta_title">Ja process tev kaitina katru dienu — tas ir pirmais kandidāts automatizācijai.</h2>
+        <p data-i18n="cta_sub">Aprakstiet vienu problēmu. Sagatavosim konkrētu plānu, ko var uzlabot jau tuvākajās dienās.</p>
+      </div>
+      <a class="btn btn-main" href="mailto:hello@example.com" data-i18n="cta_button">Aprakstīt savu problēmu</a>
+    </section>
+  </main>
+
+  <footer>
+    <span data-i18n="footer_text">Rīga, Latvija · Pieejams projektiem Latvijā un attālināti Eiropā</span>
+  </footer>
+  <script>
+    (function () {
+      var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
+      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-04-25-01";
+      var languageFiles = {
+        lv: "./locales/lv.json",
+        ru: "./locales/ru.json",
+        en: "./locales/en.json"
+      };
+      var fallbackLanguage = "lv";
+      var languageCache = {};
+
+      function buildLanguageUrl(lang) {
+        return languageFiles[lang] + "?v=" + encodeURIComponent(i18nVersion);
+      }
+
+      function loadLanguage(lang) {
+        var selected = languageFiles[lang] ? lang : fallbackLanguage;
+        if (languageCache[selected]) return Promise.resolve(languageCache[selected]);
+
+        return fetch(buildLanguageUrl(selected))
+          .then(function (response) {
+            if (!response.ok) throw new Error("Failed to load language: " + selected);
+            return response.json();
+          })
+          .then(function (copy) {
+            languageCache[selected] = copy;
+            return copy;
+          });
+      }
+
+      function applyLanguage(lang) {
+        var selected = languageFiles[lang] ? lang : fallbackLanguage;
+        return loadLanguage(selected).catch(function () {
+          if (selected === fallbackLanguage) return null;
+          selected = fallbackLanguage;
+          return loadLanguage(fallbackLanguage);
+        }).then(function (copy) {
+          if (!copy) return;
+        var descriptionMeta = document.querySelector('meta[name="description"]');
+        document.documentElement.lang = selected;
+        document.title = copy.page_title;
+        if (descriptionMeta) descriptionMeta.setAttribute("content", copy.page_desc);
+
+        document.querySelectorAll("[data-i18n]").forEach(function (node) {
+          var key = node.getAttribute("data-i18n");
+          if (Object.prototype.hasOwnProperty.call(copy, key)) node.textContent = copy[key];
+        });
+
+        document.querySelectorAll(".lang-btn").forEach(function (btn) {
+          btn.classList.toggle("active", btn.getAttribute("data-lang") === selected);
+        });
+
+        localStorage.setItem("preferred-language", selected);
+        });
+      }
+
+      document.querySelectorAll(".lang-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          applyLanguage(btn.getAttribute("data-lang"));
+        });
+      });
+
+      var savedLanguage = localStorage.getItem("preferred-language");
+      applyLanguage(savedLanguage || "lv");
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var revealNodes = document.querySelectorAll(".reveal");
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" });
+      revealNodes.forEach(function (node) {
+        observer.observe(node);
+      });
+    })();
+  </script>
+</body>
+</html>
