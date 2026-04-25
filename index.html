@@ -287,22 +287,16 @@
     .center-orb {
       border-radius: 10px;
       border: 1px solid #355685;
-      background: rgba(19, 32, 54, 0.9);
-      min-height: 52px;
-      display: grid;
-      place-items: center;
-      font-size: 11px;
-      color: #d6e5ff;
-      text-align: center;
-      padding: 8px;
-    }
-
-    .center-orb {
       border-color: #4973b0;
       background:
         radial-gradient(80px 40px at 50% 30%, rgba(43, 169, 241, 0.35), transparent 60%),
         radial-gradient(70px 50px at 60% 70%, rgba(243, 172, 45, 0.25), transparent 60%),
         rgba(18, 32, 55, 0.94);
+      display: grid;
+      place-items: center;
+      color: #d6e5ff;
+      text-align: center;
+      padding: 8px;
       font-weight: 700;
       font-size: 12px;
       letter-spacing: 0.08em;
@@ -623,7 +617,7 @@
           kļūdām, un uzņēmums var augt bez operacionālā “bottleneck”.
         </p>
         <div class="cta">
-          <a class="btn btn-main" href="mailto:hello@example.com" data-i18n="hero_cta_main">Sākt sarunu</a>
+          <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="hero_cta_main">Sākt sarunu</a>
           <a class="btn btn-alt" href="#pakalpojumi" data-i18n="hero_cta_alt">Redzēt, ko var automatizēt</a>
         </div>
       </article>
@@ -748,7 +742,7 @@
         <h2 data-i18n="cta_title">Ja process tev kaitina katru dienu — tas ir pirmais kandidāts automatizācijai.</h2>
         <p data-i18n="cta_sub">Aprakstiet vienu problēmu. Sagatavosim konkrētu plānu, ko var uzlabot jau tuvākajās dienās.</p>
       </div>
-      <a class="btn btn-main" href="mailto:hello@example.com" data-i18n="cta_button">Aprakstīt savu problēmu</a>
+      <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Aprakstīt savu problēmu</a>
     </section>
   </main>
 
@@ -800,12 +794,12 @@
         if (descriptionMeta) descriptionMeta.setAttribute("content", copy.page_desc);
 
         document.querySelectorAll("[data-i18n]").forEach(function (node) {
-          var key = node.getAttribute("data-i18n");
-          if (Object.prototype.hasOwnProperty.call(copy, key)) node.textContent = copy[key];
+          var key = node.dataset.i18n;
+          if (Object.hasOwn(copy, key)) node.textContent = copy[key];
         });
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
-          btn.classList.toggle("active", btn.getAttribute("data-lang") === selected);
+          btn.classList.toggle("active", btn.dataset.lang === selected);
         });
 
         localStorage.setItem("preferred-language", selected);
@@ -814,14 +808,14 @@
 
       document.querySelectorAll(".lang-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
-          applyLanguage(btn.getAttribute("data-lang"));
+          applyLanguage(btn.dataset.lang);
         });
       });
 
       var savedLanguage = localStorage.getItem("preferred-language");
       applyLanguage(savedLanguage || "lv");
 
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var revealNodes = document.querySelectorAll(".reveal");
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
