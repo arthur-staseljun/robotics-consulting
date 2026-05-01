@@ -35,6 +35,9 @@
   "services_sub": "Practical services focused on ROI, efficiency, and lower implementation risk.",
   "services_card_1_title": "Automation Opportunity Assessment",
   "services_card_1_sub": "Identify the highest-ROI automation opportunities in your business.",
+  "services_card_1_scope": "Fixed-scope engagement",
+  "services_card_1_duration": "1–2 weeks",
+  "services_card_1_price": "Starting from €990",
   "services_card_1_i1": "Process analysis",
   "services_card_1_i2": "Bottleneck identification",
   "services_card_1_i3": "Automation feasibility review",
@@ -61,6 +64,7 @@
   "why_title": "Technical Expertise Meets Business Thinking",
   "why_sub_1": "Led by a senior software architect with 8+ years building distributed enterprise systems, scalable integrations, and event-driven platforms.",
   "why_sub_2": "We combine technical depth with practical ROI-focused consulting - bridging business needs and modern automation technologies.",
+  "why_sub_3": "Specializing in the software, integration, orchestration, and systems architecture layer behind modern automation initiatives - from WMS and ERP connections to fleet orchestration and real-time data pipelines.",
   "process_title": "How It Works",
   "process_sub": "A clear process from discovery to practical implementation support.",
   "process_label_1": "01 / Discovery Call",
@@ -81,5 +85,8 @@
   "cta_sub": "Get a practical assessment before committing to expensive equipment or software.",
   "cta_button": "Book a Discovery Call",
   "cta_button_prototypes": "View prototype examples",
+  "leadmag_title": "Free Download: Automation Readiness Checklist for SMEs",
+  "leadmag_sub": "A practical PDF to help warehousing, logistics, and manufacturing teams assess which processes are ready for automation — before committing to expensive equipment or software.",
+  "leadmag_btn": "Download Free Checklist",
   "footer_text": "Riga, Latvia · Available for projects in Latvia and remotely across Europe"
 }

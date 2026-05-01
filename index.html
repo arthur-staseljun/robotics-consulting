@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Robotics Consulting | Automatizācija, kas pelna</title>
   <meta name="description" content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-  <meta name="i18n-version" content="2026-05-01-01">
+  <meta name="i18n-version" content="2026-05-01-02">
   <style>
     :root {
       --bg: #060c1a;
@@ -556,6 +556,53 @@
       font-size: 14px;
     }
 
+    .service-pricing {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #3a6540;
+      background: rgba(20, 44, 22, 0.55);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .service-pricing .price-main {
+      font-weight: 700;
+      color: #7de8a0;
+      font-size: 15px;
+    }
+
+    .service-pricing .price-meta {
+      color: #8ecba4;
+    }
+
+    .leadmag-box {
+      margin-top: 16px;
+      padding: 24px 28px;
+      border-radius: 18px;
+      border: 1px solid #395b90;
+      background:
+        radial-gradient(600px 200px at 0% 50%, rgba(43, 169, 241, 0.18), transparent 60%),
+        rgba(16, 26, 46, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .leadmag-box .leadmag-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+
+    .leadmag-box .leadmag-text { flex: 1; min-width: 200px; }
+    .leadmag-box h3 { margin: 0 0 6px; font-size: 18px; color: #ffd36f; }
+    .leadmag-box p { margin: 0; color: var(--muted); font-size: 14px; }
+
     .cta-box {
       margin-top: 16px;
       padding: 24px;
@@ -738,6 +785,11 @@
             <li data-i18n="services_card_1_i4">ROI estimation</li>
             <li data-i18n="services_card_1_i5">Recommended implementation roadmap</li>
           </ul>
+          <div class="service-pricing">
+            <span class="price-main" data-i18n="services_card_1_price">Starting from €990</span>
+            <span class="price-meta" data-i18n="services_card_1_scope">Fixed-scope engagement</span>
+            <span class="price-meta" data-i18n="services_card_1_duration">1–2 weeks</span>
+          </div>
         </article>
         <article class="panel reveal" style="--reveal-delay: 110ms;">
           <h3 data-i18n="services_card_2_title">Prototype & Pilot Design</h3>
@@ -767,6 +819,9 @@
       <p class="section-sub" data-i18n="why_sub_1">Led by a senior software architect with 8+ years building distributed enterprise systems, scalable integrations, and event-driven platforms.</p>
       <article class="panel reveal" style="--reveal-delay: 80ms;">
         <p data-i18n="why_sub_2">We combine technical depth with practical ROI-focused consulting - bridging business needs and modern automation technologies.</p>
+      </article>
+      <article class="panel reveal" style="--reveal-delay: 140ms; margin-top: 12px;">
+        <p data-i18n="why_sub_3">Specializing in the software, integration, orchestration, and systems architecture layer behind modern automation initiatives - from WMS and ERP connections to fleet orchestration and real-time data pipelines.</p>
       </article>
     </section>
 
@@ -803,6 +858,15 @@
         <li data-i18n="ideal_4">Automation and robotics vendors needing software expertise</li>
       </ul>
     </section>
+
+    <div class="leadmag-box reveal">
+      <div class="leadmag-icon">📋</div>
+      <div class="leadmag-text">
+        <h3 data-i18n="leadmag_title">Free Download: Automation Readiness Checklist for SMEs</h3>
+        <p data-i18n="leadmag_sub">A practical PDF to help warehousing, logistics, and manufacturing teams assess which processes are ready for automation — before committing to expensive equipment or software.</p>
+      </div>
+      <a class="btn btn-alt" href="./assets/automation-readiness-checklist.pdf" download data-i18n="leadmag_btn">Download Free Checklist</a>
+    </div>
 
     <section class="cta-box reveal">
       <div>

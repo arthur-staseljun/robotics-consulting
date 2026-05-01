@@ -35,6 +35,9 @@
   "services_sub": "Praktiski pakalpojumi ar fokusu uz ROI, efektivitāti un zemāku ieviešanas risku.",
   "services_card_1_title": "Automatizācijas iespēju novērtējums",
   "services_card_1_sub": "Nosakām procesus ar augstāko automatizācijas atdevi.",
+  "services_card_1_scope": "Fiksēts darba apjoms",
+  "services_card_1_duration": "1–2 nedēļas",
+  "services_card_1_price": "No €990",
   "services_card_1_i1": "Procesu analīze",
   "services_card_1_i2": "Bottleneck punktu noteikšana",
   "services_card_1_i3": "Automatizācijas iespējamības izvērtējums",
@@ -61,6 +64,7 @@
   "why_title": "Tehniskā ekspertīze kopā ar biznesa domāšanu",
   "why_sub_1": "Sadarbību vada vecākais programmatūras arhitekts ar 8+ gadu pieredzi izkliedētu uzņēmumu sistēmu, integrāciju un event-driven platformu izstrādē.",
   "why_sub_2": "Apvienojam tehnisko dziļumu ar praktiskām ROI konsultācijām, sasaistot biznesa vajadzības ar mūsdienu automatizācijas tehnoloģijām.",
+  "why_sub_3": "Specializējas programmatūras, integrāciju, orkestrācijas un sistēmu arhitektūras slānī aiz modernām automatizācijas iniciatīvām — no WMS un ERP savienojumiem līdz flotes orkestrācijai un reāllaika datu plūsmām.",
   "process_title": "Kā tas notiek",
   "process_sub": "Skaidrs process no sākotnējās izpētes līdz praktiskam ieviešanas atbalstam.",
   "process_label_1": "01 / Atklāšanas zvans",
@@ -81,5 +85,8 @@
   "cta_sub": "Saņemiet praktisku novērtējumu pirms ieguldāt dārgās iekārtās vai programmatūrā.",
   "cta_button": "Pieteikt atklāšanas zvanu",
   "cta_button_prototypes": "Apskatīt prototipu piemērus",
+  "leadmag_title": "Bezmaksas lejupielāde: Automatizācijas gatavības kontrolsaraksts MVU",
+  "leadmag_sub": "Praktisks PDF noliktavu, loģistikas un ražošanas komandām, lai novērtētu, kuri procesi ir gatavi automatizācijai — pirms investīcijām dārgās iekārtās vai programmatūrā.",
+  "leadmag_btn": "Lejupielādēt bezmaksas kontrolsarakstu",
   "footer_text": "Rīga, Latvija · Pieejams projektiem Latvijā un attālināti Eiropā"
 }
