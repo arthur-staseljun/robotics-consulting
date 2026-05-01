@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Robotics Consulting | Automatizācija, kas pelna</title>
   <meta name="description" content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-  <meta name="i18n-version" content="2026-04-25-01">
+  <meta name="i18n-version" content="2026-05-01-01">
   <style>
     :root {
       --bg: #060c1a;
@@ -547,6 +547,15 @@
       gap: 6px;
     }
 
+    .service-includes {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 5px;
+      font-size: 14px;
+    }
+
     .cta-box {
       margin-top: 16px;
       padding: 24px;
@@ -643,14 +652,13 @@
   <main class="container">
     <section class="hero reveal">
       <article class="hero-main glass reveal" style="--reveal-delay: 80ms;">
-        <h1 data-i18n="hero_title">Ietaupiet laiku un izmaksas, automatizējot manuālus biznesa procesus.</h1>
+        <h1 data-i18n="hero_title">Practical Automation & Robotics Consulting for SMEs</h1>
         <p class="lead" data-i18n="hero_lead">
-          Mēs ne tikai izstrādājam tehnisku risinājumu - mēs sakārtojam procesu tā, lai komanda strādā ātrāk, ar mazāk
-          kļūdām, un uzņēmums var augt bez operacionālā “bottleneck”.
+          We help warehousing, logistics, and manufacturing businesses identify where automation makes financial sense - and how to implement it with confidence.
         </p>
         <div class="cta">
-          <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="hero_cta_main">Sākt sarunu</a>
-          <a class="btn btn-alt" href="#pakalpojumi" data-i18n="hero_cta_alt">Redzēt, ko var automatizēt</a>
+          <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="hero_cta_main">Book a Discovery Call</a>
+          <a class="btn btn-alt" href="./prototypes.html" data-i18n="hero_cta_alt">See Prototype Concepts</a>
         </div>
       </article>
 
@@ -700,80 +708,109 @@
       </aside>
     </section>
 
-    <section id="pakalpojumi" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="services_title">Kur rodas lielākais efekts</h2>
-      <p class="section-sub" data-i18n="services_sub">Viss, kas ir atkārtojams, ir automatizējams. Un viss, kas ir automatizējams, var kļūt par tavu konkurences priekšrocību.</p>
-      <div class="grid grid-3">
-        <article class="panel reveal" style="--reveal-delay: 40ms;">
-          <h3 data-i18n="services_card_1_title">Backoffice automatizācija</h3>
-          <p data-i18n="services_card_1_sub">Pasūtījumi, rēķini, datu validācija, failu apstrāde, paziņojumi un citi rutīnas darbi bez manuālas klikšķināšanas.</p>
-        </article>
-        <article class="panel reveal" style="--reveal-delay: 110ms;">
-          <h3 data-i18n="services_card_2_title">Sistēmu savienošana</h3>
-          <p data-i18n="services_card_2_sub">Mājaslapa, noliktava, maksājumi, e-pasti un iekšējie rīki strādā kā viens vesels.</p>
-        </article>
-        <article class="panel reveal" style="--reveal-delay: 180ms;">
-          <h3 data-i18n="services_card_3_title">Specifiski iekšējie rīki</h3>
-          <p data-i18n="services_card_3_sub">Ja gatavs produkts neder, izstrādājam tieši jums pielāgotu rīku ar skaidru mērķi un izmērāmu ieguvumu.</p>
-        </article>
-      </div>
-      <div class="panel reveal" style="margin-top: 12px; --reveal-delay: 220ms;">
-        <h3 data-i18n="services_help_title">Nodrošinām arī:</h3>
-        <ul class="services-list">
-          <li data-i18n="services_li_1">Iekšējo rīku un specializētu sistēmu izveidi biznesam</li>
-          <li data-i18n="services_li_2">Pasūtījumu un rēķinu plūsmu automatizāciju</li>
-          <li data-i18n="services_li_3">Excel / CSV datu importu un validāciju</li>
-          <li data-i18n="services_li_4">Mājaslapas savienošanu ar citām biznesa sistēmām</li>
-          <li data-i18n="services_li_5">Video novērošanas risinājumu ieviešanu procesos</li>
+    <section id="value-prop" class="glass section-card reveal">
+      <h2 class="section-title" data-i18n="problem_title">Automation is Expensive When Done Wrong</h2>
+      <p class="section-sub" data-i18n="problem_body">Many small and mid-sized businesses know automation could improve efficiency - but struggle to answer:</p>
+      <div class="grid grid-2">
+        <ul class="services-list panel reveal" style="--reveal-delay: 40ms;">
+          <li data-i18n="problem_q1">Which processes are worth automating?</li>
+          <li data-i18n="problem_q2">Will the investment pay off?</li>
+          <li data-i18n="problem_q3">What technology fits our workflow?</li>
+          <li data-i18n="problem_q4">How do we avoid costly mistakes?</li>
         </ul>
+        <article class="panel reveal" style="--reveal-delay: 110ms;">
+          <p data-i18n="problem_note">We help you answer those questions before major investments are made.</p>
+        </article>
       </div>
     </section>
 
+    <section id="pakalpojumi" class="glass section-card reveal">
+      <h2 class="section-title" data-i18n="services_title">Services</h2>
+      <p class="section-sub" data-i18n="services_sub">Practical services focused on ROI, efficiency, and lower implementation risk.</p>
+      <div class="grid grid-3">
+        <article class="panel reveal" style="--reveal-delay: 40ms;">
+          <h3 data-i18n="services_card_1_title">Automation Opportunity Assessment</h3>
+          <p data-i18n="services_card_1_sub">Identify the highest-ROI automation opportunities in your business.</p>
+          <ul class="service-includes">
+            <li data-i18n="services_card_1_i1">Process analysis</li>
+            <li data-i18n="services_card_1_i2">Bottleneck identification</li>
+            <li data-i18n="services_card_1_i3">Automation feasibility review</li>
+            <li data-i18n="services_card_1_i4">ROI estimation</li>
+            <li data-i18n="services_card_1_i5">Recommended implementation roadmap</li>
+          </ul>
+        </article>
+        <article class="panel reveal" style="--reveal-delay: 110ms;">
+          <h3 data-i18n="services_card_2_title">Prototype & Pilot Design</h3>
+          <p data-i18n="services_card_2_sub">Validate automation concepts before full-scale implementation.</p>
+          <ul class="service-includes">
+            <li data-i18n="services_card_2_i1">Workflow simulation</li>
+            <li data-i18n="services_card_2_i2">Prototype concepts</li>
+            <li data-i18n="services_card_2_i3">Technical feasibility assessment</li>
+            <li data-i18n="services_card_2_i4">Vendor and technology recommendations</li>
+          </ul>
+        </article>
+        <article class="panel reveal" style="--reveal-delay: 180ms;">
+          <h3 data-i18n="services_card_3_title">Robotics & Systems Integration Architecture</h3>
+          <p data-i18n="services_card_3_sub">Design the software and integration layer behind modern automation systems.</p>
+          <ul class="service-includes">
+            <li data-i18n="services_card_3_i1">API and platform architecture</li>
+            <li data-i18n="services_card_3_i2">Fleet and workflow orchestration</li>
+            <li data-i18n="services_card_3_i3">Cloud and edge integration</li>
+            <li data-i18n="services_card_3_i4">Data pipelines and monitoring</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="why-us" class="glass section-card reveal">
+      <h2 class="section-title" data-i18n="why_title">Technical Expertise Meets Business Thinking</h2>
+      <p class="section-sub" data-i18n="why_sub_1">Led by a senior software architect with 8+ years building distributed enterprise systems, scalable integrations, and event-driven platforms.</p>
+      <article class="panel reveal" style="--reveal-delay: 80ms;">
+        <p data-i18n="why_sub_2">We combine technical depth with practical ROI-focused consulting - bridging business needs and modern automation technologies.</p>
+      </article>
+    </section>
+
     <section id="process" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="process_title">Kā notiek sadarbība</h2>
-      <p class="section-sub" data-i18n="process_sub">Ātrs, caurspīdīgs process bez liekas birokrātijas.</p>
+      <h2 class="section-title" data-i18n="process_title">How It Works</h2>
+      <p class="section-sub" data-i18n="process_sub">A clear process from discovery to practical implementation support.</p>
       <div class="flow">
         <article class="step reveal" style="--reveal-delay: 30ms;">
-          <small>01 / Audit</small>
-          <p data-i18n="process_step_1">Saprotam, kur šobrīd zūd laiks un nauda. Definējam “quick wins”.</p>
+          <small data-i18n="process_label_1">01 / Discovery Call</small>
+          <p data-i18n="process_step_1">Understand your operations and current challenges.</p>
         </article>
         <article class="step reveal" style="--reveal-delay: 100ms;">
-          <small>02 / Prototype</small>
-          <p data-i18n="process_step_2">Īsā laikā izstrādājam darba prototipu, lai redzat rezultātu pirms pilnas ieviešanas.</p>
+          <small data-i18n="process_label_2">02 / Assessment</small>
+          <p data-i18n="process_step_2">Analyze workflows and identify automation opportunities.</p>
         </article>
         <article class="step reveal" style="--reveal-delay: 170ms;">
-          <small>03 / Rollout</small>
-          <p data-i18n="process_step_3">Ieviešana reālajā plūsmā, ar datu drošību, monitoringu un fallback plānu.</p>
+          <small data-i18n="process_label_3">03 / Roadmap</small>
+          <p data-i18n="process_step_3">Deliver practical recommendations with ROI estimates.</p>
         </article>
         <article class="step reveal" style="--reveal-delay: 240ms;">
-          <small>04 / Improve</small>
-          <p data-i18n="process_step_4">Turpinām optimizāciju: mazāk kļūdu, vairāk ātruma, labāka mērogojamība.</p>
+          <small data-i18n="process_label_4">04 / Implementation Support</small>
+          <p data-i18n="process_step_4">Assist with prototyping, architecture, and vendor coordination.</p>
         </article>
       </div>
     </section>
 
     <section id="tech" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="tech_title">Tehnoloģijas, ar kurām var uzvarēt</h2>
-      <p class="section-sub" data-i18n="tech_sub">Instrumenti tiek izvēlēti pēc biznesa vajadzības, nevis “modīguma”.</p>
-      <div class="stack">
-        <span class="chip reveal" style="--reveal-delay: 20ms;">Automation Pipelines</span>
-        <span class="chip reveal" style="--reveal-delay: 55ms;">System Integrations</span>
-        <span class="chip reveal" style="--reveal-delay: 90ms;">Python / Node.js</span>
-        <span class="chip reveal" style="--reveal-delay: 125ms;">Cloud (AWS)</span>
-        <span class="chip reveal" style="--reveal-delay: 160ms;">Data Import & ETL</span>
-        <span class="chip reveal" style="--reveal-delay: 195ms;">Custom Dashboards</span>
-        <span class="chip reveal" style="--reveal-delay: 230ms;">Process Monitoring</span>
-      </div>
+      <h2 class="section-title" data-i18n="tech_title">Who We Help</h2>
+      <p class="section-sub" data-i18n="tech_sub">We work with teams where operational efficiency and investment clarity matter most.</p>
+      <ul class="services-list">
+        <li data-i18n="ideal_1">Warehousing and fulfillment centers</li>
+        <li data-i18n="ideal_2">Logistics providers</li>
+        <li data-i18n="ideal_3">Light manufacturing businesses</li>
+        <li data-i18n="ideal_4">Automation and robotics vendors needing software expertise</li>
+      </ul>
     </section>
 
     <section class="cta-box reveal">
       <div>
-        <h2 data-i18n="cta_title">Ja process tev kaitina katru dienu — tas ir pirmais kandidāts automatizācijai.</h2>
-        <p data-i18n="cta_sub">Aprakstiet vienu problēmu. Sagatavosim konkrētu plānu, ko var uzlabot jau tuvākajās dienās.</p>
+        <h2 data-i18n="cta_title">Considering Automation But Unsure Where to Start?</h2>
+        <p data-i18n="cta_sub">Get a practical assessment before committing to expensive equipment or software.</p>
       </div>
       <div class="cta-actions">
-        <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Aprakstīt savu problēmu</a>
-        <a class="btn btn-alt" href="./prototypes.html" data-i18n="cta_button_prototypes">Apskatīt prototipu piemērus</a>
+        <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Book a Discovery Call</a>
       </div>
     </section>
   </main>
