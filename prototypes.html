@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="lv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototipi | Robotics Consulting</title>
+  <meta name="description" content="Plašāka informācija un galerija par Robotics Consulting prototipiem.">
+  <style>
+    body { background: #060c1a; color: #edf2ff; font-family: Inter, Arial, sans-serif; margin: 0; }
+    .container { width: min(1140px, 92vw); margin: 0 auto; padding: 32px 0; }
+    h1, h2, h3 { color: #ffd36f; }
+    .proto-section { background: rgba(17,25,44,0.72); border-radius: 18px; box-shadow: 0 12px 36px #0005; margin-bottom: 38px; padding: 30px 26px; border: 1px solid #223556; }
+    .proto-gallery { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 18px; }
+    .proto-gallery img { max-width: 260px; width: 100%; border-radius: 10px; box-shadow: 0 2px 12px #0002; background: #0f1a30; cursor: zoom-in; transition: transform 160ms ease; }
+    .proto-gallery--five { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; }
+    .proto-gallery--five img { max-width: none; }
+    .proto-gallery img:hover { transform: translateY(-2px); }
+    .proto-meta { color: #c4d2ea; font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
+    .proto-copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 18px; }
+    .proto-benefits { margin: 0 0 16px 0; padding-left: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 20px; }
+    .proto-benefits li { margin-bottom: 0; }
+    .proto-readme { color: #d7e8ff; font-size: 15px; line-height: 1.58; margin: 0; padding: 16px; border-radius: 14px; border: 1px solid #2b4168; background: linear-gradient(180deg, rgba(14, 23, 40, 0.84), rgba(9, 16, 30, 0.84)); box-shadow: 0 6px 18px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; transition: transform 160ms ease, border-color 160ms ease; }
+    .proto-readme:hover { transform: translateY(-2px); border-color: #3a588a; }
+    .proto-readme strong { display: block; color: #ffd36f; margin-bottom: 6px; }
+    .back-link { color: #2ba9f1; font-size: 15px; text-decoration: none; display: inline-block; margin-bottom: 18px; }
+    .top-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .lang-switch { display: flex; gap: 6px; padding: 4px; border-radius: 999px; border: 1px solid #294068; background: rgba(17, 29, 50, 0.86); }
+    .lang-btn { border: 0; background: transparent; color: #b3c1dc; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 6px 10px; cursor: pointer; }
+    .lang-btn.active { color: #09223e; background: linear-gradient(120deg, #f3ac2d, #ffd36f); }
+    .lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(4, 10, 22, 0.9); z-index: 1000; padding: 10px; }
+    .lightbox.open { display: flex; }
+    .lightbox-content { position: relative; width: min(1800px, 98vw); }
+    .lightbox img { width: 100%; max-height: 94vh; object-fit: contain; border-radius: 12px; border: 1px solid #2a3e63; background: #0f1a30; }
+    .lightbox-close { position: absolute; top: -48px; right: 0; border: 1px solid #395b90; border-radius: 10px; background: rgba(17, 29, 50, 0.95); color: #edf2ff; font-size: 15px; padding: 8px 12px; cursor: pointer; }
+    .lightbox-caption { margin-top: 10px; color: #b3c1dc; font-size: 14px; }
+    @media (max-width: 1100px) {
+      .proto-gallery--five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 900px) {
+      .proto-gallery { flex-direction: column; }
+      .proto-gallery--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .proto-gallery--five { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-controls">
+      <a id="back-link" href="index.html" class="back-link">&larr; Atpakaļ uz galveno lapu</a>
+      <div class="lang-switch" aria-label="Language switch">
+        <button class="lang-btn active" type="button" data-lang="lv">LV</button>
+        <button class="lang-btn" type="button" data-lang="ru">RU</button>
+        <button class="lang-btn" type="button" data-lang="en">ENG</button>
+      </div>
+    </div>
+    <h1 id="page-title">Prototipi — detalizēta informācija un galerija</h1>
+
+    <!-- Tier Scheduler Section -->
+    <section id="tier-scheduler" class="proto-section">
+      <h2 id="tier-title">Riepu servisa plānotājs</h2>
+      <div class="proto-gallery proto-gallery--five">
+        <img src="./assets/prototypes/tier-scheduler/1.jpeg" alt="Tier Scheduler 1">
+        <img src="./assets/prototypes/tier-scheduler/2.jpeg" alt="Tier Scheduler 2">
+        <img src="./assets/prototypes/tier-scheduler/3.jpeg" alt="Tier Scheduler 3">
+        <img src="./assets/prototypes/tier-scheduler/4.jpeg" alt="Tier Scheduler 4">
+        <img src="./assets/prototypes/tier-scheduler/5.jpeg" alt="Tier Scheduler 5">
+      </div>
+      <div id="tier-meta" class="proto-meta">Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi, brīvos laikus un pieprasījumu.</div>
+      <div class="proto-copy-grid">
+        <div id="tier-copy-5" class="proto-readme">
+          <strong>Kam tas ir piemērots:</strong> riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.
+        </div>
+        <div id="tier-copy-6" class="proto-readme">
+          <strong>Kādu problēmu tas atrisina:</strong> samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.
+        </div>
+      </div>
+      <div class="proto-copy-grid">
+        <div id="tier-copy-1" class="proto-readme">
+          <strong>Kāpēc tas atmaksājas biznesam:</strong> vairāk zvanu pārtop reālos apmeklējumos, jo klients tiek pierakstīts uzreiz sarunas laikā.
+        </div>
+        <div id="tier-copy-2" class="proto-readme">
+          <strong>Ko iegūst īpašnieks:</strong> skaidrāku grafiku, pīķa stundu pārskatu un precīzāku maiņu plānošanu.
+        </div>
+        <div id="tier-copy-3" class="proto-readme">
+          <strong>Kā tas palīdz ikdienā:</strong> administrators strādā ātrāk, bet vadītājs redz, kur trūkst kapacitātes.
+        </div>
+        <div id="tier-copy-4" class="proto-readme">
+          <strong>Kāpēc tas ir labs ieguldījums:</strong> lielāka atdeve no esošā zvanu apjoma bez papildu reklāmas budžeta.
+        </div>
+      </div>
+      <ul class="proto-benefits">
+        <li id="tier-benefit-1">Pieraksts zvana laikā</li>
+        <li id="tier-benefit-2">Mazāk kļūdu, ātrāka apkalpošana</li>
+        <li id="tier-benefit-3">Eksports uz Excel/Google Sheets/BI</li>
+        <li id="tier-benefit-4">Labāka noslodzes plānošana</li>
+        <li id="tier-benefit-5">CSV imports un eksports</li>
+      </ul>
+    </section>
+
+    <!-- YOLO Monitoring Section -->
+    <section id="yolo-monitoring" class="proto-section">
+      <h2 id="yolo-title">YOLO Video Monitorings</h2>
+      <div class="proto-gallery proto-gallery--five">
+        <img src="./assets/prototypes/yolo/1.png" alt="YOLO 1">
+        <img src="./assets/prototypes/yolo/2.png" alt="YOLO 2">
+        <img src="./assets/prototypes/yolo/3.png" alt="YOLO 3">
+        <img src="./assets/prototypes/yolo/4.png" alt="YOLO 4">
+        <img src="./assets/prototypes/yolo/5.png" alt="YOLO 5">
+      </div>
+      <div id="yolo-meta" class="proto-meta">Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi reāllaikā.</div>
+      <div class="proto-copy-grid">
+        <div id="yolo-copy-5" class="proto-readme">
+          <strong>Kam tas ir piemērots:</strong> ražošanai, noliktavām, loģistikai un drošības komandām.
+        </div>
+        <div id="yolo-copy-6" class="proto-readme">
+          <strong>Kādu problēmu tas atrisina:</strong> parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir riskantas zonas.
+        </div>
+      </div>
+      <div class="proto-copy-grid">
+        <div id="yolo-copy-1" class="proto-readme">
+          <strong>Kāpēc tas atmaksājas biznesam:</strong> vadība redz faktus, nevis minējumus, un ātrāk reaģē uz problēmām.
+        </div>
+        <div id="yolo-copy-2" class="proto-readme">
+          <strong>Ko redz ikdienā:</strong> aktīvākās zonas, kritiskos notikumus un vēsturi.
+        </div>
+        <div id="yolo-copy-3" class="proto-readme">
+          <strong>Ko iegūst vadība:</strong> pārskatāmus ziņojumus un ātru veidu pārbaudīt strīdīgas situācijas.
+        </div>
+        <div id="yolo-copy-4" class="proto-readme">
+          <strong>Kāpēc tas ir labs ieguldījums:</strong> esošās kameras sāk dot biznesa vērtību bez pilnīgas infrastruktūras nomaiņas.
+        </div>
+      </div>
+      <ul class="proto-benefits">
+        <li id="yolo-benefit-1">Cilvēku detektēšana un izsekošana</li>
+        <li id="yolo-benefit-2">Pārskati reāllaikā un vēsture</li>
+        <li id="yolo-benefit-3">Integrācija ar backend un BI</li>
+        <li id="yolo-benefit-4">Ražošanai, noliktavām, drošībai</li>
+        <li id="yolo-benefit-5">Mērogojams risinājums</li>
+      </ul>
+    </section>
+
+    <!-- Expense Tracker Section -->
+    <section id="expense-tracker" class="proto-section">
+      <h2 id="exp-title">Expense Tracker (Android)</h2>
+      <div class="proto-gallery proto-gallery--five">
+        <img src="./assets/prototypes/expense-tracker/1.jpeg" alt="Expense Tracker 1">
+        <img src="./assets/prototypes/expense-tracker/2.jpeg" alt="Expense Tracker 2">
+      </div>
+      <div id="exp-meta" class="proto-meta">Ļauj lauka darbiniekiem ievadīt izdevumus uzreiz telefonā un nodot tos sistēmā bez pārrakstīšanas.</div>
+      <div class="proto-copy-grid">
+        <div id="exp-copy-5" class="proto-readme">
+          <strong>Kam tas ir piemērots:</strong> būvniecībai, loģistikai, servisam un komandām, kas strādā ārpus biroja.
+        </div>
+        <div id="exp-copy-6" class="proto-readme">
+          <strong>Kādu problēmu tas atrisina:</strong> novērš čekus kabatās, manuālu pārrakstīšanu un kavētu izmaksu uzskaiti.
+        </div>
+      </div>
+      <div class="proto-copy-grid">
+        <div id="exp-copy-1" class="proto-readme">
+          <strong>Kāpēc tas atmaksājas biznesam:</strong> vadība redz izmaksas ātrāk, bet birojam nav jāvāc dati no dažādiem kanāliem.
+        </div>
+        <div id="exp-copy-2" class="proto-readme">
+          <strong>Biznesa efekts skaitļos:</strong> komanda ar 10 darbiniekiem var ietaupīt ap 100 minūtēm dienā uz administratīvo darbu.
+        </div>
+        <div id="exp-copy-3" class="proto-readme">
+          <strong>Kā tas izskatās ikdienā:</strong> darbinieks ievada summu vai pievieno čeku uz vietas, un birojs to redz uzreiz.
+        </div>
+        <div id="exp-copy-4" class="proto-readme">
+          <strong>Kāpēc tas ir labs ieguldījums:</strong> mazāk laika papīriem, vairāk laika darbam ar klientiem un objektiem.
+        </div>
+      </div>
+      <ul class="proto-benefits">
+        <li id="exp-benefit-1">Ātra izdevumu ievade telefonā</li>
+        <li id="exp-benefit-2">CRM sinhronizācija bez manuālas apkopošanas</li>
+        <li id="exp-benefit-3">Mazāk kļūdu un administratīvā sloga</li>
+        <li id="exp-benefit-4">Elastīga backend integrācija</li>
+        <li id="exp-benefit-5">Darbojas arī bezsaistē</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-content">
+      <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Aizvērt attēlu">Aizvērt</button>
+      <img id="lightboxImage" src="" alt="Palielināts prototipa attēls">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var i18n = {
+        lv: {
+          pageTitle: "Prototipi — detalizēta informācija un galerija",
+          htmlTitle: "Prototipi | Robotics Consulting",
+          pageDesc: "Plašāka informācija un galerija par Robotics Consulting prototipiem.",
+          back: "&larr; Atpakaļ uz galveno lapu",
+          expTitle: "Expense Tracker (Android)",
+          expMeta: "Ļauj lauka darbiniekiem ievadīt izdevumus uzreiz telefonā un nodot tos sistēmā bez pārrakstīšanas.",
+          expB1: "Ātra izdevumu ievade telefonā",
+          expB2: "CRM sinhronizācija bez manuālas apkopošanas",
+          expB3: "Mazāk kļūdu un administratīvā sloga",
+          expB4: "Elastīga backend integrācija",
+          expB5: "Darbojas arī bezsaistē",
+          expC1: "<strong>Kāpēc tas atmaksājas biznesam:</strong> vadība redz izmaksas ātrāk, bet birojam nav jāvāc dati no dažādiem kanāliem.",
+          expC2: "<strong>Biznesa efekts skaitļos:</strong> komanda ar 10 darbiniekiem var ietaupīt ap 100 minūtēm dienā uz administratīvo darbu.",
+          expC3: "<strong>Kā tas izskatās ikdienā:</strong> darbinieks ievada summu vai pievieno čeku uz vietas, un birojs to redz uzreiz.",
+          expC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> mazāk laika papīriem, vairāk laika darbam ar klientiem un objektiem.",
+          expC5: "<strong>Kam tas ir piemērots:</strong> būvniecībai, loģistikai, servisam un komandām, kas strādā ārpus biroja.",
+          expC6: "<strong>Kādu problēmu tas atrisina:</strong> novērš čekus kabatās, manuālu pārrakstīšanu un kavētu izmaksu uzskaiti.",
+          tierTitle: "Riepu servisa plānotājs",
+          tierMeta: "Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi, brīvos laikus un pieprasījumu.",
+          tierB1: "Pieraksts zvana laikā",
+          tierB2: "Mazāk kļūdu, ātrāka apkalpošana",
+          tierB3: "Eksports uz Excel/Google Sheets/BI",
+          tierB4: "Labāka noslodzes plānošana",
+          tierB5: "CSV imports un eksports",
+          tierC1: "<strong>Kāpēc tas atmaksājas biznesam:</strong> vairāk zvanu pārtop reālos apmeklējumos, jo klients tiek pierakstīts uzreiz sarunas laikā.",
+          tierC2: "<strong>Ko iegūst īpašnieks:</strong> skaidrāku grafiku, pīķa stundu pārskatu un precīzāku maiņu plānošanu.",
+          tierC3: "<strong>Kā tas palīdz ikdienā:</strong> administrators strādā ātrāk, bet vadītājs redz, kur trūkst kapacitātes.",
+          tierC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> lielāka atdeve no esošā zvanu apjoma bez papildu reklāmas budžeta.",
+          tierC5: "<strong>Kam tas ir piemērots:</strong> riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.",
+          tierC6: "<strong>Kādu problēmu tas atrisina:</strong> samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.",
+          yoloTitle: "YOLO Video Monitorings",
+          yoloMeta: "Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi reāllaikā.",
+          yoloB1: "Cilvēku detektēšana un izsekošana",
+          yoloB2: "Pārskati reāllaikā un vēsture",
+          yoloB3: "Integrācija ar backend un BI",
+          yoloB4: "Ražošanai, noliktavām, drošībai",
+          yoloB5: "Mērogojams risinājums",
+          yoloC1: "<strong>Kāpēc tas atmaksājas biznesam:</strong> vadība redz faktus, nevis minējumus, un ātrāk reaģē uz problēmām.",
+          yoloC2: "<strong>Ko redz ikdienā:</strong> aktīvākās zonas, kritiskos notikumus un vēsturi.",
+          yoloC3: "<strong>Ko iegūst vadība:</strong> pārskatāmus ziņojumus un ātru veidu pārbaudīt strīdīgas situācijas.",
+          yoloC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> esošās kameras sāk dot biznesa vērtību bez pilnīgas infrastruktūras nomaiņas.",
+          yoloC5: "<strong>Kam tas ir piemērots:</strong> ražošanai, noliktavām, loģistikai un drošības komandām.",
+          yoloC6: "<strong>Kādu problēmu tas atrisina:</strong> parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir riskantas zonas.",
+          close: "Aizvērt",
+          lightboxAlt: "Palielināts prototipa attēls"
+        },
+        ru: {
+          pageTitle: "Прототипы — подробная информация и галерея",
+          htmlTitle: "Прототипы | Robotics Consulting",
+          pageDesc: "Подробная информация и галерея прототипов Robotics Consulting.",
+          back: "&larr; Назад на главную",
+          expTitle: "Expense Tracker (Android)",
+          expMeta: "Позволяет полевым сотрудникам сразу заносить расходы в телефон и передавать их в систему без ручного переноса.",
+          expB1: "Быстрый ввод расходов с телефона",
+          expB2: "Синхронизация с CRM без ручной сводки",
+          expB3: "Меньше ошибок и админнагрузки",
+          expB4: "Гибкая интеграция с backend",
+          expB5: "Работает и офлайн",
+          expC1: "<strong>Почему это выгодно бизнесу:</strong> руководство быстрее видит затраты, а офис не тратит время на сбор данных вручную.",
+          expC2: "<strong>Эффект в цифрах:</strong> команда из 10 сотрудников может экономить около 100 минут в день на административной работе.",
+          expC3: "<strong>Как это выглядит в работе:</strong> сотрудник заносит сумму или фото чека на месте, и офис видит расход сразу.",
+          expC4: "<strong>Почему это хорошая инвестиция:</strong> меньше времени на бумагу, больше времени на клиентов и объекты.",
+          expC5: "<strong>Для кого подходит:</strong> для строительных, логистических, сервисных и выездных команд.",
+          expC6: "<strong>Какую проблему решает:</strong> убирает чеки в карманах, ручной перенос данных и задержки в учете расходов.",
+          tierTitle: "Планировщик шиномонтажа",
+          tierMeta: "Превращает входящие звонки в записи и в одной системе показывает загрузку, свободные окна и спрос.",
+          tierB1: "Запись прямо во время звонка",
+          tierB2: "Меньше ошибок, быстрее обслуживание",
+          tierB3: "Экспорт в Excel/Google Sheets/BI",
+          tierB4: "Лучшее планирование загрузки",
+          tierB5: "Импорт и экспорт CSV",
+          tierC1: "<strong>Почему это выгодно бизнесу:</strong> больше звонков превращаются в реальные визиты, потому что клиент записывается сразу.",
+          tierC2: "<strong>Что получает владелец:</strong> понятный график, обзор пиковых часов и более точное планирование смен.",
+          tierC3: "<strong>Как это помогает в работе точки:</strong> администратор работает быстрее, а руководитель видит, где не хватает людей.",
+          tierC4: "<strong>Почему это хорошая инвестиция:</strong> выше отдача от текущего потока звонков без дополнительных рекламных затрат.",
+          tierC5: "<strong>Для кого подходит:</strong> для шиномонтажей, автосервисов и компаний с записью по телефону.",
+          tierC6: "<strong>Какую проблему решает:</strong> снижает потерянные звонки, ошибки в записи и пустые окна в расписании.",
+          yoloTitle: "YOLO Видеомониторинг",
+          yoloMeta: "Превращает существующие камеры в понятную аналитику по активности, рискам и простоям.",
+          yoloB1: "Детекция и трекинг людей",
+          yoloB2: "Live-панель и история событий",
+          yoloB3: "Интеграция с backend и BI",
+          yoloB4: "Для производств, складов и безопасности",
+          yoloB5: "Масштабируется по этапам",
+          yoloC1: "<strong>Почему это выгодно бизнесу:</strong> руководство видит факты, а не предположения, и быстрее реагирует на отклонения.",
+          yoloC2: "<strong>Что видно каждый день:</strong> самые активные зоны, критические события и историю действий.",
+          yoloC3: "<strong>Что получает руководство:</strong> понятные отчеты и быстрый способ проверять спорные ситуации.",
+          yoloC4: "<strong>Почему это хорошая инвестиция:</strong> существующие камеры начинают приносить бизнес-пользу без полной замены инфраструктуры.",
+          yoloC5: "<strong>Для кого подходит:</strong> для производств, складов, логистических центров и служб безопасности.",
+          yoloC6: "<strong>Какую проблему решает:</strong> показывает, где возникают простои, рискованные зоны и потери эффективности.",
+          close: "Закрыть",
+          lightboxAlt: "Увеличенное изображение прототипа"
+        },
+        en: {
+          pageTitle: "Prototypes — detailed overview and gallery",
+          htmlTitle: "Prototypes | Robotics Consulting",
+          pageDesc: "Business-focused overview and gallery of Robotics Consulting prototypes.",
+          back: "&larr; Back to main page",
+          expTitle: "Expense Tracker (Android)",
+          expMeta: "Lets field staff enter expenses on their phone and send them into the system without manual re-entry.",
+          expB1: "Fast mobile expense capture",
+          expB2: "CRM sync without manual consolidation",
+          expB3: "Fewer errors and less admin work",
+          expB4: "Flexible backend integration",
+          expB5: "Works offline when needed",
+          expC1: "<strong>Why this pays off:</strong> management sees costs sooner, and the office spends less time collecting data by hand.",
+          expC2: "<strong>Impact in numbers:</strong> a 10-person team can save around 100 minutes per day on admin work.",
+          expC3: "<strong>What it looks like in practice:</strong> staff enter the amount or attach a receipt on site, and the office sees it immediately.",
+          expC4: "<strong>Why this is a strong investment:</strong> less time on paperwork, more time for customers and field work.",
+          expC5: "<strong>Who it fits:</strong> construction, logistics, service, and field teams.",
+          expC6: "<strong>What problem it solves:</strong> it removes receipts in pockets, manual re-entry, and delays in expense reporting.",
+          tierTitle: "Tire Service Scheduler",
+          tierMeta: "Turns incoming calls into bookings and shows workload, open slots, and demand in one system.",
+          tierB1: "Bookings during the call",
+          tierB2: "Fewer mistakes, faster service",
+          tierB3: "Export to Excel/Google Sheets/BI",
+          tierB4: "Better workload planning",
+          tierB5: "CSV import/export support",
+          tierC1: "<strong>Why this pays off:</strong> more calls become real visits because customers are booked immediately.",
+          tierC2: "<strong>Owner value:</strong> a clearer schedule, peak-hour visibility, and better shift planning.",
+          tierC3: "<strong>How it helps day to day:</strong> front-desk staff work faster, and managers see where capacity is tight.",
+          tierC4: "<strong>Why this is a strong investment:</strong> better return from the call volume you already have, without extra ad spend.",
+          tierC5: "<strong>Who it fits:</strong> tire service centers, auto workshops, and businesses that book by phone.",
+          tierC6: "<strong>What problem it solves:</strong> it reduces missed calls, booking mistakes, and empty time slots.",
+          yoloTitle: "YOLO Video Monitoring",
+          yoloMeta: "Turns existing cameras into a real-time view of activity, risks, and downtime.",
+          yoloB1: "Human detection and tracking",
+          yoloB2: "Live summaries and event history",
+          yoloB3: "Backend and BI integration",
+          yoloB4: "For production, warehousing, and safety",
+          yoloB5: "Built to scale step by step",
+          yoloC1: "<strong>Why this pays off:</strong> management sees facts instead of assumptions and reacts faster to issues.",
+          yoloC2: "<strong>Daily value:</strong> busiest zones, critical events, and event history in one view.",
+          yoloC3: "<strong>What management gets:</strong> clear reports and a fast way to review disputed situations.",
+          yoloC4: "<strong>Why this is a strong investment:</strong> existing cameras start delivering business value without a full infrastructure replacement.",
+          yoloC5: "<strong>Who it fits:</strong> production sites, warehouses, logistics centers, and security teams.",
+          yoloC6: "<strong>What problem it solves:</strong> it shows where downtime starts, which zones carry risk, and where efficiency drops.",
+          close: "Close",
+          lightboxAlt: "Enlarged prototype image"
+        }
+      };
+
+      function setText(id, value) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function setHtml(id, value) {
+        var el = document.getElementById(id);
+        if (el) el.innerHTML = value;
+      }
+
+      function applyLanguage(lang) {
+        var selected = i18n[lang] ? lang : "lv";
+        var copy = i18n[selected];
+
+        document.documentElement.lang = selected;
+        document.title = copy.htmlTitle;
+        var descriptionMeta = document.querySelector('meta[name="description"]');
+        if (descriptionMeta) descriptionMeta.setAttribute("content", copy.pageDesc);
+
+        setText("page-title", copy.pageTitle);
+        setHtml("back-link", copy.back);
+        setText("exp-title", copy.expTitle);
+        setText("exp-meta", copy.expMeta);
+        setText("exp-benefit-1", copy.expB1);
+        setText("exp-benefit-2", copy.expB2);
+        setText("exp-benefit-3", copy.expB3);
+        setText("exp-benefit-4", copy.expB4);
+        setText("exp-benefit-5", copy.expB5);
+        setHtml("exp-copy-1", copy.expC1);
+        setHtml("exp-copy-2", copy.expC2);
+        setHtml("exp-copy-3", copy.expC3);
+        setHtml("exp-copy-4", copy.expC4);
+        setHtml("exp-copy-5", copy.expC5);
+        setHtml("exp-copy-6", copy.expC6);
+
+        setText("tier-title", copy.tierTitle);
+        setText("tier-meta", copy.tierMeta);
+        setText("tier-benefit-1", copy.tierB1);
+        setText("tier-benefit-2", copy.tierB2);
+        setText("tier-benefit-3", copy.tierB3);
+        setText("tier-benefit-4", copy.tierB4);
+        setText("tier-benefit-5", copy.tierB5);
+        setHtml("tier-copy-1", copy.tierC1);
+        setHtml("tier-copy-2", copy.tierC2);
+        setHtml("tier-copy-3", copy.tierC3);
+        setHtml("tier-copy-4", copy.tierC4);
+        setHtml("tier-copy-5", copy.tierC5);
+        setHtml("tier-copy-6", copy.tierC6);
+
+        setText("yolo-title", copy.yoloTitle);
+        setText("yolo-meta", copy.yoloMeta);
+        setText("yolo-benefit-1", copy.yoloB1);
+        setText("yolo-benefit-2", copy.yoloB2);
+        setText("yolo-benefit-3", copy.yoloB3);
+        setText("yolo-benefit-4", copy.yoloB4);
+        setText("yolo-benefit-5", copy.yoloB5);
+        setHtml("yolo-copy-1", copy.yoloC1);
+        setHtml("yolo-copy-2", copy.yoloC2);
+        setHtml("yolo-copy-3", copy.yoloC3);
+        setHtml("yolo-copy-4", copy.yoloC4);
+        setHtml("yolo-copy-5", copy.yoloC5);
+        setHtml("yolo-copy-6", copy.yoloC6);
+
+        lightboxClose.textContent = copy.close;
+        lightboxClose.setAttribute("aria-label", copy.close);
+        if (!lightboxImage.src) lightboxImage.alt = copy.lightboxAlt;
+
+        document.querySelectorAll(".lang-btn").forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.lang === selected);
+        });
+        localStorage.setItem("preferred-language", selected);
+      }
+
+      var images = document.querySelectorAll(".proto-gallery img");
+      var lightbox = document.getElementById("lightbox");
+      var lightboxImage = document.getElementById("lightboxImage");
+      var lightboxCaption = document.getElementById("lightboxCaption");
+      var lightboxClose = document.getElementById("lightboxClose");
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImage.src = "";
+      }
+
+      images.forEach(function (img) {
+        img.addEventListener("click", function () {
+          lightboxImage.src = img.src;
+          lightboxImage.alt = img.alt || "Palielināts prototipa attēls";
+          lightboxCaption.textContent = img.alt || "";
+          lightbox.classList.add("open");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) closeLightbox();
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+      });
+
+      document.querySelectorAll(".lang-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          applyLanguage(btn.dataset.lang);
+        });
+      });
+
+      applyLanguage(localStorage.getItem("preferred-language") || "lv");
+    })();
+  </script>
+</body>
+</html>
+

@@ -4,6 +4,7 @@
   "nav_services": "Pakalpojumi",
   "nav_process": "Process",
   "nav_tech": "Tehnoloģijas",
+  "nav_prototypes": "Prototipi",
   "hero_title": "Ietaupiet laiku un izmaksas, automatizējot manuālus biznesa procesus.",
   "hero_lead": "Mēs ne tikai izstrādājam tehnisku risinājumu - mēs sakārtojam procesu tā, lai komanda strādā ātrāk, ar mazāk kļūdām, un uzņēmums var augt bez operacionālā “bottleneck”.",
   "hero_cta_main": "Sākt sarunu",
@@ -48,5 +49,6 @@
   "cta_title": "Ja process tev kaitina katru dienu — tas ir pirmais kandidāts automatizācijai.",
   "cta_sub": "Aprakstiet vienu problēmu. Sagatavosim konkrētu plānu, ko var uzlabot jau tuvākajās dienās.",
   "cta_button": "Aprakstīt savu problēmu",
+  "cta_button_prototypes": "Apskatīt prototipu piemērus",
   "footer_text": "Rīga, Latvija · Pieejams projektiem Latvijā un attālināti Eiropā"
 }

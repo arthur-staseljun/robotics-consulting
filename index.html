@@ -275,6 +275,30 @@
       color: #9cb3d8;
     }
 
+    .concept-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 58px;
+      border-radius: 10px;
+      border: 1px solid #f3c15a;
+      background: linear-gradient(120deg, var(--accent-c), #ffd36f);
+      color: #1d2433;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      padding: 10px;
+      transition: transform 160ms ease;
+    }
+
+    .concept-link-btn:hover {
+      transform: translateY(-1px);
+    }
+
     .concept-mid {
       position: relative;
       z-index: 1;
@@ -541,6 +565,13 @@
 
     .cta-box h2 { margin: 0 0 6px; }
     .cta-box p { margin: 0; color: var(--muted); }
+    .cta-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-left: auto;
+      justify-content: flex-end;
+    }
 
     .reveal {
       opacity: 0;
@@ -598,6 +629,7 @@
           <a href="#pakalpojumi" data-i18n="nav_services">Pakalpojumi</a>
           <a href="#process" data-i18n="nav_process">Process</a>
           <a href="#tech" data-i18n="nav_tech">Tehnoloģijas</a>
+          <a href="./prototypes.html" data-i18n="nav_prototypes">Prototipi</a>
         </nav>
         <div class="lang-switch" aria-label="Language switch">
           <button class="lang-btn active" type="button" data-lang="lv">LV</button>
@@ -629,10 +661,7 @@
               <strong data-i18n="concept_app_title">Aplikācijas biznesam</strong>
               <span data-i18n="concept_app_sub">Iekšējie rīki un dashboardi</span>
             </div>
-            <div class="concept-box">
-              <strong data-i18n="concept_proto_title">Prototips</strong>
-              <span data-i18n="concept_proto_sub">2-3 dienās</span>
-            </div>
+            <a class="concept-link-btn" href="./prototypes.html">Prototips<br>2-3 dienās</a>
           </div>
           <div class="concept-box">
             <strong data-i18n="concept_auto_title">Automatizēts process</strong>
@@ -742,7 +771,10 @@
         <h2 data-i18n="cta_title">Ja process tev kaitina katru dienu — tas ir pirmais kandidāts automatizācijai.</h2>
         <p data-i18n="cta_sub">Aprakstiet vienu problēmu. Sagatavosim konkrētu plānu, ko var uzlabot jau tuvākajās dienās.</p>
       </div>
-      <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Aprakstīt savu problēmu</a>
+      <div class="cta-actions">
+        <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Aprakstīt savu problēmu</a>
+        <a class="btn btn-alt" href="./prototypes.html" data-i18n="cta_button_prototypes">Apskatīt prototipu piemērus</a>
+      </div>
     </section>
   </main>
 

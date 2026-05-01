@@ -4,6 +4,7 @@
   "nav_services": "Services",
   "nav_process": "Process",
   "nav_tech": "Technology",
+  "nav_prototypes": "Prototypes",
   "hero_title": "Save time and costs by automating manual business processes.",
   "hero_lead": "We do more than build technical solutions - we structure workflows so your team moves faster, makes fewer mistakes, and your business scales without operational bottlenecks.",
   "hero_cta_main": "Start a conversation",
@@ -48,5 +49,6 @@
   "cta_title": "If a process annoys you every day - it is the first candidate for automation.",
   "cta_sub": "Send one problem. We will reply with a concrete plan for what can be improved in the coming days.",
   "cta_button": "Describe your problem",
+  "cta_button_prototypes": "View prototype examples",
   "footer_text": "Riga, Latvia · Available for projects in Latvia and remotely across Europe"
 }
