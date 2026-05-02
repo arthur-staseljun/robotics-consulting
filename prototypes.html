@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prototipi | Robotics Consulting</title>
-  <meta name="description" content="Plašāka informācija un galerija par Robotics Consulting prototipiem.">
+  <title>Business Automation Scenarios | Robotics Consulting</title>
+  <meta name="description" content="Example automation concepts for warehousing, logistics, and manufacturing SMEs.">
   <style>
     body { background: #060c1a; color: #edf2ff; font-family: Inter, Arial, sans-serif; margin: 0; }
     .container { width: min(1140px, 92vw); margin: 0 auto; padding: 32px 0; }
@@ -22,6 +22,13 @@
     .proto-readme { color: #d7e8ff; font-size: 15px; line-height: 1.58; margin: 0; padding: 16px; border-radius: 14px; border: 1px solid #2b4168; background: linear-gradient(180deg, rgba(14, 23, 40, 0.84), rgba(9, 16, 30, 0.84)); box-shadow: 0 6px 18px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; transition: transform 160ms ease, border-color 160ms ease; }
     .proto-readme:hover { transform: translateY(-2px); border-color: #3a588a; }
     .proto-readme strong { display: block; color: #ffd36f; margin-bottom: 6px; }
+    .proto-meta-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 14px; }
+    .proto-chip { display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; border: 1px solid #2b4168; background: rgba(10, 17, 31, 0.7); font-size: 13px; min-width: 160px; }
+    .proto-chip-label { color: #7da8d8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .proto-chip-value { color: #edf2ff; font-weight: 600; font-size: 14px; }
+    .proto-chip--low .proto-chip-value { color: #7de8a0; }
+    .proto-chip--medium .proto-chip-value { color: #f3c15a; }
+    .proto-chip--high .proto-chip-value { color: #f17b7b; }
     .back-link { color: #2ba9f1; font-size: 15px; text-decoration: none; display: inline-block; margin-bottom: 18px; }
     .top-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
     .lang-switch { display: flex; gap: 6px; padding: 4px; border-radius: 999px; border: 1px solid #294068; background: rgba(17, 29, 50, 0.86); }
@@ -48,18 +55,17 @@
 <body>
   <div class="container">
     <div class="top-controls">
-      <a id="back-link" href="index.html" class="back-link">&larr; Atpakaļ uz galveno lapu</a>
-      <div class="lang-switch" aria-label="Language switch">
+      <a id="back-link" href="index.html" class="back-link">&larr; Atpakaļ uz galveno lapu</a>      <div class="lang-switch" aria-label="Language switch">
         <button class="lang-btn active" type="button" data-lang="lv">LV</button>
         <button class="lang-btn" type="button" data-lang="ru">RU</button>
         <button class="lang-btn" type="button" data-lang="en">ENG</button>
       </div>
     </div>
-    <h1 id="page-title">Prototipi — detalizēta informācija un galerija</h1>
+    <h1 id="page-title">Business Automation Scenarios</h1>
 
     <!-- Tier Scheduler Section -->
     <section id="tier-scheduler" class="proto-section">
-      <h2 id="tier-title">Riepu servisa plānotājs</h2>
+      <h2 id="tier-title">Tire Service Scheduling Automation</h2>
       <div class="proto-gallery proto-gallery--five">
         <img src="./assets/prototypes/tier-scheduler/1.jpeg" alt="Tier Scheduler 1">
         <img src="./assets/prototypes/tier-scheduler/2.jpeg" alt="Tier Scheduler 2">
@@ -68,6 +74,20 @@
         <img src="./assets/prototypes/tier-scheduler/5.jpeg" alt="Tier Scheduler 5">
       </div>
       <div id="tier-meta" class="proto-meta">Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi, brīvos laikus un pieprasījumu.</div>
+      <div class="proto-meta-chips">
+        <div class="proto-chip proto-chip--low">
+          <span class="proto-chip-label" id="tier-chip-complexity-label">Implementation complexity</span>
+          <span class="proto-chip-value" id="tier-chip-complexity">Low</span>
+        </div>
+        <div class="proto-chip">
+          <span class="proto-chip-label" id="tier-chip-budget-label">Indicative investment range</span>
+          <span class="proto-chip-value" id="tier-chip-budget">€3k – €10k</span>
+        </div>
+        <div class="proto-chip">
+          <span class="proto-chip-label" id="tier-chip-integration-label">Can integrate with</span>
+          <span class="proto-chip-value" id="tier-chip-integration">CRM, telephony, Google Sheets / Excel</span>
+        </div>
+      </div>
       <div class="proto-copy-grid">
         <div id="tier-copy-5" class="proto-readme">
           <strong>Kam tas ir piemērots:</strong> riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.
@@ -101,7 +121,7 @@
 
     <!-- YOLO Monitoring Section -->
     <section id="yolo-monitoring" class="proto-section">
-      <h2 id="yolo-title">YOLO Video Monitorings</h2>
+      <h2 id="yolo-title">Computer Vision for Operational Efficiency</h2>
       <div class="proto-gallery proto-gallery--five">
         <img src="./assets/prototypes/yolo/1.png" alt="YOLO 1">
         <img src="./assets/prototypes/yolo/2.png" alt="YOLO 2">
@@ -110,6 +130,20 @@
         <img src="./assets/prototypes/yolo/5.png" alt="YOLO 5">
       </div>
       <div id="yolo-meta" class="proto-meta">Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi reāllaikā.</div>
+      <div class="proto-meta-chips">
+        <div class="proto-chip proto-chip--medium">
+          <span class="proto-chip-label" id="yolo-chip-complexity-label">Implementation complexity</span>
+          <span class="proto-chip-value" id="yolo-chip-complexity">Medium</span>
+        </div>
+        <div class="proto-chip">
+          <span class="proto-chip-label" id="yolo-chip-budget-label">Indicative investment range</span>
+          <span class="proto-chip-value" id="yolo-chip-budget">€10k – €30k</span>
+        </div>
+        <div class="proto-chip">
+          <span class="proto-chip-label" id="yolo-chip-integration-label">Can integrate with</span>
+          <span class="proto-chip-value" id="yolo-chip-integration">Existing cameras, dashboards, BI, ERP/WMS</span>
+        </div>
+      </div>
       <div class="proto-copy-grid">
         <div id="yolo-copy-5" class="proto-readme">
           <strong>Kam tas ir piemērots:</strong> ražošanai, noliktavām, loģistikai un drošības komandām.
@@ -143,12 +177,26 @@
 
     <!-- Expense Tracker Section -->
     <section id="expense-tracker" class="proto-section">
-      <h2 id="exp-title">Expense Tracker (Android)</h2>
+      <h2 id="exp-title">Field Operations Digitization</h2>
       <div class="proto-gallery proto-gallery--five">
         <img src="./assets/prototypes/expense-tracker/1.jpeg" alt="Expense Tracker 1">
         <img src="./assets/prototypes/expense-tracker/2.jpeg" alt="Expense Tracker 2">
       </div>
       <div id="exp-meta" class="proto-meta">Ļauj lauka darbiniekiem ievadīt izdevumus uzreiz telefonā un nodot tos sistēmā bez pārrakstīšanas.</div>
+      <div class="proto-meta-chips">
+        <div class="proto-chip proto-chip--low">
+          <span class="proto-chip-label" id="exp-chip-complexity-label">Implementation complexity</span>
+          <span class="proto-chip-value" id="exp-chip-complexity">Low</span>
+        </div>
+        <div class="proto-chip">
+          <span class="proto-chip-label" id="exp-chip-budget-label">Indicative investment range</span>
+          <span class="proto-chip-value" id="exp-chip-budget">€3k – €8k</span>
+        </div>
+        <div class="proto-chip">
+          <span class="proto-chip-label" id="exp-chip-integration-label">Can integrate with</span>
+          <span class="proto-chip-value" id="exp-chip-integration">CRM, ERP, accounting software</span>
+        </div>
+      </div>
       <div class="proto-copy-grid">
         <div id="exp-copy-5" class="proto-readme">
           <strong>Kam tas ir piemērots:</strong> būvniecībai, loģistikai, servisam un komandām, kas strādā ārpus biroja.
@@ -194,11 +242,11 @@
     (function () {
       var i18n = {
         lv: {
-          pageTitle: "Prototipi — detalizēta informācija un galerija",
-          htmlTitle: "Prototipi | Robotics Consulting",
-          pageDesc: "Plašāka informācija un galerija par Robotics Consulting prototipiem.",
+          pageTitle: "Biznesa automatizācijas scenāriji",
+          htmlTitle: "Biznesa automatizācijas scenāriji | Robotics Consulting",
+          pageDesc: "Automatizācijas konceptu piemēri noliktavām, loģistikai un ražošanas MVU.",
           back: "&larr; Atpakaļ uz galveno lapu",
-          expTitle: "Expense Tracker (Android)",
+          expTitle: "Lauka operāciju digitalizācija",
           expMeta: "Ļauj lauka darbiniekiem ievadīt izdevumus uzreiz telefonā un nodot tos sistēmā bez pārrakstīšanas.",
           expB1: "Ātra izdevumu ievade telefonā",
           expB2: "CRM sinhronizācija bez manuālas apkopošanas",
@@ -211,7 +259,7 @@
           expC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> mazāk laika papīriem, vairāk laika darbam ar klientiem un objektiem.",
           expC5: "<strong>Kam tas ir piemērots:</strong> būvniecībai, loģistikai, servisam un komandām, kas strādā ārpus biroja.",
           expC6: "<strong>Kādu problēmu tas atrisina:</strong> novērš čekus kabatās, manuālu pārrakstīšanu un kavētu izmaksu uzskaiti.",
-          tierTitle: "Riepu servisa plānotājs",
+          tierTitle: "Riepu servisa pierakstu automatizācija",
           tierMeta: "Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi, brīvos laikus un pieprasījumu.",
           tierB1: "Pieraksts zvana laikā",
           tierB2: "Mazāk kļūdu, ātrāka apkalpošana",
@@ -224,7 +272,7 @@
           tierC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> lielāka atdeve no esošā zvanu apjoma bez papildu reklāmas budžeta.",
           tierC5: "<strong>Kam tas ir piemērots:</strong> riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.",
           tierC6: "<strong>Kādu problēmu tas atrisina:</strong> samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.",
-          yoloTitle: "YOLO Video Monitorings",
+          yoloTitle: "Computer Vision operacionālajai efektivitātei",
           yoloMeta: "Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi reāllaikā.",
           yoloB1: "Cilvēku detektēšana un izsekošana",
           yoloB2: "Pārskati reāllaikā un vēsture",
@@ -238,14 +286,19 @@
           yoloC5: "<strong>Kam tas ir piemērots:</strong> ražošanai, noliktavām, loģistikai un drošības komandām.",
           yoloC6: "<strong>Kādu problēmu tas atrisina:</strong> parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir riskantas zonas.",
           close: "Aizvērt",
-          lightboxAlt: "Palielināts prototipa attēls"
+          lightboxAlt: "Palielināts automatizācijas koncepta attēls",
+          complexityLabel: "Ieviešanas sarežģītība",
+          budgetLabel: "Indikatīvais ieguldījumu diapazons",
+          integrationLabel: "Var integrēties ar",
+          tierComplexity: "Zema", tierBudget: "€3k – €10k", tierIntegration: "CRM, zvanu sistēmas, Google Sheets / Excel",
+          yoloComplexity: "Vidēja", yoloBudget: "€10k – €30k", yoloIntegration: "Esošās kameras, dashboardi, BI, ERP/WMS",
+          expComplexity: "Zema", expBudget: "€3k – €8k", expIntegration: "CRM, ERP, grāmatvedības programmatūra"
         },
         ru: {
-          pageTitle: "Прототипы — подробная информация и галерея",
-          htmlTitle: "Прототипы | Robotics Consulting",
-          pageDesc: "Подробная информация и галерея прототипов Robotics Consulting.",
+          pageTitle: "Бизнес-сценарии автоматизации",
+          htmlTitle: "Бизнес-сценарии автоматизации | Robotics Consulting",
+          pageDesc: "Примеры концептов автоматизации для складов, логистики и производственных SMB.",
           back: "&larr; Назад на главную",
-          expTitle: "Expense Tracker (Android)",
           expMeta: "Позволяет полевым сотрудникам сразу заносить расходы в телефон и передавать их в систему без ручного переноса.",
           expB1: "Быстрый ввод расходов с телефона",
           expB2: "Синхронизация с CRM без ручной сводки",
@@ -258,7 +311,7 @@
           expC4: "<strong>Почему это хорошая инвестиция:</strong> меньше времени на бумагу, больше времени на клиентов и объекты.",
           expC5: "<strong>Для кого подходит:</strong> для строительных, логистических, сервисных и выездных команд.",
           expC6: "<strong>Какую проблему решает:</strong> убирает чеки в карманах, ручной перенос данных и задержки в учете расходов.",
-          tierTitle: "Планировщик шиномонтажа",
+          tierTitle: "Автоматизация записи в шиномонтаже",
           tierMeta: "Превращает входящие звонки в записи и в одной системе показывает загрузку, свободные окна и спрос.",
           tierB1: "Запись прямо во время звонка",
           tierB2: "Меньше ошибок, быстрее обслуживание",
@@ -271,7 +324,7 @@
           tierC4: "<strong>Почему это хорошая инвестиция:</strong> выше отдача от текущего потока звонков без дополнительных рекламных затрат.",
           tierC5: "<strong>Для кого подходит:</strong> для шиномонтажей, автосервисов и компаний с записью по телефону.",
           tierC6: "<strong>Какую проблему решает:</strong> снижает потерянные звонки, ошибки в записи и пустые окна в расписании.",
-          yoloTitle: "YOLO Видеомониторинг",
+          yoloTitle: "Computer Vision для операционной эффективности",
           yoloMeta: "Превращает существующие камеры в понятную аналитику по активности, рискам и простоям.",
           yoloB1: "Детекция и трекинг людей",
           yoloB2: "Live-панель и история событий",
@@ -285,14 +338,20 @@
           yoloC5: "<strong>Для кого подходит:</strong> для производств, складов, логистических центров и служб безопасности.",
           yoloC6: "<strong>Какую проблему решает:</strong> показывает, где возникают простои, рискованные зоны и потери эффективности.",
           close: "Закрыть",
-          lightboxAlt: "Увеличенное изображение прототипа"
+          lightboxAlt: "Увеличенное изображение концепта автоматизации",
+          complexityLabel: "Сложность внедрения",
+          budgetLabel: "Ориентировочный бюджет",
+          integrationLabel: "Интегрируется с",
+          tierComplexity: "Низкая", tierBudget: "€3k – €10k", tierIntegration: "CRM, телефония, Google Sheets / Excel",
+          yoloComplexity: "Средняя", yoloBudget: "€10k – €30k", yoloIntegration: "Существующие камеры, дашборды, BI, ERP/WMS",
+          expComplexity: "Низкая", expBudget: "€3k – €8k", expIntegration: "CRM, ERP, бухгалтерский софт"
         },
         en: {
-          pageTitle: "Prototypes — detailed overview and gallery",
-          htmlTitle: "Prototypes | Robotics Consulting",
-          pageDesc: "Business-focused overview and gallery of Robotics Consulting prototypes.",
+          pageTitle: "Business Automation Scenarios",
+          htmlTitle: "Business Automation Scenarios | Robotics Consulting",
+          pageDesc: "Example automation concepts for warehousing, logistics, and manufacturing SMEs.",
           back: "&larr; Back to main page",
-          expTitle: "Expense Tracker (Android)",
+          expTitle: "Field Operations Digitization",
           expMeta: "Lets field staff enter expenses on their phone and send them into the system without manual re-entry.",
           expB1: "Fast mobile expense capture",
           expB2: "CRM sync without manual consolidation",
@@ -305,7 +364,7 @@
           expC4: "<strong>Why this is a strong investment:</strong> less time on paperwork, more time for customers and field work.",
           expC5: "<strong>Who it fits:</strong> construction, logistics, service, and field teams.",
           expC6: "<strong>What problem it solves:</strong> it removes receipts in pockets, manual re-entry, and delays in expense reporting.",
-          tierTitle: "Tire Service Scheduler",
+          tierTitle: "Tire Service Scheduling Automation",
           tierMeta: "Turns incoming calls into bookings and shows workload, open slots, and demand in one system.",
           tierB1: "Bookings during the call",
           tierB2: "Fewer mistakes, faster service",
@@ -318,7 +377,7 @@
           tierC4: "<strong>Why this is a strong investment:</strong> better return from the call volume you already have, without extra ad spend.",
           tierC5: "<strong>Who it fits:</strong> tire service centers, auto workshops, and businesses that book by phone.",
           tierC6: "<strong>What problem it solves:</strong> it reduces missed calls, booking mistakes, and empty time slots.",
-          yoloTitle: "YOLO Video Monitoring",
+          yoloTitle: "Computer Vision for Operational Efficiency",
           yoloMeta: "Turns existing cameras into a real-time view of activity, risks, and downtime.",
           yoloB1: "Human detection and tracking",
           yoloB2: "Live summaries and event history",
@@ -332,7 +391,13 @@
           yoloC5: "<strong>Who it fits:</strong> production sites, warehouses, logistics centers, and security teams.",
           yoloC6: "<strong>What problem it solves:</strong> it shows where downtime starts, which zones carry risk, and where efficiency drops.",
           close: "Close",
-          lightboxAlt: "Enlarged prototype image"
+          lightboxAlt: "Enlarged automation concept image",
+          complexityLabel: "Implementation complexity",
+          budgetLabel: "Indicative investment range",
+          integrationLabel: "Can integrate with",
+          tierComplexity: "Low", tierBudget: "€3k – €10k", tierIntegration: "CRM, telephony, Google Sheets / Excel",
+          yoloComplexity: "Medium", yoloBudget: "€10k – €30k", yoloIntegration: "Existing cameras, dashboards, BI tools, ERP/WMS",
+          expComplexity: "Low", expBudget: "€3k – €8k", expIntegration: "CRM, ERP, accounting software"
         }
       };
 
@@ -357,8 +422,7 @@
 
         setText("page-title", copy.pageTitle);
         setHtml("back-link", copy.back);
-        setText("exp-title", copy.expTitle);
-        setText("exp-meta", copy.expMeta);
+        setText("exp-title", copy.expTitle);        setText("exp-meta", copy.expMeta);
         setText("exp-benefit-1", copy.expB1);
         setText("exp-benefit-2", copy.expB2);
         setText("exp-benefit-3", copy.expB3);
@@ -402,6 +466,31 @@
         lightboxClose.textContent = copy.close;
         lightboxClose.setAttribute("aria-label", copy.close);
         if (!lightboxImage.src) lightboxImage.alt = copy.lightboxAlt;
+
+        // chip labels and values
+        ["tier", "yolo", "exp"].forEach(function(prefix) {
+          setText(prefix + "-chip-complexity-label", copy.complexityLabel);
+          setText(prefix + "-chip-budget-label", copy.budgetLabel);
+          setText(prefix + "-chip-integration-label", copy.integrationLabel);
+        });
+        setText("tier-chip-complexity", copy.tierComplexity);
+        setText("tier-chip-budget", copy.tierBudget);
+        setText("tier-chip-integration", copy.tierIntegration);
+        setText("yolo-chip-complexity", copy.yoloComplexity);
+        setText("yolo-chip-budget", copy.yoloBudget);
+        setText("yolo-chip-integration", copy.yoloIntegration);
+        setText("exp-chip-complexity", copy.expComplexity);
+        setText("exp-chip-budget", copy.expBudget);
+        setText("exp-chip-integration", copy.expIntegration);
+
+        // update complexity chip color classes
+        var complexityMap = { tier: "low", yolo: "medium", exp: "low" };
+        Object.keys(complexityMap).forEach(function(prefix) {
+          var chip = document.getElementById(prefix + "-chip-complexity");
+          if (chip && chip.parentElement) {
+            chip.parentElement.className = "proto-chip proto-chip--" + complexityMap[prefix];
+          }
+        });
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
           btn.classList.toggle("active", btn.dataset.lang === selected);
