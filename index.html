@@ -1,941 +1,986 @@
 <!doctype html>
 <html lang="lv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Robotics Consulting | Automatizācija, kas pelna</title>
-  <meta name="description" content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-  <meta name="i18n-version" content="2026-05-02-04">
-  <meta name="keywords" content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
-  <style>
-    :root {
-      --bg: #060c1a;
-      --bg-soft: #0f1a30;
-      --card: rgba(17, 25, 44, 0.72);
-      --text: #edf2ff;
-      --muted: #b3c1dc;
-      --line: #2a3e63;
-      --accent-a: #2ba9f1;
-      --accent-b: #1d5fa8;
-      --accent-c: #f3ac2d;
-      --shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body { margin: 0; }
-
-    body {
-      color: var(--text);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1300px 680px at -10% -20%, rgba(43, 169, 241, 0.24), transparent 50%),
-        radial-gradient(1200px 760px at 110% -10%, rgba(29, 95, 168, 0.28), transparent 46%),
-        radial-gradient(900px 600px at 50% 120%, rgba(243, 172, 45, 0.12), transparent 45%),
-        var(--bg);
-      line-height: 1.55;
-    }
-
-    .container {
-      width: min(1140px, 92vw);
-      margin: 0 auto;
-    }
-
-    .glass {
-      background: linear-gradient(170deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-
-    header {
-      padding: 24px 0 16px;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: linear-gradient(180deg, rgba(7, 11, 20, 0.88), rgba(7, 11, 20, 0.55), transparent);
-      backdrop-filter: blur(6px);
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .brand img {
-      width: 345px;
-      height: auto;
-      object-fit: contain;
-      border-radius: 0;
-      background: transparent;
-      padding: 0;
-      display: block;
-    }
-
-    .mini-nav {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .mini-nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
-      border: 1px solid #294068;
-      border-radius: 999px;
-      padding: 7px 12px;
-      background: rgba(17, 29, 50, 0.86);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .lang-switch {
-      display: flex;
-      gap: 6px;
-      padding: 4px;
-      border-radius: 999px;
-      border: 1px solid #294068;
-      background: rgba(17, 29, 50, 0.86);
-    }
-
-    .lang-btn {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      border-radius: 999px;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
-    .lang-btn.active {
-      color: #09223e;
-      background: linear-gradient(120deg, var(--accent-c), #ffd36f);
-    }
-
-    .hero {
-      padding: 46px 0 24px;
-      display: grid;
-      gap: 16px;
-      grid-template-columns: 1.1fr 0.9fr;
-    }
-
-    .hero-main {
-      padding: 34px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      border: 1px solid #375c90;
-      padding: 7px 12px;
-      font-size: 13px;
-      color: #d7e8ff;
-      background: rgba(26, 43, 74, 0.58);
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 6vw, 64px);
-      line-height: 1.04;
-      letter-spacing: -0.03em;
-      max-width: 14ch;
-    }
-
-    .lead {
-      margin: 0;
-      max-width: 54ch;
-      color: var(--muted);
-      font-size: clamp(17px, 2.1vw, 20px);
-    }
-
-    .cta {
-      margin-top: 26px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 11px;
-      padding: 11px 16px;
-      border: 1px solid transparent;
-      transition: 160ms ease;
-      display: inline-block;
-      color: inherit;
-    }
-
-    .btn-main {
-      background: linear-gradient(120deg, var(--accent-c), #ffd36f);
-      color: #1d2433;
-    }
-
-    .btn-alt {
-      border-color: #3d5f93;
-      background: rgba(24, 37, 64, 0.8);
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .hero-side {
-      padding: 22px;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .concept-board {
-      position: relative;
-      overflow: hidden;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid #2d4976;
-      background: linear-gradient(180deg, rgba(15, 28, 50, 0.94), rgba(10, 20, 38, 0.94));
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.32);
-      margin-bottom: 6px;
-    }
-
-    .concept-board::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: conic-gradient(from 180deg, rgba(43, 169, 241, 0), rgba(43, 169, 241, 0.16), rgba(243, 172, 45, 0.18), rgba(43, 169, 241, 0));
-      animation: boardSpin 13s linear infinite;
-      pointer-events: none;
-    }
-
-    .concept-board::after {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 13px;
-      background: linear-gradient(180deg, rgba(15, 28, 50, 0.96), rgba(10, 20, 38, 0.96));
-      pointer-events: none;
-    }
-
-    .concept-top {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .concept-box {
-      border-radius: 10px;
-      border: 1px solid #385a90;
-      background: rgba(18, 31, 53, 0.88);
-      min-height: 58px;
-      padding: 10px;
-      display: grid;
-      align-content: center;
-      gap: 3px;
-      text-align: center;
-      justify-items: center;
-    }
-
-    .concept-board > .concept-box {
-      position: relative;
-      z-index: 1;
-    }
-
-    .concept-box strong {
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      color: #d9e7ff;
-      text-transform: uppercase;
-    }
-
-    .concept-box span {
-      font-size: 11px;
-      color: #9cb3d8;
-    }
-
-    .concept-link-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      min-height: 58px;
-      border-radius: 10px;
-      border: 1px solid #f3c15a;
-      background: linear-gradient(120deg, var(--accent-c), #ffd36f);
-      color: #1d2433;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
-      padding: 10px;
-      transition: transform 160ms ease;
-    }
-
-    .concept-link-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .concept-mid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .center-orb {
-      border-radius: 10px;
-      border: 1px solid #355685;
-      border-color: #4973b0;
-      background:
-        radial-gradient(80px 40px at 50% 30%, rgba(43, 169, 241, 0.35), transparent 60%),
-        radial-gradient(70px 50px at 60% 70%, rgba(243, 172, 45, 0.25), transparent 60%),
-        rgba(18, 32, 55, 0.94);
-      display: grid;
-      place-items: center;
-      color: #d6e5ff;
-      text-align: center;
-      padding: 8px;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      min-height: 108px;
-      position: relative;
-      animation: pulseCore 2.8s ease-in-out infinite;
-      gap: 6px;
-      align-content: center;
-    }
-
-    .orb-kicker {
-      font-size: 11px;
-      color: #98b6e3;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-
-    .orb-main {
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      line-height: 0.9;
-    }
-
-    .concept-bottom {
-      position: relative;
-      z-index: 1;
-      border-radius: 10px;
-      border: 1px dashed #4a72ac;
-      margin-top: 6px;
-      padding: 12px 12px;
-      font-size: 15px;
-      line-height: 1.35;
-      color: #b5c8ea;
-      text-align: center;
-      background: linear-gradient(90deg, rgba(21, 47, 78, 0.65), rgba(29, 61, 98, 0.38));
-    }
-
-    @keyframes boardSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes pulseCore {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(43, 169, 241, 0.22); }
-      50% { box-shadow: 0 0 0 8px rgba(43, 169, 241, 0); }
-    }
-
-    @keyframes sweep {
-      0% { left: -45%; }
-      100% { left: 110%; }
-    }
-
-    .kpi {
-      background: rgba(13, 23, 40, 0.76);
-      border: 1px solid #2b446f;
-      border-radius: 14px;
-      padding: 14px 15px 12px;
-    }
-
-    .kpi-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .kpi-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid #4d75ae;
-      background: radial-gradient(circle at 30% 30%, rgba(43, 169, 241, 0.5), rgba(18, 35, 60, 0.9));
-      display: grid;
-      place-items: center;
-      color: #e7f2ff;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .kpi strong {
-      display: block;
-      font-size: 21px;
-      margin-bottom: 0;
-      line-height: 1.1;
-    }
-
-    .kpi p {
-      margin: 0;
-      color: #bdd0ee;
-      font-size: 14px;
-    }
-
-    .kpi-meter {
-      position: relative;
-      margin-top: 9px;
-      height: 7px;
-      border-radius: 999px;
-      background: rgba(25, 41, 68, 0.9);
-      border: 1px solid #365684;
-      overflow: hidden;
-    }
-
-    .kpi-meter::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: var(--meter, 80%);
-      background: linear-gradient(90deg, #2ba9f1, #f3ac2d);
-      border-radius: 999px;
-    }
-
-    .offer-card {
-      margin-top: 16px;
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .offer-pill {
-      text-align: center;
-      padding: 13px 10px;
-      border-radius: 12px;
-      border: 1px solid #355685;
-      background: rgba(18, 30, 53, 0.78);
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    main { padding-bottom: 48px; }
-
-    section { margin-top: 16px; }
-
-    .section-card {
-      padding: 26px;
-    }
-
-    .section-title {
-      margin: 0 0 8px;
-      font-size: clamp(24px, 4vw, 32px);
-      letter-spacing: -0.02em;
-    }
-
-    .section-sub {
-      margin: 0 0 18px;
-      color: var(--muted);
-      max-width: 66ch;
-    }
-
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-    .panel {
-      padding: 18px;
-      border-radius: 14px;
-      border: 1px solid #2d456f;
-      background: rgba(17, 27, 47, 0.84);
-    }
-
-    .panel h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-
-    .panel p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .flow {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .step {
-      padding: 16px;
-      border-radius: 14px;
-      border: 1px solid #324f80;
-      background: linear-gradient(180deg, rgba(18, 30, 53, 0.9), rgba(12, 22, 39, 0.9));
-    }
-
-    .step small {
-      display: inline-block;
-      margin-bottom: 6px;
-      color: #84a9df;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      border: 1px solid #385a90;
-      background: rgba(21, 35, 60, 0.9);
-      color: #d5e4ff;
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-    }
-
-    .services-list {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-      display: grid;
-      gap: 6px;
-    }
-
-    .service-includes {
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      display: grid;
-      gap: 5px;
-      font-size: 14px;
-    }
-
-    .service-pricing {
-      margin-top: 14px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #3a6540;
-      background: rgba(20, 44, 22, 0.55);
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      font-size: 13px;
-    }
-
-    .service-pricing .price-main {
-      font-weight: 700;
-      color: #7de8a0;
-      font-size: 15px;
-    }
-
-    .service-pricing .price-meta {
-      color: #8ecba4;
-    }
-
-    .leadmag-box {
-      margin-top: 16px;
-      padding: 24px 28px;
-      border-radius: 18px;
-      border: 1px solid #395b90;
-      background:
-        radial-gradient(600px 200px at 0% 50%, rgba(43, 169, 241, 0.18), transparent 60%),
-        rgba(16, 26, 46, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .leadmag-box .leadmag-icon {
-      font-size: 36px;
-      flex-shrink: 0;
-    }
-
-    .leadmag-box .leadmag-text { flex: 1; min-width: 200px; }
-    .leadmag-box h3 { margin: 0 0 6px; font-size: 18px; color: #ffd36f; }
-    .leadmag-box p { margin: 0; color: var(--muted); font-size: 14px; }
-
-    .cta-box {
-      margin-top: 16px;
-      padding: 24px;
-      border-radius: 18px;
-      border: 1px solid #395b90;
-      background:
-        radial-gradient(700px 280px at 10% 0%, rgba(43, 169, 241, 0.24), transparent 60%),
-        radial-gradient(700px 280px at 90% 100%, rgba(243, 172, 45, 0.2), transparent 60%),
-        rgba(18, 28, 49, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .cta-box h2 { margin: 0 0 6px; }
-    .cta-box p { margin: 0; color: var(--muted); }
-    .cta-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-left: auto;
-      justify-content: flex-end;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px) scale(0.985);
-      transition: opacity 620ms ease, transform 620ms ease;
-      transition-delay: var(--reveal-delay, 0ms);
-      will-change: opacity, transform;
-    }
-
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    footer {
-      border-top: 1px solid #23395d;
-      padding: 20px 0 32px;
-      color: #8ca3ca;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    @media (max-width: 960px) {
-      .hero, .grid-3, .grid-2, .flow { grid-template-columns: 1fr; }
-      header { position: static; }
-      .hero-main, .hero-side { padding: 24px; }
-      h1 { max-width: 100%; }
-      .concept-top, .concept-mid { grid-template-columns: 1fr; }
-      .brand img { width: 270px; height: auto; }
-      .center-orb { min-height: 94px; }
-      .orb-main { font-size: 32px; }
-      .concept-bottom { font-size: 14px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .concept-board::before,
-      .center-orb,
-      .reveal {
-        animation: none !important;
-        transition: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-      }
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Robotics Consulting | Automatizācija, kas pelna</title>
+    <meta name="description"
+          content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
+    <meta name="i18n-version" content="2026-05-02-04">
+    <meta name="keywords"
+          content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
+    <style>
+        :root {
+          --bg: #060c1a;
+          --bg-soft: #0f1a30;
+          --card: rgba(17, 25, 44, 0.72);
+          --text: #edf2ff;
+          --muted: #b3c1dc;
+          --line: #2a3e63;
+          --accent-a: #2ba9f1;
+          --accent-b: #1d5fa8;
+          --accent-c: #f3ac2d;
+          --shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body { margin: 0; }
+
+        body {
+          color: var(--text);
+          font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+          background:
+            radial-gradient(1300px 680px at -10% -20%, rgba(43, 169, 241, 0.24), transparent 50%),
+            radial-gradient(1200px 760px at 110% -10%, rgba(29, 95, 168, 0.28), transparent 46%),
+            radial-gradient(900px 600px at 50% 120%, rgba(243, 172, 45, 0.12), transparent 45%),
+            var(--bg);
+          line-height: 1.55;
+        }
+
+        .container {
+          width: min(1140px, 92vw);
+          margin: 0 auto;
+        }
+
+        .glass {
+          background: linear-gradient(170deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+          border: 1px solid var(--line);
+          border-radius: 20px;
+          box-shadow: var(--shadow);
+          backdrop-filter: blur(8px);
+        }
+
+        header {
+          padding: 24px 0 16px;
+          position: sticky;
+          top: 0;
+          z-index: 20;
+          background: linear-gradient(180deg, rgba(7, 11, 20, 0.88), rgba(7, 11, 20, 0.55), transparent);
+          backdrop-filter: blur(6px);
+        }
+
+        .topbar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+        }
+
+        .brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+        }
+
+        .brand img {
+          width: 345px;
+          height: auto;
+          object-fit: contain;
+          border-radius: 0;
+          background: transparent;
+          padding: 0;
+          display: block;
+        }
+
+        .mini-nav {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+
+        .mini-nav a {
+          color: var(--muted);
+          text-decoration: none;
+          font-size: 14px;
+          border: 1px solid #294068;
+          border-radius: 999px;
+          padding: 7px 12px;
+          background: rgba(17, 29, 50, 0.86);
+        }
+
+        .header-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .lang-switch {
+          display: flex;
+          gap: 6px;
+          padding: 4px;
+          border-radius: 999px;
+          border: 1px solid #294068;
+          background: rgba(17, 29, 50, 0.86);
+        }
+
+        .lang-btn {
+          border: 0;
+          background: transparent;
+          color: var(--muted);
+          font-size: 12px;
+          font-weight: 700;
+          border-radius: 999px;
+          padding: 6px 10px;
+          cursor: pointer;
+        }
+
+        .lang-btn.active {
+          color: #09223e;
+          background: linear-gradient(120deg, var(--accent-c), #ffd36f);
+        }
+
+        .hero {
+          padding: 46px 0 24px;
+          display: grid;
+          gap: 16px;
+          grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .hero-main {
+          padding: 34px;
+        }
+
+        .pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          border-radius: 999px;
+          border: 1px solid #375c90;
+          padding: 7px 12px;
+          font-size: 13px;
+          color: #d7e8ff;
+          background: rgba(26, 43, 74, 0.58);
+          margin-bottom: 14px;
+        }
+
+        h1 {
+          margin: 0 0 12px;
+          font-size: clamp(34px, 6vw, 64px);
+          line-height: 1.04;
+          letter-spacing: -0.03em;
+          max-width: 14ch;
+        }
+
+        .lead {
+          margin: 0;
+          max-width: 54ch;
+          color: var(--muted);
+          font-size: clamp(17px, 2.1vw, 20px);
+        }
+
+        .cta {
+          margin-top: 26px;
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          text-decoration: none;
+          font-weight: 600;
+          border-radius: 11px;
+          padding: 11px 16px;
+          border: 1px solid transparent;
+          transition: 160ms ease;
+          display: inline-block;
+          color: inherit;
+        }
+
+        .btn-main {
+          background: linear-gradient(120deg, var(--accent-c), #ffd36f);
+          color: #1d2433;
+        }
+
+        .btn-alt {
+          border-color: #3d5f93;
+          background: rgba(24, 37, 64, 0.8);
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+
+        .hero-side {
+          padding: 22px;
+          display: grid;
+          gap: 10px;
+          align-content: start;
+        }
+
+        .concept-board {
+          position: relative;
+          overflow: hidden;
+          padding: 12px;
+          border-radius: 14px;
+          border: 1px solid #2d4976;
+          background: linear-gradient(180deg, rgba(15, 28, 50, 0.94), rgba(10, 20, 38, 0.94));
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.32);
+          margin-bottom: 6px;
+        }
+
+        .concept-board::before {
+          content: "";
+          position: absolute;
+          inset: -40%;
+          background: conic-gradient(from 180deg, rgba(43, 169, 241, 0), rgba(43, 169, 241, 0.16), rgba(243, 172, 45, 0.18), rgba(43, 169, 241, 0));
+          animation: boardSpin 13s linear infinite;
+          pointer-events: none;
+        }
+
+        .concept-board::after {
+          content: "";
+          position: absolute;
+          inset: 1px;
+          border-radius: 13px;
+          background: linear-gradient(180deg, rgba(15, 28, 50, 0.96), rgba(10, 20, 38, 0.96));
+          pointer-events: none;
+        }
+
+        .concept-top {
+          position: relative;
+          z-index: 1;
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+
+        .concept-box {
+          border-radius: 10px;
+          border: 1px solid #385a90;
+          background: rgba(18, 31, 53, 0.88);
+          min-height: 58px;
+          padding: 10px;
+          display: grid;
+          align-content: center;
+          gap: 3px;
+          text-align: center;
+          justify-items: center;
+        }
+
+        .concept-board > .concept-box {
+          position: relative;
+          z-index: 1;
+        }
+
+        .concept-box strong {
+          font-size: 12px;
+          letter-spacing: 0.06em;
+          color: #d9e7ff;
+          text-transform: uppercase;
+        }
+
+        .concept-box span {
+          font-size: 11px;
+          color: #9cb3d8;
+        }
+
+        .concept-link-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          min-height: 58px;
+          border-radius: 10px;
+          border: 1px solid #f3c15a;
+          background: linear-gradient(120deg, var(--accent-c), #ffd36f);
+          color: #1d2433;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+          text-decoration: none;
+          text-align: center;
+          padding: 10px;
+          transition: transform 160ms ease;
+        }
+
+        .concept-link-btn:hover {
+          transform: translateY(-1px);
+        }
+
+        .concept-mid {
+          position: relative;
+          z-index: 1;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+          margin-bottom: 10px;
+        }
+
+        .center-orb {
+          border-radius: 10px;
+          border: 1px solid #355685;
+          border-color: #4973b0;
+          background:
+            radial-gradient(80px 40px at 50% 30%, rgba(43, 169, 241, 0.35), transparent 60%),
+            radial-gradient(70px 50px at 60% 70%, rgba(243, 172, 45, 0.25), transparent 60%),
+            rgba(18, 32, 55, 0.94);
+          display: grid;
+          place-items: center;
+          color: #d6e5ff;
+          text-align: center;
+          padding: 8px;
+          font-weight: 700;
+          font-size: 12px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          min-height: 108px;
+          position: relative;
+          animation: pulseCore 2.8s ease-in-out infinite;
+          gap: 6px;
+          align-content: center;
+        }
+
+        .orb-kicker {
+          font-size: 11px;
+          color: #98b6e3;
+          letter-spacing: 0.08em;
+          font-weight: 700;
+        }
+
+        .orb-main {
+          font-size: 21px;
+          font-weight: 800;
+          letter-spacing: 0.03em;
+          line-height: 0.9;
+        }
+
+        .concept-bottom {
+          position: relative;
+          z-index: 1;
+          border-radius: 10px;
+          border: 1px dashed #4a72ac;
+          margin-top: 6px;
+          padding: 12px 12px;
+          font-size: 15px;
+          line-height: 1.35;
+          color: #b5c8ea;
+          text-align: center;
+          background: linear-gradient(90deg, rgba(21, 47, 78, 0.65), rgba(29, 61, 98, 0.38));
+        }
+
+        @keyframes boardSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseCore {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(43, 169, 241, 0.22); }
+          50% { box-shadow: 0 0 0 8px rgba(43, 169, 241, 0); }
+        }
+
+        @keyframes sweep {
+          0% { left: -45%; }
+          100% { left: 110%; }
+        }
+
+        .kpi {
+          background: rgba(13, 23, 40, 0.76);
+          border: 1px solid #2b446f;
+          border-radius: 14px;
+          padding: 14px 15px 12px;
+        }
+
+        .kpi-head {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 6px;
+        }
+
+        .kpi-icon {
+          width: 34px;
+          height: 34px;
+          border-radius: 999px;
+          border: 1px solid #4d75ae;
+          background: radial-gradient(circle at 30% 30%, rgba(43, 169, 241, 0.5), rgba(18, 35, 60, 0.9));
+          display: grid;
+          place-items: center;
+          color: #e7f2ff;
+          font-size: 16px;
+          flex-shrink: 0;
+        }
+
+        .kpi strong {
+          display: block;
+          font-size: 21px;
+          margin-bottom: 0;
+          line-height: 1.1;
+        }
+
+        .kpi p {
+          margin: 0;
+          color: #bdd0ee;
+          font-size: 14px;
+        }
+
+        .kpi-meter {
+          position: relative;
+          margin-top: 9px;
+          height: 7px;
+          border-radius: 999px;
+          background: rgba(25, 41, 68, 0.9);
+          border: 1px solid #365684;
+          overflow: hidden;
+        }
+
+        .kpi-meter::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          width: var(--meter, 80%);
+          background: linear-gradient(90deg, #2ba9f1, #f3ac2d);
+          border-radius: 999px;
+        }
+
+        .offer-card {
+          margin-top: 16px;
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .offer-pill {
+          text-align: center;
+          padding: 13px 10px;
+          border-radius: 12px;
+          border: 1px solid #355685;
+          background: rgba(18, 30, 53, 0.78);
+          font-size: 14px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+        }
+
+        main { padding-bottom: 48px; }
+
+        section { margin-top: 16px; }
+
+        .section-card {
+          padding: 26px;
+        }
+
+        .section-title {
+          margin: 0 0 8px;
+          font-size: clamp(24px, 4vw, 32px);
+          letter-spacing: -0.02em;
+        }
+
+        .section-sub {
+          margin: 0 0 18px;
+          color: var(--muted);
+          max-width: 66ch;
+        }
+
+        .grid {
+          display: grid;
+          gap: 12px;
+        }
+
+        .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+        .panel {
+          padding: 18px;
+          border-radius: 14px;
+          border: 1px solid #2d456f;
+          background: rgba(17, 27, 47, 0.84);
+        }
+
+        .panel h3 {
+          margin: 0 0 8px;
+          font-size: 18px;
+        }
+
+        .panel p {
+          margin: 0;
+          color: var(--muted);
+        }
+
+        .flow {
+          display: grid;
+          gap: 12px;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .step {
+          padding: 16px;
+          border-radius: 14px;
+          border: 1px solid #324f80;
+          background: linear-gradient(180deg, rgba(18, 30, 53, 0.9), rgba(12, 22, 39, 0.9));
+        }
+
+        .step small {
+          display: inline-block;
+          margin-bottom: 6px;
+          color: #84a9df;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+        }
+
+        .step p {
+          margin: 0;
+          color: var(--muted);
+          font-size: 15px;
+        }
+
+        .stack {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .chip {
+          border: 1px solid #385a90;
+          background: rgba(21, 35, 60, 0.9);
+          color: #d5e4ff;
+          padding: 7px 10px;
+          border-radius: 999px;
+          font-size: 13px;
+        }
+
+        .services-list {
+          margin: 0;
+          padding-left: 20px;
+          color: var(--muted);
+          display: grid;
+          gap: 6px;
+        }
+
+        .service-includes {
+          margin: 10px 0 0;
+          padding-left: 18px;
+          color: var(--muted);
+          display: grid;
+          gap: 5px;
+          font-size: 14px;
+        }
+
+        .service-pricing {
+          margin-top: 14px;
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1px solid #3a6540;
+          background: rgba(20, 44, 22, 0.55);
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          align-items: center;
+          font-size: 13px;
+        }
+
+        .service-pricing .price-main {
+          font-weight: 700;
+          color: #7de8a0;
+          font-size: 15px;
+        }
+
+        .service-pricing .price-meta {
+          color: #8ecba4;
+        }
+
+        .leadmag-box {
+          margin-top: 16px;
+          padding: 24px 28px;
+          border-radius: 18px;
+          border: 1px solid #395b90;
+          background:
+            radial-gradient(600px 200px at 0% 50%, rgba(43, 169, 241, 0.18), transparent 60%),
+            rgba(16, 26, 46, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+          flex-wrap: wrap;
+        }
+
+        .leadmag-box .leadmag-icon {
+          font-size: 36px;
+          flex-shrink: 0;
+        }
+
+        .leadmag-box .leadmag-text { flex: 1; min-width: 200px; }
+        .leadmag-box h3 { margin: 0 0 6px; font-size: 18px; color: #ffd36f; }
+        .leadmag-box p { margin: 0; color: var(--muted); font-size: 14px; }
+
+        .cta-box {
+          margin-top: 16px;
+          padding: 24px;
+          border-radius: 18px;
+          border: 1px solid #395b90;
+          background:
+            radial-gradient(700px 280px at 10% 0%, rgba(43, 169, 241, 0.24), transparent 60%),
+            radial-gradient(700px 280px at 90% 100%, rgba(243, 172, 45, 0.2), transparent 60%),
+            rgba(18, 28, 49, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .cta-box h2 { margin: 0 0 6px; }
+        .cta-box p { margin: 0; color: var(--muted); }
+        .cta-actions {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-left: auto;
+          justify-content: flex-end;
+        }
+
+        .reveal {
+          opacity: 0;
+          transform: translateY(22px) scale(0.985);
+          transition: opacity 620ms ease, transform 620ms ease;
+          transition-delay: var(--reveal-delay, 0ms);
+          will-change: opacity, transform;
+        }
+
+        .reveal.in-view {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        footer {
+          border-top: 1px solid #23395d;
+          padding: 20px 0 32px;
+          color: #8ca3ca;
+          font-size: 14px;
+          text-align: center;
+        }
+
+        @media (max-width: 960px) {
+          .hero, .grid-3, .grid-2, .flow { grid-template-columns: 1fr; }
+          header { position: static; }
+          .hero-main, .hero-side { padding: 24px; }
+          h1 { max-width: 100%; }
+          .concept-top, .concept-mid { grid-template-columns: 1fr; }
+          .brand img { width: 270px; height: auto; }
+          .center-orb { min-height: 94px; }
+          .orb-main { font-size: 32px; }
+          .concept-bottom { font-size: 14px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .concept-board::before,
+          .center-orb,
+          .reveal {
+            animation: none !important;
+            transition: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+          }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18116557749">
+    </script>
+    <script>
+        globalThis.dataLayer = globalThis.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-18116557749');
+    </script>
 </head>
 <body>
-  <header>
+<header>
     <div class="container topbar">
-      <div class="brand">
-        <img src="./assets/logo-transparent.png" alt="Robotics Consulting logo">
-      </div>
-      <div class="header-actions">
-        <nav class="mini-nav">
-          <a href="#pakalpojumi" data-i18n="nav_services">Pakalpojumi</a>
-          <a href="#process" data-i18n="nav_process">Process</a>
-          <a href="#tech" data-i18n="nav_tech">Tehnoloģijas</a>
-          <a href="#faq" data-i18n="nav_faq">FAQ</a>
-          <a href="./prototypes.html" data-i18n="nav_prototypes">Prototipi</a>
-        </nav>
-        <div class="lang-switch" aria-label="Language switch">
-          <button class="lang-btn active" type="button" data-lang="lv">LV</button>
-          <button class="lang-btn" type="button" data-lang="ru">RU</button>
-          <button class="lang-btn" type="button" data-lang="en">ENG</button>
+        <div class="brand">
+            <img src="./assets/logo-transparent.png" alt="Robotics Consulting logo">
         </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero reveal">
-      <article class="hero-main glass reveal" style="--reveal-delay: 80ms;">
-        <h1 data-i18n="hero_title">Practical Automation & Robotics Consulting for SMEs</h1>
-        <p class="lead" data-i18n="hero_lead">
-          We help warehousing, logistics, and manufacturing businesses identify where automation makes financial sense - and how to implement it with confidence.
-        </p>
-        <div class="cta">
-          <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="hero_cta_main">Book a Discovery Call</a>
-          <a class="btn btn-alt" href="./prototypes.html" data-i18n="hero_cta_alt">See Prototype Concepts</a>
-        </div>
-      </article>
-
-      <aside class="hero-side glass reveal" style="--reveal-delay: 150ms;">
-        <div class="concept-board" aria-label="Automation concept layout">
-          <div class="concept-top">
-            <div class="concept-box">
-              <strong data-i18n="concept_app_title">Aplikācijas biznesam</strong>
-              <span data-i18n="concept_app_sub">Iekšējie rīki un dashboardi</span>
+        <div class="header-actions">
+            <nav class="mini-nav">
+                <a href="#pakalpojumi" data-i18n="nav_services">Pakalpojumi</a>
+                <a href="#process" data-i18n="nav_process">Process</a>
+                <a href="#tech" data-i18n="nav_tech">Tehnoloģijas</a>
+                <a href="#faq" data-i18n="nav_faq">FAQ</a>
+                <a href="./prototypes.html" data-i18n="nav_prototypes">Prototipi</a>
+            </nav>
+            <div class="lang-switch" aria-label="Language switch">
+                <button class="lang-btn active" type="button" data-lang="lv">LV</button>
+                <button class="lang-btn" type="button" data-lang="ru">RU</button>
+                <button class="lang-btn" type="button" data-lang="en">ENG</button>
             </div>
-            <a class="concept-link-btn" href="./prototypes.html" data-i18n="concept_link_btn">See Concepts</a>
-          </div>
-          <div class="concept-box">
-            <strong data-i18n="concept_auto_title">Automatizēts process</strong>
-            <span data-i18n="concept_auto_sub">No datiem uz rezultātu: mazāk kļūdu, ātrāka izpilde, lielāka peļņa.</span>
-          </div>
         </div>
-        <div class="kpi">
-          <div class="kpi-head">
-            <div class="kpi-icon">⏱</div>
-            <strong data-i18n="kpi_1_title">10+ gadi</strong>
-          </div>
-          <p data-i18n="kpi_1_sub">pieredze IT un sistēmu integrācijās</p>
-          <div class="kpi-meter" style="--meter: 92%;"></div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-head">
-            <div class="kpi-icon">🚀</div>
-            <strong data-i18n="kpi_2_title">2-3 dienās</strong>
-          </div>
-          <p data-i18n="kpi_2_sub">pirmā prototipa versija idejas validācijai</p>
-          <div class="kpi-meter" style="--meter: 84%;"></div>
-        </div>
-        <div class="kpi">
-          <div class="kpi-head">
-            <div class="kpi-icon">🎯</div>
-            <strong data-i18n="kpi_3_title">Pragmatiska pieeja</strong>
-          </div>
-          <p data-i18n="kpi_3_sub">fokusā biznesa rezultāts, nevis buzzwordi</p>
-          <div class="kpi-meter" style="--meter: 96%;"></div>
-        </div>
-        <div class="offer-card">
-          <div class="offer-pill" data-i18n="offer_1">Aplikācijas biznesam</div>
-          <div class="offer-pill" data-i18n="offer_2">Integrācijas ar mājaslapām</div>
-          <div class="offer-pill" data-i18n="offer_3">Video novērošana</div>
-        </div>
-      </aside>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero reveal">
+        <article class="hero-main glass reveal" style="--reveal-delay: 80ms;">
+            <h1 data-i18n="hero_title">Practical Automation & Robotics Consulting for SMEs</h1>
+            <p class="lead" data-i18n="hero_lead">
+                We help warehousing, logistics, and manufacturing businesses identify where automation makes financial
+                sense - and how to implement it with confidence.
+            </p>
+            <div class="cta">
+                <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="hero_cta_main">Book a
+                    Discovery Call</a>
+                <a class="btn btn-alt" href="./prototypes.html" data-i18n="hero_cta_alt">See Prototype Concepts</a>
+            </div>
+        </article>
+
+        <aside class="hero-side glass reveal" style="--reveal-delay: 150ms;">
+            <div class="concept-board" aria-label="Automation concept layout">
+                <div class="concept-top">
+                    <div class="concept-box">
+                        <strong data-i18n="concept_app_title">Aplikācijas biznesam</strong>
+                        <span data-i18n="concept_app_sub">Iekšējie rīki un dashboardi</span>
+                    </div>
+                    <a class="concept-link-btn" href="./prototypes.html" data-i18n="concept_link_btn">See Concepts</a>
+                </div>
+                <div class="concept-box">
+                    <strong data-i18n="concept_auto_title">Automatizēts process</strong>
+                    <span data-i18n="concept_auto_sub">No datiem uz rezultātu: mazāk kļūdu, ātrāka izpilde, lielāka peļņa.</span>
+                </div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-head">
+                    <div class="kpi-icon">⏱</div>
+                    <strong data-i18n="kpi_1_title">10+ gadi</strong>
+                </div>
+                <p data-i18n="kpi_1_sub">pieredze IT un sistēmu integrācijās</p>
+                <div class="kpi-meter" style="--meter: 92%;"></div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-head">
+                    <div class="kpi-icon">🚀</div>
+                    <strong data-i18n="kpi_2_title">2-3 dienās</strong>
+                </div>
+                <p data-i18n="kpi_2_sub">pirmā prototipa versija idejas validācijai</p>
+                <div class="kpi-meter" style="--meter: 84%;"></div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-head">
+                    <div class="kpi-icon">🎯</div>
+                    <strong data-i18n="kpi_3_title">Pragmatiska pieeja</strong>
+                </div>
+                <p data-i18n="kpi_3_sub">fokusā biznesa rezultāts, nevis buzzwordi</p>
+                <div class="kpi-meter" style="--meter: 96%;"></div>
+            </div>
+            <div class="offer-card">
+                <div class="offer-pill" data-i18n="offer_1">Aplikācijas biznesam</div>
+                <div class="offer-pill" data-i18n="offer_2">Integrācijas ar mājaslapām</div>
+                <div class="offer-pill" data-i18n="offer_3">Video novērošana</div>
+            </div>
+        </aside>
     </section>
 
     <section id="value-prop" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="problem_title">Automation is Expensive When Done Wrong</h2>
-      <p class="section-sub" data-i18n="problem_body">Many small and mid-sized businesses know automation could improve efficiency - but struggle to answer:</p>
-      <div class="grid grid-2">
-        <ul class="services-list panel reveal" style="--reveal-delay: 40ms;">
-          <li data-i18n="problem_q1">Which processes are worth automating?</li>
-          <li data-i18n="problem_q2">Will the investment pay off?</li>
-          <li data-i18n="problem_q3">What technology fits our workflow?</li>
-          <li data-i18n="problem_q4">How do we avoid costly mistakes?</li>
-        </ul>
-        <article class="panel reveal" style="--reveal-delay: 110ms;">
-          <p data-i18n="problem_note">We help you answer those questions before major investments are made.</p>
-        </article>
-      </div>
+        <h2 class="section-title" data-i18n="problem_title">Automation is Expensive When Done Wrong</h2>
+        <p class="section-sub" data-i18n="problem_body">Many small and mid-sized businesses know automation could
+            improve efficiency - but struggle to answer:</p>
+        <div class="grid grid-2">
+            <ul class="services-list panel reveal" style="--reveal-delay: 40ms;">
+                <li data-i18n="problem_q1">Which processes are worth automating?</li>
+                <li data-i18n="problem_q2">Will the investment pay off?</li>
+                <li data-i18n="problem_q3">What technology fits our workflow?</li>
+                <li data-i18n="problem_q4">How do we avoid costly mistakes?</li>
+            </ul>
+            <article class="panel reveal" style="--reveal-delay: 110ms;">
+                <p data-i18n="problem_note">We help you answer those questions before major investments are made.</p>
+            </article>
+        </div>
     </section>
 
     <section id="pakalpojumi" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="services_title">Services</h2>
-      <p class="section-sub" data-i18n="services_sub">Practical services focused on ROI, efficiency, and lower implementation risk.</p>
-      <div class="grid grid-3">
-        <article class="panel reveal" style="--reveal-delay: 40ms;">
-          <h3 data-i18n="services_card_1_title">Automation Opportunity Assessment</h3>
-          <p data-i18n="services_card_1_sub">Identify the highest-ROI automation opportunities in your business.</p>
-          <ul class="service-includes">
-            <li data-i18n="services_card_1_i1">Process analysis</li>
-            <li data-i18n="services_card_1_i2">Bottleneck identification</li>
-            <li data-i18n="services_card_1_i3">Automation feasibility review</li>
-            <li data-i18n="services_card_1_i4">ROI estimation</li>
-            <li data-i18n="services_card_1_i5">Recommended implementation roadmap</li>
-          </ul>
-          <div class="service-pricing">
-            <span class="price-main" data-i18n="services_card_1_price">Starting from €990</span>
-            <span class="price-meta" data-i18n="services_card_1_scope">Fixed-scope engagement</span>
-            <span class="price-meta" data-i18n="services_card_1_duration">1–2 weeks</span>
-          </div>
-        </article>
-        <article class="panel reveal" style="--reveal-delay: 110ms;">
-          <h3 data-i18n="services_card_2_title">Prototype & Pilot Design</h3>
-          <p data-i18n="services_card_2_sub">Validate automation concepts before full-scale implementation.</p>
-          <ul class="service-includes">
-            <li data-i18n="services_card_2_i1">Workflow simulation</li>
-            <li data-i18n="services_card_2_i2">Prototype concepts</li>
-            <li data-i18n="services_card_2_i3">Technical feasibility assessment</li>
-            <li data-i18n="services_card_2_i4">Vendor and technology recommendations</li>
-          </ul>
-        </article>
-        <article class="panel reveal" style="--reveal-delay: 180ms;">
-          <h3 data-i18n="services_card_3_title">Robotics & Systems Integration Architecture</h3>
-          <p data-i18n="services_card_3_sub">Design the software and integration layer behind modern automation systems.</p>
-          <ul class="service-includes">
-            <li data-i18n="services_card_3_i1">API and platform architecture</li>
-            <li data-i18n="services_card_3_i2">Fleet and workflow orchestration</li>
-            <li data-i18n="services_card_3_i3">Cloud and edge integration</li>
-            <li data-i18n="services_card_3_i4">Data pipelines and monitoring</li>
-          </ul>
-        </article>
-      </div>
+        <h2 class="section-title" data-i18n="services_title">Services</h2>
+        <p class="section-sub" data-i18n="services_sub">Practical services focused on ROI, efficiency, and lower
+            implementation risk.</p>
+        <div class="grid grid-3">
+            <article class="panel reveal" style="--reveal-delay: 40ms;">
+                <h3 data-i18n="services_card_1_title">Automation Opportunity Assessment</h3>
+                <p data-i18n="services_card_1_sub">Identify the highest-ROI automation opportunities in your
+                    business.</p>
+                <ul class="service-includes">
+                    <li data-i18n="services_card_1_i1">Process analysis</li>
+                    <li data-i18n="services_card_1_i2">Bottleneck identification</li>
+                    <li data-i18n="services_card_1_i3">Automation feasibility review</li>
+                    <li data-i18n="services_card_1_i4">ROI estimation</li>
+                    <li data-i18n="services_card_1_i5">Recommended implementation roadmap</li>
+                </ul>
+                <div class="service-pricing">
+                    <span class="price-main" data-i18n="services_card_1_price">Starting from €990</span>
+                    <span class="price-meta" data-i18n="services_card_1_scope">Fixed-scope engagement</span>
+                    <span class="price-meta" data-i18n="services_card_1_duration">1–2 weeks</span>
+                </div>
+            </article>
+            <article class="panel reveal" style="--reveal-delay: 110ms;">
+                <h3 data-i18n="services_card_2_title">Prototype & Pilot Design</h3>
+                <p data-i18n="services_card_2_sub">Validate automation concepts before full-scale implementation.</p>
+                <ul class="service-includes">
+                    <li data-i18n="services_card_2_i1">Workflow simulation</li>
+                    <li data-i18n="services_card_2_i2">Prototype concepts</li>
+                    <li data-i18n="services_card_2_i3">Technical feasibility assessment</li>
+                    <li data-i18n="services_card_2_i4">Vendor and technology recommendations</li>
+                </ul>
+            </article>
+            <article class="panel reveal" style="--reveal-delay: 180ms;">
+                <h3 data-i18n="services_card_3_title">Robotics & Systems Integration Architecture</h3>
+                <p data-i18n="services_card_3_sub">Design the software and integration layer behind modern automation
+                    systems.</p>
+                <ul class="service-includes">
+                    <li data-i18n="services_card_3_i1">API and platform architecture</li>
+                    <li data-i18n="services_card_3_i2">Fleet and workflow orchestration</li>
+                    <li data-i18n="services_card_3_i3">Cloud and edge integration</li>
+                    <li data-i18n="services_card_3_i4">Data pipelines and monitoring</li>
+                </ul>
+            </article>
+        </div>
     </section>
 
     <section class="cta-box reveal" style="margin-top:16px;">
-      <div>
-        <h2 data-i18n="cta_mid_title">Ready to identify your best automation opportunities?</h2>
-      </div>
-      <div class="cta-actions">
-        <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_mid_btn">Book a Discovery Call</a>
-      </div>
+        <div>
+            <h2 data-i18n="cta_mid_title">Ready to identify your best automation opportunities?</h2>
+        </div>
+        <div class="cta-actions">
+            <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_mid_btn">Book a
+                Discovery Call</a>
+        </div>
     </section>
 
     <section id="why-us" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="why_title">Technical Expertise Meets Business Thinking</h2>
-      <p class="section-sub" data-i18n="why_sub_1">Led by a senior software architect with 8+ years building distributed enterprise systems, scalable integrations, and event-driven platforms.</p>
-      <article class="panel reveal" style="--reveal-delay: 80ms;">
-        <p data-i18n="why_sub_2">We combine technical depth with practical ROI-focused consulting - bridging business needs and modern automation technologies.</p>
-      </article>
-      <article class="panel reveal" style="--reveal-delay: 140ms; margin-top: 12px;">
-        <p data-i18n="why_sub_3">Specializing in the software, integration, orchestration, and systems architecture layer behind modern automation initiatives - from WMS and ERP connections to fleet orchestration and real-time data pipelines.</p>
-      </article>
-      <article class="panel reveal" style="--reveal-delay: 200ms; margin-top: 12px; border-color: #3a6540; background: rgba(20,44,22,0.45);">
-        <p><strong data-i18n="why_honest_label" style="color:#7de8a0;">Honest approach</strong></p>
-        <p data-i18n="why_honest">We may recommend NOT automating — if the ROI analysis shows it does not make financial sense at this stage. Our goal is a result that is good for your business, not a sale.</p>
-      </article>
-      <article class="panel reveal" style="--reveal-delay: 260ms; margin-top: 12px;">
-        <p><strong data-i18n="founder_title" style="color:#ffd36f; font-size:16px;">Founder Background</strong></p>
-        <p data-i18n="founder_sub" style="margin-bottom:10px;">Senior systems architect background across enterprise and operational environments:</p>
-        <ul class="service-includes" style="margin-top:0;">
-          <li data-i18n="founder_bg_1">Distributed systems and scalable integrations</li>
-          <li data-i18n="founder_bg_2">Process orchestration and workflow automation</li>
-          <li data-i18n="founder_bg_3">WMS, ERP, and operational platform integrations</li>
-          <li data-i18n="founder_bg_4">Cloud, edge, and real-time data pipelines</li>
-          <li data-i18n="founder_bg_5">Team lead experience in multi-system architecture projects</li>
-        </ul>
-      </article>
+        <h2 class="section-title" data-i18n="why_title">Technical Expertise Meets Business Thinking</h2>
+        <p class="section-sub" data-i18n="why_sub_1">Led by a senior software architect with 8+ years building
+            distributed enterprise systems, scalable integrations, and event-driven platforms.</p>
+        <article class="panel reveal" style="--reveal-delay: 80ms;">
+            <p data-i18n="why_sub_2">We combine technical depth with practical ROI-focused consulting - bridging
+                business needs and modern automation technologies.</p>
+        </article>
+        <article class="panel reveal" style="--reveal-delay: 140ms; margin-top: 12px;">
+            <p data-i18n="why_sub_3">Specializing in the software, integration, orchestration, and systems architecture
+                layer behind modern automation initiatives - from WMS and ERP connections to fleet orchestration and
+                real-time data pipelines.</p>
+        </article>
+        <article class="panel reveal"
+                 style="--reveal-delay: 200ms; margin-top: 12px; border-color: #3a6540; background: rgba(20,44,22,0.45);">
+            <p><strong data-i18n="why_honest_label" style="color:#7de8a0;">Honest approach</strong></p>
+            <p data-i18n="why_honest">We may recommend NOT automating — if the ROI analysis shows it does not make
+                financial sense at this stage. Our goal is a result that is good for your business, not a sale.</p>
+        </article>
+        <article class="panel reveal" style="--reveal-delay: 260ms; margin-top: 12px;">
+            <p><strong data-i18n="founder_title" style="color:#ffd36f; font-size:16px;">Founder Background</strong></p>
+            <p data-i18n="founder_sub" style="margin-bottom:10px;">Senior systems architect background across enterprise
+                and operational environments:</p>
+            <ul class="service-includes" style="margin-top:0;">
+                <li data-i18n="founder_bg_1">Distributed systems and scalable integrations</li>
+                <li data-i18n="founder_bg_2">Process orchestration and workflow automation</li>
+                <li data-i18n="founder_bg_3">WMS, ERP, and operational platform integrations</li>
+                <li data-i18n="founder_bg_4">Cloud, edge, and real-time data pipelines</li>
+                <li data-i18n="founder_bg_5">Team lead experience in multi-system architecture projects</li>
+            </ul>
+        </article>
     </section>
 
     <section id="process" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="process_title">How It Works</h2>
-      <p class="section-sub" data-i18n="process_sub">A clear process from discovery to practical implementation support.</p>
-      <div class="flow">
-        <article class="step reveal" style="--reveal-delay: 30ms;">
-          <small data-i18n="process_label_1">01 / Discovery Call</small>
-          <p data-i18n="process_step_1">Understand your operations and current challenges.</p>
-        </article>
-        <article class="step reveal" style="--reveal-delay: 100ms;">
-          <small data-i18n="process_label_2">02 / Assessment</small>
-          <p data-i18n="process_step_2">Analyze workflows and identify automation opportunities.</p>
-        </article>
-        <article class="step reveal" style="--reveal-delay: 170ms;">
-          <small data-i18n="process_label_3">03 / Roadmap</small>
-          <p data-i18n="process_step_3">Deliver practical recommendations with ROI estimates.</p>
-        </article>
-        <article class="step reveal" style="--reveal-delay: 240ms;">
-          <small data-i18n="process_label_4">04 / Implementation Support</small>
-          <p data-i18n="process_step_4">Assist with prototyping, architecture, and vendor coordination.</p>
-        </article>
-      </div>
+        <h2 class="section-title" data-i18n="process_title">How It Works</h2>
+        <p class="section-sub" data-i18n="process_sub">A clear process from discovery to practical implementation
+            support.</p>
+        <div class="flow">
+            <article class="step reveal" style="--reveal-delay: 30ms;">
+                <small data-i18n="process_label_1">01 / Discovery Call</small>
+                <p data-i18n="process_step_1">Understand your operations and current challenges.</p>
+            </article>
+            <article class="step reveal" style="--reveal-delay: 100ms;">
+                <small data-i18n="process_label_2">02 / Assessment</small>
+                <p data-i18n="process_step_2">Analyze workflows and identify automation opportunities.</p>
+            </article>
+            <article class="step reveal" style="--reveal-delay: 170ms;">
+                <small data-i18n="process_label_3">03 / Roadmap</small>
+                <p data-i18n="process_step_3">Deliver practical recommendations with ROI estimates.</p>
+            </article>
+            <article class="step reveal" style="--reveal-delay: 240ms;">
+                <small data-i18n="process_label_4">04 / Implementation Support</small>
+                <p data-i18n="process_step_4">Assist with prototyping, architecture, and vendor coordination.</p>
+            </article>
+        </div>
     </section>
 
     <section id="tech" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="tech_title">Who We Help</h2>
-      <p class="section-sub" data-i18n="tech_sub">We work with teams where operational efficiency and investment clarity matter most.</p>
-      <ul class="services-list">
-        <li data-i18n="ideal_1">Warehousing and fulfillment centers</li>
-        <li data-i18n="ideal_2">Logistics providers</li>
-        <li data-i18n="ideal_3">Light manufacturing businesses</li>
-        <li data-i18n="ideal_4">Automation and robotics vendors needing software expertise</li>
-      </ul>
+        <h2 class="section-title" data-i18n="tech_title">Who We Help</h2>
+        <p class="section-sub" data-i18n="tech_sub">We work with teams where operational efficiency and investment
+            clarity matter most.</p>
+        <ul class="services-list">
+            <li data-i18n="ideal_1">Warehousing and fulfillment centers</li>
+            <li data-i18n="ideal_2">Logistics providers</li>
+            <li data-i18n="ideal_3">Light manufacturing businesses</li>
+            <li data-i18n="ideal_4">Automation and robotics vendors needing software expertise</li>
+        </ul>
     </section>
 
     <section id="faq" class="glass section-card reveal">
-      <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
-      <p class="section-sub" data-i18n="faq_sub">Common questions from warehouse, logistics, and manufacturing teams considering automation.</p>
-      <div class="grid grid-2" style="gap:12px;">
-        <article class="panel reveal" style="--reveal-delay:30ms;">
-          <h3 data-i18n="faq_q1" style="font-size:16px;margin-bottom:8px;">How much does automation typically cost?</h3>
-          <p data-i18n="faq_a1">Costs vary widely — from a few thousand euros for software-based process automation to hundreds of thousands for physical robotics. That is exactly why an Automation Opportunity Assessment comes first.</p>
-        </article>
-        <article class="panel reveal" style="--reveal-delay:80ms;">
-          <h3 data-i18n="faq_q2" style="font-size:16px;margin-bottom:8px;">Do we need robots or vendors already selected?</h3>
-          <p data-i18n="faq_a2">No. We can work with you from scratch, or alongside your existing vendor conversations. The assessment helps you evaluate options with clear criteria rather than vendor marketing.</p>
-        </article>
-        <article class="panel reveal" style="--reveal-delay:130ms;">
-          <h3 data-i18n="faq_q3" style="font-size:16px;margin-bottom:8px;">Can you work with our existing systems and vendors?</h3>
-          <p data-i18n="faq_a3">Yes. We specialize in integration architecture — connecting new automation layers with existing WMS, ERP, and operational tools your team already uses.</p>
-        </article>
-        <article class="panel reveal" style="--reveal-delay:180ms;">
-          <h3 data-i18n="faq_q4" style="font-size:16px;margin-bottom:8px;">What if automation turns out not to be viable?</h3>
-          <p data-i18n="faq_a4">We will tell you honestly. If the numbers do not support automation at this stage, you receive a clear explanation of why and what to revisit in 12–18 months. That clarity is worth the assessment cost on its own.</p>
-        </article>
-        <article class="panel reveal" style="--reveal-delay:230ms;">
-          <h3 data-i18n="faq_q5" style="font-size:16px;margin-bottom:8px;">What industries do you focus on?</h3>
-          <p data-i18n="faq_a5">Primarily warehousing, fulfillment, logistics, and light manufacturing — industries where process efficiency and throughput directly affect profitability.</p>
-        </article>
-      </div>
+        <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
+        <p class="section-sub" data-i18n="faq_sub">Common questions from warehouse, logistics, and manufacturing teams
+            considering automation.</p>
+        <div class="grid grid-2" style="gap:12px;">
+            <article class="panel reveal" style="--reveal-delay:30ms;">
+                <h3 data-i18n="faq_q1" style="font-size:16px;margin-bottom:8px;">How much does automation typically
+                    cost?</h3>
+                <p data-i18n="faq_a1">Costs vary widely — from a few thousand euros for software-based process
+                    automation to hundreds of thousands for physical robotics. That is exactly why an Automation
+                    Opportunity Assessment comes first.</p>
+            </article>
+            <article class="panel reveal" style="--reveal-delay:80ms;">
+                <h3 data-i18n="faq_q2" style="font-size:16px;margin-bottom:8px;">Do we need robots or vendors already
+                    selected?</h3>
+                <p data-i18n="faq_a2">No. We can work with you from scratch, or alongside your existing vendor
+                    conversations. The assessment helps you evaluate options with clear criteria rather than vendor
+                    marketing.</p>
+            </article>
+            <article class="panel reveal" style="--reveal-delay:130ms;">
+                <h3 data-i18n="faq_q3" style="font-size:16px;margin-bottom:8px;">Can you work with our existing systems
+                    and vendors?</h3>
+                <p data-i18n="faq_a3">Yes. We specialize in integration architecture — connecting new automation layers
+                    with existing WMS, ERP, and operational tools your team already uses.</p>
+            </article>
+            <article class="panel reveal" style="--reveal-delay:180ms;">
+                <h3 data-i18n="faq_q4" style="font-size:16px;margin-bottom:8px;">What if automation turns out not to be
+                    viable?</h3>
+                <p data-i18n="faq_a4">We will tell you honestly. If the numbers do not support automation at this stage,
+                    you receive a clear explanation of why and what to revisit in 12–18 months. That clarity is worth
+                    the assessment cost on its own.</p>
+            </article>
+            <article class="panel reveal" style="--reveal-delay:230ms;">
+                <h3 data-i18n="faq_q5" style="font-size:16px;margin-bottom:8px;">What industries do you focus on?</h3>
+                <p data-i18n="faq_a5">Primarily warehousing, fulfillment, logistics, and light manufacturing —
+                    industries where process efficiency and throughput directly affect profitability.</p>
+            </article>
+        </div>
     </section>
 
     <div class="leadmag-box reveal">
-      <div class="leadmag-icon">📋</div>
-      <div class="leadmag-text">
-        <h3 data-i18n="leadmag_title">Free Download: Automation Readiness Checklist for SMEs</h3>
-        <p data-i18n="leadmag_sub">A practical PDF to help warehousing, logistics, and manufacturing teams assess which processes are ready for automation — before committing to expensive equipment or software.</p>
-      </div>
-      <a id="leadmag-link" class="btn btn-alt" href="./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf" download data-i18n="leadmag_btn">Download Free Checklist</a>
+        <div class="leadmag-icon">📋</div>
+        <div class="leadmag-text">
+            <h3 data-i18n="leadmag_title">Free Download: Automation Readiness Checklist for SMEs</h3>
+            <p data-i18n="leadmag_sub">A practical PDF to help warehousing, logistics, and manufacturing teams assess
+                which processes are ready for automation — before committing to expensive equipment or software.</p>
+        </div>
+        <a id="leadmag-link" class="btn btn-alt"
+           href="./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf"
+           download data-i18n="leadmag_btn">Download Free Checklist</a>
     </div>
 
     <section class="cta-box reveal">
-      <div>
-        <h2 data-i18n="cta_title">Considering Automation But Unsure Where to Start?</h2>
-        <p data-i18n="cta_sub">Get a practical assessment before committing to expensive equipment or software.</p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Book a Discovery Call</a>
-      </div>
+        <div>
+            <h2 data-i18n="cta_title">Considering Automation But Unsure Where to Start?</h2>
+            <p data-i18n="cta_sub">Get a practical assessment before committing to expensive equipment or software.</p>
+        </div>
+        <div class="cta-actions">
+            <a class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com" data-i18n="cta_button">Book a
+                Discovery Call</a>
+        </div>
     </section>
-  </main>
+</main>
 
-  <footer>
+<footer>
     <span data-i18n="footer_text">Rīga, Latvija · Pieejams projektiem Latvijā un attālināti Eiropā</span>
-  </footer>
-  <script>
+</footer>
+<script>
     (function () {
       var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
       var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-04-25-01";
@@ -1019,6 +1064,6 @@
         observer.observe(node);
       });
     })();
-  </script>
+</script>
 </body>
 </html>

@@ -1,356 +1,392 @@
 <!doctype html>
 <html lang="lv">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Business Automation Scenarios | Robotics Consulting</title>
-  <meta name="description" content="Example automation concepts for warehousing, logistics, and manufacturing SMEs.">
-  <style>
-    :root {
-      --bg: #060c1a;
-      --text: #edf2ff;
-      --muted: #b3c1dc;
-      --line: #2a3e63;
-      --shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
-    }
-    body {
-      background:
-        radial-gradient(1300px 680px at -10% -20%, rgba(43, 169, 241, 0.24), transparent 50%),
-        radial-gradient(1200px 760px at 110% -10%, rgba(29, 95, 168, 0.28), transparent 46%),
-        radial-gradient(900px 600px at 50% 120%, rgba(243, 172, 45, 0.12), transparent 45%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      margin: 0;
-    }
-    .container { width: min(1140px, 92vw); margin: 0 auto; padding: 24px 0 32px; }
-    h1, h2, h3 { color: #ffd36f; }
-    #page-title {
-      margin: 0 0 16px;
-      color: var(--text);
-      font-size: clamp(34px, 6vw, 64px);
-      line-height: 1.04;
-      letter-spacing: -0.03em;
-      max-width: 14ch;
-    }
-    .proto-section { background: rgba(17,25,44,0.72); border-radius: 18px; box-shadow: 0 12px 36px #0005; margin-bottom: 38px; padding: 30px 26px; border: 1px solid #223556; }
-    .proto-gallery { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 18px; }
-    .proto-gallery img { max-width: 260px; width: 100%; border-radius: 10px; box-shadow: 0 2px 12px #0002; background: #0f1a30; cursor: zoom-in; transition: transform 160ms ease; }
-    .proto-gallery--five { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; }
-    .proto-gallery--five img { max-width: none; }
-    .proto-gallery img:hover { transform: translateY(-2px); }
-    .proto-meta { color: #c4d2ea; font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
-    .proto-copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 18px; }
-    .proto-benefits { margin: 0 0 16px 0; padding-left: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 20px; }
-    .proto-benefits li { margin-bottom: 0; }
-    .proto-readme { color: #d7e8ff; font-size: 15px; line-height: 1.58; margin: 0; padding: 16px; border-radius: 14px; border: 1px solid #2b4168; background: linear-gradient(180deg, rgba(14, 23, 40, 0.84), rgba(9, 16, 30, 0.84)); box-shadow: 0 6px 18px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; transition: transform 160ms ease, border-color 160ms ease; }
-    .proto-readme:hover { transform: translateY(-2px); border-color: #3a588a; }
-    .proto-readme strong { display: block; color: #ffd36f; margin-bottom: 6px; }
-    .proto-meta-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 14px; }
-    .proto-chip { display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; border: 1px solid #2b4168; background: rgba(10, 17, 31, 0.7); font-size: 13px; min-width: 160px; }
-    .proto-chip-label { color: #7da8d8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-    .proto-chip-value { color: #edf2ff; font-weight: 600; font-size: 14px; }
-    .proto-chip--low .proto-chip-value { color: #7de8a0; }
-    .proto-chip--medium .proto-chip-value { color: #f3c15a; }
-    .proto-chip--high .proto-chip-value { color: #f17b7b; }
-    .back-link {
-      color: var(--muted);
-      font-size: 14px;
-      text-decoration: none;
-      display: inline-block;
-      border: 1px solid #294068;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: rgba(17, 29, 50, 0.86);
-    }
-    .top-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: linear-gradient(170deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-      padding: 14px;
-      position: sticky;
-      top: 10px;
-      z-index: 20;
-    }
-    .lang-switch { display: flex; gap: 6px; padding: 4px; border-radius: 999px; border: 1px solid #294068; background: rgba(17, 29, 50, 0.86); }
-    .lang-btn { border: 0; background: transparent; color: #b3c1dc; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 6px 10px; cursor: pointer; }
-    .lang-btn.active { color: #09223e; background: linear-gradient(120deg, #f3ac2d, #ffd36f); }
-    .lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(4, 10, 22, 0.9); z-index: 1000; padding: 10px; }
-    .lightbox.open { display: flex; }
-    .lightbox-content { position: relative; width: min(1800px, 98vw); }
-    .lightbox img { width: 100%; max-height: 94vh; object-fit: contain; border-radius: 12px; border: 1px solid #2a3e63; background: #0f1a30; }
-    .lightbox-close { position: absolute; top: -48px; right: 0; border: 1px solid #395b90; border-radius: 10px; background: rgba(17, 29, 50, 0.95); color: #edf2ff; font-size: 15px; padding: 8px 12px; cursor: pointer; }
-    .lightbox-caption { margin-top: 10px; color: #b3c1dc; font-size: 14px; }
-    .btn { text-decoration: none; font-weight: 600; border-radius: 11px; padding: 11px 16px; border: 1px solid transparent; transition: 160ms ease; display: inline-block; color: inherit; }
-    .btn-main { background: linear-gradient(120deg, #f3ac2d, #ffd36f); color: #1d2433; }
-    .btn-alt { border-color: #3d5f93; background: rgba(24, 37, 64, 0.8); }
-    .btn:hover { transform: translateY(-1px); }
-    .leadmag-box {
-      margin-top: 16px;
-      padding: 24px 28px;
-      border-radius: 18px;
-      border: 1px solid #395b90;
-      background:
-        radial-gradient(600px 200px at 0% 50%, rgba(43, 169, 241, 0.18), transparent 60%),
-        rgba(16, 26, 46, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .leadmag-box .leadmag-icon { font-size: 36px; flex-shrink: 0; }
-    .leadmag-box .leadmag-text { flex: 1; min-width: 200px; }
-    .leadmag-box h3 { margin: 0 0 6px; font-size: 18px; color: #ffd36f; }
-    .leadmag-box p { margin: 0; color: var(--muted, #b3c1dc); font-size: 14px; }
-    .cta-box {
-      margin-top: 16px;
-      padding: 24px;
-      border-radius: 18px;
-      border: 1px solid #395b90;
-      background:
-        radial-gradient(700px 280px at 10% 0%, rgba(43, 169, 241, 0.24), transparent 60%),
-        radial-gradient(700px 280px at 90% 100%, rgba(243, 172, 45, 0.2), transparent 60%),
-        rgba(18, 28, 49, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .cta-box h2 { margin: 0 0 6px; }
-    .cta-box p { margin: 0; color: var(--muted, #b3c1dc); }
-    .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-left: auto; justify-content: flex-end; }
-    @media (max-width: 1100px) {
-      .proto-gallery--five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-    @media (max-width: 960px) {
-      .top-controls { position: static; }
-    }
-    @media (max-width: 900px) {
-      .proto-gallery { flex-direction: column; }
-      .proto-gallery--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      #page-title { max-width: 100%; }
-    }
-    @media (max-width: 560px) {
-      .proto-gallery--five { grid-template-columns: 1fr; }
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Business Automation Scenarios | Robotics Consulting</title>
+    <meta name="description" content="Example automation concepts for warehousing, logistics, and manufacturing SMEs.">
+    <style>
+        :root {
+          --bg: #060c1a;
+          --text: #edf2ff;
+          --muted: #b3c1dc;
+          --line: #2a3e63;
+          --shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
+        }
+        body {
+          background:
+            radial-gradient(1300px 680px at -10% -20%, rgba(43, 169, 241, 0.24), transparent 50%),
+            radial-gradient(1200px 760px at 110% -10%, rgba(29, 95, 168, 0.28), transparent 46%),
+            radial-gradient(900px 600px at 50% 120%, rgba(243, 172, 45, 0.12), transparent 45%),
+            var(--bg);
+          color: var(--text);
+          font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+          margin: 0;
+        }
+        .container { width: min(1140px, 92vw); margin: 0 auto; padding: 24px 0 32px; }
+        h1, h2, h3 { color: #ffd36f; }
+        #page-title {
+          margin: 0 0 16px;
+          color: var(--text);
+          font-size: clamp(34px, 6vw, 64px);
+          line-height: 1.04;
+          letter-spacing: -0.03em;
+          max-width: 14ch;
+        }
+        .proto-section { background: rgba(17,25,44,0.72); border-radius: 18px; box-shadow: 0 12px 36px #0005; margin-bottom: 38px; padding: 30px 26px; border: 1px solid #223556; }
+        .proto-gallery { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 18px; }
+        .proto-gallery img { max-width: 260px; width: 100%; border-radius: 10px; box-shadow: 0 2px 12px #0002; background: #0f1a30; cursor: zoom-in; transition: transform 160ms ease; }
+        .proto-gallery--five { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; }
+        .proto-gallery--five img { max-width: none; }
+        .proto-gallery img:hover { transform: translateY(-2px); }
+        .proto-meta { color: #c4d2ea; font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
+        .proto-copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 18px; }
+        .proto-benefits { margin: 0 0 16px 0; padding-left: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 20px; }
+        .proto-benefits li { margin-bottom: 0; }
+        .proto-readme { color: #d7e8ff; font-size: 15px; line-height: 1.58; margin: 0; padding: 16px; border-radius: 14px; border: 1px solid #2b4168; background: linear-gradient(180deg, rgba(14, 23, 40, 0.84), rgba(9, 16, 30, 0.84)); box-shadow: 0 6px 18px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; transition: transform 160ms ease, border-color 160ms ease; }
+        .proto-readme:hover { transform: translateY(-2px); border-color: #3a588a; }
+        .proto-readme strong { display: block; color: #ffd36f; margin-bottom: 6px; }
+        .proto-meta-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 14px; }
+        .proto-chip { display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; border: 1px solid #2b4168; background: rgba(10, 17, 31, 0.7); font-size: 13px; min-width: 160px; }
+        .proto-chip-label { color: #7da8d8; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+        .proto-chip-value { color: #edf2ff; font-weight: 600; font-size: 14px; }
+        .proto-chip--low .proto-chip-value { color: #7de8a0; }
+        .proto-chip--medium .proto-chip-value { color: #f3c15a; }
+        .proto-chip--high .proto-chip-value { color: #f17b7b; }
+        .back-link {
+          color: var(--muted);
+          font-size: 14px;
+          text-decoration: none;
+          display: inline-block;
+          border: 1px solid #294068;
+          border-radius: 999px;
+          padding: 8px 12px;
+          background: rgba(17, 29, 50, 0.86);
+        }
+        .top-controls {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 14px;
+          margin-bottom: 14px;
+          flex-wrap: wrap;
+          border: 1px solid var(--line);
+          border-radius: 20px;
+          background: linear-gradient(170deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+          box-shadow: var(--shadow);
+          backdrop-filter: blur(8px);
+          padding: 14px;
+          position: sticky;
+          top: 10px;
+          z-index: 20;
+        }
+        .lang-switch { display: flex; gap: 6px; padding: 4px; border-radius: 999px; border: 1px solid #294068; background: rgba(17, 29, 50, 0.86); }
+        .lang-btn { border: 0; background: transparent; color: #b3c1dc; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 6px 10px; cursor: pointer; }
+        .lang-btn.active { color: #09223e; background: linear-gradient(120deg, #f3ac2d, #ffd36f); }
+        .lightbox { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(4, 10, 22, 0.9); z-index: 1000; padding: 10px; }
+        .lightbox.open { display: flex; }
+        .lightbox-content { position: relative; width: min(1800px, 98vw); }
+        .lightbox img { width: 100%; max-height: 94vh; object-fit: contain; border-radius: 12px; border: 1px solid #2a3e63; background: #0f1a30; }
+        .lightbox-close { position: absolute; top: -48px; right: 0; border: 1px solid #395b90; border-radius: 10px; background: rgba(17, 29, 50, 0.95); color: #edf2ff; font-size: 15px; padding: 8px 12px; cursor: pointer; }
+        .lightbox-caption { margin-top: 10px; color: #b3c1dc; font-size: 14px; }
+        .btn { text-decoration: none; font-weight: 600; border-radius: 11px; padding: 11px 16px; border: 1px solid transparent; transition: 160ms ease; display: inline-block; color: inherit; }
+        .btn-main { background: linear-gradient(120deg, #f3ac2d, #ffd36f); color: #1d2433; }
+        .btn-alt { border-color: #3d5f93; background: rgba(24, 37, 64, 0.8); }
+        .btn:hover { transform: translateY(-1px); }
+        .leadmag-box {
+          margin-top: 16px;
+          padding: 24px 28px;
+          border-radius: 18px;
+          border: 1px solid #395b90;
+          background:
+            radial-gradient(600px 200px at 0% 50%, rgba(43, 169, 241, 0.18), transparent 60%),
+            rgba(16, 26, 46, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+          flex-wrap: wrap;
+        }
+        .leadmag-box .leadmag-icon { font-size: 36px; flex-shrink: 0; }
+        .leadmag-box .leadmag-text { flex: 1; min-width: 200px; }
+        .leadmag-box h3 { margin: 0 0 6px; font-size: 18px; color: #ffd36f; }
+        .leadmag-box p { margin: 0; color: var(--muted, #b3c1dc); font-size: 14px; }
+        .cta-box {
+          margin-top: 16px;
+          padding: 24px;
+          border-radius: 18px;
+          border: 1px solid #395b90;
+          background:
+            radial-gradient(700px 280px at 10% 0%, rgba(43, 169, 241, 0.24), transparent 60%),
+            radial-gradient(700px 280px at 90% 100%, rgba(243, 172, 45, 0.2), transparent 60%),
+            rgba(18, 28, 49, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+        .cta-box h2 { margin: 0 0 6px; }
+        .cta-box p { margin: 0; color: var(--muted, #b3c1dc); }
+        .cta-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-left: auto; justify-content: flex-end; }
+        @media (max-width: 1100px) {
+          .proto-gallery--five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (max-width: 960px) {
+          .top-controls { position: static; }
+        }
+        @media (max-width: 900px) {
+          .proto-gallery { flex-direction: column; }
+          .proto-gallery--five { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          #page-title { max-width: 100%; }
+        }
+        @media (max-width: 560px) {
+          .proto-gallery--five { grid-template-columns: 1fr; }
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18116557749">
+    </script>
+    <script>
+        globalThis.dataLayer = globalThis.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'AW-18116557749');
+    </script>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <div class="top-controls">
-      <a id="back-link" href="index.html" class="back-link">&larr; Atpakaļ uz galveno lapu</a>      <div class="lang-switch" aria-label="Language switch">
-        <button class="lang-btn active" type="button" data-lang="lv">LV</button>
-        <button class="lang-btn" type="button" data-lang="ru">RU</button>
-        <button class="lang-btn" type="button" data-lang="en">ENG</button>
-      </div>
+        <a id="back-link" href="index.html" class="back-link">&larr; Atpakaļ uz galveno lapu</a>
+        <div class="lang-switch" aria-label="Language switch">
+            <button class="lang-btn active" type="button" data-lang="lv">LV</button>
+            <button class="lang-btn" type="button" data-lang="ru">RU</button>
+            <button class="lang-btn" type="button" data-lang="en">ENG</button>
+        </div>
     </div>
     <h1 id="page-title">Business Automation Scenarios</h1>
 
     <!-- Tier Scheduler Section -->
     <section id="tier-scheduler" class="proto-section">
-      <h2 id="tier-title">Tire Service Scheduling Automation</h2>
-      <div class="proto-gallery proto-gallery--five">
-        <img src="./assets/prototypes/tier-scheduler/1.jpeg" alt="Tier Scheduler 1">
-        <img src="./assets/prototypes/tier-scheduler/2.jpeg" alt="Tier Scheduler 2">
-        <img src="./assets/prototypes/tier-scheduler/3.jpeg" alt="Tier Scheduler 3">
-        <img src="./assets/prototypes/tier-scheduler/4.jpeg" alt="Tier Scheduler 4">
-        <img src="./assets/prototypes/tier-scheduler/5.jpeg" alt="Tier Scheduler 5">
-      </div>
-      <div id="tier-meta" class="proto-meta">Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi, brīvos laikus un pieprasījumu.</div>
-      <div class="proto-meta-chips">
-        <div class="proto-chip proto-chip--low">
-          <span class="proto-chip-label" id="tier-chip-complexity-label">Implementation complexity</span>
-          <span class="proto-chip-value" id="tier-chip-complexity">Low</span>
+        <h2 id="tier-title">Tire Service Scheduling Automation</h2>
+        <div class="proto-gallery proto-gallery--five">
+            <img src="./assets/prototypes/tier-scheduler/1.jpeg" alt="Tier Scheduler 1">
+            <img src="./assets/prototypes/tier-scheduler/2.jpeg" alt="Tier Scheduler 2">
+            <img src="./assets/prototypes/tier-scheduler/3.jpeg" alt="Tier Scheduler 3">
+            <img src="./assets/prototypes/tier-scheduler/4.jpeg" alt="Tier Scheduler 4">
+            <img src="./assets/prototypes/tier-scheduler/5.jpeg" alt="Tier Scheduler 5">
         </div>
-        <div class="proto-chip">
-          <span class="proto-chip-label" id="tier-chip-budget-label">Indicative investment range</span>
-          <span class="proto-chip-value" id="tier-chip-budget">€3k – €10k</span>
+        <div id="tier-meta" class="proto-meta">Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi,
+            brīvos laikus un pieprasījumu.
         </div>
-        <div class="proto-chip">
-          <span class="proto-chip-label" id="tier-chip-integration-label">Can integrate with</span>
-          <span class="proto-chip-value" id="tier-chip-integration">CRM, telephony, Google Sheets / Excel</span>
+        <div class="proto-meta-chips">
+            <div class="proto-chip proto-chip--low">
+                <span class="proto-chip-label" id="tier-chip-complexity-label">Implementation complexity</span>
+                <span class="proto-chip-value" id="tier-chip-complexity">Low</span>
+            </div>
+            <div class="proto-chip">
+                <span class="proto-chip-label" id="tier-chip-budget-label">Indicative investment range</span>
+                <span class="proto-chip-value" id="tier-chip-budget">€3k – €10k</span>
+            </div>
+            <div class="proto-chip">
+                <span class="proto-chip-label" id="tier-chip-integration-label">Can integrate with</span>
+                <span class="proto-chip-value" id="tier-chip-integration">CRM, telephony, Google Sheets / Excel</span>
+            </div>
         </div>
-      </div>
-      <div class="proto-copy-grid">
-        <div id="tier-copy-5" class="proto-readme">
-          <strong>Kam tas ir piemērots:</strong> Riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.
+        <div class="proto-copy-grid">
+            <div id="tier-copy-5" class="proto-readme">
+                <strong>Kam tas ir piemērots:</strong> Riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus
+                pieņem pa tālruni.
+            </div>
+            <div id="tier-copy-6" class="proto-readme">
+                <strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.
+            </div>
         </div>
-        <div id="tier-copy-6" class="proto-readme">
-          <strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.
+        <div class="proto-copy-grid">
+            <div id="tier-copy-1" class="proto-readme">
+                <strong>Kāpēc tas atmaksājas biznesam:</strong> Vairāk zvanu pārtop reālos apmeklējumos, jo klients tiek
+                pierakstīts uzreiz sarunas laikā.
+            </div>
+            <div id="tier-copy-2" class="proto-readme">
+                <strong>Ko iegūst īpašnieks:</strong> Skaidrāku grafiku, pīķa stundu pārskatu un precīzāku maiņu
+                plānošanu.
+            </div>
+            <div id="tier-copy-3" class="proto-readme">
+                <strong>Kā tas palīdz ikdienā:</strong> Administrators strādā ātrāk, bet vadītājs redz, kur trūkst
+                kapacitātes.
+            </div>
+            <div id="tier-copy-4" class="proto-readme">
+                <strong>Kāpēc tas ir labs ieguldījums:</strong> Lielāka atdeve no esošā zvanu apjoma bez papildu
+                reklāmas budžeta.
+            </div>
         </div>
-      </div>
-      <div class="proto-copy-grid">
-        <div id="tier-copy-1" class="proto-readme">
-          <strong>Kāpēc tas atmaksājas biznesam:</strong> Vairāk zvanu pārtop reālos apmeklējumos, jo klients tiek pierakstīts uzreiz sarunas laikā.
-        </div>
-        <div id="tier-copy-2" class="proto-readme">
-          <strong>Ko iegūst īpašnieks:</strong> Skaidrāku grafiku, pīķa stundu pārskatu un precīzāku maiņu plānošanu.
-        </div>
-        <div id="tier-copy-3" class="proto-readme">
-          <strong>Kā tas palīdz ikdienā:</strong> Administrators strādā ātrāk, bet vadītājs redz, kur trūkst kapacitātes.
-        </div>
-        <div id="tier-copy-4" class="proto-readme">
-          <strong>Kāpēc tas ir labs ieguldījums:</strong> Lielāka atdeve no esošā zvanu apjoma bez papildu reklāmas budžeta.
-        </div>
-      </div>
-      <ul class="proto-benefits">
-        <li id="tier-benefit-1">Pieraksts zvana laikā</li>
-        <li id="tier-benefit-2">Mazāk kļūdu, ātrāka apkalpošana</li>
-        <li id="tier-benefit-3">Eksports uz Excel/Google Sheets/BI</li>
-        <li id="tier-benefit-4">Labāka noslodzes plānošana</li>
-        <li id="tier-benefit-5">CSV imports un eksports</li>
-      </ul>
+        <ul class="proto-benefits">
+            <li id="tier-benefit-1">Pieraksts zvana laikā</li>
+            <li id="tier-benefit-2">Mazāk kļūdu, ātrāka apkalpošana</li>
+            <li id="tier-benefit-3">Eksports uz Excel/Google Sheets/BI</li>
+            <li id="tier-benefit-4">Labāka noslodzes plānošana</li>
+            <li id="tier-benefit-5">CSV imports un eksports</li>
+        </ul>
     </section>
 
     <!-- YOLO Monitoring Section -->
     <section id="yolo-monitoring" class="proto-section">
-      <h2 id="yolo-title">Computer Vision for Operational Efficiency</h2>
-      <div class="proto-gallery proto-gallery--five">
-        <img src="./assets/prototypes/yolo/1.png" alt="YOLO 1">
-        <img src="./assets/prototypes/yolo/2.png" alt="YOLO 2">
-        <img src="./assets/prototypes/yolo/3.png" alt="YOLO 3">
-        <img src="./assets/prototypes/yolo/4.png" alt="YOLO 4">
-        <img src="./assets/prototypes/yolo/5.png" alt="YOLO 5">
-      </div>
-      <div id="yolo-meta" class="proto-meta">Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi reāllaikā.</div>
-      <div class="proto-meta-chips">
-        <div class="proto-chip proto-chip--medium">
-          <span class="proto-chip-label" id="yolo-chip-complexity-label">Implementation complexity</span>
-          <span class="proto-chip-value" id="yolo-chip-complexity">Medium</span>
+        <h2 id="yolo-title">Computer Vision for Operational Efficiency</h2>
+        <div class="proto-gallery proto-gallery--five">
+            <img src="./assets/prototypes/yolo/1.png" alt="YOLO 1">
+            <img src="./assets/prototypes/yolo/2.png" alt="YOLO 2">
+            <img src="./assets/prototypes/yolo/3.png" alt="YOLO 3">
+            <img src="./assets/prototypes/yolo/4.png" alt="YOLO 4">
+            <img src="./assets/prototypes/yolo/5.png" alt="YOLO 5">
         </div>
-        <div class="proto-chip">
-          <span class="proto-chip-label" id="yolo-chip-budget-label">Indicative investment range</span>
-          <span class="proto-chip-value" id="yolo-chip-budget">€10k – €30k</span>
+        <div id="yolo-meta" class="proto-meta">Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi
+            reāllaikā.
         </div>
-        <div class="proto-chip">
-          <span class="proto-chip-label" id="yolo-chip-integration-label">Can integrate with</span>
-          <span class="proto-chip-value" id="yolo-chip-integration">Existing cameras, dashboards, BI, ERP/WMS</span>
+        <div class="proto-meta-chips">
+            <div class="proto-chip proto-chip--medium">
+                <span class="proto-chip-label" id="yolo-chip-complexity-label">Implementation complexity</span>
+                <span class="proto-chip-value" id="yolo-chip-complexity">Medium</span>
+            </div>
+            <div class="proto-chip">
+                <span class="proto-chip-label" id="yolo-chip-budget-label">Indicative investment range</span>
+                <span class="proto-chip-value" id="yolo-chip-budget">€10k – €30k</span>
+            </div>
+            <div class="proto-chip">
+                <span class="proto-chip-label" id="yolo-chip-integration-label">Can integrate with</span>
+                <span class="proto-chip-value"
+                      id="yolo-chip-integration">Existing cameras, dashboards, BI, ERP/WMS</span>
+            </div>
         </div>
-      </div>
-      <div class="proto-copy-grid">
-        <div id="yolo-copy-5" class="proto-readme">
-          <strong>Kam tas ir piemērots:</strong> Ražošanai, noliktavām, loģistikai un drošības komandām.
+        <div class="proto-copy-grid">
+            <div id="yolo-copy-5" class="proto-readme">
+                <strong>Kam tas ir piemērots:</strong> Ražošanai, noliktavām, loģistikai un drošības komandām.
+            </div>
+            <div id="yolo-copy-6" class="proto-readme">
+                <strong>Kādu problēmu tas atrisina:</strong> Parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir
+                riskantas zonas.
+            </div>
         </div>
-        <div id="yolo-copy-6" class="proto-readme">
-          <strong>Kādu problēmu tas atrisina:</strong> Parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir riskantas zonas.
+        <div class="proto-copy-grid">
+            <div id="yolo-copy-1" class="proto-readme">
+                <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz faktus, nevis minējumus, un ātrāk reaģē uz
+                problēmām.
+            </div>
+            <div id="yolo-copy-2" class="proto-readme">
+                <strong>Ko redz ikdienā:</strong> Aktīvākās zonas, kritiskos notikumus un vēsturi.
+            </div>
+            <div id="yolo-copy-3" class="proto-readme">
+                <strong>Ko iegūst vadība:</strong> Pārskatāmus ziņojumus un ātru veidu pārbaudīt strīdīgas situācijas.
+            </div>
+            <div id="yolo-copy-4" class="proto-readme">
+                <strong>Kāpēc tas ir labs ieguldījums:</strong> Esošās kameras sāk dot biznesa vērtību bez pilnīgas
+                infrastruktūras nomaiņas.
+            </div>
         </div>
-      </div>
-      <div class="proto-copy-grid">
-        <div id="yolo-copy-1" class="proto-readme">
-          <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz faktus, nevis minējumus, un ātrāk reaģē uz problēmām.
-        </div>
-        <div id="yolo-copy-2" class="proto-readme">
-          <strong>Ko redz ikdienā:</strong> Aktīvākās zonas, kritiskos notikumus un vēsturi.
-        </div>
-        <div id="yolo-copy-3" class="proto-readme">
-          <strong>Ko iegūst vadība:</strong> Pārskatāmus ziņojumus un ātru veidu pārbaudīt strīdīgas situācijas.
-        </div>
-        <div id="yolo-copy-4" class="proto-readme">
-          <strong>Kāpēc tas ir labs ieguldījums:</strong> Esošās kameras sāk dot biznesa vērtību bez pilnīgas infrastruktūras nomaiņas.
-        </div>
-      </div>
-      <ul class="proto-benefits">
-        <li id="yolo-benefit-1">Cilvēku detektēšana un izsekošana</li>
-        <li id="yolo-benefit-2">Pārskati reāllaikā un vēsture</li>
-        <li id="yolo-benefit-3">Integrācija ar backend un BI</li>
-        <li id="yolo-benefit-4">Ražošanai, noliktavām, drošībai</li>
-        <li id="yolo-benefit-5">Mērogojams risinājums</li>
-      </ul>
+        <ul class="proto-benefits">
+            <li id="yolo-benefit-1">Cilvēku detektēšana un izsekošana</li>
+            <li id="yolo-benefit-2">Pārskati reāllaikā un vēsture</li>
+            <li id="yolo-benefit-3">Integrācija ar backend un BI</li>
+            <li id="yolo-benefit-4">Ražošanai, noliktavām, drošībai</li>
+            <li id="yolo-benefit-5">Mērogojams risinājums</li>
+        </ul>
     </section>
 
     <!-- Expense Tracker Section -->
     <section id="expense-tracker" class="proto-section">
-      <h2 id="exp-title">Būvniecības CRM integrācijas aplikācija</h2>
-      <div class="proto-gallery proto-gallery--five">
-        <img src="./assets/prototypes/expense-tracker/1.jpeg" alt="Expense Tracker 1">
-        <img src="./assets/prototypes/expense-tracker/2.jpeg" alt="Expense Tracker 2">
-      </div>
-      <div id="exp-meta" class="proto-meta">Mobilā aplikācija, kas integrēta ar būvniecības uzņēmuma CRM: brigādes uz vietas ievada izdevumus, un dati uzreiz nonāk CRM sistēmā bez manuālas pārrakstīšanas.</div>
-      <div class="proto-meta-chips">
-        <div class="proto-chip proto-chip--low">
-          <span class="proto-chip-label" id="exp-chip-complexity-label">Implementation complexity</span>
-          <span class="proto-chip-value" id="exp-chip-complexity">Low</span>
+        <h2 id="exp-title">Būvniecības CRM integrācijas aplikācija</h2>
+        <div class="proto-gallery proto-gallery--five">
+            <img src="./assets/prototypes/expense-tracker/1.jpeg" alt="Expense Tracker 1">
+            <img src="./assets/prototypes/expense-tracker/2.jpeg" alt="Expense Tracker 2">
         </div>
-        <div class="proto-chip">
-          <span class="proto-chip-label" id="exp-chip-budget-label">Indicative investment range</span>
-          <span class="proto-chip-value" id="exp-chip-budget">€3k – €8k</span>
+        <div id="exp-meta" class="proto-meta">Mobilā aplikācija, kas integrēta ar būvniecības uzņēmuma CRM: brigādes uz
+            vietas ievada izdevumus, un dati uzreiz nonāk CRM sistēmā bez manuālas pārrakstīšanas.
         </div>
-        <div class="proto-chip">
-          <span class="proto-chip-label" id="exp-chip-integration-label">Can integrate with</span>
-          <span class="proto-chip-value" id="exp-chip-integration">Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend</span>
+        <div class="proto-meta-chips">
+            <div class="proto-chip proto-chip--low">
+                <span class="proto-chip-label" id="exp-chip-complexity-label">Implementation complexity</span>
+                <span class="proto-chip-value" id="exp-chip-complexity">Low</span>
+            </div>
+            <div class="proto-chip">
+                <span class="proto-chip-label" id="exp-chip-budget-label">Indicative investment range</span>
+                <span class="proto-chip-value" id="exp-chip-budget">€3k – €8k</span>
+            </div>
+            <div class="proto-chip">
+                <span class="proto-chip-label" id="exp-chip-integration-label">Can integrate with</span>
+                <span class="proto-chip-value" id="exp-chip-integration">Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend</span>
+            </div>
         </div>
-      </div>
-      <div class="proto-copy-grid">
-        <div id="exp-copy-5" class="proto-readme">
-          <strong>Kam tas ir piemērots:</strong> Būvniecības uzņēmumiem, kuriem nepieciešama cieša izdevumu plūsmas integrācija ar CRM.
+        <div class="proto-copy-grid">
+            <div id="exp-copy-5" class="proto-readme">
+                <strong>Kam tas ir piemērots:</strong> Būvniecības uzņēmumiem, kuriem nepieciešama cieša izdevumu
+                plūsmas integrācija ar CRM.
+            </div>
+            <div id="exp-copy-6" class="proto-readme">
+                <strong>Kādu problēmu tas atrisina:</strong> Novērš čekus kabatās, manuālu pārrakstīšanu un kavētu
+                izmaksu uzskaiti.
+            </div>
         </div>
-        <div id="exp-copy-6" class="proto-readme">
-          <strong>Kādu problēmu tas atrisina:</strong> Novērš čekus kabatās, manuālu pārrakstīšanu un kavētu izmaksu uzskaiti.
+        <div class="proto-copy-grid">
+            <div id="exp-copy-1" class="proto-readme">
+                <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz izmaksas ātrāk, bet birojam nav jāvāc dati
+                no dažādiem kanāliem.
+            </div>
+            <div id="exp-copy-2" class="proto-readme">
+                <strong>Biznesa efekts skaitļos:</strong> Komanda ar 10 darbiniekiem var ietaupīt ap 100 minūtēm dienā
+                uz administratīvo darbu.
+            </div>
+            <div id="exp-copy-3" class="proto-readme">
+                <strong>Kā tas izskatās ikdienā:</strong> Darbinieks ievada summu vai pievieno čeku uz vietas, un birojs
+                to redz uzreiz.
+            </div>
+            <div id="exp-copy-4" class="proto-readme">
+                <strong>Kāpēc tas ir labs ieguldījums:</strong> Mazāk laika papīriem, vairāk laika darbam ar klientiem
+                un objektiem.
+            </div>
         </div>
-      </div>
-      <div class="proto-copy-grid">
-        <div id="exp-copy-1" class="proto-readme">
-          <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz izmaksas ātrāk, bet birojam nav jāvāc dati no dažādiem kanāliem.
-        </div>
-        <div id="exp-copy-2" class="proto-readme">
-          <strong>Biznesa efekts skaitļos:</strong> Komanda ar 10 darbiniekiem var ietaupīt ap 100 minūtēm dienā uz administratīvo darbu.
-        </div>
-        <div id="exp-copy-3" class="proto-readme">
-          <strong>Kā tas izskatās ikdienā:</strong> Darbinieks ievada summu vai pievieno čeku uz vietas, un birojs to redz uzreiz.
-        </div>
-        <div id="exp-copy-4" class="proto-readme">
-          <strong>Kāpēc tas ir labs ieguldījums:</strong> Mazāk laika papīriem, vairāk laika darbam ar klientiem un objektiem.
-        </div>
-      </div>
-      <ul class="proto-benefits">
-        <li id="exp-benefit-1">Ātra izdevumu ievade telefonā</li>
-        <li id="exp-benefit-2">CRM sinhronizācija bez manuālas apkopošanas</li>
-        <li id="exp-benefit-3">Mazāk kļūdu un administratīvā sloga</li>
-        <li id="exp-benefit-4">Elastīga backend integrācija</li>
-        <li id="exp-benefit-5">Darbojas arī bezsaistē</li>
-      </ul>
+        <ul class="proto-benefits">
+            <li id="exp-benefit-1">Ātra izdevumu ievade telefonā</li>
+            <li id="exp-benefit-2">CRM sinhronizācija bez manuālas apkopošanas</li>
+            <li id="exp-benefit-3">Mazāk kļūdu un administratīvā sloga</li>
+            <li id="exp-benefit-4">Elastīga backend integrācija</li>
+            <li id="exp-benefit-5">Darbojas arī bezsaistē</li>
+        </ul>
     </section>
 
     <div class="leadmag-box">
-      <div class="leadmag-icon">📋</div>
-      <div class="leadmag-text">
-        <h3 id="leadmag-title">Bezmaksas lejupielāde: Automatizācijas gatavības kontrolsaraksts MVU</h3>
-        <p id="leadmag-sub">Praktisks PDF noliktavu, loģistikas un ražošanas komandām, lai novērtētu, kuri procesi ir gatavi automatizācijai.</p>
-      </div>
-      <a id="leadmag-link" class="btn btn-alt" href="./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf" download>Lejupielādēt bezmaksas kontrolsarakstu</a>
+        <div class="leadmag-icon">📋</div>
+        <div class="leadmag-text">
+            <h3 id="leadmag-title">Bezmaksas lejupielāde: Automatizācijas gatavības kontrolsaraksts MVU</h3>
+            <p id="leadmag-sub">Praktisks PDF noliktavu, loģistikas un ražošanas komandām, lai novērtētu, kuri procesi
+                ir gatavi automatizācijai.</p>
+        </div>
+        <a id="leadmag-link" class="btn btn-alt"
+           href="./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf"
+           download>Lejupielādēt bezmaksas kontrolsarakstu</a>
     </div>
 
     <section class="cta-box">
-      <div>
-        <h2 id="cta-title">Apsverat automatizāciju, bet nezināt, ar ko sākt?</h2>
-        <p id="cta-sub">Saņemiet praktisku novērtējumu pirms ieguldāt dārgās iekārtās vai programmatūrā.</p>
-      </div>
-      <div class="cta-actions">
-        <a id="cta-button" class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com">Pieteikt atklāšanas zvanu</a>
-      </div>
+        <div>
+            <h2 id="cta-title">Apsverat automatizāciju, bet nezināt, ar ko sākt?</h2>
+            <p id="cta-sub">Saņemiet praktisku novērtējumu pirms ieguldāt dārgās iekārtās vai programmatūrā.</p>
+        </div>
+        <div class="cta-actions">
+            <a id="cta-button" class="btn btn-main" href="mailto:sia.robotics.consulting@gmail.com">Pieteikt atklāšanas
+                zvanu</a>
+        </div>
     </section>
 
-  </div>
+</div>
 
-  <div id="lightbox" class="lightbox" aria-hidden="true">
+<div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox-content">
-      <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Aizvērt attēlu">Aizvērt</button>
-      <img id="lightboxImage" src="" alt="Palielināts prototipa attēls">
-      <div id="lightboxCaption" class="lightbox-caption"></div>
+        <button id="lightboxClose" class="lightbox-close" type="button" aria-label="Aizvērt attēlu">Aizvērt</button>
+        <img id="lightboxImage" src="" alt="Palielināts prototipa attēls">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
     </div>
-  </div>
+</div>
 
-  <script>
+<script>
     (function () {
       var i18n = {
         lv: {
@@ -681,7 +717,7 @@
 
       applyLanguage(localStorage.getItem("preferred-language") || "lv");
     })();
-  </script>
+</script>
 </body>
 </html>
 
