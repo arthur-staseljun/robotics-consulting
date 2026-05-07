@@ -133,8 +133,8 @@
   "yolo_complexity": "Medium",
   "yolo_budget": "€10k – €30k",
   "yolo_integration": "Existing cameras, backend dashboards, BI tools, ERP/WMS",
-  "exp_section_title": "Field Operations Digitization",
+  "exp_section_title": "CRM Integration App for Construction Companies",
   "exp_complexity": "Low",
   "exp_budget": "€3k – €8k",
-  "exp_integration": "CRM, ERP, accounting software, HTTP-based backends"
+  "exp_integration": "Construction company CRM, ERP, accounting software, HTTP-based backends"
 }

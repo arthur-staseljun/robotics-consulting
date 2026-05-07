@@ -132,8 +132,8 @@
   "yolo_complexity": "Vidēja",
   "yolo_budget": "€10k – €30k",
   "yolo_integration": "Esošās kameras, backend dashboardi, BI rīki, ERP/WMS",
-  "exp_section_title": "Lauka operāciju digitalizācija",
+  "exp_section_title": "Būvniecības CRM integrācijas aplikācija",
   "exp_complexity": "Zema",
   "exp_budget": "€3k – €8k",
-  "exp_integration": "CRM, ERP, grāmatvedības programmatūra, HTTP-bāzēts backend"
+  "exp_integration": "Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend"
 }
