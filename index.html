@@ -918,7 +918,7 @@
         <h3 data-i18n="leadmag_title">Free Download: Automation Readiness Checklist for SMEs</h3>
         <p data-i18n="leadmag_sub">A practical PDF to help warehousing, logistics, and manufacturing teams assess which processes are ready for automation — before committing to expensive equipment or software.</p>
       </div>
-      <a class="btn btn-alt" href="./assets/automation-readiness-checklist.pdf" download data-i18n="leadmag_btn">Download Free Checklist</a>
+      <a id="leadmag-link" class="btn btn-alt" href="./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf" download data-i18n="leadmag_btn">Download Free Checklist</a>
     </div>
 
     <section class="cta-box reveal">
@@ -975,6 +975,7 @@
         }).then(function (copy) {
           if (!copy) return;
         var descriptionMeta = document.querySelector('meta[name="description"]');
+        var leadmagLink = document.getElementById("leadmag-link");
         document.documentElement.lang = selected;
         document.title = copy.page_title;
         if (descriptionMeta) descriptionMeta.setAttribute("content", copy.page_desc);
@@ -983,6 +984,10 @@
           var key = node.dataset.i18n;
           if (Object.hasOwn(copy, key)) node.textContent = copy[key];
         });
+
+        if (leadmagLink && copy.leadmag_href) {
+          leadmagLink.href = copy.leadmag_href;
+        }
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
           btn.classList.toggle("active", btn.dataset.lang === selected);
