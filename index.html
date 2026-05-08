@@ -6,7 +6,7 @@
     <title>Robotics Consulting | Automatizācija, kas pelna</title>
     <meta name="description"
           content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-    <meta name="i18n-version" content="2026-05-02-04">
+    <meta name="i18n-version" content="2026-05-08-01">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
@@ -800,6 +800,7 @@
           .hero {
             padding: 18px 0 12px;
             gap: 12px;
+            grid-template-columns: 1fr;
           }
 
           .hero-main {
@@ -809,6 +810,7 @@
           .hero-side {
             padding: 16px;
             gap: 12px;
+            display: none;
           }
 
           h1 {
@@ -894,13 +896,6 @@
             display: inline-flex;
           }
 
-          .hero-side {
-            display: none;
-          }
-
-          .hero {
-            grid-template-columns: 1fr;
-          }
 
           #why-us > .panel:not(.why-mobile-keep) {
             display: none;
@@ -990,7 +985,7 @@
             <nav class="mini-nav">
                 <a href="#pakalpojumi" data-i18n="nav_services">Pakalpojumi</a>
                 <a href="#process" data-i18n="nav_process">Process</a>
-                <a href="#tech" data-i18n="nav_tech">Tehnoloģijas</a>
+                <a href="#tech" data-i18n="nav_tech">Kam mēs palīdzam</a>
                 <a href="#faq" data-i18n="nav_faq">FAQ</a>
                 <a href="./prototypes.html" data-i18n="nav_prototypes">Prototipi</a>
             </nav>
@@ -1024,7 +1019,7 @@
                 <div class="concept-top">
                     <div class="concept-box">
                         <strong data-i18n="concept_app_title">Aplikācijas biznesam</strong>
-                        <span data-i18n="concept_app_sub">Iekšējie rīki un dashboardi</span>
+                        <span data-i18n="concept_app_sub">Iekšējie rīki un vadības paneļi</span>
                     </div>
                     <a class="concept-link-btn" href="./prototypes.html" data-i18n="concept_link_btn">See Concepts</a>
                 </div>
@@ -1044,7 +1039,7 @@
             <div class="kpi">
                 <div class="kpi-head">
                     <div class="kpi-icon">🚀</div>
-                    <strong data-i18n="kpi_2_title">2-3 dienās</strong>
+                    <strong data-i18n="kpi_2_title">2–3 dienās</strong>
                 </div>
                 <p data-i18n="kpi_2_sub">pirmā prototipa versija idejas validācijai</p>
                 <div class="kpi-meter" style="--meter: 84%;"></div>
@@ -1058,9 +1053,9 @@
                 <div class="kpi-meter" style="--meter: 96%;"></div>
             </div>
             <div class="offer-card">
-                <div class="offer-pill" data-i18n="offer_1">Aplikācijas biznesam</div>
-                <div class="offer-pill" data-i18n="offer_2">Integrācijas ar mājaslapām</div>
-                <div class="offer-pill" data-i18n="offer_3">Video novērošana</div>
+                <div class="offer-pill" data-i18n="offer_1">Noliktavu automatizācija</div>
+                <div class="offer-pill" data-i18n="offer_2">Loģistika un pasūtījumu izpilde</div>
+                <div class="offer-pill" data-i18n="offer_3">Procesu digitalizācija</div>
             </div>
         </aside>
     </section>
@@ -1278,7 +1273,7 @@
 <script>
     (function () {
       var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
-      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-04-25-01";
+      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-08-01";
       var languageFiles = {
         lv: "./locales/lv.json",
         ru: "./locales/ru.json",
