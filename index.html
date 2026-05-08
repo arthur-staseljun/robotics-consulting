@@ -9,6 +9,7 @@
     <meta name="i18n-version" content="2026-05-02-04">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
+    <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
     <style>
         :root {
           --bg: #060c1a;
@@ -98,6 +99,9 @@
           border: 1px solid #294068;
           border-radius: 999px;
           padding: 7px 12px;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
           background: rgba(17, 29, 50, 0.86);
         }
 
@@ -107,6 +111,19 @@
           gap: 10px;
           flex-wrap: wrap;
           justify-content: flex-end;
+        }
+
+        .menu-toggle {
+          display: none;
+          border: 1px solid #294068;
+          border-radius: 999px;
+          background: rgba(17, 29, 50, 0.86);
+          color: var(--text);
+          min-height: 44px;
+          padding: 8px 14px;
+          font-size: 14px;
+          font-weight: 700;
+          cursor: pointer;
         }
 
         .lang-switch {
@@ -126,6 +143,7 @@
           font-weight: 700;
           border-radius: 999px;
           padding: 6px 10px;
+          min-height: 36px;
           cursor: pointer;
         }
 
@@ -187,7 +205,10 @@
           padding: 11px 16px;
           border: 1px solid transparent;
           transition: 160ms ease;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 44px;
           color: inherit;
         }
 
@@ -457,6 +478,49 @@
 
         main { padding-bottom: 48px; }
 
+        .mobile-cta-bar {
+          display: none;
+          position: fixed;
+          left: 12px;
+          right: 12px;
+          bottom: max(12px, env(safe-area-inset-bottom));
+          z-index: 35;
+          padding: 10px;
+          border-radius: 18px;
+          border: 1px solid #395b90;
+          background: rgba(10, 18, 33, 0.94);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+          backdrop-filter: blur(12px);
+          transition: transform 180ms ease, opacity 180ms ease;
+        }
+
+        .mobile-cta-bar.is-hidden {
+          transform: translateY(calc(100% + 18px));
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .mobile-cta-bar .btn {
+          width: 100%;
+        }
+
+        .swipe-hint {
+          display: none;
+          align-items: center;
+          gap: 8px;
+          margin: 0 0 12px;
+          color: #9db7df;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.03em;
+        }
+
+        .swipe-hint::after {
+          content: "→";
+          font-size: 16px;
+          color: #ffd36f;
+        }
+
         section { margin-top: 16px; }
 
         .section-card {
@@ -498,6 +562,26 @@
         .panel p {
           margin: 0;
           color: var(--muted);
+        }
+
+        .faq-toggle {
+          width: 100%;
+          border: 0;
+          background: transparent;
+          color: inherit;
+          padding: 0;
+          text-align: left;
+          font: inherit;
+          cursor: pointer;
+        }
+
+        .faq-answer {
+          margin-top: 0;
+        }
+
+        .faq-heading {
+          margin: 0 0 8px;
+          font-size: 16px;
         }
 
         .flow {
@@ -655,14 +739,223 @@
 
         @media (max-width: 960px) {
           .hero, .grid-3, .grid-2, .flow { grid-template-columns: 1fr; }
-          header { position: static; }
+          header { position: static; backdrop-filter: none; }
           .hero-main, .hero-side { padding: 24px; }
           h1 { max-width: 100%; }
           .concept-top, .concept-mid { grid-template-columns: 1fr; }
-          .brand img { width: 270px; height: auto; }
+          .brand img { width: min(270px, 70vw); height: auto; }
           .center-orb { min-height: 94px; }
           .orb-main { font-size: 32px; }
           .concept-bottom { font-size: 14px; }
+          .lang-btn { min-height: 44px; }
+          .section-card, .hero-main, .hero-side { padding: 18px; }
+          h1, .section-title, .panel h3, .step p { overflow-wrap: anywhere; hyphens: auto; }
+        }
+
+        @media (max-width: 760px) {
+          header {
+            padding: 14px 0 10px;
+          }
+
+          .topbar {
+            align-items: center;
+          }
+
+          .brand {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .brand img {
+            width: min(220px, 62vw);
+          }
+
+          .header-actions {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .menu-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .mini-nav {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            padding-top: 6px;
+          }
+
+          .mini-nav a {
+            width: 100%;
+            justify-content: center;
+          }
+
+          header.menu-open .mini-nav {
+            display: flex;
+          }
+
+          .hero {
+            padding: 18px 0 12px;
+            gap: 12px;
+          }
+
+          .hero-main {
+            padding: 20px;
+          }
+
+          .hero-side {
+            padding: 16px;
+            gap: 12px;
+          }
+
+          h1 {
+            font-size: clamp(30px, 9vw, 40px);
+            line-height: 1.08;
+          }
+
+          .lead {
+            font-size: 16px;
+          }
+
+          .cta {
+            margin-top: 18px;
+          }
+
+          .cta .btn,
+          .cta-actions .btn,
+          .leadmag-box .btn {
+            width: 100%;
+          }
+
+          .hero-side .kpi:nth-of-type(n+2),
+          .hero-side .offer-card,
+          .concept-board > .concept-box,
+          .concept-top .concept-box {
+            display: none;
+          }
+
+          .concept-board {
+            margin-bottom: 0;
+            padding: 10px;
+          }
+
+          .concept-top {
+            grid-template-columns: 1fr;
+            margin-bottom: 0;
+          }
+
+          .concept-link-btn {
+            min-height: 48px;
+            font-size: 12px;
+          }
+
+          .section-card,
+          .cta-box,
+          .leadmag-box {
+            padding: 18px;
+          }
+
+          .section-sub {
+            margin-bottom: 14px;
+          }
+
+          .services-list,
+          .service-includes {
+            gap: 8px;
+          }
+
+          .flow {
+            grid-template-columns: none;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(76vw, 1fr);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 6px;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .step {
+            scroll-snap-align: start;
+            min-height: 148px;
+          }
+
+          .step p {
+            font-size: 14px;
+          }
+
+          .step small {
+            font-size: 12px;
+          }
+
+          .swipe-hint {
+            display: inline-flex;
+          }
+
+          .hero-side {
+            display: none;
+          }
+
+          .hero {
+            grid-template-columns: 1fr;
+          }
+
+          #why-us > .panel:not(.why-mobile-keep) {
+            display: none;
+          }
+
+          #why-us .section-sub {
+            margin-bottom: 12px;
+          }
+
+          .faq-item {
+            padding: 0;
+            overflow: hidden;
+          }
+
+          .faq-toggle {
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 16px 18px;
+          }
+
+          .faq-toggle::after {
+            content: "+";
+            flex-shrink: 0;
+            font-size: 24px;
+            line-height: 1;
+            color: #ffd36f;
+          }
+
+          .faq-item.is-open .faq-toggle::after {
+            content: "−";
+          }
+
+          .faq-answer {
+            display: none;
+            padding: 0 18px 18px;
+          }
+
+          .faq-item.is-open .faq-answer {
+            display: block;
+          }
+
+          .cta-mid {
+            display: none;
+          }
+
+          main {
+            padding-bottom: 112px;
+          }
+
+          .mobile-cta-bar {
+            display: block;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -691,7 +984,7 @@
 <header>
     <div class="container topbar">
         <div class="brand">
-            <img src="./assets/logo-transparent.png" alt="Robotics Consulting logo">
+            <img src="./assets/logo-transparent.png" alt="Robotics Consulting logo" loading="eager" fetchpriority="high" decoding="async" width="1024" height="682">
         </div>
         <div class="header-actions">
             <nav class="mini-nav">
@@ -706,6 +999,7 @@
                 <button class="lang-btn" type="button" data-lang="ru">RU</button>
                 <button class="lang-btn" type="button" data-lang="en">ENG</button>
             </div>
+            <button class="menu-toggle" type="button" data-i18n="nav_menu" aria-expanded="false" aria-controls="mobile-site-nav">Menu</button>
         </div>
     </div>
 </header>
@@ -714,7 +1008,7 @@
     <section class="hero reveal">
         <article class="hero-main glass reveal" style="--reveal-delay: 80ms;">
             <h1 data-i18n="hero_title">Practical Automation & Robotics Consulting for SMEs</h1>
-            <p class="lead" data-i18n="hero_lead">
+            <p class="lead" data-i18n="hero_lead" data-i18n-mobile="hero_lead_mobile">
                 We help warehousing, logistics, and manufacturing businesses identify where automation makes financial
                 sense - and how to implement it with confidence.
             </p>
@@ -834,7 +1128,7 @@
         </div>
     </section>
 
-    <section class="cta-box reveal" style="margin-top:16px;">
+    <section class="cta-box cta-mid reveal" style="margin-top:16px;">
         <div>
             <h2 data-i18n="cta_mid_title">Ready to identify your best automation opportunities?</h2>
         </div>
@@ -846,9 +1140,9 @@
 
     <section id="why-us" class="glass section-card reveal">
         <h2 class="section-title" data-i18n="why_title">Technical Expertise Meets Business Thinking</h2>
-        <p class="section-sub" data-i18n="why_sub_1">Led by a senior software architect with 8+ years building
+        <p class="section-sub" data-i18n="why_sub_1" data-i18n-mobile="why_sub_1_mobile">Led by a senior software architect with 8+ years building
             distributed enterprise systems, scalable integrations, and event-driven platforms.</p>
-        <article class="panel reveal" style="--reveal-delay: 80ms;">
+            <article class="panel reveal" style="--reveal-delay: 80ms;">
             <p data-i18n="why_sub_2">We combine technical depth with practical ROI-focused consulting - bridging
                 business needs and modern automation technologies.</p>
         </article>
@@ -857,7 +1151,7 @@
                 layer behind modern automation initiatives - from WMS and ERP connections to fleet orchestration and
                 real-time data pipelines.</p>
         </article>
-        <article class="panel reveal"
+            <article class="panel reveal why-mobile-keep"
                  style="--reveal-delay: 200ms; margin-top: 12px; border-color: #3a6540; background: rgba(20,44,22,0.45);">
             <p><strong data-i18n="why_honest_label" style="color:#7de8a0;">Honest approach</strong></p>
             <p data-i18n="why_honest">We may recommend NOT automating — if the ROI analysis shows it does not make
@@ -879,24 +1173,25 @@
 
     <section id="process" class="glass section-card reveal">
         <h2 class="section-title" data-i18n="process_title">How It Works</h2>
-        <p class="section-sub" data-i18n="process_sub">A clear process from discovery to practical implementation
+        <p class="section-sub" data-i18n="process_sub" data-i18n-mobile="process_sub_mobile">A clear process from discovery to practical implementation
             support.</p>
+        <p class="swipe-hint" data-i18n="process_swipe_hint">Swipe to see the steps</p>
         <div class="flow">
             <article class="step reveal" style="--reveal-delay: 30ms;">
                 <small data-i18n="process_label_1">01 / Discovery Call</small>
-                <p data-i18n="process_step_1">Understand your operations and current challenges.</p>
+                <p data-i18n="process_step_1" data-i18n-mobile="process_step_1_mobile">Understand your operations and current challenges.</p>
             </article>
             <article class="step reveal" style="--reveal-delay: 100ms;">
                 <small data-i18n="process_label_2">02 / Assessment</small>
-                <p data-i18n="process_step_2">Analyze workflows and identify automation opportunities.</p>
+                <p data-i18n="process_step_2" data-i18n-mobile="process_step_2_mobile">Analyze workflows and identify automation opportunities.</p>
             </article>
             <article class="step reveal" style="--reveal-delay: 170ms;">
                 <small data-i18n="process_label_3">03 / Roadmap</small>
-                <p data-i18n="process_step_3">Deliver practical recommendations with ROI estimates.</p>
+                <p data-i18n="process_step_3" data-i18n-mobile="process_step_3_mobile">Deliver practical recommendations with ROI estimates.</p>
             </article>
             <article class="step reveal" style="--reveal-delay: 240ms;">
                 <small data-i18n="process_label_4">04 / Implementation Support</small>
-                <p data-i18n="process_step_4">Assist with prototyping, architecture, and vendor coordination.</p>
+                <p data-i18n="process_step_4" data-i18n-mobile="process_step_4_mobile">Assist with prototyping, architecture, and vendor coordination.</p>
             </article>
         </div>
     </section>
@@ -918,36 +1213,32 @@
         <p class="section-sub" data-i18n="faq_sub">Common questions from warehouse, logistics, and manufacturing teams
             considering automation.</p>
         <div class="grid grid-2" style="gap:12px;">
-            <article class="panel reveal" style="--reveal-delay:30ms;">
-                <h3 data-i18n="faq_q1" style="font-size:16px;margin-bottom:8px;">How much does automation typically
-                    cost?</h3>
-                <p data-i18n="faq_a1">Costs vary widely — from a few thousand euros for software-based process
+            <article class="panel faq-item reveal is-open" style="--reveal-delay:30ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="true" aria-controls="faq-answer-1"><span data-i18n="faq_q1">How much does automation typically cost?</span></button></h3>
+                <p id="faq-answer-1" class="faq-answer" data-i18n="faq_a1">Costs vary widely — from a few thousand euros for software-based process
                     automation to hundreds of thousands for physical robotics. That is exactly why an Automation
                     Opportunity Assessment comes first.</p>
             </article>
-            <article class="panel reveal" style="--reveal-delay:80ms;">
-                <h3 data-i18n="faq_q2" style="font-size:16px;margin-bottom:8px;">Do we need robots or vendors already
-                    selected?</h3>
-                <p data-i18n="faq_a2">No. We can work with you from scratch, or alongside your existing vendor
+            <article class="panel faq-item reveal" style="--reveal-delay:80ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-2"><span data-i18n="faq_q2">Do we need robots or vendors already selected?</span></button></h3>
+                <p id="faq-answer-2" class="faq-answer" data-i18n="faq_a2">No. We can work with you from scratch, or alongside your existing vendor
                     conversations. The assessment helps you evaluate options with clear criteria rather than vendor
                     marketing.</p>
             </article>
-            <article class="panel reveal" style="--reveal-delay:130ms;">
-                <h3 data-i18n="faq_q3" style="font-size:16px;margin-bottom:8px;">Can you work with our existing systems
-                    and vendors?</h3>
-                <p data-i18n="faq_a3">Yes. We specialize in integration architecture — connecting new automation layers
+            <article class="panel faq-item reveal" style="--reveal-delay:130ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-3"><span data-i18n="faq_q3">Can you work with our existing systems and vendors?</span></button></h3>
+                <p id="faq-answer-3" class="faq-answer" data-i18n="faq_a3">Yes. We specialize in integration architecture — connecting new automation layers
                     with existing WMS, ERP, and operational tools your team already uses.</p>
             </article>
-            <article class="panel reveal" style="--reveal-delay:180ms;">
-                <h3 data-i18n="faq_q4" style="font-size:16px;margin-bottom:8px;">What if automation turns out not to be
-                    viable?</h3>
-                <p data-i18n="faq_a4">We will tell you honestly. If the numbers do not support automation at this stage,
+            <article class="panel faq-item reveal" style="--reveal-delay:180ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span data-i18n="faq_q4">What if automation turns out not to be viable?</span></button></h3>
+                <p id="faq-answer-4" class="faq-answer" data-i18n="faq_a4">We will tell you honestly. If the numbers do not support automation at this stage,
                     you receive a clear explanation of why and what to revisit in 12–18 months. That clarity is worth
                     the assessment cost on its own.</p>
             </article>
-            <article class="panel reveal" style="--reveal-delay:230ms;">
-                <h3 data-i18n="faq_q5" style="font-size:16px;margin-bottom:8px;">What industries do you focus on?</h3>
-                <p data-i18n="faq_a5">Primarily warehousing, fulfillment, logistics, and light manufacturing —
+            <article class="panel faq-item reveal" style="--reveal-delay:230ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-5"><span data-i18n="faq_q5">What industries do you focus on?</span></button></h3>
+                <p id="faq-answer-5" class="faq-answer" data-i18n="faq_a5">Primarily warehousing, fulfillment, logistics, and light manufacturing —
                     industries where process efficiency and throughput directly affect profitability.</p>
             </article>
         </div>
@@ -957,7 +1248,7 @@
         <div class="leadmag-icon">📋</div>
         <div class="leadmag-text">
             <h3 data-i18n="leadmag_title">Free Download: Automation Readiness Checklist for SMEs</h3>
-            <p data-i18n="leadmag_sub">A practical PDF to help warehousing, logistics, and manufacturing teams assess
+            <p data-i18n="leadmag_sub" data-i18n-mobile="leadmag_sub_mobile">A practical PDF to help warehousing, logistics, and manufacturing teams assess
                 which processes are ready for automation — before committing to expensive equipment or software.</p>
         </div>
         <a id="leadmag-link" class="btn btn-alt"
@@ -967,7 +1258,7 @@
 
     <section class="cta-box reveal">
         <div>
-            <h2 data-i18n="cta_title">Considering Automation But Unsure Where to Start?</h2>
+            <h2 data-i18n="cta_title" data-i18n-mobile="cta_title_mobile">Considering Automation But Unsure Where to Start?</h2>
             <p data-i18n="cta_sub">Get a practical assessment before committing to expensive equipment or software.</p>
         </div>
         <div class="cta-actions">
@@ -976,6 +1267,10 @@
         </div>
     </section>
 </main>
+
+<div class="mobile-cta-bar" aria-label="Quick contact">
+    <a class="btn btn-main" href="mailto:info@sia-robotics-consulting.eu" data-i18n="hero_cta_main">Book a Discovery Call</a>
+</div>
 
 <footer>
     <span data-i18n="footer_text">Rīga, Latvija · Pieejams projektiem Latvijā un attālināti Eiropā</span>
@@ -1021,6 +1316,7 @@
           if (!copy) return;
         var descriptionMeta = document.querySelector('meta[name="description"]');
         var leadmagLink = document.getElementById("leadmag-link");
+        var menuToggle = document.querySelector(".menu-toggle");
         document.documentElement.lang = selected;
         document.title = copy.page_title;
         if (descriptionMeta) descriptionMeta.setAttribute("content", copy.page_desc);
@@ -1030,8 +1326,19 @@
           if (Object.hasOwn(copy, key)) node.textContent = copy[key];
         });
 
+        if (globalThis.innerWidth <= 760) {
+          document.querySelectorAll("[data-i18n-mobile]").forEach(function (node) {
+            var mobileKey = node.dataset.i18nMobile;
+            if (mobileKey && Object.hasOwn(copy, mobileKey)) node.textContent = copy[mobileKey];
+          });
+        }
+
         if (leadmagLink && copy.leadmag_href) {
           leadmagLink.href = copy.leadmag_href;
+        }
+
+        if (menuToggle && copy.nav_menu) {
+          menuToggle.setAttribute("aria-label", copy.nav_menu);
         }
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
@@ -1046,6 +1353,84 @@
         btn.addEventListener("click", function () {
           applyLanguage(btn.dataset.lang);
         });
+      });
+
+      var header = document.querySelector("header");
+      var menuToggle = document.querySelector(".menu-toggle");
+      var miniNav = document.querySelector(".mini-nav");
+      if (miniNav) miniNav.id = "mobile-site-nav";
+
+      function closeMenu() {
+        if (!header || !menuToggle) return;
+        header.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        setMobileCtaHidden(false);
+      }
+
+      var mobileCtaBar = document.querySelector(".mobile-cta-bar");
+      var lastScrollY = 0;
+
+      function setMobileCtaHidden(hidden) {
+        if (!mobileCtaBar) return;
+        mobileCtaBar.classList.toggle("is-hidden", hidden);
+      }
+
+      if (menuToggle && header) {
+        menuToggle.addEventListener("click", function () {
+          var isOpen = header.classList.toggle("menu-open");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          setMobileCtaHidden(isOpen);
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        if (!header || !menuToggle || globalThis.innerWidth > 760) return;
+        if (!header.classList.contains("menu-open")) return;
+        if (header.contains(event.target)) return;
+        closeMenu();
+      });
+
+      document.querySelectorAll(".mini-nav a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+
+      var faqItems = Array.from(document.querySelectorAll(".faq-item"));
+      faqItems.forEach(function (item) {
+        var toggle = item.querySelector(".faq-toggle");
+        if (!toggle) return;
+        toggle.addEventListener("click", function () {
+          var shouldOpen = !item.classList.contains("is-open");
+          faqItems.forEach(function (other) {
+            other.classList.remove("is-open");
+            var otherToggle = other.querySelector(".faq-toggle");
+            if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
+          });
+          if (!shouldOpen) return;
+          item.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+        });
+      });
+
+      globalThis.addEventListener("resize", function () {
+        if (globalThis.innerWidth > 760) closeMenu();
+        applyLanguage(document.documentElement.lang || fallbackLanguage);
+      });
+
+      globalThis.addEventListener("scroll", function () {
+        if (!mobileCtaBar || globalThis.innerWidth > 760) return;
+        var currentY = globalThis.scrollY || 0;
+        if (Math.abs(currentY - lastScrollY) < 8) return;
+        if (currentY < 72) {
+          setMobileCtaHidden(false);
+          lastScrollY = currentY;
+          return;
+        }
+        setMobileCtaHidden(currentY > lastScrollY);
+        lastScrollY = currentY;
+      }, { passive: true });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && header && header.classList.contains("menu-open")) closeMenu();
       });
 
       var savedLanguage = localStorage.getItem("preferred-language");
