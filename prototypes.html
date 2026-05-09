@@ -314,10 +314,6 @@
                 <span class="proto-chip-value" id="tier-chip-complexity">Low</span>
             </div>
             <div class="proto-chip">
-                <span class="proto-chip-label" id="tier-chip-budget-label">Indicative investment range</span>
-                <span class="proto-chip-value" id="tier-chip-budget">€3k – €10k</span>
-            </div>
-            <div class="proto-chip">
                 <span class="proto-chip-label" id="tier-chip-integration-label">Can integrate with</span>
                 <span class="proto-chip-value" id="tier-chip-integration">CRM, telephony, Google Sheets / Excel</span>
             </div>
@@ -378,10 +374,6 @@
                 <span class="proto-chip-value" id="yolo-chip-complexity">Medium</span>
             </div>
             <div class="proto-chip">
-                <span class="proto-chip-label" id="yolo-chip-budget-label">Indicative investment range</span>
-                <span class="proto-chip-value" id="yolo-chip-budget">€10k – €30k</span>
-            </div>
-            <div class="proto-chip">
                 <span class="proto-chip-label" id="yolo-chip-integration-label">Can integrate with</span>
                 <span class="proto-chip-value"
                       id="yolo-chip-integration">Existing cameras, dashboards, BI, ERP/WMS</span>
@@ -436,10 +428,6 @@
             <div class="proto-chip proto-chip--low">
                 <span class="proto-chip-label" id="exp-chip-complexity-label">Implementation complexity</span>
                 <span class="proto-chip-value" id="exp-chip-complexity">Low</span>
-            </div>
-            <div class="proto-chip">
-                <span class="proto-chip-label" id="exp-chip-budget-label">Indicative investment range</span>
-                <span class="proto-chip-value" id="exp-chip-budget">€3k – €8k</span>
             </div>
             <div class="proto-chip">
                 <span class="proto-chip-label" id="exp-chip-integration-label">Can integrate with</span>
@@ -586,11 +574,10 @@
           slideLabel: "Ekrāns",
           lightboxAlt: "Palielināts automatizācijas koncepta attēls",
           complexityLabel: "Ieviešanas sarežģītība",
-          budgetLabel: "Indikatīvais ieguldījumu diapazons",
           integrationLabel: "Var integrēties ar",
-          tierComplexity: "Zema", tierBudget: "€3k – €10k", tierIntegration: "CRM, zvanu sistēmas, Google Sheets / Excel",
-          yoloComplexity: "Vidēja", yoloBudget: "€10k – €30k", yoloIntegration: "Esošās kameras, dashboardi, BI, ERP/WMS",
-          expComplexity: "Zema", expBudget: "€3k – €8k", expIntegration: "Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend"
+          tierComplexity: "Zema", tierIntegration: "CRM, zvanu sistēmas, Google Sheets / Excel",
+          yoloComplexity: "Vidēja", yoloIntegration: "Esošās kameras, dashboardi, BI, ERP/WMS",
+          expComplexity: "Zema", expIntegration: "Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend"
         },
         ru: {
           pageTitle: "Бизнес-сценарии автоматизации",
@@ -656,11 +643,10 @@
           slideLabel: "Экран",
           lightboxAlt: "Увеличенное изображение концепта автоматизации",
           complexityLabel: "Сложность внедрения",
-          budgetLabel: "Ориентировочный бюджет",
           integrationLabel: "Интегрируется с",
-          tierComplexity: "Низкая", tierBudget: "€3k – €10k", tierIntegration: "CRM, телефония, Google Sheets / Excel",
-          yoloComplexity: "Средняя", yoloBudget: "€10k – €30k", yoloIntegration: "Существующие камеры, дашборды, BI, ERP/WMS",
-          expComplexity: "Низкая", expBudget: "€3k – €8k", expIntegration: "CRM строительной компании, ERP и бухгалтерский софт, HTTP-backend"
+          tierComplexity: "Низкая", tierIntegration: "CRM, телефония, Google Sheets / Excel",
+          yoloComplexity: "Средняя", yoloIntegration: "Существующие камеры, дашборды, BI, ERP/WMS",
+          expComplexity: "Низкая", expIntegration: "CRM строительной компании, ERP и бухгалтерский софт, HTTP-backend"
         },
         en: {
           pageTitle: "Business Automation Scenarios",
@@ -726,11 +712,10 @@
           slideLabel: "Screen",
           lightboxAlt: "Enlarged automation concept image",
           complexityLabel: "Implementation complexity",
-          budgetLabel: "Indicative investment range",
           integrationLabel: "Can integrate with",
-          tierComplexity: "Low", tierBudget: "€3k – €10k", tierIntegration: "CRM, telephony, Google Sheets / Excel",
-          yoloComplexity: "Medium", yoloBudget: "€10k – €30k", yoloIntegration: "Existing cameras, dashboards, BI tools, ERP/WMS",
-          expComplexity: "Low", expBudget: "€3k – €8k", expIntegration: "Construction company CRM, ERP, accounting software, HTTP-based backends"
+          tierComplexity: "Low", tierIntegration: "CRM, telephony, Google Sheets / Excel",
+          yoloComplexity: "Medium", yoloIntegration: "Existing cameras, dashboards, BI tools, ERP/WMS",
+          expComplexity: "Low", expIntegration: "Construction company CRM, ERP, accounting software, HTTP-based backends"
         }
       };
 
@@ -824,17 +809,13 @@
         // chip labels and values
         ["tier", "yolo", "exp"].forEach(function(prefix) {
           setText(prefix + "-chip-complexity-label", copy.complexityLabel);
-          setText(prefix + "-chip-budget-label", copy.budgetLabel);
           setText(prefix + "-chip-integration-label", copy.integrationLabel);
         });
         setText("tier-chip-complexity", copy.tierComplexity);
-        setText("tier-chip-budget", copy.tierBudget);
         setText("tier-chip-integration", copy.tierIntegration);
         setText("yolo-chip-complexity", copy.yoloComplexity);
-        setText("yolo-chip-budget", copy.yoloBudget);
         setText("yolo-chip-integration", copy.yoloIntegration);
         setText("exp-chip-complexity", copy.expComplexity);
-        setText("exp-chip-budget", copy.expBudget);
         setText("exp-chip-integration", copy.expIntegration);
 
         // update complexity chip color classes
