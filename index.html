@@ -1296,8 +1296,8 @@
         <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
         <p class="section-sub" data-i18n="faq_sub" data-i18n-mobile="faq_sub_mobile">Common questions from small businesses considering their first steps with workflow tools or automation.</p>
         <div class="grid grid-2" style="gap:12px;">
-            <article class="panel faq-item reveal is-open" style="--reveal-delay:30ms;">
-                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="true" aria-controls="faq-answer-1"><span data-i18n="faq_q1">How much does automation typically cost?</span></button></h3>
+            <article class="panel faq-item reveal" style="--reveal-delay:30ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-1"><span data-i18n="faq_q1">How much does automation typically cost?</span></button></h3>
                 <p id="faq-answer-1" class="faq-answer" data-i18n="faq_a1">Costs vary widely — from a few thousand euros for software-based process
                     automation to hundreds of thousands for physical robotics. That is exactly why an Automation
                     Opportunity Assessment comes first.</p>
@@ -1308,18 +1308,18 @@
                     conversations. The assessment helps you evaluate options with clear criteria rather than vendor
                     marketing.</p>
             </article>
-            <article class="panel faq-item reveal mobile-hide-on-phone" style="--reveal-delay:130ms;">
+            <article class="panel faq-item reveal" style="--reveal-delay:130ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-3"><span data-i18n="faq_q3">Can you work with our existing systems and vendors?</span></button></h3>
                 <p id="faq-answer-3" class="faq-answer" data-i18n="faq_a3">Yes. We specialize in integration architecture — connecting new automation layers
                     with existing WMS, ERP, and operational tools your team already uses.</p>
             </article>
-            <article class="panel faq-item reveal mobile-hide-on-phone" style="--reveal-delay:180ms;">
+            <article class="panel faq-item reveal" style="--reveal-delay:180ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span data-i18n="faq_q4">What if automation turns out not to be viable?</span></button></h3>
                 <p id="faq-answer-4" class="faq-answer" data-i18n="faq_a4">We will tell you honestly. If the numbers do not support automation at this stage,
                     you receive a clear explanation of why and what to revisit in 12–18 months. That clarity is worth
                     the assessment cost on its own.</p>
             </article>
-            <article class="panel faq-item reveal mobile-hide-on-phone" style="--reveal-delay:230ms;">
+            <article class="panel faq-item reveal" style="--reveal-delay:230ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-5"><span data-i18n="faq_q5">What industries do you focus on?</span></button></h3>
                 <p id="faq-answer-5" class="faq-answer" data-i18n="faq_a5">Primarily warehousing, fulfillment, logistics, and light manufacturing —
                     industries where process efficiency and throughput directly affect profitability.</p>
@@ -1497,7 +1497,7 @@
 
       function syncServiceCards() {
         var isMobile = globalThis.innerWidth <= 760;
-        serviceCards.forEach(function (card, index) {
+        serviceCards.forEach(function (card) {
           var toggle = card.querySelector(".service-toggle");
           var body = card.querySelector(".service-card-body");
           if (!toggle || !body) return;
@@ -1508,9 +1508,6 @@
             return;
           }
 
-          if (!serviceCards.some(function (item) { return item.classList.contains("is-open"); })) {
-            card.classList.toggle("is-open", index === 0);
-          }
 
           var isOpen = card.classList.contains("is-open");
           body.hidden = !isOpen;
