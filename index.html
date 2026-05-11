@@ -6,7 +6,7 @@
     <title>Robotics Consulting | Automatizācija, kas pelna</title>
     <meta name="description"
           content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-    <meta name="i18n-version" content="2026-05-11-01">
+    <meta name="i18n-version" content="2026-05-11-02">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
@@ -674,6 +674,39 @@
           color: #8ecba4;
         }
 
+        .service-card-heading {
+          margin: 0 0 8px;
+        }
+
+        .service-toggle {
+          width: 100%;
+          border: 0;
+          background: transparent;
+          color: inherit;
+          padding: 0;
+          text-align: left;
+          font: inherit;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          cursor: default;
+        }
+
+        .service-toggle-title {
+          font-size: 18px;
+          font-weight: 700;
+        }
+
+        .service-toggle-icon {
+          display: none;
+          flex-shrink: 0;
+        }
+
+        .service-card-body {
+          display: block;
+        }
+
         .leadmag-box {
           margin-top: 16px;
           padding: 24px 28px;
@@ -872,9 +905,47 @@
             margin-bottom: 14px;
           }
 
+          .mobile-hide-on-phone {
+            display: none !important;
+          }
+
           .services-list,
           .service-includes {
             gap: 8px;
+          }
+
+          .service-card-heading {
+            margin: 0;
+          }
+
+          .service-toggle {
+            min-height: 52px;
+            cursor: pointer;
+          }
+
+          .service-toggle-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            border: 1px solid #3e6399;
+            color: #ffd36f;
+            font-size: 20px;
+            line-height: 1;
+          }
+
+          .service-toggle-icon::before {
+            content: "+";
+          }
+
+          .service-card--collapsible.is-open .service-toggle-icon::before {
+            content: "−";
+          }
+
+          .service-card-body {
+            padding-top: 8px;
           }
 
           ul.services-list.panel {
@@ -996,7 +1067,7 @@
         <div class="header-actions">
             <nav class="mini-nav">
                 <a href="#faq" data-i18n="nav_faq">FAQ</a>
-                <a href="./prototypes.html" data-i18n="nav_prototypes">Prototipi</a>
+                <a href="./prototypes.html?v=2026-05-11-03" data-i18n="nav_prototypes">Prototipi</a>
             </nav>
             <div class="lang-switch" aria-label="Language switch">
                 <button class="lang-btn active" type="button" data-lang="lv">LV</button>
@@ -1016,7 +1087,7 @@
             </p>
             <div class="cta">
                 <a class="btn btn-main" href="mailto:info@sia-robotics-consulting.eu" data-i18n="hero_cta_main">Book a Free Discovery Call</a>
-                <a class="btn btn-alt" href="./prototypes.html" data-i18n="hero_cta_alt">See Practical Examples</a>
+                <a class="btn btn-alt" href="./prototypes.html?v=2026-05-11-03" data-i18n="hero_cta_alt">See Practical Examples</a>
             </div>
         </article>
 
@@ -1027,7 +1098,7 @@
                         <strong data-i18n="concept_app_title">Aplikācijas biznesam</strong>
                         <span data-i18n="concept_app_sub">Iekšējie rīki un vadības paneļi</span>
                     </div>
-                    <a class="concept-link-btn" href="./prototypes.html" data-i18n="concept_link_btn">See Concepts</a>
+                    <a class="concept-link-btn" href="./prototypes.html?v=2026-05-11-03" data-i18n="concept_link_btn">See Concepts</a>
                 </div>
                 <div class="concept-box">
                     <strong data-i18n="concept_auto_title">Automatizēts process</strong>
@@ -1068,7 +1139,7 @@
 
     <section id="value-prop" class="glass section-card reveal">
         <h2 class="section-title" data-i18n="problem_title">Does This Sound Familiar?</h2>
-        <p class="section-sub" data-i18n="problem_body">Growing businesses often run into the same daily headaches:</p>
+        <p class="section-sub" data-i18n="problem_body" data-i18n-mobile="problem_body_mobile">Growing businesses often run into the same daily headaches:</p>
         <div class="grid grid-2">
             <ul class="services-list panel reveal" style="--reveal-delay: 40ms;">
                 <li data-i18n="problem_q1">Too much manual work and repetitive tasks</li>
@@ -1076,7 +1147,7 @@
                 <li data-i18n="problem_q3">No visibility into what is actually happening</li>
                 <li data-i18n="problem_q4">People constantly asking questions — no clear process</li>
             </ul>
-            <article class="panel reveal" style="--reveal-delay: 110ms;">
+            <article class="panel reveal mobile-hide-on-phone" style="--reveal-delay: 110ms;">
                 <p data-i18n="problem_note">We help fix this with practical tools and workflows — no complex strategy, no buzzwords.</p>
             </article>
         </div>
@@ -1084,43 +1155,64 @@
 
     <section id="pakalpojumi" class="glass section-card reveal">
         <h2 class="section-title" data-i18n="services_title">How We Help</h2>
-        <p class="section-sub" data-i18n="services_sub">Practical services to reduce manual work, improve visibility, and simplify daily operations.</p>
+        <p class="section-sub" data-i18n="services_sub" data-i18n-mobile="services_sub_mobile">Practical services to reduce manual work, improve visibility, and simplify daily operations.</p>
         <div class="grid grid-3">
-            <article class="panel reveal" style="--reveal-delay: 40ms;">
-                <h3 data-i18n="services_card_1_title">Operational Review</h3>
-                <p data-i18n="services_card_1_sub">Find the biggest time-wasters in your business and figure out what to fix first.</p>
-                <ul class="service-includes">
-                    <li data-i18n="services_card_1_i1">Process walkthrough</li>
-                    <li data-i18n="services_card_1_i2">Spot bottlenecks and repetitive work</li>
-                    <li data-i18n="services_card_1_i3">Practical improvement options</li>
-                    <li data-i18n="services_card_1_i4">ROI and effort estimate</li>
-                    <li data-i18n="services_card_1_i5">Clear recommended next steps</li>
-                </ul>
-                <div class="service-pricing">
-                    <span class="price-main" data-i18n="services_card_1_price">Flexible — adapted to your scale</span>
-                    <span class="price-meta" data-i18n="services_card_1_scope">Fixed-scope engagement</span>
-                    <span class="price-meta" data-i18n="services_card_1_duration">1–2 weeks</span>
+            <article class="panel reveal service-card--collapsible is-open" style="--reveal-delay: 40ms;">
+                <h3 class="service-card-heading">
+                    <button class="service-toggle" type="button" aria-expanded="true" aria-controls="service-card-1-body">
+                        <span class="service-toggle-title" data-i18n="services_card_1_title">Operational Review</span>
+                        <span class="service-toggle-icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div id="service-card-1-body" class="service-card-body">
+                    <p data-i18n="services_card_1_sub" data-i18n-mobile="services_card_1_sub_mobile">Find the biggest time-wasters in your business and figure out what to fix first.</p>
+                    <ul class="service-includes">
+                        <li data-i18n="services_card_1_i1">Process walkthrough</li>
+                        <li data-i18n="services_card_1_i2">Spot bottlenecks and repetitive work</li>
+                        <li data-i18n="services_card_1_i3">Practical improvement options</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i4">ROI and effort estimate</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i5">Clear recommended next steps</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <span class="price-main" data-i18n="services_card_1_price">Flexible — adapted to your scale</span>
+                        <span class="price-meta mobile-hide-on-phone" data-i18n="services_card_1_scope">Fixed-scope engagement</span>
+                        <span class="price-meta mobile-hide-on-phone" data-i18n="services_card_1_duration">1–2 weeks</span>
+                    </div>
                 </div>
             </article>
-            <article class="panel reveal" style="--reveal-delay: 110ms;">
-                <h3 data-i18n="services_card_2_title">Practical Tool or Workflow</h3>
-                <p data-i18n="services_card_2_sub">Build something concrete and useful — before committing to a larger project.</p>
-                <ul class="service-includes">
-                    <li data-i18n="services_card_2_i1">Workflow improvement or automation</li>
-                    <li data-i18n="services_card_2_i2">Prototype or lightweight tool</li>
-                    <li data-i18n="services_card_2_i3">Technical feasibility assessment</li>
-                    <li data-i18n="services_card_2_i4">Vendor and technology recommendations</li>
-                </ul>
+            <article class="panel reveal service-card--collapsible" style="--reveal-delay: 110ms;">
+                <h3 class="service-card-heading">
+                    <button class="service-toggle" type="button" aria-expanded="false" aria-controls="service-card-2-body">
+                        <span class="service-toggle-title" data-i18n="services_card_2_title">Practical Tool or Workflow</span>
+                        <span class="service-toggle-icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div id="service-card-2-body" class="service-card-body">
+                    <p data-i18n="services_card_2_sub" data-i18n-mobile="services_card_2_sub_mobile">Build something concrete and useful — before committing to a larger project.</p>
+                    <ul class="service-includes">
+                        <li data-i18n="services_card_2_i1">Workflow improvement or automation</li>
+                        <li data-i18n="services_card_2_i2">Prototype or lightweight tool</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_2_i3">Technical feasibility assessment</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_2_i4">Vendor and technology recommendations</li>
+                    </ul>
+                </div>
             </article>
-            <article class="panel reveal" style="--reveal-delay: 180ms;">
-                <h3 data-i18n="services_card_3_title">Systems & Integrations</h3>
-                <p data-i18n="services_card_3_sub">Connect your tools and systems so data flows where it needs to — automatically.</p>
-                <ul class="service-includes">
-                    <li data-i18n="services_card_3_i1">API and platform connections</li>
-                    <li data-i18n="services_card_3_i2">Workflow and process orchestration</li>
-                    <li data-i18n="services_card_3_i3">Cloud and edge integration</li>
-                    <li data-i18n="services_card_3_i4">Data pipelines and visibility dashboards</li>
-                </ul>
+            <article class="panel reveal service-card--collapsible" style="--reveal-delay: 180ms;">
+                <h3 class="service-card-heading">
+                    <button class="service-toggle" type="button" aria-expanded="false" aria-controls="service-card-3-body">
+                        <span class="service-toggle-title" data-i18n="services_card_3_title">Systems & Integrations</span>
+                        <span class="service-toggle-icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div id="service-card-3-body" class="service-card-body">
+                    <p data-i18n="services_card_3_sub" data-i18n-mobile="services_card_3_sub_mobile">Connect your tools and systems so data flows where it needs to — automatically.</p>
+                    <ul class="service-includes">
+                        <li data-i18n="services_card_3_i1">API and platform connections</li>
+                        <li data-i18n="services_card_3_i2">Workflow and process orchestration</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_3_i3">Cloud and edge integration</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_3_i4">Data pipelines and visibility dashboards</li>
+                    </ul>
+                </div>
             </article>
         </div>
     </section>
@@ -1156,16 +1248,6 @@
             <p data-i18n="why_honest">We may recommend NOT automating — if the ROI analysis shows it does not make
                 financial sense at this stage. Our goal is a result that is good for your business, not a sale.</p>
         </article>
-        <article class="panel reveal" style="--reveal-delay: 260ms; margin-top: 12px;">
-            <p data-i18n="founder_sub" style="margin-bottom:10px; color:#ffd36f; font-size:16px; font-weight:600;">Senior systems architect background across enterprise
-                and operational environments:</p>
-            <ul class="service-includes" style="margin-top:0;">
-                <li data-i18n="founder_bg_1">Distributed systems and scalable integrations</li>
-                <li data-i18n="founder_bg_2">Process orchestration and workflow automation</li>
-                <li data-i18n="founder_bg_3">WMS, ERP, and operational platform integrations</li>
-                <li data-i18n="founder_bg_4">Cloud, edge, and real-time data pipelines</li>
-            </ul>
-        </article>
     </section>
 
     <section id="process" class="glass section-card reveal">
@@ -1199,18 +1281,18 @@
 
     <section id="tech" class="glass section-card reveal">
         <h2 class="section-title" data-i18n="tech_title">Who We Help</h2>
-        <p class="section-sub" data-i18n="tech_sub">We work best with growing businesses where daily operations still feel manual, messy, or disconnected.</p>
+        <p class="section-sub" data-i18n="tech_sub" data-i18n-mobile="tech_sub_mobile">We work best with growing businesses where daily operations still feel manual, messy, or disconnected.</p>
         <ul class="services-list">
             <li data-i18n="ideal_1">Small warehouses and local fulfilment operations</li>
             <li data-i18n="ideal_2">Local logistics and distribution companies</li>
             <li data-i18n="ideal_3">Light manufacturing, workshops, and production businesses</li>
-            <li data-i18n="ideal_4">Growing service businesses with chaotic or manual processes</li>
+            <li class="mobile-hide-on-phone" data-i18n="ideal_4">Growing service businesses with chaotic or manual processes</li>
         </ul>
     </section>
 
     <section id="faq" class="glass section-card reveal">
         <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
-        <p class="section-sub" data-i18n="faq_sub">Common questions from small businesses considering their first steps with workflow tools or automation.</p>
+        <p class="section-sub" data-i18n="faq_sub" data-i18n-mobile="faq_sub_mobile">Common questions from small businesses considering their first steps with workflow tools or automation.</p>
         <div class="grid grid-2" style="gap:12px;">
             <article class="panel faq-item reveal is-open" style="--reveal-delay:30ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="true" aria-controls="faq-answer-1"><span data-i18n="faq_q1">How much does automation typically cost?</span></button></h3>
@@ -1224,18 +1306,18 @@
                     conversations. The assessment helps you evaluate options with clear criteria rather than vendor
                     marketing.</p>
             </article>
-            <article class="panel faq-item reveal" style="--reveal-delay:130ms;">
+            <article class="panel faq-item reveal mobile-hide-on-phone" style="--reveal-delay:130ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-3"><span data-i18n="faq_q3">Can you work with our existing systems and vendors?</span></button></h3>
                 <p id="faq-answer-3" class="faq-answer" data-i18n="faq_a3">Yes. We specialize in integration architecture — connecting new automation layers
                     with existing WMS, ERP, and operational tools your team already uses.</p>
             </article>
-            <article class="panel faq-item reveal" style="--reveal-delay:180ms;">
+            <article class="panel faq-item reveal mobile-hide-on-phone" style="--reveal-delay:180ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span data-i18n="faq_q4">What if automation turns out not to be viable?</span></button></h3>
                 <p id="faq-answer-4" class="faq-answer" data-i18n="faq_a4">We will tell you honestly. If the numbers do not support automation at this stage,
                     you receive a clear explanation of why and what to revisit in 12–18 months. That clarity is worth
                     the assessment cost on its own.</p>
             </article>
-            <article class="panel faq-item reveal" style="--reveal-delay:230ms;">
+            <article class="panel faq-item reveal mobile-hide-on-phone" style="--reveal-delay:230ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-5"><span data-i18n="faq_q5">What industries do you focus on?</span></button></h3>
                 <p id="faq-answer-5" class="faq-answer" data-i18n="faq_a5">Primarily warehousing, fulfillment, logistics, and light manufacturing —
                     industries where process efficiency and throughput directly affect profitability.</p>
@@ -1257,7 +1339,7 @@
     <section class="cta-box reveal">
         <div>
             <h2 data-i18n="cta_title" data-i18n-mobile="cta_title_mobile">Not Sure Where to Start?</h2>
-            <p data-i18n="cta_sub">A short discovery call is enough to understand your situation and suggest a practical first step.</p>
+            <p data-i18n="cta_sub" data-i18n-mobile="cta_sub_mobile">A short discovery call is enough to understand your situation and suggest a practical first step.</p>
         </div>
         <div class="cta-actions">
             <a class="btn btn-main" href="mailto:info@sia-robotics-consulting.eu" data-i18n="cta_button">Book a
@@ -1276,7 +1358,7 @@
 <script>
     (function () {
       var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
-      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-11-01";
+      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-11-02";
       var languageFiles = {
         lv: "./locales/lv.json",
         ru: "./locales/ru.json",
@@ -1409,9 +1491,51 @@
         });
       });
 
+      var serviceCards = Array.from(document.querySelectorAll(".service-card--collapsible"));
+
+      function syncServiceCards() {
+        var isMobile = globalThis.innerWidth <= 760;
+        serviceCards.forEach(function (card, index) {
+          var toggle = card.querySelector(".service-toggle");
+          var body = card.querySelector(".service-card-body");
+          if (!toggle || !body) return;
+
+          if (!isMobile) {
+            body.hidden = false;
+            toggle.setAttribute("aria-expanded", "true");
+            return;
+          }
+
+          if (!serviceCards.some(function (item) { return item.classList.contains("is-open"); })) {
+            card.classList.toggle("is-open", index === 0);
+          }
+
+          var isOpen = card.classList.contains("is-open");
+          body.hidden = !isOpen;
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      serviceCards.forEach(function (card) {
+        var toggle = card.querySelector(".service-toggle");
+        if (!toggle) return;
+        toggle.addEventListener("click", function () {
+          if (globalThis.innerWidth > 760) return;
+          var shouldOpen = !card.classList.contains("is-open");
+          serviceCards.forEach(function (other) {
+            other.classList.remove("is-open");
+          });
+          if (shouldOpen) card.classList.add("is-open");
+          syncServiceCards();
+        });
+      });
+
+      syncServiceCards();
+
       globalThis.addEventListener("resize", function () {
         if (globalThis.innerWidth > 760) closeMenu();
         applyLanguage(document.documentElement.lang || fallbackLanguage);
+        syncServiceCards();
       });
 
       globalThis.addEventListener("scroll", function () {

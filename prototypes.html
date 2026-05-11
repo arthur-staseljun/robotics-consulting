@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Business Automation Scenarios | Robotics Consulting</title>
-    <meta name="description" content="Example automation concepts for warehousing, logistics, and manufacturing SMEs.">
+    <title>Practical Examples for Small Businesses | Robotics Consulting</title>
+    <meta name="description" content="Practical workflow and internal tool examples for small and growing businesses.">
     <style>
         :root {
           --bg: #060c1a;
@@ -32,7 +32,7 @@
           font-size: clamp(34px, 6vw, 64px);
           line-height: 1.04;
           letter-spacing: -0.03em;
-          max-width: 14ch;
+          max-width: 18ch;
         }
         .proto-section { background: rgba(17,25,44,0.72); border-radius: 18px; box-shadow: 0 12px 36px #0005; margin-bottom: 38px; padding: 30px 26px; border: 1px solid #223556; scroll-margin-top: 104px; }
         .proto-gallery { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 18px; }
@@ -91,26 +91,6 @@
           gap: 14px;
           flex-wrap: wrap;
         }
-        .case-nav {
-          width: 100%;
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-        }
-        .case-nav a {
-          color: var(--text);
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          min-height: 40px;
-          padding: 8px 14px;
-          border-radius: 999px;
-          border: 1px solid #355685;
-          background: rgba(12, 22, 39, 0.72);
-          font-size: 14px;
-          white-space: nowrap;
-        }
         .swipe-hint {
           display: none;
           align-items: center;
@@ -128,10 +108,6 @@
         }
         .gallery-swipe-hint {
           margin: 0 0 12px;
-        }
-        .case-nav-swipe-hint {
-          width: 100%;
-          margin-top: -4px;
         }
         .lang-switch { display: flex; gap: 6px; padding: 4px; border-radius: 999px; border: 1px solid #294068; background: rgba(17, 29, 50, 0.86); }
         .lang-btn { border: 0; background: transparent; color: #b3c1dc; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 6px 10px; min-height: 36px; cursor: pointer; }
@@ -207,15 +183,14 @@
           .back-link {
             opacity: 0.8;
           }
-          .case-nav {
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            padding-bottom: 2px;
-            scroll-snap-type: x proximity;
+          .proto-copy-grid--details {
+            display: none;
           }
-          .case-nav a {
-            flex: 0 0 auto;
-            scroll-snap-align: start;
+          .proto-benefits li:nth-child(n+4) {
+            display: none;
+          }
+          .proto-gallery picture:nth-child(n+4) {
+            display: none;
           }
           .proto-section {
             display: grid;
@@ -285,13 +260,8 @@
                 <button class="lang-btn" type="button" data-lang="en">ENG</button>
             </div>
         </div>
-        <nav class="case-nav" aria-label="Prototype navigation">
-            <a id="nav-tier" href="#tier-scheduler">Riepu serviss</a>
-            <a id="nav-exp" href="#expense-tracker">CRM izdevumi</a>
-        </nav>
-        <p id="case-nav-hint" class="swipe-hint case-nav-swipe-hint">Pavelciet, lai pārslēgtu scenārijus</p>
     </div>
-    <h1 id="page-title">Business Automation Scenarios</h1>
+    <h1 id="page-title">Practical Examples for Small Businesses</h1>
 
     <!-- Tier Scheduler Section -->
     <section id="tier-scheduler" class="proto-section">
@@ -317,7 +287,7 @@
                 <span class="proto-chip-value" id="tier-chip-integration">CRM, telephony, Google Sheets / Excel</span>
             </div>
         </div>
-        <div class="proto-copy-grid">
+        <div class="proto-copy-grid proto-copy-grid--essentials">
             <div id="tier-copy-5" class="proto-readme">
                 <strong>Kam tas ir piemērots:</strong> Riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus
                 pieņem pa tālruni.
@@ -326,7 +296,7 @@
                 <strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.
             </div>
         </div>
-        <div class="proto-copy-grid">
+        <div class="proto-copy-grid proto-copy-grid--details">
             <div id="tier-copy-1" class="proto-readme">
                 <strong>Kāpēc tas atmaksājas biznesam:</strong> Vairāk zvanu pārtop reālos apmeklējumos, jo klients tiek
                 pierakstīts uzreiz sarunas laikā.
@@ -374,7 +344,7 @@
                 <span class="proto-chip-value" id="exp-chip-integration">Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend</span>
             </div>
         </div>
-        <div class="proto-copy-grid">
+        <div class="proto-copy-grid proto-copy-grid--essentials">
             <div id="exp-copy-5" class="proto-readme">
                 <strong>Kam tas ir piemērots:</strong> Būvniecības uzņēmumiem, kuriem nepieciešama cieša izdevumu
                 plūsmas integrācija ar CRM.
@@ -384,7 +354,7 @@
                 izmaksu uzskaiti.
             </div>
         </div>
-        <div class="proto-copy-grid">
+        <div class="proto-copy-grid proto-copy-grid--details">
             <div id="exp-copy-1" class="proto-readme">
                 <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz izmaksas ātrāk, bet birojam nav jāvāc dati
                 no dažādiem kanāliem.
@@ -451,13 +421,10 @@
     (function () {
       var i18n = {
         lv: {
-          pageTitle: "Biznesa automatizācijas scenāriji",
-          htmlTitle: "Biznesa automatizācijas scenāriji | Robotics Consulting",
-          pageDesc: "Automatizācijas konceptu piemēri noliktavām, loģistikai un ražošanas MVU.",
+          pageTitle: "Praktiski piemēri mazam biznesam",
+          htmlTitle: "Praktiski piemēri mazam biznesam | Robotics Consulting",
+          pageDesc: "Praktiski darba plūsmu un iekšējo rīku piemēri maziem un augošiem uzņēmumiem.",
           back: "&larr; Atpakaļ uz galveno lapu",
-          navTier: "Riepu serviss",
-          navExp: "CRM izdevumi",
-          caseNavHint: "Pavelciet, lai pārslēgtu scenārijus",
           galleryHint: "Pavelciet, lai skatītu ekrānus",
           expTitle: "Būvniecības CRM integrācijas aplikācija",
           expMeta: "Mobilā aplikācija, kas integrēta ar būvniecības uzņēmuma CRM: brigādes uz vietas ievada izdevumus, un dati uzreiz nonāk CRM sistēmā bez manuālas pārrakstīšanas.",
@@ -505,13 +472,10 @@
           expComplexity: "Zema", expIntegration: "Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend"
         },
         ru: {
-          pageTitle: "Бизнес-сценарии автоматизации",
-          htmlTitle: "Бизнес-сценарии автоматизации | Robotics Consulting",
-          pageDesc: "Примеры концептов автоматизации для складов, логистики и производственных SMB.",
+          pageTitle: "Практические примеры для малого бизнеса",
+          htmlTitle: "Практические примеры для малого бизнеса | Robotics Consulting",
+          pageDesc: "Практические примеры рабочих процессов и внутренних инструментов для малого и растущего бизнеса.",
           back: "&larr; Назад на главную",
-          navTier: "Шиномонтаж",
-          navExp: "CRM расходы",
-          caseNavHint: "Свайпните, чтобы переключать сценарии",
           galleryHint: "Свайпните, чтобы смотреть экраны",
           expTitle: "Приложение для интеграции с CRM строительной компании",
           expMeta: "Мобильное приложение с интеграцией в CRM строительной компании: бригады на объекте сразу вносят расходы, и данные без ручного переноса попадают в CRM.",
@@ -559,13 +523,10 @@
           expComplexity: "Низкая", expIntegration: "CRM строительной компании, ERP и бухгалтерский софт, HTTP-backend"
         },
         en: {
-          pageTitle: "Business Automation Scenarios",
-          htmlTitle: "Business Automation Scenarios | Robotics Consulting",
-          pageDesc: "Example automation concepts for warehousing, logistics, and manufacturing SMEs.",
+          pageTitle: "Practical Examples for Small Businesses",
+          htmlTitle: "Practical Examples for Small Businesses | Robotics Consulting",
+          pageDesc: "Practical workflow and internal tool examples for small and growing businesses.",
           back: "&larr; Back to main page",
-          navTier: "Tire service",
-          navExp: "CRM expenses",
-          caseNavHint: "Swipe to switch scenarios",
           galleryHint: "Swipe to view screens",
           expTitle: "CRM Integration App for Construction Companies",
           expMeta: "A mobile app integrated with a construction company's CRM: site crews capture expenses on location, and data flows into CRM without manual re-entry.",
@@ -635,9 +596,6 @@
 
         setText("page-title", copy.pageTitle);
         setHtml("back-link", copy.back);
-        setText("nav-tier", copy.navTier);
-        setText("nav-exp", copy.navExp);
-        setText("case-nav-hint", copy.caseNavHint);
         setText("gallery-hint-tier", copy.galleryHint);
         setText("gallery-hint-exp", copy.galleryHint);
         setText("exp-title", copy.expTitle);        setText("exp-meta", copy.expMeta);
