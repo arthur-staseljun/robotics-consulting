@@ -1038,6 +1038,15 @@
           }
         }
 
+        /* Desktop: hide verbose sections to keep page focused */
+        @media (min-width: 761px) {
+          #value-prop,
+          #why-us,
+          .cta-mid {
+            display: none;
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .concept-board::before,
           .center-orb,
