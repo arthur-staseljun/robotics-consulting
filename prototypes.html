@@ -192,9 +192,6 @@
           .proto-benefits li:nth-child(n+4) {
             display: none;
           }
-          .proto-gallery picture:nth-child(n+4) {
-            display: none;
-          }
           .proto-section {
             display: grid;
           }
@@ -213,17 +210,21 @@
             -webkit-overflow-scrolling: touch;
           }
           .proto-gallery picture {
-            flex: 0 0 min(78vw, 320px);
-            width: min(78vw, 320px);
+            flex: 0 0 min(62vw, 240px);
+            width: min(62vw, 240px);
             scroll-snap-align: start;
           }
           .proto-gallery img {
             display: block;
             max-width: none;
             width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            object-position: center top;
           }
           .proto-gallery--five { display: flex; grid-template-columns: none; }
-          .proto-gallery--five img { height: auto; }
+          .proto-gallery--five img { height: auto; max-height: 260px; }
+          #estrich-crm .proto-gallery--five img { max-height: 140px; }
           #page-title { max-width: 100%; }
           .lightbox-close {
             position: fixed;
