@@ -64,7 +64,7 @@
   "services_li_2": "Automating orders, invoicing, and repetitive flows",
   "services_li_3": "Excel / CSV imports and data validation",
   "services_li_4": "Connecting your website to other business tools",
-  "services_li_5": "Camera-based monitoring built into operations",
+  "services_li_5": "Simple dashboards and better operational visibility",
   "cta_mid_title": "Want to find out what is worth fixing first?",
   "cta_mid_btn": "Book a Free Discovery Call",
   "why_title": "Practical Help, Not Consulting Jargon",
@@ -142,9 +142,6 @@
   "tier_section_title": "Tire Service Scheduling Automation",
   "tier_complexity": "Low",
   "tier_integration": "CRM, telephony systems, Google Sheets / Excel exports",
-  "yolo_section_title": "Computer Vision for Operational Efficiency",
-  "yolo_complexity": "Medium",
-  "yolo_integration": "Existing cameras, backend dashboards, BI tools, ERP/WMS",
   "exp_section_title": "CRM Integration App for Construction Companies",
   "exp_complexity": "Low",
   "exp_integration": "Construction company CRM, ERP, accounting software, HTTP-based backends"

@@ -64,7 +64,7 @@
   "services_li_2": "Pasūtījumu, rēķinu un atkārtotu plūsmu automatizācija",
   "services_li_3": "Excel / CSV datu imports un validācija",
   "services_li_4": "Mājaslapas savienošana ar citiem biznesa rīkiem",
-  "services_li_5": "Kameru monitoringa integrācija procesos",
+  "services_li_5": "Vienkārši paneļi un labāka operāciju redzamība",
   "cta_mid_title": "Vēlaties uzzināt, ko vispirms ir vērts labot?",
   "cta_mid_btn": "Pierakstīties uz bezmaksas zvanu",
   "why_title": "Praktisks atbalsts, nevis konsultāciju žargons",
@@ -142,9 +142,6 @@
   "tier_section_title": "Riepu servisa pierakstu automatizācija",
   "tier_complexity": "Zema",
   "tier_integration": "CRM, zvanu sistēmas, Google Sheets / Excel eksports",
-  "yolo_section_title": "Datorredze operacionālajai efektivitātei",
-  "yolo_complexity": "Vidēja",
-  "yolo_integration": "Esošās kameras, aizmugursistēmu vadības paneļi, BI rīki, ERP/WMS",
   "exp_section_title": "Būvniecības CRM integrācijas aplikācija",
   "exp_complexity": "Zema",
   "exp_integration": "Būvniecības uzņēmuma CRM, ERP, grāmatvedības programmatūra, HTTP bāzētas aizmugursistēmas"

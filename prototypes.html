@@ -285,7 +285,11 @@
                 <button class="lang-btn" type="button" data-lang="en">ENG</button>
             </div>
         </div>
-
+        <nav class="case-nav" aria-label="Prototype navigation">
+            <a id="nav-tier" href="#tier-scheduler">Riepu serviss</a>
+            <a id="nav-exp" href="#expense-tracker">CRM izdevumi</a>
+        </nav>
+        <p id="case-nav-hint" class="swipe-hint case-nav-swipe-hint">Pavelciet, lai pārslēgtu scenārijus</p>
     </div>
     <h1 id="page-title">Business Automation Scenarios</h1>
 
@@ -407,65 +411,6 @@
         </ul>
     </section>
 
-    <!-- YOLO Monitoring Section -->
-    <section id="yolo-monitoring" class="proto-section">
-        <h2 id="yolo-title">Computer Vision for Operational Efficiency</h2>
-        <p id="gallery-hint-yolo" class="swipe-hint gallery-swipe-hint">Pavelciet, lai skatītu ekrānus</p>
-        <div class="proto-gallery proto-gallery--five">
-            <picture><source srcset="./assets/prototypes/yolo/1.webp" type="image/webp"><img src="./assets/prototypes/yolo/1.png" alt="YOLO 1" loading="lazy" decoding="async" width="1530" height="1372"></picture>
-            <picture><source srcset="./assets/prototypes/yolo/2.webp" type="image/webp"><img src="./assets/prototypes/yolo/2.png" alt="YOLO 2" loading="lazy" decoding="async" width="1342" height="1212"></picture>
-            <picture><source srcset="./assets/prototypes/yolo/3.webp" type="image/webp"><img src="./assets/prototypes/yolo/3.png" alt="YOLO 3" loading="lazy" decoding="async" width="1380" height="1408"></picture>
-            <picture><source srcset="./assets/prototypes/yolo/4.webp" type="image/webp"><img src="./assets/prototypes/yolo/4.png" alt="YOLO 4" loading="lazy" decoding="async" width="1192" height="1356"></picture>
-            <picture><source srcset="./assets/prototypes/yolo/5.webp" type="image/webp"><img src="./assets/prototypes/yolo/5.png" alt="YOLO 5" loading="lazy" decoding="async" width="1176" height="1202"></picture>
-        </div>
-        <div id="yolo-meta" class="proto-meta">Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi
-            reāllaikā.
-        </div>
-        <div class="proto-meta-chips">
-            <div class="proto-chip proto-chip--medium">
-                <span class="proto-chip-label" id="yolo-chip-complexity-label">Implementation complexity</span>
-                <span class="proto-chip-value" id="yolo-chip-complexity">Medium</span>
-            </div>
-            <div class="proto-chip">
-                <span class="proto-chip-label" id="yolo-chip-integration-label">Can integrate with</span>
-                <span class="proto-chip-value"
-                      id="yolo-chip-integration">Existing cameras, dashboards, BI, ERP/WMS</span>
-            </div>
-        </div>
-        <div class="proto-copy-grid">
-            <div id="yolo-copy-5" class="proto-readme">
-                <strong>Kam tas ir piemērots:</strong> Ražošanai, noliktavām, loģistikai un drošības komandām.
-            </div>
-            <div id="yolo-copy-6" class="proto-readme">
-                <strong>Kādu problēmu tas atrisina:</strong> Parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir
-                riskantas zonas.
-            </div>
-        </div>
-        <div class="proto-copy-grid">
-            <div id="yolo-copy-1" class="proto-readme">
-                <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz faktus, nevis minējumus, un ātrāk reaģē uz
-                problēmām.
-            </div>
-            <div id="yolo-copy-2" class="proto-readme">
-                <strong>Ko redz ikdienā:</strong> Aktīvākās zonas, kritiskos notikumus un vēsturi.
-            </div>
-            <div id="yolo-copy-3" class="proto-readme">
-                <strong>Ko iegūst vadība:</strong> Pārskatāmus ziņojumus un ātru veidu pārbaudīt strīdīgas situācijas.
-            </div>
-            <div id="yolo-copy-4" class="proto-readme">
-                <strong>Kāpēc tas ir labs ieguldījums:</strong> Esošās kameras sāk dot biznesa vērtību bez pilnīgas
-                infrastruktūras nomaiņas.
-            </div>
-        </div>
-        <ul class="proto-benefits">
-            <li id="yolo-benefit-1">Cilvēku detektēšana un izsekošana</li>
-            <li id="yolo-benefit-2">Pārskati reāllaikā un vēsture</li>
-            <li id="yolo-benefit-3">Integrācija ar backend un BI</li>
-            <li id="yolo-benefit-4">Ražošanai, noliktavām, drošībai</li>
-            <li id="yolo-benefit-5">Mērogojams risinājums</li>
-        </ul>
-    </section>
-
     <div class="leadmag-box">
         <div class="leadmag-icon">📋</div>
         <div class="leadmag-text">
@@ -511,7 +456,6 @@
           pageDesc: "Automatizācijas konceptu piemēri noliktavām, loģistikai un ražošanas MVU.",
           back: "&larr; Atpakaļ uz galveno lapu",
           navTier: "Riepu serviss",
-          navYolo: "Computer Vision",
           navExp: "CRM izdevumi",
           caseNavHint: "Pavelciet, lai pārslēgtu scenārijus",
           galleryHint: "Pavelciet, lai skatītu ekrānus",
@@ -541,19 +485,6 @@
           tierC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> Lielāka atdeve no esošā zvanu apjoma bez papildu reklāmas budžeta.",
           tierC5: "<strong>Kam tas ir piemērots:</strong> Riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.",
           tierC6: "<strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.",
-          yoloTitle: "Computer Vision operacionālajai efektivitātei",
-          yoloMeta: "Pārvērš esošās kameras pārskatā par aktivitāti, riskiem un dīkstāvi reāllaikā.",
-          yoloB1: "Cilvēku detektēšana un izsekošana",
-          yoloB2: "Pārskati reāllaikā un vēsture",
-          yoloB3: "Integrācija ar backend un BI",
-          yoloB4: "Ražošanai, noliktavām, drošībai",
-          yoloB5: "Mērogojams risinājums",
-          yoloC1: "<strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz faktus, nevis minējumus, un ātrāk reaģē uz problēmām.",
-          yoloC2: "<strong>Ko redz ikdienā:</strong> Aktīvākās zonas, kritiskos notikumus un vēsturi.",
-          yoloC3: "<strong>Ko iegūst vadība:</strong> Pārskatāmus ziņojumus un ātru veidu pārbaudīt strīdīgas situācijas.",
-          yoloC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> Esošās kameras sāk dot biznesa vērtību bez pilnīgas infrastruktūras nomaiņas.",
-          yoloC5: "<strong>Kam tas ir piemērots:</strong> Ražošanai, noliktavām, loģistikai un drošības komandām.",
-          yoloC6: "<strong>Kādu problēmu tas atrisina:</strong> Parāda, kur procesi bremzējas, kur rodas dīkstāve un kur ir riskantas zonas.",
           leadmagTitle: "Bezmaksas lejupielāde: Automatizācijas gatavības kontrolsaraksts MVU",
           leadmagSub: "Praktisks PDF noliktavu, loģistikas un ražošanas komandām, lai novērtētu, kuri procesi ir gatavi automatizācijai.",
           leadmagSubMobile: "Īss PDF, lai ātri saprastu, kuri procesi ir gatavi automatizācijai.",
@@ -571,7 +502,6 @@
           complexityLabel: "Ieviešanas sarežģītība",
           integrationLabel: "Var integrēties ar",
           tierComplexity: "Zema", tierIntegration: "CRM, zvanu sistēmas, Google Sheets / Excel",
-          yoloComplexity: "Vidēja", yoloIntegration: "Esošās kameras, dashboardi, BI, ERP/WMS",
           expComplexity: "Zema", expIntegration: "Būvniecības CRM sistēma, ERP, grāmatvedības programmatūra, HTTP backend"
         },
         ru: {
@@ -580,7 +510,6 @@
           pageDesc: "Примеры концептов автоматизации для складов, логистики и производственных SMB.",
           back: "&larr; Назад на главную",
           navTier: "Шиномонтаж",
-          navYolo: "Computer Vision",
           navExp: "CRM расходы",
           caseNavHint: "Свайпните, чтобы переключать сценарии",
           galleryHint: "Свайпните, чтобы смотреть экраны",
@@ -610,19 +539,6 @@
           tierC4: "<strong>Почему это хорошая инвестиция:</strong> Выше отдача от текущего потока звонков без дополнительных рекламных затрат.",
           tierC5: "<strong>Для кого подходит:</strong> Для шиномонтажей, автосервисов и компаний с записью по телефону.",
           tierC6: "<strong>Какую проблему решает:</strong> Снижает потерянные звонки, ошибки в записи и пустые окна в расписании.",
-          yoloTitle: "Computer Vision для операционной эффективности",
-          yoloMeta: "Превращает существующие камеры в понятную аналитику по активности, рискам и простоям.",
-          yoloB1: "Детекция и трекинг людей",
-          yoloB2: "Live-панель и история событий",
-          yoloB3: "Интеграция с backend и BI",
-          yoloB4: "Для производств, складов и безопасности",
-          yoloB5: "Масштабируется по этапам",
-          yoloC1: "<strong>Почему это выгодно бизнесу:</strong> Руководство видит факты, а не предположения, и быстрее реагирует на отклонения.",
-          yoloC2: "<strong>Что видно каждый день:</strong> Самые активные зоны, критические события и историю действий.",
-          yoloC3: "<strong>Что получает руководство:</strong> Понятные отчеты и быстрый способ проверять спорные ситуации.",
-          yoloC4: "<strong>Почему это хорошая инвестиция:</strong> Существующие камеры начинают приносить бизнес-пользу без полной замены инфраструктуры.",
-          yoloC5: "<strong>Для кого подходит:</strong> Для производств, складов, логистических центров и служб безопасности.",
-          yoloC6: "<strong>Какую проблему решает:</strong> Показывает, где возникают простои, рискованные зоны и потери эффективности.",
           leadmagTitle: "Бесплатно: Чеклист готовности к автоматизации для SMB",
           leadmagSub: "Практичный PDF для складских, логистических и производственных команд — чтобы понять, какие процессы готовы к автоматизации.",
           leadmagSubMobile: "Короткий PDF, чтобы быстро понять, какие процессы уже готовы к автоматизации.",
@@ -640,7 +556,6 @@
           complexityLabel: "Сложность внедрения",
           integrationLabel: "Интегрируется с",
           tierComplexity: "Низкая", tierIntegration: "CRM, телефония, Google Sheets / Excel",
-          yoloComplexity: "Средняя", yoloIntegration: "Существующие камеры, дашборды, BI, ERP/WMS",
           expComplexity: "Низкая", expIntegration: "CRM строительной компании, ERP и бухгалтерский софт, HTTP-backend"
         },
         en: {
@@ -649,7 +564,6 @@
           pageDesc: "Example automation concepts for warehousing, logistics, and manufacturing SMEs.",
           back: "&larr; Back to main page",
           navTier: "Tire service",
-          navYolo: "Computer Vision",
           navExp: "CRM expenses",
           caseNavHint: "Swipe to switch scenarios",
           galleryHint: "Swipe to view screens",
@@ -679,19 +593,6 @@
           tierC4: "<strong>Why this is a strong investment:</strong> Better return from the call volume you already have, without extra ad spend.",
           tierC5: "<strong>Who it fits:</strong> Tire service centers, auto workshops, and businesses that book by phone.",
           tierC6: "<strong>What problem it solves:</strong> It reduces missed calls, booking mistakes, and empty time slots.",
-          yoloTitle: "Computer Vision for Operational Efficiency",
-          yoloMeta: "Turns existing cameras into a real-time view of activity, risks, and downtime.",
-          yoloB1: "Human detection and tracking",
-          yoloB2: "Live summaries and event history",
-          yoloB3: "Backend and BI integration",
-          yoloB4: "For production, warehousing, and safety",
-          yoloB5: "Built to scale step by step",
-          yoloC1: "<strong>Why this pays off:</strong> Management sees facts instead of assumptions and reacts faster to issues.",
-          yoloC2: "<strong>Daily value:</strong> Busiest zones, critical events, and event history in one view.",
-          yoloC3: "<strong>What management gets:</strong> Clear reports and a fast way to review disputed situations.",
-          yoloC4: "<strong>Why this is a strong investment:</strong> Existing cameras start delivering business value without a full infrastructure replacement.",
-          yoloC5: "<strong>Who it fits:</strong> Production sites, warehouses, logistics centers, and security teams.",
-          yoloC6: "<strong>What problem it solves:</strong> It shows where downtime starts, which zones carry risk, and where efficiency drops.",
           leadmagTitle: "Free Download: Automation Readiness Checklist for SMEs",
           leadmagSub: "A practical PDF for warehousing, logistics, and manufacturing teams to assess which processes are ready for automation.",
           leadmagSubMobile: "A short PDF to quickly assess which processes are ready for automation.",
@@ -709,7 +610,6 @@
           complexityLabel: "Implementation complexity",
           integrationLabel: "Can integrate with",
           tierComplexity: "Low", tierIntegration: "CRM, telephony, Google Sheets / Excel",
-          yoloComplexity: "Medium", yoloIntegration: "Existing cameras, dashboards, BI tools, ERP/WMS",
           expComplexity: "Low", expIntegration: "Construction company CRM, ERP, accounting software, HTTP-based backends"
         }
       };
@@ -736,11 +636,9 @@
         setText("page-title", copy.pageTitle);
         setHtml("back-link", copy.back);
         setText("nav-tier", copy.navTier);
-        setText("nav-yolo", copy.navYolo);
         setText("nav-exp", copy.navExp);
         setText("case-nav-hint", copy.caseNavHint);
         setText("gallery-hint-tier", copy.galleryHint);
-        setText("gallery-hint-yolo", copy.galleryHint);
         setText("gallery-hint-exp", copy.galleryHint);
         setText("exp-title", copy.expTitle);        setText("exp-meta", copy.expMeta);
         setText("exp-benefit-1", copy.expB1);
@@ -769,20 +667,6 @@
         setHtml("tier-copy-5", copy.tierC5);
         setHtml("tier-copy-6", copy.tierC6);
 
-        setText("yolo-title", copy.yoloTitle);
-        setText("yolo-meta", copy.yoloMeta);
-        setText("yolo-benefit-1", copy.yoloB1);
-        setText("yolo-benefit-2", copy.yoloB2);
-        setText("yolo-benefit-3", copy.yoloB3);
-        setText("yolo-benefit-4", copy.yoloB4);
-        setText("yolo-benefit-5", copy.yoloB5);
-        setHtml("yolo-copy-1", copy.yoloC1);
-        setHtml("yolo-copy-2", copy.yoloC2);
-        setHtml("yolo-copy-3", copy.yoloC3);
-        setHtml("yolo-copy-4", copy.yoloC4);
-        setHtml("yolo-copy-5", copy.yoloC5);
-        setHtml("yolo-copy-6", copy.yoloC6);
-
         setText("leadmag-title", copy.leadmagTitle);
         setText("leadmag-sub", globalThis.innerWidth <= 760 && copy.leadmagSubMobile ? copy.leadmagSubMobile : copy.leadmagSub);
         setText("cta-title", globalThis.innerWidth <= 760 && copy.ctaTitleMobile ? copy.ctaTitleMobile : copy.ctaTitle);
@@ -802,19 +686,17 @@
         if (currentImageIndex >= 0) openLightbox(currentImageIndex);
 
         // chip labels and values
-        ["tier", "yolo", "exp"].forEach(function(prefix) {
+        ["tier", "exp"].forEach(function(prefix) {
           setText(prefix + "-chip-complexity-label", copy.complexityLabel);
           setText(prefix + "-chip-integration-label", copy.integrationLabel);
         });
         setText("tier-chip-complexity", copy.tierComplexity);
         setText("tier-chip-integration", copy.tierIntegration);
-        setText("yolo-chip-complexity", copy.yoloComplexity);
-        setText("yolo-chip-integration", copy.yoloIntegration);
         setText("exp-chip-complexity", copy.expComplexity);
         setText("exp-chip-integration", copy.expIntegration);
 
         // update complexity chip color classes
-        var complexityMap = { tier: "low", yolo: "medium", exp: "low" };
+        var complexityMap = { tier: "low", exp: "low" };
         Object.keys(complexityMap).forEach(function(prefix) {
           var chip = document.getElementById(prefix + "-chip-complexity");
           if (chip && chip.parentElement) {
