@@ -10,7 +10,7 @@
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         :root {
           --bg: #060c1a;
@@ -1083,7 +1083,12 @@
 </head>
 <body>
 <!-- Cloudflare Turnstile invisible widget (anti-bot for visitor counter) -->
-<div id="cf-turnstile-widget" style="display:none" aria-hidden="true"></div>
+<div id="cf-turnstile-widget"
+     data-sitekey="0x4AAAAAADPYP1wzXYxaaeg"
+     data-size="invisible"
+     data-appearance="interaction-only"
+     data-callback="rcOnTurnstileToken"
+     style="position:absolute;width:0;height:0;overflow:hidden"></div>
 <header>
     <div class="container topbar">
         <div class="brand">
@@ -1393,7 +1398,13 @@
       var languageCache = {};
       var counterStartConfigPath = "./assets/counter.json";
       var counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
-      var turnstileSiteKey = "0x4AAAAAADPYP1wzXYxaaeg";
+      var rcTurnstileToken = null;
+      var rcTurnstileResolvers = [];
+
+      globalThis.rcOnTurnstileToken = function (token) {
+        rcTurnstileToken = token;
+        for (var pending of rcTurnstileResolvers.splice(0)) { pending(token); }
+      };
       var counterStartCache;
       var ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
       var counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
@@ -1463,23 +1474,15 @@
       }
 
       function getTurnstileToken() {
+        if (rcTurnstileToken) return Promise.resolve(rcTurnstileToken);
         return new Promise(function (resolve, reject) {
-          var container = document.getElementById("cf-turnstile-widget");
-          if (!container) return reject(new Error("No Turnstile container"));
-          if (globalThis.turnstile === undefined) return reject(new Error("Turnstile not loaded"));
-          if (!turnstileSiteKey || turnstileSiteKey.includes("REPLACE_WITH")) return reject(new Error("Turnstile site key not configured"));
-          try {
-            globalThis.turnstile.render(container, {
-              sitekey: turnstileSiteKey,
-              callback: resolve,
-              "error-callback": function () { reject(new Error("Turnstile challenge failed")); },
-              "expired-callback": function () { reject(new Error("Turnstile token expired")); },
-              size: "invisible",
-              appearance: "interaction-only"
-            });
-          } catch (error) {
-            reject(error);
-          }
+          var timer = setTimeout(function () {
+            var idx = rcTurnstileResolvers.indexOf(onToken);
+            if (idx !== -1) rcTurnstileResolvers.splice(idx, 1);
+            reject(new Error("Turnstile timeout"));
+          }, 15000);
+          function onToken(token) { clearTimeout(timer); resolve(token); }
+          rcTurnstileResolvers.push(onToken);
         });
       }
 
