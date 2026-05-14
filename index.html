@@ -1598,10 +1598,8 @@
             .then(function (tsToken) { return doCounterFetch(mode, tsToken, isOwnerView, hasVisited, localFlag); })
             .catch(function () {
               console.debug("Turnstile token unavailable, skipping counter hit.");
-              if (isOwnerView) {
-                var lastKnown = getStoredCounterValue();
-                if (lastKnown !== null) setVisitorCount(lastKnown);
-              }
+              // Still fetch current value for owner so they see live data
+              doCounterFetch("get", null, isOwnerView, true, localFlag);
             });
         } else {
           doCounterFetch(mode, null, isOwnerView, hasVisited, localFlag);
