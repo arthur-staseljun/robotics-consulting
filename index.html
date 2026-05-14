@@ -6,7 +6,7 @@
     <title>Robotics Consulting | Automatizācija, kas pelna</title>
     <meta name="description"
           content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-    <meta name="i18n-version" content="2026-05-14-01">
+    <meta name="i18n-version" content="2026-05-14-02">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
@@ -1380,7 +1380,7 @@
 <script>
     (function () {
       var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
-      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-01";
+      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-02";
       var languageFiles = {
         lv: "./locales/lv.json",
         ru: "./locales/ru.json",
@@ -1390,8 +1390,8 @@
       var languageCache = {};
       var counterStartConfigPath = "./assets/counter.json";
       var counterStartCache;
-      var counterLastKnownStorageKey = "rc-counter-last-known-value";
       var ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
+      var counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
       var ownerCounterStorageKey = "rc-owner-counter-enabled";
       var visitorCounterWrap = document.getElementById("visitor-counter");
       var visitorCountNode = document.getElementById("visitor-count-value");
@@ -1460,7 +1460,7 @@
       function loadCounterStart() {
         if (typeof counterStartCache === "number") return Promise.resolve(counterStartCache);
 
-        return fetch(counterStartConfigPath + "?v=" + encodeURIComponent(i18nVersion))
+        return fetch(counterStartConfigPath + "?v=" + encodeURIComponent(ownerCounterToken))
           .then(function (response) {
             if (!response.ok) throw new Error("Counter start config request failed");
             return response.json();
