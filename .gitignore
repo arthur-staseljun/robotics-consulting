@@ -1,1 +1,4 @@
 /.idea/*
+/.wrangler/cache/wrangler-account.json
+/backend/counter-worker/
+/backend/counter-worker/package-lock.json
