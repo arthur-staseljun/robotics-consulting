@@ -6,7 +6,7 @@
     <title>Robotics Consulting | Automatizācija, kas pelna</title>
     <meta name="description"
           content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-    <meta name="i18n-version" content="2026-05-11-02">
+    <meta name="i18n-version" content="2026-05-14-01">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
@@ -780,6 +780,17 @@
           text-align: center;
         }
 
+        .visitor-counter {
+          margin-top: 6px;
+          color: #9eb5dc;
+          font-size: 13px;
+        }
+
+        .visitor-counter strong {
+          color: #e8f1ff;
+          font-weight: 700;
+        }
+
         @media (max-width: 960px) {
           .hero, .grid-3, .grid-2, .flow { grid-template-columns: 1fr; }
           header { position: static; backdrop-filter: none; }
@@ -1361,11 +1372,15 @@
 
 <footer>
     <span data-i18n="footer_text">Rīga, Latvija · Pieejams projektiem Latvijā un attālināti Eiropā</span>
+    <div id="visitor-counter" class="visitor-counter" hidden>
+        <span data-i18n="visitor_counter_label">Unique visitors:</span>
+        <strong id="visitor-count-value" aria-live="polite">...</strong>
+    </div>
 </footer>
 <script>
     (function () {
       var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
-      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-11-02";
+      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-01";
       var languageFiles = {
         lv: "./locales/lv.json",
         ru: "./locales/ru.json",
@@ -1373,6 +1388,153 @@
       };
       var fallbackLanguage = "lv";
       var languageCache = {};
+      var counterStartConfigPath = "./assets/counter.json";
+      var counterStartCache;
+      var counterLastKnownStorageKey = "rc-counter-last-known-value";
+      var ownerCounterToken = "rc-owner-2026-05-14-v7p9k2";
+      var ownerCounterStorageKey = "rc-owner-counter-enabled";
+      var visitorCounterWrap = document.getElementById("visitor-counter");
+      var visitorCountNode = document.getElementById("visitor-count-value");
+
+      function isOwnerCounterEnabled() {
+        var params = new URLSearchParams(globalThis.location.search || "");
+        var providedToken = params.get("counter_access");
+
+        if (providedToken && providedToken === ownerCounterToken) {
+          try {
+            localStorage.setItem(ownerCounterStorageKey, "1");
+          } catch (error) {
+            console.debug("Owner counter localStorage write is unavailable", error);
+          }
+
+          params.delete("counter_access");
+          var query = params.toString();
+          var cleanUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+          globalThis.history.replaceState(null, "", cleanUrl);
+          return true;
+        }
+
+        try {
+          return localStorage.getItem(ownerCounterStorageKey) === "1";
+        } catch (error) {
+          console.debug("Owner counter localStorage read is unavailable", error);
+          return false;
+        }
+      }
+
+      function setVisitorCounterVisible(visible) {
+        if (!visitorCounterWrap) return;
+        visitorCounterWrap.hidden = !visible;
+      }
+
+      function setVisitorCount(value) {
+        if (!visitorCountNode) return;
+        if (typeof value !== "number" || !Number.isFinite(value)) {
+          visitorCountNode.textContent = "-";
+          return;
+        }
+        visitorCountNode.textContent = value.toLocaleString();
+      }
+
+      function getStoredCounterValue() {
+        try {
+          var raw = localStorage.getItem(counterLastKnownStorageKey);
+          if (raw === null) return null;
+          var parsed = Number(raw);
+          return Number.isFinite(parsed) ? parsed : null;
+        } catch (error) {
+          console.debug("Counter last-known-value read is unavailable", error);
+          return null;
+        }
+      }
+
+      function storeCounterValue(value) {
+        if (typeof value !== "number" || !Number.isFinite(value)) return;
+        try {
+          localStorage.setItem(counterLastKnownStorageKey, String(value));
+        } catch (error) {
+          console.debug("Counter last-known-value write is unavailable", error);
+        }
+      }
+
+      function loadCounterStart() {
+        if (typeof counterStartCache === "number") return Promise.resolve(counterStartCache);
+
+        return fetch(counterStartConfigPath + "?v=" + encodeURIComponent(i18nVersion))
+          .then(function (response) {
+            if (!response.ok) throw new Error("Counter start config request failed");
+            return response.json();
+          })
+          .then(function (payload) {
+            if (!payload || typeof payload.value !== "number" || !Number.isFinite(payload.value)) {
+              throw new Error("Counter start config is invalid");
+            }
+            counterStartCache = payload.value;
+            return counterStartCache;
+          });
+      }
+
+      function updateUniqueVisitorCount() {
+        var namespace = "rc-live-2026-05-14-f6b8c2d9e4a17350";
+        var key = "visits-uq-c9a1e7b53d2048f6b2";
+        var localFlag = "rc-unique-visitor-v3";
+        var endpoint = "https://api.countapi.xyz";
+        var hasVisited = false;
+        var isOwnerView = isOwnerCounterEnabled();
+
+        try {
+          hasVisited = localStorage.getItem(localFlag) === "1";
+        } catch (error) {
+          console.debug("Visitor counter localStorage read is unavailable", error);
+          hasVisited = false;
+        }
+
+        if (!isOwnerView && hasVisited) return;
+
+        var action = hasVisited ? "get" : "hit";
+        var url = endpoint + "/" + action + "/" + encodeURIComponent(namespace) + "/" + encodeURIComponent(key);
+
+        fetch(url)
+          .then(function (response) {
+            if (!response.ok) throw new Error("Visitor counter request failed");
+            return response.json();
+          })
+          .then(function (payload) {
+            if (!hasVisited) {
+              try {
+                localStorage.setItem(localFlag, "1");
+              } catch (error) {
+                console.debug("Visitor counter localStorage write is unavailable", error);
+              }
+            }
+
+            if (!isOwnerView) return null;
+
+            return loadCounterStart().then(function (counterStart) {
+              var displayValue = (payload && payload.value) + counterStart - 1;
+              setVisitorCount(displayValue);
+              storeCounterValue(displayValue);
+            });
+          })
+          .catch(function () {
+            if (!isOwnerView) return;
+
+            var lastKnownValue = getStoredCounterValue();
+            if (lastKnownValue !== null) {
+              setVisitorCount(lastKnownValue);
+              return;
+            }
+
+            loadCounterStart()
+              .then(function (counterStart) {
+                setVisitorCount(counterStart);
+                storeCounterValue(counterStart);
+              })
+              .catch(function () {
+                setVisitorCount(null);
+              });
+          });
+      }
 
       function buildLanguageUrl(lang) {
         return languageFiles[lang] + "?v=" + encodeURIComponent(i18nVersion);
@@ -1561,6 +1723,10 @@
 
       var savedLanguage = localStorage.getItem("preferred-language");
       applyLanguage(savedLanguage || "lv");
+
+      var isOwnerView = isOwnerCounterEnabled();
+      setVisitorCounterVisible(isOwnerView);
+      updateUniqueVisitorCount();
 
       if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var revealNodes = document.querySelectorAll(".reveal");
