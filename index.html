@@ -6,7 +6,7 @@
     <title>Robotics Consulting | Automatizācija, kas pelna</title>
     <meta name="description"
           content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-    <meta name="i18n-version" content="2026-05-14-02">
+    <meta name="i18n-version" content="2026-05-14-03">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
@@ -1380,7 +1380,7 @@
 <script>
     (function () {
       var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
-      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-02";
+      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-03";
       var languageFiles = {
         lv: "./locales/lv.json",
         ru: "./locales/ru.json",
@@ -1389,6 +1389,7 @@
       var fallbackLanguage = "lv";
       var languageCache = {};
       var counterStartConfigPath = "./assets/counter.json";
+      var counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
       var counterStartCache;
       var ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
       var counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
@@ -1457,6 +1458,14 @@
         }
       }
 
+      function hasConfiguredCounterEndpoint() {
+        if (typeof counterApiEndpoint !== "string") return false;
+        var endpoint = counterApiEndpoint.trim();
+        if (!endpoint) return false;
+        if (endpoint.includes("replace-with-your-worker.workers.dev")) return false;
+        return endpoint.includes("/api/counter");
+      }
+
       function loadCounterStart() {
         if (typeof counterStartCache === "number") return Promise.resolve(counterStartCache);
 
@@ -1475,10 +1484,7 @@
       }
 
       function updateUniqueVisitorCount() {
-        var namespace = "rc-live-2026-05-14-f6b8c2d9e4a17350";
-        var key = "visits-uq-c9a1e7b53d2048f6b2";
         var localFlag = "rc-unique-visitor-v3";
-        var endpoint = "https://api.countapi.xyz";
         var hasVisited = false;
         var isOwnerView = isOwnerCounterEnabled();
 
@@ -1489,10 +1495,32 @@
           hasVisited = false;
         }
 
+        if (!hasConfiguredCounterEndpoint()) {
+          if (!isOwnerView) return;
+
+          console.warn("Visitor counter backend is not configured. Set counterApiEndpoint to your deployed Worker URL.");
+
+          var fallbackValue = getStoredCounterValue();
+          if (fallbackValue !== null) {
+            setVisitorCount(fallbackValue);
+            return;
+          }
+
+          loadCounterStart()
+            .then(function (counterStart) {
+              setVisitorCount(counterStart);
+              storeCounterValue(counterStart);
+            })
+            .catch(function () {
+              setVisitorCount(null);
+            });
+          return;
+        }
+
         if (!isOwnerView && hasVisited) return;
 
-        var action = hasVisited ? "get" : "hit";
-        var url = endpoint + "/" + action + "/" + encodeURIComponent(namespace) + "/" + encodeURIComponent(key);
+        var mode = hasVisited ? "get" : "hit";
+        var url = counterApiEndpoint + "?mode=" + encodeURIComponent(mode);
 
         fetch(url)
           .then(function (response) {
@@ -1500,6 +1528,10 @@
             return response.json();
           })
           .then(function (payload) {
+            if (!payload || typeof payload.value !== "number" || !Number.isFinite(payload.value)) {
+              throw new Error("Visitor counter response is invalid");
+            }
+
             if (!hasVisited) {
               try {
                 localStorage.setItem(localFlag, "1");
@@ -1510,11 +1542,9 @@
 
             if (!isOwnerView) return null;
 
-            return loadCounterStart().then(function (counterStart) {
-              var displayValue = (payload && payload.value) + counterStart - 1;
-              setVisitorCount(displayValue);
-              storeCounterValue(displayValue);
-            });
+            setVisitorCount(payload.value);
+            storeCounterValue(payload.value);
+            return null;
           })
           .catch(function () {
             if (!isOwnerView) return;

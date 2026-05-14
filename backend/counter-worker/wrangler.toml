@@ -1,0 +1,13 @@
+name = "robotics-counter-worker"
+main = "src/worker.js"
+compatibility_date = "2026-05-14"
+
+# Set this to your GitHub Pages domain, e.g. "https://sia-robotics-consulting.eu"
+[vars]
+ALLOWED_ORIGIN = "https://www.sia-robotics-consulting.eu"
+COUNTER_KEY = "site-unique-visitors"
+COUNTER_START = "32"
+
+[[kv_namespaces]]
+binding = "COUNTER_KV"
+id = "5782b02b00534ce2a1ee82bb2043315f"
