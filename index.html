@@ -23,8 +23,7 @@
           sitekey: '0x4AAAAAADPYP1wzXYxaaeg',
           callback: rcOnTurnstileToken,
           'error-callback': function() { console.debug('Turnstile error'); },
-          'expired-callback': function() { rcTurnstileToken = null; },
-          size: 'invisible'
+          'expired-callback': function() { rcTurnstileToken = null; }
         });
       }
     </script>
