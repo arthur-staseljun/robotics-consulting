@@ -1,3 +1,18 @@
+async function verifyTurnstile(token, secretKey, ip) {
+  const body = new URLSearchParams({ secret: secretKey, response: token, remoteip: ip || "" });
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
 function json(data, status, origin) {
   return new Response(JSON.stringify(data), {
 	status,
@@ -65,7 +80,14 @@ export default {
 	  const mode = url.searchParams.get("mode") || "get";
 	  let current = await getCurrentValue(env);
 
-	  if (mode === "hit") {
+	if (mode === "hit") {
+		if (env.TURNSTILE_SECRET) {
+		  const tsToken = url.searchParams.get("ts_token");
+		  if (!tsToken) return json({ error: "Turnstile token required" }, 403, origin);
+		  const ip = request.headers.get("CF-Connecting-IP") || "";
+		  const valid = await verifyTurnstile(tsToken, env.TURNSTILE_SECRET, ip);
+		  if (!valid) return json({ error: "Turnstile verification failed" }, 403, origin);
+		}
 		current += 1;
 		await setCurrentValue(env, current);
 	  } else if (mode !== "get") {

@@ -10,6 +10,7 @@
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
     <style>
         :root {
           --bg: #060c1a;
@@ -1081,6 +1082,8 @@
     </script>
 </head>
 <body>
+<!-- Cloudflare Turnstile invisible widget (anti-bot for visitor counter) -->
+<div id="cf-turnstile-widget" style="display:none" aria-hidden="true"></div>
 <header>
     <div class="container topbar">
         <div class="brand">
@@ -1390,6 +1393,7 @@
       var languageCache = {};
       var counterStartConfigPath = "./assets/counter.json";
       var counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
+      var turnstileSiteKey = "0x4AAAAAADPYP1wzXYxaaeg";
       var counterStartCache;
       var ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
       var counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
@@ -1458,8 +1462,28 @@
         }
       }
 
-      function hasConfiguredCounterEndpoint() {
-        if (typeof counterApiEndpoint !== "string") return false;
+      function getTurnstileToken() {
+        return new Promise(function (resolve, reject) {
+          var container = document.getElementById("cf-turnstile-widget");
+          if (!container) return reject(new Error("No Turnstile container"));
+          if (globalThis.turnstile === undefined) return reject(new Error("Turnstile not loaded"));
+          if (!turnstileSiteKey || turnstileSiteKey.includes("REPLACE_WITH")) return reject(new Error("Turnstile site key not configured"));
+          try {
+            globalThis.turnstile.render(container, {
+              sitekey: turnstileSiteKey,
+              callback: resolve,
+              "error-callback": function () { reject(new Error("Turnstile challenge failed")); },
+              "expired-callback": function () { reject(new Error("Turnstile token expired")); },
+              size: "invisible",
+              appearance: "interaction-only"
+            });
+          } catch (error) {
+            reject(error);
+          }
+        });
+      }
+
+      function hasConfiguredCounterEndpoint() {        if (typeof counterApiEndpoint !== "string") return false;
         var endpoint = counterApiEndpoint.trim();
         if (!endpoint) return false;
         if (endpoint.includes("replace-with-your-worker.workers.dev")) return false;
@@ -1481,6 +1505,50 @@
             counterStartCache = payload.value;
             return counterStartCache;
           });
+      }
+
+      function handleCounterFetchError(isOwnerView) {
+        if (!isOwnerView) return;
+        var lastKnownValue = getStoredCounterValue();
+        if (lastKnownValue !== null) {
+          setVisitorCount(lastKnownValue);
+          return;
+        }
+        loadCounterStart()
+          .then(function (counterStart) {
+            setVisitorCount(counterStart);
+            storeCounterValue(counterStart);
+          })
+          .catch(function () {
+            setVisitorCount(null);
+          });
+      }
+
+      function doCounterFetch(mode, tsToken, isOwnerView, hasVisited, localFlag) {
+        var fetchUrl = counterApiEndpoint + "?mode=" + encodeURIComponent(mode);
+        if (tsToken) fetchUrl += "&ts_token=" + encodeURIComponent(tsToken);
+        return fetch(fetchUrl)
+          .then(function (response) {
+            if (!response.ok) throw new Error("Visitor counter request failed");
+            return response.json();
+          })
+          .then(function (payload) {
+            if (!payload || typeof payload.value !== "number" || !Number.isFinite(payload.value)) {
+              throw new Error("Visitor counter response is invalid");
+            }
+            if (!hasVisited) {
+              try {
+                localStorage.setItem(localFlag, "1");
+              } catch (error) {
+                console.debug("Visitor counter localStorage write is unavailable", error);
+              }
+            }
+            if (!isOwnerView) return null;
+            setVisitorCount(payload.value);
+            storeCounterValue(payload.value);
+            return null;
+          })
+          .catch(function () { handleCounterFetchError(isOwnerView); });
       }
 
       function updateUniqueVisitorCount() {
@@ -1520,50 +1588,20 @@
         if (!isOwnerView && hasVisited) return;
 
         var mode = hasVisited ? "get" : "hit";
-        var url = counterApiEndpoint + "?mode=" + encodeURIComponent(mode);
 
-        fetch(url)
-          .then(function (response) {
-            if (!response.ok) throw new Error("Visitor counter request failed");
-            return response.json();
-          })
-          .then(function (payload) {
-            if (!payload || typeof payload.value !== "number" || !Number.isFinite(payload.value)) {
-              throw new Error("Visitor counter response is invalid");
-            }
-
-            if (!hasVisited) {
-              try {
-                localStorage.setItem(localFlag, "1");
-              } catch (error) {
-                console.debug("Visitor counter localStorage write is unavailable", error);
+        if (mode === "hit") {
+          getTurnstileToken()
+            .then(function (tsToken) { return doCounterFetch(mode, tsToken, isOwnerView, hasVisited, localFlag); })
+            .catch(function () {
+              console.debug("Turnstile token unavailable, skipping counter hit.");
+              if (isOwnerView) {
+                var lastKnown = getStoredCounterValue();
+                if (lastKnown !== null) setVisitorCount(lastKnown);
               }
-            }
-
-            if (!isOwnerView) return null;
-
-            setVisitorCount(payload.value);
-            storeCounterValue(payload.value);
-            return null;
-          })
-          .catch(function () {
-            if (!isOwnerView) return;
-
-            var lastKnownValue = getStoredCounterValue();
-            if (lastKnownValue !== null) {
-              setVisitorCount(lastKnownValue);
-              return;
-            }
-
-            loadCounterStart()
-              .then(function (counterStart) {
-                setVisitorCount(counterStart);
-                storeCounterValue(counterStart);
-              })
-              .catch(function () {
-                setVisitorCount(null);
-              });
-          });
+            });
+        } else {
+          doCounterFetch(mode, null, isOwnerView, hasVisited, localFlag);
+        }
       }
 
       function buildLanguageUrl(lang) {
