@@ -11,7 +11,24 @@
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/logo-transparent.png" fetchpriority="high">
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+      var rcTurnstileToken = null;
+      var rcTurnstileResolvers = [];
+      function rcOnTurnstileToken(token) {
+        rcTurnstileToken = token;
+        for (var p of rcTurnstileResolvers.splice(0)) { p(token); }
+      }
+      function rcOnTurnstileLoad() {
+        turnstile.render('#cf-turnstile-widget', {
+          sitekey: '0x4AAAAAADPYP1wzXYxaaeg',
+          callback: rcOnTurnstileToken,
+          'error-callback': function() { console.debug('Turnstile error'); },
+          'expired-callback': function() { rcTurnstileToken = null; },
+          size: 'invisible'
+        });
+      }
+    </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=rcOnTurnstileLoad" async defer></script>
     <style>
         :root {
           --bg: #060c1a;
@@ -1084,10 +1101,7 @@
 </head>
 <body>
 <!-- Cloudflare Turnstile invisible widget (anti-bot for visitor counter) -->
-<div id="cf-turnstile-widget"
-     data-sitekey="0x4AAAAAADPYP1wzXYxaaeg"
-     data-callback="rcOnTurnstileToken"
-     style="position:fixed;bottom:0;right:0;opacity:0;pointer-events:none"></div>
+<div id="cf-turnstile-widget" style="position:fixed;bottom:0;right:0;opacity:0;pointer-events:none"></div>
 <header>
     <div class="container topbar">
         <div class="brand">
@@ -1397,13 +1411,7 @@
       var languageCache = {};
       var counterStartConfigPath = "./assets/counter.json";
       var counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
-      var rcTurnstileToken = null;
-      var rcTurnstileResolvers = [];
-
-      globalThis.rcOnTurnstileToken = function (token) {
-        rcTurnstileToken = token;
-        for (var pending of rcTurnstileResolvers.splice(0)) { pending(token); }
-      };
+      // rcTurnstileToken, rcTurnstileResolvers, rcOnTurnstileToken defined in <head>
       var counterStartCache;
       var ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
       var counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
