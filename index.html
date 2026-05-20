@@ -7,7 +7,7 @@
     <title>Robotics Consulting | Automatizācija, kas pelna</title>
     <meta name="description"
           content="Nevis vienkārši kods, bet sistēmas, kas samazina izmaksas un atbrīvo komandu no rutīnas.">
-    <meta name="i18n-version" content="2026-05-14-03">
+    <meta name="i18n-version" content="2026-05-20-01">
     <meta name="keywords"
           content="warehouse automation consulting, logistics process automation, robotics consulting Latvia, industrial automation advisory, SME automation assessment, WMS integration, fulfillment automation">
     <link rel="preload" as="image" href="./assets/Robotics%20Consulting-v5.png" fetchpriority="high">
@@ -176,7 +176,7 @@
           padding: 46px 0 24px;
           display: grid;
           gap: 16px;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: 1fr 1fr;
         }
 
         .hero-main {
@@ -481,19 +481,38 @@
         .offer-card {
           margin-top: 16px;
           display: grid;
-          gap: 10px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 8px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .offer-pill {
           text-align: center;
-          padding: 13px 10px;
+          padding: 12px 10px;
           border-radius: 12px;
           border: 1px solid #355685;
           background: rgba(18, 30, 53, 0.78);
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 700;
-          letter-spacing: 0.02em;
+          letter-spacing: 0.01em;
+          line-height: 1.25;
+          min-height: 52px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow-wrap: anywhere;
+          text-decoration: none;
+          color: #e6efff;
+        }
+
+        .offer-pill-ai {
+          border-color: #c98f17;
+          background: linear-gradient(120deg, #f3ac2d, #ffd36f);
+          color: #1d2433;
+        }
+
+        .offer-pill-ai:hover {
+          filter: brightness(1.03);
+          transform: translateY(-1px);
         }
 
         main { padding-bottom: 48px; }
@@ -811,6 +830,7 @@
 
         @media (max-width: 960px) {
           .hero, .grid-3, .grid-2, .flow { grid-template-columns: 1fr; }
+          .offer-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
           header { position: static; backdrop-filter: none; }
           .hero-main, .hero-side { padding: 24px; }
           h1 { max-width: 100%; }
@@ -1175,6 +1195,7 @@
                 <div class="offer-pill" data-i18n="offer_1">Noliktavu automatizācija</div>
                 <div class="offer-pill" data-i18n="offer_2">Loģistika un pasūtījumu izpilde</div>
                 <div class="offer-pill" data-i18n="offer_3">Procesu digitalizācija</div>
+                <a class="offer-pill offer-pill-ai" id="offer-ai-link" data-i18n="offer_4" href="./assets/ai-implementation/[LV] Kā mākslīgais intelekts uzlabo digitalizācijas ieviešanu.pdf" download>AI ieviešana</a>
             </div>
         </aside>
     </section>
@@ -1640,6 +1661,7 @@
           if (!copy) return;
         var descriptionMeta = document.querySelector('meta[name="description"]');
         var leadmagLink = document.getElementById("leadmag-link");
+        var aiImplementationLink = document.getElementById("offer-ai-link");
         var menuToggle = document.querySelector(".menu-toggle");
         document.documentElement.lang = selected;
         document.title = copy.page_title;
@@ -1659,6 +1681,10 @@
 
         if (leadmagLink && copy.leadmag_href) {
           leadmagLink.href = copy.leadmag_href;
+        }
+
+        if (aiImplementationLink && copy.ai_doc_href) {
+          aiImplementationLink.href = copy.ai_doc_href;
         }
 
         if (menuToggle && copy.nav_menu) {
