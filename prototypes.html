@@ -41,8 +41,8 @@
         .proto-gallery--five { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; }
         .proto-gallery--five picture { display: flex; align-items: stretch; }
         .proto-gallery--five img { max-width: none; height: 280px; object-fit: contain; object-position: center top; }
-        #estrich-crm .proto-gallery--five picture { align-items: flex-start; }
-        #estrich-crm .proto-gallery--five img { height: 110px; }
+        #gogridas-crm .proto-gallery picture { align-items: flex-start; }
+        #gogridas-crm .proto-gallery img { height: 140px; }
         .proto-gallery img:hover { transform: translateY(-2px); }
         .proto-meta { color: #c4d2ea; font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
         .proto-copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 18px; }
@@ -168,7 +168,7 @@
         @media (max-width: 1100px) {
           .proto-gallery--five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
           .proto-gallery--five img { height: 240px; }
-          #estrich-crm .proto-gallery--five img { height: 150px; }
+          #gogridas-crm .proto-gallery img { height: 130px; }
         }
         @media (max-width: 960px) {
           .top-controls { position: static; backdrop-filter: none; }
@@ -224,7 +224,7 @@
           }
           .proto-gallery--five { display: flex; grid-template-columns: none; }
           .proto-gallery--five img { height: auto; max-height: 260px; }
-          #estrich-crm .proto-gallery--five img { max-height: 140px; }
+          #gogridas-crm .proto-gallery img { max-height: 140px; }
           #page-title { max-width: 100%; }
           .lightbox-close {
             position: fixed;
@@ -327,18 +327,20 @@
         </ul>
     </section>
 
-    <!-- Estrich CRM Section -->
-    <section id="estrich-crm" class="proto-section">
-        <h2 id="estr-title">Darbinieku, brigāžu un algu uzskaites sistēma</h2>
+    <!-- Go Gridas CRM Section -->
+    <section id="gogridas-crm" class="proto-section">
+        <h2 id="estr-title">Go Gridas — CRM būvniecības un remonta uzņēmumiem</h2>
         <p id="gallery-hint-estr" class="swipe-hint gallery-swipe-hint">Pavelciet, lai skatītu ekrānus</p>
-        <div class="proto-gallery proto-gallery--five">
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-05-11%20at%2021.52.08.png" alt="Estrich CRM 1" loading="lazy" decoding="async"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-05-11%20at%2021.52.50.png" alt="Estrich CRM 2" loading="lazy" decoding="async"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-05-11%20at%2021.53.35.png" alt="Estrich CRM 3" loading="lazy" decoding="async"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-05-11%20at%2021.54.03.png" alt="Estrich CRM 4" loading="lazy" decoding="async"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-05-11%20at%2021.54.29.png" alt="Estrich CRM 5" loading="lazy" decoding="async"></picture>
+        <div class="proto-gallery">
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.07.53.png" alt="Go Gridas Pārskats" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.08.33.png" alt="Go Gridas Padarītais darbs" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.09.53.png" alt="Go Gridas Ienākumi" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.10.49.png" alt="Go Gridas Izdevumi" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.11.53.png" alt="Go Gridas Darbinieki" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.12.56.png" alt="Go Gridas Izmaksas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.13.55.png" alt="Go Gridas Pārskats darbinieki" loading="lazy" decoding="async" width="2880" height="1666"></picture>
         </div>
-        <div id="estr-meta" class="proto-meta">Tīmekļa sistēma, kas ļauj uzskaitīt darbiniekus, reģistrēt darbus un aprēķināt algas — viss vienā vietā, bez izkaisītiem failiem un manuāliem aprēķiniem.</div>
+        <div id="estr-meta" class="proto-meta">Pašmitināta CRM sistēma, kas seko līdzi katram darbam no sākuma līdz izmaksai — kādi darbi veikti, kuros objektos, kuras brigādes, kādi izdevumi un cik katram darbiniekam jāizmaksā.</div>
         <div class="proto-meta-chips">
             <div class="proto-chip proto-chip--medium">
                 <span class="proto-chip-label" id="estr-chip-complexity-label">Implementation complexity</span>
@@ -351,32 +353,32 @@
         </div>
         <div class="proto-copy-grid proto-copy-grid--essentials">
             <div id="estr-copy-5" class="proto-readme">
-                <strong>Kam tas ir piemērots:</strong> Būvniecības uzņēmumiem ar vienu vai vairākām brigādēm, kuriem nepieciešama darbu un izmaksu uzskaite vienā vietā.
+                <strong>Kam tas ir piemērots:</strong> Būvniecības un remonta uzņēmumiem ar vienu vai vairākām brigādēm, kuriem nepieciešama darbu, izmaksu un izmaksu uzskaite vienā vietā.
             </div>
             <div id="estr-copy-6" class="proto-readme">
-                <strong>Kādu problēmu tas atrisina:</strong> Novērš izkaisītu uzskaiti failos un manuālos aprēķinus — viss brigāžu darbs un izdevumi vienā sistēmā.
+                <strong>Kādu problēmu tas atrisina:</strong> Novērš izkaisītu uzskaiti Excel un papīra formā — viss brigāžu darbs, ienākumi, izdevumi un izmaksas vienā sistēmā.
             </div>
         </div>
         <div class="proto-copy-grid proto-copy-grid--details">
             <div id="estr-copy-1" class="proto-readme">
-                <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz darbinieku, brigāžu un izmaksu datus vienuviet, bez ilgas informācijas apkopošanas.
+                <strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz pilnu ainu — padarītos darbus, ienākumus, izdevumus un izmaksas — vienuviet, bez ilgas manuālas apkopošanas.
             </div>
             <div id="estr-copy-2" class="proto-readme">
-                <strong>Biznesa efekts:</strong> Mazāk manuālu kļūdu algu procesos un ātrāka mēneša noslēguma sagatavošana.
+                <strong>Biznesa efekts:</strong> Mazāk manuālu kļūdu algu aprēķinos, ātrāka mēneša noslēguma sagatavošana un pārskatāma katra darbinieka izmaksu vēsture.
             </div>
             <div id="estr-copy-3" class="proto-readme">
-                <strong>Kā tas izskatās ikdienā:</strong> Personāla vadība un grāmatvedība strādā vienā sistēmā, izmantojot vienotus datus un statusus.
+                <strong>Kā tas izskatās ikdienā:</strong> Brigadieris ievada padarīto darbu caur 3-soļu vedni — objekts, darbu veidi, brigādes sastāvs — un izmaksas tiek aprēķinātas automātiski.
             </div>
             <div id="estr-copy-4" class="proto-readme">
-                <strong>Kāpēc tas ir labs ieguldījums:</strong> Sistēmu var paplašināt līdzi uzņēmuma izaugsmei, nemainot visu procesu no jauna.
+                <strong>Kāpēc tas ir labs ieguldījums:</strong> Sistēma darbojas uz sava servera (self-hosted) un to var paplašināt līdzi uzņēmuma izaugsmei, nemainot visu procesu no jauna.
             </div>
         </div>
         <ul class="proto-benefits">
-            <li id="estr-benefit-1">Darbinieku un brigāžu dati vienuviet</li>
-            <li id="estr-benefit-2">Algu aprēķins ar pārskatāmu vēsturi</li>
-            <li id="estr-benefit-3">Lomu piekļuve vadībai un grāmatvedībai</li>
-            <li id="estr-benefit-4">Savienojums ar citiem biznesa rīkiem un programmām</li>
-            <li id="estr-benefit-5">Stabila darbība un uzraudzība</li>
+            <li id="estr-benefit-1">Pārskats — centrālais panelis ar datumu filtriem un kopsavilkumiem</li>
+            <li id="estr-benefit-2">Padarītais darbs — 3-soļu vednis darbu reģistrācijai ar automātisku izmaksu aprēķinu</li>
+            <li id="estr-benefit-3">Ienākumi un izdevumi — visu finanšu plūsmu uzskaite ar kategorijām un kopsummām</li>
+            <li id="estr-benefit-4">Darbinieki un izmaksas — darbinieku katalogs ar kvalifikācijas un ieturējumu uzskaiti, izmaksu izsekošana</li>
+            <li id="estr-benefit-5">Pašmitināta (self-hosted) — Spring Boot + PostgreSQL + nginx, darbojas Docker Compose vidē</li>
         </ul>
     </section>
 
@@ -507,19 +509,19 @@
           tierC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> Lielāka atdeve no esošā zvanu apjoma bez papildu reklāmas budžeta.",
           tierC5: "<strong>Kam tas ir piemērots:</strong> Riepu servisiem, autoservisiem un uzņēmumiem, kas pierakstus pieņem pa tālruni.",
           tierC6: "<strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.",
-          estrTitle: "Darbinieku, brigāžu un algu uzskaites sistēma",
-          estrMeta: "Tīmekļa sistēma, kas ļauj uzskaitīt darbiniekus, reģistrēt darbus un aprēķināt algas — viss vienā vietā, bez izkaisītiem failiem un manuāliem aprēķiniem.",
-          estrB1: "Darbinieku un brigāžu dati vienuviet",
-          estrB2: "Algu aprēķins ar pārskatāmu vēsturi",
-          estrB3: "Lomu piekļuve vadībai un grāmatvedībai",
-          estrB4: "Savienojums ar citiem biznesa rīkiem un programmām",
-          estrB5: "Stabila darbība un uzraudzība",
-          estrC1: "<strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz darbinieku, brigāžu un izmaksu datus vienuviet, bez ilgas informācijas apkopošanas.",
-          estrC2: "<strong>Biznesa efekts:</strong> Mazāk manuālu kļūdu algu procesos un ātrāka mēneša noslēguma sagatavošana.",
-          estrC3: "<strong>Kā tas izskatās ikdienā:</strong> Personāla vadība un grāmatvedība strādā vienā sistēmā, izmantojot vienotus datus un statusus.",
-          estrC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> Sistēmu var paplašināt līdzi uzņēmuma izaugsmei, nemainot visu procesu no jauna.",
-          estrC5: "<strong>Kam tas ir piemērots:</strong> Būvniecības uzņēmumiem ar vienu vai vairākām brigādēm, kuriem nepieciešama darbu un izmaksu uzskaite vienā vietā.",
-          estrC6: "<strong>Kādu problēmu tas atrisina:</strong> Novērš izkaisītu uzskaiti failos un manuālos aprēķinus — viss brigāžu darbs un izdevumi vienā sistēmā.",
+          estrTitle: "Go Gridas — CRM būvniecības un remonta uzņēmumiem",
+          estrMeta: "Pašmitināta CRM sistēma, kas seko līdzi katram darbam no sākuma līdz izmaksai — kādi darbi veikti, kuros objektos, kuras brigādes, kādi izdevumi un cik katram darbiniekam jāizmaksā.",
+          estrB1: "Pārskats — centrālais panelis ar datumu filtriem un kopsavilkumiem",
+          estrB2: "Padarītais darbs — 3-soļu vednis darbu reģistrācijai ar automātisku izmaksu aprēķinu",
+          estrB3: "Ienākumi un izdevumi — visu finanšu plūsmu uzskaite ar kategorijām un kopsummām",
+          estrB4: "Darbinieki un izmaksas — darbinieku katalogs ar kvalifikācijas un ieturējumu uzskaiti, izmaksu izsekošana",
+          estrB5: "Pašmitināta (self-hosted) — Spring Boot + PostgreSQL + nginx, darbojas Docker Compose vidē",
+          estrC1: "<strong>Kāpēc tas atmaksājas biznesam:</strong> Vadība redz pilnu ainu — padarītos darbus, ienākumus, izdevumus un izmaksas — vienuviet, bez ilgas manuālas apkopošanas.",
+          estrC2: "<strong>Biznesa efekts:</strong> Mazāk manuālu kļūdu algu aprēķinos, ātrāka mēneša noslēguma sagatavošana un pārskatāma katra darbinieka izmaksu vēsture.",
+          estrC3: "<strong>Kā tas izskatās ikdienā:</strong> Brigadieris ievada padarīto darbu caur 3-soļu vedni — objekts, darbu veidi, brigādes sastāvs — un izmaksas tiek aprēķinātas automātiski.",
+          estrC4: "<strong>Kāpēc tas ir labs ieguldījums:</strong> Sistēma darbojas uz sava servera (self-hosted) un to var paplašināt līdzi uzņēmuma izaugsmei, nemainot visu procesu no jauna.",
+          estrC5: "<strong>Kam tas ir piemērots:</strong> Būvniecības un remonta uzņēmumiem ar vienu vai vairākām brigādēm, kuriem nepieciešama darbu, izmaksu un izmaksu uzskaite vienā vietā.",
+          estrC6: "<strong>Kādu problēmu tas atrisina:</strong> Novērš izkaisītu uzskaiti Excel un papīra formā — viss brigāžu darbs, ienākumi, izdevumi un izmaksas vienā sistēmā.",
           leadmagTitle: "Bezmaksas lejupielāde: Automatizācijas gatavības kontrolsaraksts MVU",
           leadmagSub: "Praktisks PDF noliktavu, loģistikas un ražošanas komandām, lai novērtētu, kuri procesi ir gatavi automatizācijai.",
           leadmagSubMobile: "Īss PDF, lai ātri saprastu, kuri procesi ir gatavi automatizācijai.",
@@ -572,19 +574,19 @@
           tierC4: "<strong>Почему это хорошая инвестиция:</strong> Выше отдача от текущего потока звонков без дополнительных рекламных затрат.",
           tierC5: "<strong>Для кого подходит:</strong> Для шиномонтажей, автосервисов и компаний с записью по телефону.",
           tierC6: "<strong>Какую проблему решает:</strong> Снижает потерянные звонки, ошибки в записи и пустые окна в расписании.",
-          estrTitle: "Система учёта сотрудников, бригад и зарплаты",
-          estrMeta: "Система для учёта сотрудников, работ по бригадам и расчёта зарплаты в одном месте: меньше ручной работы и меньше путаницы в файлах.",
-          estrB1: "Данные по сотрудникам и бригадам в одной системе",
-          estrB2: "Расчёт зарплаты с прозрачной историей",
-          estrB3: "Ролевой доступ для руководства и бухгалтерии",
-          estrB4: "Подключение к другим бизнес-программам и сервисам",
-          estrB5: "Надёжная работа и контроль доступности",
-          estrC1: "<strong>Почему это выгодно бизнесу:</strong> Руководство видит данные по сотрудникам, бригадам и затратам в одном месте без долгой ручной сводки.",
-          estrC2: "<strong>Бизнес-эффект:</strong> Меньше ручных ошибок в зарплатных процессах и быстрее закрытие месяца.",
-          estrC3: "<strong>Как это выглядит в работе:</strong> Отдел кадров и бухгалтерия работают в одной системе на единых данных и статусах.",
-          estrC4: "<strong>Почему это хорошая инвестиция:</strong> Систему можно расширять по мере роста компании, не меняя всё с нуля.",
-          estrC5: "<strong>Для кого подходит:</strong> Для строительных компаний с одной или несколькими бригадами, которым нужен учёт работ и затрат в одном месте.",
-          estrC6: "<strong>Какую проблему решает:</strong> Убирает разрознённые файлы и ручные расчёты — данные по бригадам, работам и выплатам собраны в одной системе.",
+          estrTitle: "Go Gridas — CRM для строительных и ремонтных компаний",
+          estrMeta: "Собственная CRM-система, которая отслеживает каждую работу от начала до выплаты — какие работы выполнены, на каких объектах, какими бригадами, какие расходы и сколько нужно выплатить каждому сотруднику.",
+          estrB1: "Обзор — центральная панель с фильтрами по датам и сводными итогами",
+          estrB2: "Выполненные работы — 3-шаговый мастер для регистрации работ с автоматическим расчётом выплат",
+          estrB3: "Доходы и расходы — учёт всех финансовых потоков с категориями и итоговыми суммами",
+          estrB4: "Сотрудники и выплаты — каталог сотрудников с учётом квалификации и удержаний, отслеживание выплат",
+          estrB5: "Собственный хостинг (self-hosted) — Spring Boot + PostgreSQL + nginx, работает в Docker Compose",
+          estrC1: "<strong>Почему это выгодно бизнесу:</strong> Руководство видит полную картину — выполненные работы, доходы, расходы и выплаты — в одном месте без долгой ручной сводки.",
+          estrC2: "<strong>Бизнес-эффект:</strong> Меньше ручных ошибок в расчёте зарплат, быстрее закрытие месяца и прозрачная история выплат каждому сотруднику.",
+          estrC3: "<strong>Как это выглядит в работе:</strong> Бригадир вводит выполненную работу через 3-шаговый мастер — объект, виды работ, состав бригады — и выплаты рассчитываются автоматически.",
+          estrC4: "<strong>Почему это хорошая инвестиция:</strong> Система работает на собственном сервере (self-hosted) и может расширяться вместе с ростом компании без перестройки всех процессов.",
+          estrC5: "<strong>Для кого подходит:</strong> Для строительных и ремонтных компаний с одной или несколькими бригадами, которым нужен учёт работ, затрат и выплат в одном месте.",
+          estrC6: "<strong>Какую проблему решает:</strong> Убирает разрознённый учёт в Excel и на бумаге — все работы бригад, доходы, расходы и выплаты в одной системе.",
           leadmagTitle: "Бесплатно: Чеклист готовности к автоматизации для SMB",
           leadmagSub: "Практичный PDF для складских, логистических и производственных команд — чтобы понять, какие процессы готовы к автоматизации.",
           leadmagSubMobile: "Короткий PDF, чтобы быстро понять, какие процессы уже готовы к автоматизации.",
@@ -637,19 +639,19 @@
           tierC4: "<strong>Why this is a strong investment:</strong> Better return from the call volume you already have, without extra ad spend.",
           tierC5: "<strong>Who it fits:</strong> Tire service centers, auto workshops, and businesses that book by phone.",
           tierC6: "<strong>What problem it solves:</strong> It reduces missed calls, booking mistakes, and empty time slots.",
-          estrTitle: "Employee, Crew & Payroll Management System",
-          estrMeta: "A system for tracking employees, crew work, and payroll in one place — instead of scattered files and manual calculations.",
-          estrB1: "Employee and crew data in one place",
-          estrB2: "Payroll workflows with clear history",
-          estrB3: "Role-based access for managers and accounting",
-          estrB4: "Connects with other business tools and software",
-          estrB5: "Reliable operation and uptime monitoring",
-          estrC1: "<strong>Why this pays off:</strong> Leadership sees people and cost data in one place instead of collecting it manually from multiple files.",
-          estrC2: "<strong>Business impact:</strong> Fewer payroll mistakes and faster month-end closing.",
-          estrC3: "<strong>What it looks like in practice:</strong> Staff management and accounting work from the same records and statuses.",
-          estrC4: "<strong>Why this is a strong investment:</strong> The system can grow with the business without rebuilding everything from scratch.",
-          estrC5: "<strong>Who it fits:</strong> Construction businesses with one or multiple crews that need work and cost tracking in one place.",
-          estrC6: "<strong>What problem it solves:</strong> Replaces scattered spreadsheets and manual calculations with one system for crews, jobs, and payroll.",
+          estrTitle: "Go Gridas — CRM for Construction & Renovation Companies",
+          estrMeta: "A self-hosted CRM that tracks every job from start to payout — what work was done, at which property, by which crew, what was spent, what was earned, and what each employee gets paid.",
+          estrB1: "Overview — central dashboard with date-range filtering, summary totals, and tabbed tables across all data types",
+          estrB2: "Work Done — 3-step wizard for recording completed jobs with automatic payout calculation",
+          estrB3: "Income & Expenses — track all financial flows with categories and running totals",
+          estrB4: "Employees & Payouts — employee directory with qualification, deductions, and payout tracking",
+          estrB5: "Self-hosted — Spring Boot + PostgreSQL + nginx, runs in Docker Compose",
+          estrC1: "<strong>Why this pays off:</strong> Management sees the full picture — work done, income, expenses, and payouts — in one place without lengthy manual compilation.",
+          estrC2: "<strong>Business impact:</strong> Fewer payroll calculation mistakes, faster month-end closing, and clear payout history for every employee.",
+          estrC3: "<strong>What it looks like in practice:</strong> The foreman records completed work through a 3-step wizard — property, work types, crew composition — and payouts are calculated automatically.",
+          estrC4: "<strong>Why this is a strong investment:</strong> The system runs on your own server (self-hosted) and can grow with the business without rebuilding everything from scratch.",
+          estrC5: "<strong>Who it fits:</strong> Construction and renovation businesses with one or more crews that need work, cost, and payout tracking in one place.",
+          estrC6: "<strong>What problem it solves:</strong> Replaces scattered Excel sheets and paper records — all crew work, income, expenses, and payouts in one system.",
           leadmagTitle: "Free Download: Automation Readiness Checklist for SMEs",
           leadmagSub: "A practical PDF for warehousing, logistics, and manufacturing teams to assess which processes are ready for automation.",
           leadmagSubMobile: "A short PDF to quickly assess which processes are ready for automation.",
