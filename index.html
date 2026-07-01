@@ -1450,6 +1450,7 @@
         .rc-form-status { display: block; margin: 4px 0 0; font-size: 14px; min-height: 20px; text-align: center; }
         .rc-form-status.is-success { color: #7de8a0; }
         .rc-form-status.is-error { color: #ff9a9a; }
+        .rc-form-status a { color: inherit; text-decoration: underline; }
         .rc-hp { position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden; }
     </style>
     <section id="contact" class="glass section-card reveal">
@@ -1925,15 +1926,26 @@
           return (copy && copy[key]) || fallback;
         }
 
+        var CONTACT_EMAIL = "latvia.robotics@gmail.com";
+        function showError() {
+          status.className = "rc-form-status is-error";
+          var msg = t("contact_error", "Something went wrong sending that. Please try again, or {email}.");
+          var link = '<a href="mailto:' + CONTACT_EMAIL + '">' + t("contact_error_link", "email me directly") + '</a>';
+          if (msg.includes("{email}")) {
+            status.innerHTML = msg.replace("{email}", link);
+          } else {
+            status.textContent = msg;
+          }
+        }
+
         form.addEventListener("submit", function (event) {
           event.preventDefault();
           status.className = "rc-form-status";
           status.textContent = "";
 
           var accessKey = form.querySelector('input[name="access_key"]');
-          if (!accessKey || !accessKey.value || accessKey.value === "2bc7037a-14d8-47df-9866-2a7804e2a575") {
-            status.classList.add("is-error");
-            status.textContent = t("contact_error", "Form is not configured yet.");
+          if (!accessKey || !accessKey.value || accessKey.value === "YOUR_WEB3FORMS_ACCESS_KEY") {
+            showError();
             return;
           }
 
@@ -1955,12 +1967,13 @@
                 status.textContent = t("contact_success", "Thanks — your message is on its way.");
                 form.reset();
               } else {
-                throw new Error("Web3Forms responded with failure");
+                console.error("Web3Forms rejected the submission:", data);
+                showError();
               }
             })
-            .catch(function () {
-              status.classList.add("is-error");
-              status.textContent = t("contact_error", "Something went wrong. Please email me directly.");
+            .catch(function (err) {
+              console.error("Contact form request failed:", err);
+              showError();
             })
             .finally(function () {
               if (submitBtn) {
