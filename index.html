@@ -1448,7 +1448,7 @@
                 <label for="cf-message" data-i18n="contact_message_label">Kāda ir situācija?</label>
                 <textarea id="cf-message" name="message" required data-i18n-placeholder="contact_message_ph" placeholder="piem., Visus pasūtījumus glabājam Excelī, un tas kļūst haotiski…"></textarea>
             </div>
-            <div class="rc-captcha"><div class="h-captcha" data-captcha="true" data-theme="dark"></div></div>
+            <div class="rc-captcha"><div class="h-captcha" data-captcha="true" data-theme="dark" data-hl="lv"></div></div>
             <div class="rc-contact-actions">
                 <button type="submit" class="btn btn-main" data-i18n="contact_send_btn">Nosūtīt</button>
             </div>
@@ -1911,7 +1911,13 @@
 
       var urlLanguage = getLangFromUrl();
       var savedLanguage = localStorage.getItem("preferred-language");
-      applyLanguage(urlLanguage || savedLanguage || "lv");
+      var initialLanguage = urlLanguage || savedLanguage || "lv";
+      if (!languageFiles[initialLanguage]) initialLanguage = "lv";
+      // Pin hCaptcha's language to the site language (not the browser locale)
+      // before Web3Forms' async script renders the widget.
+      var hcaptchaEl = document.querySelector(".h-captcha");
+      if (hcaptchaEl) hcaptchaEl.setAttribute("data-hl", initialLanguage);
+      applyLanguage(initialLanguage);
 
       var isOwnerView = isOwnerCounterEnabled();
       setVisitorCounterVisible(isOwnerView);
