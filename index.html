@@ -37,13 +37,14 @@
     <script>
       var rcTurnstileToken = null;
       var rcTurnstileResolvers = [];
+      var rcTurnstileSitekey = '0x4AAAAAADPZxfkP5kUuvI4Z';
       function rcOnTurnstileToken(token) {
         rcTurnstileToken = token;
         for (var p of rcTurnstileResolvers.splice(0)) { p(token); }
       }
       function rcOnTurnstileLoad() {
         turnstile.render('#cf-turnstile-widget', {
-          sitekey: '0x4AAAAAADPZxfkP5kUuvI4Z',
+          sitekey: rcTurnstileSitekey,
           callback: rcOnTurnstileToken,
           'error-callback': function() { console.debug('Turnstile error'); },
           'expired-callback': function() { rcTurnstileToken = null; }
@@ -602,6 +603,10 @@
           margin: 0 0 18px;
           color: var(--muted);
           max-width: 66ch;
+        }
+
+        #contact .section-sub {
+          max-width: none;
         }
 
         .grid {
@@ -1405,6 +1410,7 @@
         }
         .rc-field textarea { min-height: 120px; resize: vertical; }
         .rc-field input:focus, .rc-field textarea:focus { outline: none; border-color: var(--accent-a); }
+        .rc-captcha { display: flex; justify-content: center; min-height: 78px; }
         .rc-contact-actions { display: flex; justify-content: center; }
         .rc-form-status { display: block; margin: 4px 0 0; font-size: 14px; min-height: 20px; text-align: center; }
         .rc-form-status.is-success { color: #7de8a0; }
@@ -1437,6 +1443,7 @@
                 <label for="cf-message" data-i18n="contact_message_label">Kāda ir situācija?</label>
                 <textarea id="cf-message" name="message" required data-i18n-placeholder="contact_message_ph" placeholder="piem., Visus pasūtījumus glabājam Excelī, un tas kļūst haotiski…"></textarea>
             </div>
+            <div class="rc-captcha"><div class="h-captcha" data-captcha="true"></div></div>
             <div class="rc-contact-actions">
                 <button type="submit" class="btn btn-main" data-i18n="contact_send_btn">Nosūtīt</button>
             </div>
@@ -1939,6 +1946,13 @@
             return;
           }
 
+          var hcaptchaField = form.querySelector('textarea[name="h-captcha-response"]');
+          if (hcaptchaField && !hcaptchaField.value) {
+            status.className = "rc-form-status is-error";
+            status.textContent = t("contact_turnstile", "Please complete the verification and try again.");
+            return;
+          }
+
           var originalLabel = submitBtn ? submitBtn.textContent : "";
           if (submitBtn) {
             submitBtn.disabled = true;
@@ -1970,6 +1984,9 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalLabel || t("contact_send_btn", "Send Message");
               }
+              if (globalThis.hcaptcha && typeof globalThis.hcaptcha.reset === "function") {
+                globalThis.hcaptcha.reset();
+              }
             });
         });
       })();
@@ -1988,5 +2005,6 @@
       });
     })();
 </script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>

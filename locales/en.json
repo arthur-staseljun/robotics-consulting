@@ -132,6 +132,7 @@
   "contact_success": "Thanks — your message is on its way. I'll reply by email soon.",
   "contact_error": "Something went wrong sending that. Please try again, or {email}.",
   "contact_error_link": "email me directly",
+  "contact_turnstile": "Please complete the verification and try again.",
   "leadmag_title": "Free Download: Operational Readiness Checklist for SMEs",
   "leadmag_sub": "A short checklist to help you spot which manual processes are quietly eating the most time — before you spend anything on tools or systems.",
   "leadmag_sub_mobile": "A short checklist to spot which processes are costing you the most time.",

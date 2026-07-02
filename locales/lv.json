@@ -132,6 +132,7 @@
   "contact_success": "Paldies — ziņa ir ceļā. Drīz atbildēšu e-pastā.",
   "contact_error": "Nosūtot radās kļūda. Lūdzu, mēģiniet vēlreiz vai {email}.",
   "contact_error_link": "rakstiet man tieši",
+  "contact_turnstile": "Lūdzu, pabeidziet drošības pārbaudi un mēģiniet vēlreiz.",
   "leadmag_title": "Bezmaksas lejupielāde: Operacionālās gatavības kontrolsaraksts MVU",
   "leadmag_sub": "Īss kontrolsaraksts, kas palīdz ieraudzīt, kuri manuālie procesi klusi apēd visvairāk laika — pirms tērējat naudu rīkiem vai sistēmām.",
   "leadmag_sub_mobile": "Īss kontrolsaraksts, lai ieraudzītu, kuri procesi jums izmaksā visvairāk laika.",
