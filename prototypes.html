@@ -6,6 +6,10 @@
     <title>Automatizācijas piemēri | Robotics Consulting</title>
     <meta name="description" content="Reāli automatizācijas un rīku piemēri maziem un augošiem uzņēmumiem — ar ROI loģiku, sarežģītību un integrācijas piezīmēm aiz katra no tiem.">
     <link rel="canonical" href="https://www.sia-robotics-consulting.eu/prototypes.html">
+    <link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/prototypes.html">
+    <link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=ru">
+    <link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/prototypes.html">
 
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website">
@@ -698,6 +702,31 @@
         if (el) el.innerHTML = value;
       }
 
+      var siteOrigin = "https://www.sia-robotics-consulting.eu";
+      var canonicalPath = "/prototypes.html";
+
+      function langUrl(lang) {
+        return siteOrigin + canonicalPath + (lang === "lv" ? "" : "?lang=" + lang);
+      }
+
+      function getLangFromUrl() {
+        var params = new URLSearchParams(globalThis.location.search || "");
+        var urlLang = params.get("lang");
+        return i18n[urlLang] ? urlLang : null;
+      }
+
+      function syncLangUrl(lang) {
+        var params = new URLSearchParams(globalThis.location.search || "");
+        if (lang === "lv") {
+          params.delete("lang");
+        } else {
+          params.set("lang", lang);
+        }
+        var query = params.toString();
+        var newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+        globalThis.history.replaceState(null, "", newUrl);
+      }
+
       function applyLanguage(lang) {
         var selected = i18n[lang] ? lang : "lv";
         var copy = i18n[selected];
@@ -795,7 +824,14 @@
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
           btn.classList.toggle("active", btn.dataset.lang === selected);
         });
+
+        var canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (canonicalLink) canonicalLink.setAttribute("href", langUrl(selected));
+        var ogUrlMeta = document.querySelector('meta[property="og:url"]');
+        if (ogUrlMeta) ogUrlMeta.setAttribute("content", langUrl(selected));
+
         localStorage.setItem("preferred-language", selected);
+        syncLangUrl(selected);
       }
 
       var images = Array.from(document.querySelectorAll(".proto-gallery img"));
@@ -896,7 +932,7 @@
         applyLanguage(document.documentElement.lang || "lv");
       });
 
-      applyLanguage(localStorage.getItem("preferred-language") || "lv");
+      applyLanguage(getLangFromUrl() || localStorage.getItem("preferred-language") || "lv");
     })();
 </script>
 </body>

@@ -11,6 +11,10 @@
     <meta name="keywords"
           content="business process automation, internal tools, workflow automation, system integrations, small business automation Latvia, procesu automatizācija Rīga, automatizācija maziem uzņēmumiem">
     <link rel="canonical" href="https://www.sia-robotics-consulting.eu/">
+    <link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/">
+    <link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/?lang=ru">
+    <link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/">
 
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website">
@@ -1481,6 +1485,30 @@
       };
       var fallbackLanguage = "lv";
       var languageCache = {};
+      var siteOrigin = "https://www.sia-robotics-consulting.eu";
+      var canonicalPath = "/";
+
+      function langUrl(lang) {
+        return siteOrigin + canonicalPath + (lang === fallbackLanguage ? "" : "?lang=" + lang);
+      }
+
+      function getLangFromUrl() {
+        var params = new URLSearchParams(globalThis.location.search || "");
+        var urlLang = params.get("lang");
+        return languageFiles[urlLang] ? urlLang : null;
+      }
+
+      function syncLangUrl(lang) {
+        var params = new URLSearchParams(globalThis.location.search || "");
+        if (lang === fallbackLanguage) {
+          params.delete("lang");
+        } else {
+          params.set("lang", lang);
+        }
+        var query = params.toString();
+        var newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+        globalThis.history.replaceState(null, "", newUrl);
+      }
       var counterStartConfigPath = "./assets/counter.json";
       var counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
       // rcTurnstileToken, rcTurnstileResolvers, rcOnTurnstileToken defined in <head>
@@ -1754,7 +1782,13 @@
           btn.classList.toggle("active", btn.dataset.lang === selected);
         });
 
+        var canonicalLink = document.querySelector('link[rel="canonical"]');
+        if (canonicalLink) canonicalLink.setAttribute("href", langUrl(selected));
+        var ogUrlMeta = document.querySelector('meta[property="og:url"]');
+        if (ogUrlMeta) ogUrlMeta.setAttribute("content", langUrl(selected));
+
         localStorage.setItem("preferred-language", selected);
+        syncLangUrl(selected);
         });
       }
 
@@ -1881,8 +1915,9 @@
         if (event.key === "Escape" && header && header.classList.contains("menu-open")) closeMenu();
       });
 
+      var urlLanguage = getLangFromUrl();
       var savedLanguage = localStorage.getItem("preferred-language");
-      applyLanguage(savedLanguage || "lv");
+      applyLanguage(urlLanguage || savedLanguage || "lv");
 
       var isOwnerView = isOwnerCounterEnabled();
       setVisitorCounterVisible(isOwnerView);

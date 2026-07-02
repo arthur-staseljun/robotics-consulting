@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.sia-robotics-consulting.eu/</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/"/>
+  </url>
+  <url>
+    <loc>https://www.sia-robotics-consulting.eu/?lang=ru</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/"/>
+  </url>
+  <url>
+    <loc>https://www.sia-robotics-consulting.eu/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/"/>
+  </url>
+  <url>
+    <loc>https://www.sia-robotics-consulting.eu/prototypes.html</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/prototypes.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/prototypes.html"/>
+  </url>
+  <url>
+    <loc>https://www.sia-robotics-consulting.eu/prototypes.html?lang=ru</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/prototypes.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/prototypes.html"/>
+  </url>
+  <url>
+    <loc>https://www.sia-robotics-consulting.eu/prototypes.html?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="lv" href="https://www.sia-robotics-consulting.eu/prototypes.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.sia-robotics-consulting.eu/prototypes.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sia-robotics-consulting.eu/prototypes.html"/>
+  </url>
+</urlset>
