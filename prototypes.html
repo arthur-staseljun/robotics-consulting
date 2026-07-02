@@ -280,9 +280,9 @@
         <div class="top-controls-row">
             <a id="back-link" href="index.html" class="back-link">&larr; Atpakaļ uz galveno lapu</a>
             <div class="lang-switch" aria-label="Language switch">
-                <button class="lang-btn active" type="button" data-lang="lv">LV</button>
-                <button class="lang-btn" type="button" data-lang="ru">RU</button>
-                <button class="lang-btn" type="button" data-lang="en">ENG</button>
+                <button class="lang-btn active" type="button" data-lang="lv" aria-pressed="true">LV</button>
+                <button class="lang-btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
+                <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">ENG</button>
             </div>
         </div>
     </div>
@@ -825,7 +825,9 @@
         });
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
-          btn.classList.toggle("active", btn.dataset.lang === selected);
+          var isActive = btn.dataset.lang === selected;
+          btn.classList.toggle("active", isActive);
+          btn.setAttribute("aria-pressed", String(isActive));
         });
 
         var canonicalLink = document.querySelector('link[rel="canonical"]');

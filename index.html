@@ -1166,9 +1166,9 @@
                 <a href="./prototypes.html?v=2026-05-11-04" data-i18n="nav_prototypes">Piemēri</a>
             </nav>
             <div class="lang-switch" aria-label="Language switch">
-                <button class="lang-btn active" type="button" data-lang="lv">LV</button>
-                <button class="lang-btn" type="button" data-lang="ru">RU</button>
-                <button class="lang-btn" type="button" data-lang="en">ENG</button>
+                <button class="lang-btn active" type="button" data-lang="lv" aria-pressed="true">LV</button>
+                <button class="lang-btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
+                <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">ENG</button>
             </div>
         </div>
     </div>
@@ -1587,7 +1587,8 @@
         });
       }
 
-      function hasConfiguredCounterEndpoint() {        if (typeof counterApiEndpoint !== "string") return false;
+      function hasConfiguredCounterEndpoint() {
+        if (typeof counterApiEndpoint !== "string") return false;
         var endpoint = counterApiEndpoint.trim();
         if (!endpoint) return false;
         if (endpoint.includes("replace-with-your-worker.workers.dev")) return false;
@@ -1773,7 +1774,9 @@
         }
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
-          btn.classList.toggle("active", btn.dataset.lang === selected);
+          var isActive = btn.dataset.lang === selected;
+          btn.classList.toggle("active", isActive);
+          btn.setAttribute("aria-pressed", String(isActive));
         });
 
         var canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -1916,7 +1919,7 @@
       // Pin hCaptcha's language to the site language (not the browser locale)
       // before Web3Forms' async script renders the widget.
       var hcaptchaEl = document.querySelector(".h-captcha");
-      if (hcaptchaEl) hcaptchaEl.setAttribute("data-hl", initialLanguage);
+      if (hcaptchaEl) hcaptchaEl.dataset.hl = initialLanguage;
       applyLanguage(initialLanguage);
 
       var isOwnerView = isOwnerCounterEnabled();
