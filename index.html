@@ -3,6 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      try {
+        if (localStorage.getItem('rc-theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    </script>
     <link rel="icon" type="image/png" href="./assets/Robotics%20Consulting-v5.png">
     <title>Automatizācija un iekšējie rīki maziem uzņēmumiem | Robotics Consulting</title>
     <meta name="description"
@@ -169,7 +176,7 @@
           --topbar-nav-border: #c8d2e4;
           --lang-switch-bg: rgba(255, 255, 255, 0.5);
           --lang-switch-border: #c8d2e4;
-          --lang-btn-active-text: #ffffff;
+          --lang-btn-active-text: #09223e;
           --pill-border: #c8d2e4;
           --pill-color: #1a1e2b;
           --pill-bg: rgba(255, 255, 255, 0.7);
