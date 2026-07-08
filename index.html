@@ -2171,7 +2171,23 @@
         var hc = document.querySelector('.h-captcha');
         if (hc) {
           var isLight = theme === 'light';
-          hc.setAttribute('data-theme', isLight ? 'light' : 'dark');
+          var hcTheme = isLight ? 'light' : 'dark';
+          hc.setAttribute('data-theme', hcTheme);
+          // Once hCaptcha has auto-rendered, changing the attribute alone has no
+          // effect (the theme is baked into the widget's iframe at render time),
+          // so the widget has to be torn down and re-rendered to pick it up.
+          if (hc.dataset.sitekey && globalThis.hcaptcha && typeof globalThis.hcaptcha.render === "function") {
+            try {
+              globalThis.hcaptcha.remove();
+              globalThis.hcaptcha.render(hc, {
+                sitekey: hc.dataset.sitekey,
+                theme: hcTheme,
+                hl: hc.dataset.hl || fallbackLanguage
+              });
+            } catch (error) {
+              console.debug("hCaptcha re-render on theme change failed", error);
+            }
+          }
         }
       }
       if (currentTheme === 'light') setTheme('light');
