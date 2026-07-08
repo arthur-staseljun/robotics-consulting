@@ -1109,15 +1109,19 @@
       var htmlEl = document.documentElement;
 
       function setTheme(theme) {
-        htmlEl.setAttribute("data-theme", theme);
+        htmlEl.dataset.theme = theme;
         if (themeToggleBtn) {
           themeToggleBtn.textContent = theme === "dark" ? "☀️" : "🌙";
         }
-        try { localStorage.setItem("rc-theme", theme); } catch(e) {}
+        try {
+          localStorage.setItem("rc-theme", theme);
+        } catch (e) {
+          console.debug("Theme preference write is unavailable", e);
+        }
       }
 
       function toggleTheme() {
-        var current = htmlEl.getAttribute("data-theme") || "dark";
+        var current = htmlEl.dataset.theme || "dark";
         setTheme(current === "dark" ? "light" : "dark");
       }
 
@@ -1127,7 +1131,11 @@
 
       // Restore saved theme preference
       var savedTheme = null;
-      try { savedTheme = localStorage.getItem("rc-theme"); } catch(e) {}
+      try {
+        savedTheme = localStorage.getItem("rc-theme");
+      } catch (e) {
+        console.debug("Theme preference read is unavailable", e);
+      }
       if (savedTheme === "light" || savedTheme === "dark") {
         setTheme(savedTheme);
       }

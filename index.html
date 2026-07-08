@@ -6,9 +6,11 @@
     <script>
       try {
         if (localStorage.getItem('rc-theme') === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.dataset.theme = 'light';
         }
-      } catch (e) {}
+      } catch (e) {
+        console.debug("Theme preference read is unavailable", e);
+      }
     </script>
     <link rel="icon" type="image/png" href="./assets/Robotics%20Consulting-v5.png">
     <title>Automatizācija un iekšējie rīki maziem uzņēmumiem | Robotics Consulting</title>
@@ -1139,6 +1141,7 @@
 
           .topbar {
             align-items: center;
+            flex-wrap: wrap;
           }
 
           .brand {
@@ -1495,7 +1498,7 @@
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="true" aria-controls="service-card-1-body">
                         <span class="service-toggle-title" data-i18n="services_card_1_title">Operacionālais pārskats</span>
-                        <span class="service-toggle-icon" aria-hidden="true">☕</span>
+                        <span class="service-toggle-icon" aria-hidden="true"></span>
                     </button>
                 </h3>
                 <div id="service-card-1-body" class="service-card-body">
@@ -2160,10 +2163,10 @@
       var currentTheme = localStorage.getItem('rc-theme');
       function setTheme(theme) {
         if (theme === 'light') {
-          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.dataset.theme = 'light';
           if (themeToggleBtn) themeToggleBtn.textContent = '🌙';
         } else {
-          document.documentElement.removeAttribute('data-theme');
+          delete document.documentElement.dataset.theme;
           if (themeToggleBtn) themeToggleBtn.textContent = '☀️';
         }
         localStorage.setItem('rc-theme', theme);
@@ -2172,7 +2175,7 @@
         if (hc) {
           var isLight = theme === 'light';
           var hcTheme = isLight ? 'light' : 'dark';
-          hc.setAttribute('data-theme', hcTheme);
+          hc.dataset.theme = hcTheme;
           // Once hCaptcha has auto-rendered, changing the attribute alone has no
           // effect (the theme is baked into the widget's iframe at render time),
           // so the widget has to be torn down and re-rendered to pick it up.
@@ -2193,7 +2196,7 @@
       if (currentTheme === 'light') setTheme('light');
       if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', function() {
-          var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+          var isLight = document.documentElement.dataset.theme === 'light';
           setTheme(isLight ? 'dark' : 'light');
         });
       }
