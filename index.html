@@ -276,15 +276,34 @@
           display: inline-block;
           position: relative;
         }
-        .soul-underline::after {
-          content: "";
+        .soul-underline-svg {
           position: absolute;
           left: -2px;
           right: -2px;
-          bottom: -2px;
+          bottom: -4px;
+          width: calc(100% + 4px);
           height: 10px;
-          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6' stroke='%23f3ac2d' stroke-width='2.5' fill='none' stroke-linecap='round' opacity='0.5'/%3E%3C/svg%3E") repeat-x bottom / 120px 12px;
+          overflow: visible;
           pointer-events: none;
+        }
+        .soul-underline-svg path {
+          fill: none;
+          stroke: var(--accent-c);
+          stroke-width: 2.5;
+          stroke-linecap: round;
+          opacity: 0.5;
+          stroke-dasharray: 160;
+          stroke-dashoffset: 160;
+          animation: soulDraw 900ms 900ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        @keyframes soulDraw {
+          to { stroke-dashoffset: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .soul-underline-svg path {
+            animation: none;
+            stroke-dashoffset: 0;
+          }
         }
 
         .soul-arrow {
@@ -1099,6 +1118,48 @@
           transform: translateY(0) scale(1);
         }
 
+        .frame-reveal {
+          position: relative;
+        }
+
+        .frame-reveal-svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+          pointer-events: none;
+        }
+
+        .frame-reveal-svg rect {
+          fill: none;
+          stroke: var(--accent-c);
+          stroke-width: 2;
+          opacity: 0.85;
+          stroke-dasharray: var(--dash-length, 1000);
+          stroke-dashoffset: var(--dash-length, 1000);
+        }
+
+        /* Animation is only attached once .in-view lands, not toggled on an
+           already-present property — a fresh animation always starts at its own
+           0%, so there's no race with the element's first paint (unlike a
+           transition, whose start value has to have been painted already). */
+        .frame-reveal.in-view .frame-reveal-svg rect {
+          animation: frameDraw 1900ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+          animation-delay: var(--reveal-delay, 0ms);
+        }
+
+        @keyframes frameDraw {
+          to { stroke-dashoffset: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .frame-reveal-svg rect {
+            animation: none;
+            stroke-dashoffset: 0;
+          }
+        }
+
         footer {
           border-top: 1px solid var(--footer-border);
           padding: 20px 0 32px;
@@ -1436,8 +1497,9 @@
 
 <main class="container">
     <section class="hero reveal">
-        <article class="hero-main glass reveal" style="--reveal-delay: 80ms;">
-            <h1 data-i18n="hero_title">Mazāk rutīnas. Mazāk lietu, kas pazūd starp <span class="soul-underline">pirkstiem</span>.</h1>
+        <article class="hero-main glass frame-reveal" style="--reveal-delay: 80ms;">
+            <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
+            <h1 data-i18n="hero_title">Mazāk rutīnas. Mazāk lietu, kas pazūd starp <span class="soul-underline">pirkstiem<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg></span>.</h1>
             <p class="lead" data-i18n="hero_lead" data-i18n-mobile="hero_lead_mobile">Palīdzu maziem un augošiem uzņēmumiem tikt prom no WhatsApp un Excel ikdienas — veidoju iekšējos rīkus un automatizācijas, kas atkārtoto darbu klusi izdara fonā.</p>
             <div class="cta">
                 <a class="btn btn-main" href="#contact" data-i18n="hero_cta_main">Pieteikt bezmaksas iepazīšanās zvanu</a>
@@ -1445,7 +1507,8 @@
             </div>
         </article>
 
-        <aside class="hero-side glass reveal" style="--reveal-delay: 150ms;">
+        <aside class="hero-side glass frame-reveal" style="--reveal-delay: 750ms;">
+            <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
             <div class="concept-board" aria-label="Automation concept layout">
                 <div class="concept-top">
                     <div class="concept-box">
@@ -1490,7 +1553,8 @@
     </section>
 
     
-    <section id="pakalpojumi" class="glass section-card reveal">
+    <section id="pakalpojumi" class="glass section-card frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="services_title">Kā es palīdzu</h2>
         <p class="section-sub" data-i18n="services_sub" data-i18n-mobile="services_sub_mobile">Daži skaidri veidi, kā strādāt kopā — atkarībā no tā, kur esat iestrēguši.</p>
         <div class="grid grid-3">
@@ -1554,7 +1618,8 @@
         </div>
     </section>
 
-    <section class="cta-box cta-mid reveal" style="margin-top:16px;">
+    <section class="cta-box cta-mid frame-reveal" style="margin-top:16px;">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <div>
             <h2 data-i18n="cta_mid_title">Vēlaties uzzināt, ko vispirms ir vērts labot?</h2>
         </div>
@@ -1563,7 +1628,8 @@
         </div>
     </section>
 
-    <section id="process" class="glass section-card reveal">
+    <section id="process" class="glass section-card frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="process_title">Kā tas notiek</h2>
         <p class="section-sub" data-i18n="process_sub" data-i18n-mobile="process_sub_mobile">No pirmā zvana līdz kaut kam, kas tiešām strādā.</p>
         <p class="swipe-hint" data-i18n="process_swipe_hint">Pavelciet, lai redzētu soļus</p>
@@ -1591,7 +1657,8 @@
         </div>
     </section>
 
-    <section id="tech" class="glass section-card reveal">
+    <section id="tech" class="glass section-card frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="tech_title">Kam es palīdzu</h2>
         <p class="section-sub" data-i18n="tech_sub" data-i18n-mobile="tech_sub_mobile">Vislabāk strādāju ar augošiem uzņēmumiem, kur daudz kas vēl balstās uz manuāliem soļiem, pusē atcerētiem procesiem un rīkiem, kas savā starpā nesarunājas.</p>
         <ul class="services-list">
@@ -1602,7 +1669,8 @@
         </ul>
     </section>
 
-    <section id="faq" class="glass section-card reveal">
+    <section id="faq" class="glass section-card frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="faq_title">Biežāk uzdotie jautājumi</h2>
         <p class="section-sub" data-i18n="faq_sub" data-i18n-mobile="faq_sub_mobile">Īsti jautājumi, ko man uzdod mazie uzņēmumi, sperot pirmos soļus ar rīkiem vai automatizāciju.</p>
         <div class="grid grid-2" style="gap:12px;">
@@ -1629,7 +1697,8 @@
         </div>
     </section>
 
-    <div class="leadmag-box reveal">
+    <div class="leadmag-box frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <div class="leadmag-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f3ac2d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
         <div class="leadmag-text">
             <h3 data-i18n="leadmag_title">Bezmaksas lejupielāde: Operacionālās gatavības kontrolsaraksts MVU</h3>
@@ -1640,7 +1709,8 @@
            download data-i18n="leadmag_btn">Lejupielādēt bezmaksas kontrolsarakstu</a>
     </div>
 
-    <section class="cta-box reveal">
+    <section class="cta-box frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <div>
             <h2 data-i18n="cta_title" data-i18n-mobile="cta_title_mobile">Neesat pārliecināti, ar ko sākt?</h2>
             <p data-i18n="cta_sub" data-i18n-mobile="cta_sub_mobile">Ar vienu īsu zvanu man parasti pietiek, lai saprastu jūsu situāciju un ieteiktu saprātīgu pirmo soli.</p>
@@ -1668,7 +1738,8 @@
         .rc-form-status a { color: inherit; text-decoration: underline; }
         .rc-hp { position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden; }
     </style>
-    <section id="contact" class="glass section-card reveal">
+    <section id="contact" class="glass section-card frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="contact_title">Pieteikt bezmaksas iepazīšanās zvanu</h2>
         <p class="section-sub" data-i18n="contact_sub">Atstājiet savu kontaktu un pastāstiet, ar ko saskaraties — atbildēšu e-pastā, lai norunātu īsu zvanu.</p>
         <form id="contact-form" class="rc-contact-form" novalidate>
@@ -1725,6 +1796,26 @@
       };
       var fallbackLanguage = "lv";
       var languageCache = {};
+      var heroUnderlineWords = { lv: "pirkstiem", en: "cracks", ru: "по пути" };
+      var soulUnderlineSvg = '<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg>';
+
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+
+      function renderHeroTitle(node, text, lang) {
+        var word = heroUnderlineWords[lang];
+        var idx = word ? text.indexOf(word) : -1;
+        if (idx === -1) {
+          node.textContent = text;
+          return;
+        }
+        var before = escapeHtml(text.slice(0, idx));
+        var after = escapeHtml(text.slice(idx + word.length));
+        node.innerHTML = before + '<span class="soul-underline">' + escapeHtml(word) + soulUnderlineSvg + "</span>" + after;
+      }
       var siteOrigin = "https://www.sia-robotics-consulting.eu";
       var canonicalPath = "/";
 
@@ -1992,7 +2083,12 @@
 
         document.querySelectorAll("[data-i18n]").forEach(function (node) {
           var key = node.dataset.i18n;
-          if (Object.hasOwn(copy, key)) node.textContent = copy[key];
+          if (!Object.hasOwn(copy, key)) return;
+          if (key === "hero_title") {
+            renderHeroTitle(node, copy[key], selected);
+          } else {
+            node.textContent = copy[key];
+          }
         });
 
         document.querySelectorAll("[data-i18n-placeholder]").forEach(function (node) {
@@ -2292,6 +2388,51 @@
               }
             });
         });
+      })();
+
+      (function initFrameReveal() {
+        var cards = document.querySelectorAll(".frame-reveal");
+        if (!cards.length) return;
+        var reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function sizeFrame(card) {
+          var svg = card.querySelector(".frame-reveal-svg");
+          var rect = svg && svg.querySelector("rect");
+          if (!rect) return;
+          var w = card.clientWidth;
+          var h = card.clientHeight;
+          svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+          var inset = 1;
+          rect.setAttribute("x", inset);
+          rect.setAttribute("y", inset);
+          rect.setAttribute("width", Math.max(0, w - inset * 2));
+          rect.setAttribute("height", Math.max(0, h - inset * 2));
+          rect.setAttribute("rx", Number.parseFloat(getComputedStyle(card).borderTopLeftRadius) || 20);
+          rect.style.setProperty("--dash-length", rect.getTotalLength());
+        }
+
+        cards.forEach(sizeFrame);
+
+        if (typeof ResizeObserver === "function") {
+          var resizeObserver = new ResizeObserver(function (entries) {
+            entries.forEach(function (entry) { sizeFrame(entry.target); });
+          });
+          cards.forEach(function (card) { resizeObserver.observe(card); });
+        }
+
+        if (reduceMotion) {
+          cards.forEach(function (card) { card.classList.add("in-view"); });
+          return;
+        }
+
+        var frameObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("in-view");
+            frameObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
+        cards.forEach(function (card) { frameObserver.observe(card); });
       })();
 
       if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
