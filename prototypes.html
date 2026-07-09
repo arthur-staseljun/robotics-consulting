@@ -1,8 +1,17 @@
 <!doctype html>
-<html lang="lv" data-theme="dark">
+<html lang="lv" data-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      try {
+        if (localStorage.getItem('rc-theme') === 'dark') {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      } catch (e) {
+        console.debug("Theme preference read is unavailable", e);
+      }
+    </script>
     <title>Automatizācijas piemēri | Robotics Consulting</title>
     <meta name="description" content="Reāli automatizācijas un rīku piemēri maziem un augošiem uzņēmumiem — ar ROI loģiku, sarežģītību un integrācijas piezīmēm aiz katra no tiem.">
     <link rel="canonical" href="https://www.sia-robotics-consulting.eu/prototypes.html">
@@ -449,7 +458,7 @@
                     <button class="lang-btn" type="button" data-lang="ru" aria-pressed="false">RU</button>
                     <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">ENG</button>
                 </div>
-                <button class="theme-toggle" id="theme-toggle-btn" type="button" aria-label="Toggle theme">☀️</button>
+                <button class="theme-toggle" id="theme-toggle-btn" type="button" aria-label="Toggle theme">🌙</button>
             </div>
         </div>
     </div>
