@@ -1008,7 +1008,8 @@
           border: 1px solid var(--pricing-border);
           background: var(--pricing-bg);
           display: flex;
-          gap: 10px;
+          column-gap: 10px;
+          row-gap: 2px;
           flex-wrap: wrap;
           align-items: center;
           font-size: 13px;
@@ -1575,9 +1576,8 @@
                         <li class="mobile-hide-on-phone" data-i18n="services_card_1_i5">Skaidri nākamie soļi</li>
                     </ul>
                     <div class="service-pricing">
-                        <span class="price-main" data-i18n="services_card_1_price">Elastīgi — pielāgots jūsu mērogam</span>
-                        <span class="price-meta mobile-hide-on-phone" data-i18n="services_card_1_scope">Fiksēts darba apjoms</span>
-                        <span class="price-meta mobile-hide-on-phone" data-i18n="services_card_1_duration">1–2 nedēļas</span>
+                        <span class="price-main" data-i18n="services_card_1_price">Bezmaksas audīts</span>
+                        <span class="price-meta mobile-hide-on-phone" data-i18n="services_card_1_scope">Pirmais prototips 2–3 dienās</span>
                     </div>
                 </div>
             </article>
@@ -1737,6 +1737,8 @@
         .rc-form-status.is-error { color: #ff9a9a; }
         .rc-form-status a { color: inherit; text-decoration: underline; }
         .rc-hp { position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden; }
+        .rc-contact-alt { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 16px auto 0; max-width: 640px; font-size: 14px; color: var(--muted); }
+        .rc-contact-alt .btn { padding: 9px 16px; min-height: 40px; }
     </style>
     <section id="contact" class="glass section-card frame-reveal">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
@@ -1771,6 +1773,13 @@
             </div>
             <output class="rc-form-status" id="contact-status"></output>
         </form>
+        <div class="rc-contact-alt">
+            <span data-i18n="contact_or">vai</span>
+            <a class="btn btn-alt frame-reveal" href="https://wa.me/37126843654" target="_blank" rel="noopener">
+                <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
+                <span data-i18n="contact_whatsapp_btn">Rakstiet WhatsApp</span>
+            </a>
+        </div>
     </section>
 </main>
 
