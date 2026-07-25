@@ -42,7 +42,7 @@
     <meta name="twitter:title" content="Automatizācija un iekšējie rīki maziem uzņēmumiem | Robotics Consulting">
     <meta name="twitter:description" content="Veidoju rīkus un integrācijas, kas palīdz augošiem uzņēmumiem tikt prom no WhatsApp, Excel un papīra — mazāk manuālā darba, mazāk kļūdu.">
     <meta name="twitter:image" content="https://www.sia-robotics-consulting.eu/assets/og-image.png">
-    <link rel="preload" as="image" href="./assets/Robotics%20Consulting-v5.png" fetchpriority="high">
+    <link rel="preload" as="image" href="./assets/Robotics%20Consulting-v5.webp" type="image/webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
@@ -1450,18 +1450,26 @@
     </script>
     <!-- Meta Pixel -->
     <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1264801605722112');
-        fbq('track', 'PageView');
+        (function (f, b, e, v) {
+            if (f.fbq) return;
+            var n = f.fbq = function () {
+                n.callMethod ? n.callMethod(...arguments) : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = true;
+            n.version = "2.0";
+            n.queue = [];
+            var t = b.createElement(e);
+            t.async = true;
+            t.src = v;
+            var s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+        })(globalThis, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+        fbq("init", "1264801605722112");
+        fbq("track", "PageView");
     </script>
-    <noscript><img height="1" width="1" style="display:none"
+    <noscript><img height="1" width="1" style="display:none" alt=""
         src="https://www.facebook.com/tr?id=1264801605722112&ev=PageView&noscript=1"
     /></noscript>
     <script type="application/ld+json">
@@ -1495,7 +1503,10 @@
 <header>
     <div class="container topbar">
         <div class="brand">
-            <img src="./assets/Robotics%20Consulting-v5.png" alt="Robotics Consulting logo" loading="eager" fetchpriority="high" decoding="async" width="1536" height="1024">
+            <picture>
+                <source srcset="./assets/Robotics%20Consulting-v5.webp" type="image/webp">
+                <img src="./assets/Robotics%20Consulting-v5.png" alt="Robotics Consulting logo" loading="eager" fetchpriority="high" decoding="async" width="1040" height="693">
+            </picture>
         </div>
         <div class="header-actions">
             <nav class="mini-nav">
@@ -1782,8 +1793,7 @@
                 <label for="cf-message" data-i18n="contact_message_label">Kāda ir situācija?</label>
                 <textarea id="cf-message" name="message" required data-i18n-placeholder="contact_message_ph" placeholder="piem., Visus pasūtījumus glabājam Excelī, un tas kļūst haotiski…"></textarea>
             </div>
-            <!-- hCaptcha disabled (too hard for users). Re-enable by uncommenting: -->
-            <!-- <div class="rc-captcha"><div class="h-captcha" data-captcha="true" data-theme="dark" data-hl="lv"></div></div> -->
+            <!-- hCaptcha disabled (too hard for users) -->
             <div class="rc-contact-actions">
                 <button type="submit" class="btn btn-main" data-i18n="contact_send_btn">Nosūtīt</button>
             </div>
