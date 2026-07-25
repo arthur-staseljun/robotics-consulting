@@ -1448,6 +1448,22 @@
 
         gtag('config', 'AW-18116557749');
     </script>
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1264801605722112');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1264801605722112&ev=PageView&noscript=1"
+    /></noscript>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -1553,7 +1569,7 @@
         </aside>
     </section>
 
-    
+
     <section id="pakalpojumi" class="glass section-card frame-reveal">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="services_title">Kā es palīdzu</h2>
@@ -1775,7 +1791,7 @@
         </form>
         <div class="rc-contact-alt">
             <span data-i18n="contact_or">vai</span>
-            <a class="btn btn-alt frame-reveal" href="https://wa.me/37126843654" target="_blank" rel="noopener">
+            <a id="whatsapp-contact-link" class="btn btn-alt frame-reveal" href="https://wa.me/37126843654" target="_blank" rel="noopener">
                 <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
                 <span data-i18n="contact_whatsapp_btn">Rakstiet WhatsApp</span>
             </a>
@@ -2344,6 +2360,14 @@
           }
         }
 
+        var whatsappLink = document.getElementById("whatsapp-contact-link");
+        if (whatsappLink) {
+          whatsappLink.addEventListener("click", function () {
+            if (typeof fbq === "function") fbq("track", "Contact");
+            if (typeof gtag === "function") gtag("event", "generate_lead", { method: "whatsapp" });
+          });
+        }
+
         form.addEventListener("submit", function (event) {
           event.preventDefault();
           status.className = "rc-form-status";
@@ -2379,6 +2403,8 @@
                 status.classList.add("is-success");
                 status.textContent = t("contact_success", "Thanks — your message is on its way.");
                 form.reset();
+                if (typeof fbq === "function") fbq("track", "Lead");
+                if (typeof gtag === "function") gtag("event", "generate_lead");
               } else {
                 console.error("Web3Forms rejected the submission:", data);
                 showError();
