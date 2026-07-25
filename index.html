@@ -918,6 +918,43 @@
           color: var(--muted);
         }
 
+        .work-strip {
+          display: flex;
+          gap: 10px;
+          margin-top: 14px;
+        }
+
+        .work-strip a {
+          display: block;
+          flex: 1 1 0;
+          min-width: 0;
+          border-radius: 10px;
+          overflow: hidden;
+          border: 1px solid var(--panel-border);
+          transition: 160ms ease;
+        }
+
+        .work-strip a:hover { transform: translateY(-2px); }
+
+        .work-strip img {
+          display: block;
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+          object-position: top center;
+          background: var(--panel-bg);
+          filter: saturate(0.45) brightness(0.9);
+          transition: filter 160ms ease;
+        }
+
+        .work-strip a:hover img {
+          filter: saturate(1) brightness(1);
+        }
+
+        @media (max-width: 480px) {
+          .work-strip img { height: 90px; }
+        }
+
         .faq-toggle {
           width: 100%;
           border: 0;
@@ -1532,6 +1569,11 @@
             <div class="cta">
                 <a class="btn btn-main" href="#contact" data-i18n="hero_cta_main">Pieteikt bezmaksas iepazīšanās zvanu</a>
                 <a class="btn btn-alt" href="./prototypes.html?v=2026-05-11-04" data-i18n="hero_cta_alt">Skatīt piemērus</a>
+            </div>
+            <div class="work-strip">
+                <a href="./prototypes.html?v=2026-05-11-04#gogridas-crm"><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2017.49.26.png" alt="Go Gridas CRM" loading="lazy" decoding="async"></a>
+                <a href="./prototypes.html?v=2026-05-11-04#expense-tracker"><img src="./assets/prototypes/expense-tracker/1.jpeg" alt="Izdevumu uzskaites aplikācija" loading="lazy" decoding="async"></a>
+                <a href="./prototypes.html?v=2026-05-11-04#tier-scheduler"><img src="./assets/prototypes/tier-scheduler/1.jpeg" alt="Riepu servisa pieraksts" loading="lazy" decoding="async"></a>
             </div>
         </article>
 
