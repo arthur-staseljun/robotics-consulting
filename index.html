@@ -12,7 +12,10 @@
         console.debug("Theme preference read is unavailable", e);
       }
     </script>
-    <link rel="icon" type="image/png" href="./assets/Robotics%20Consulting-v5.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png">
+    <link rel="icon" href="./assets/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
     <title>Automatizācija un iekšējie rīki maziem uzņēmumiem | Robotics Consulting</title>
     <meta name="description"
           content="Veidoju rīkus un integrācijas, kas palīdz augošiem uzņēmumiem tikt prom no WhatsApp, Excel un papīra — mazāk manuālā darba, mazāk kļūdu. Bāzēts Rīgā, strādāju visā Eiropā.">
@@ -42,7 +45,7 @@
     <meta name="twitter:title" content="Automatizācija un iekšējie rīki maziem uzņēmumiem | Robotics Consulting">
     <meta name="twitter:description" content="Veidoju rīkus un integrācijas, kas palīdz augošiem uzņēmumiem tikt prom no WhatsApp, Excel un papīra — mazāk manuālā darba, mazāk kļūdu.">
     <meta name="twitter:image" content="https://www.sia-robotics-consulting.eu/assets/og-image.png">
-    <link rel="preload" as="image" href="./assets/Robotics%20Consulting-v5.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="./assets/robotics-consulting-logo.webp" type="image/webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
@@ -378,7 +381,7 @@
         }
 
         .brand img {
-          width: 345px;
+          width: 104px;
           height: auto;
           object-fit: contain;
           border-radius: 0;
@@ -386,6 +389,11 @@
           padding: 0;
           display: block;
         }
+
+        .brand .logo-light { display: none; }
+
+        [data-theme="light"] .brand .logo-dark { display: none; }
+        [data-theme="light"] .brand .logo-light { display: block; }
 
         .mini-nav {
           display: flex;
@@ -1224,7 +1232,7 @@
           .hero-main, .hero-side { padding: 24px; }
           h1 { max-width: 100%; }
           .concept-top, .concept-mid { grid-template-columns: 1fr; }
-          .brand img { width: min(270px, 70vw); height: auto; }
+          .brand img { width: min(83px, 22vw); height: auto; }
           .center-orb { min-height: 94px; }
           .orb-main { font-size: 32px; }
           .concept-bottom { font-size: 14px; }
@@ -1249,7 +1257,7 @@
           }
 
           .brand img {
-            width: min(220px, 62vw);
+            width: min(68px, 19vw);
           }
 
           .header-actions {
@@ -1516,8 +1524,8 @@
       "name": "Robotics Consulting",
       "legalName": "SIA Robotics Consulting",
       "url": "https://www.sia-robotics-consulting.eu/",
-      "logo": "https://www.sia-robotics-consulting.eu/assets/Robotics%20Consulting-v5.png",
-      "image": "https://www.sia-robotics-consulting.eu/assets/Robotics%20Consulting-v5.png",
+      "logo": "https://www.sia-robotics-consulting.eu/assets/robotics-consulting-icon.png",
+      "image": "https://www.sia-robotics-consulting.eu/assets/robotics-consulting-icon.png",
       "description": "Automation and internal tools for small and growing businesses — cutting repetitive manual work and connecting the tools you already use.",
       "email": "latvia.robotics@gmail.com",
       "priceRange": "€€",
@@ -1540,9 +1548,13 @@
 <header>
     <div class="container topbar">
         <div class="brand">
-            <picture>
-                <source srcset="./assets/Robotics%20Consulting-v5.webp" type="image/webp">
-                <img src="./assets/Robotics%20Consulting-v5.png" alt="Robotics Consulting logo" loading="eager" fetchpriority="high" decoding="async" width="1040" height="693">
+            <picture class="logo-dark">
+                <source srcset="./assets/robotics-consulting-logo.webp" type="image/webp">
+                <img src="./assets/robotics-consulting-logo.png" alt="Robotics Consulting logo" loading="eager" fetchpriority="high" decoding="async" width="803" height="886">
+            </picture>
+            <picture class="logo-light">
+                <source srcset="./assets/robotics-consulting-logo-light.webp" type="image/webp">
+                <img src="./assets/robotics-consulting-logo-light.png" alt="Robotics Consulting logo" loading="eager" fetchpriority="high" decoding="async" width="638" height="709">
             </picture>
         </div>
         <div class="header-actions">
