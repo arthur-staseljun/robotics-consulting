@@ -2220,7 +2220,11 @@
         var ogUrlMeta = document.querySelector('meta[property="og:url"]');
         if (ogUrlMeta) ogUrlMeta.setAttribute("content", langUrl(selected));
 
-        localStorage.setItem("preferred-language", selected);
+        try {
+          localStorage.setItem("preferred-language", selected);
+        } catch (error) {
+          console.debug("Preferred-language write is unavailable", error);
+        }
         syncLangUrl(selected);
         });
       }
@@ -2350,7 +2354,12 @@
 
       // Theme toggle
       var themeToggleBtn = document.getElementById('theme-toggle-btn');
-      var currentTheme = localStorage.getItem('rc-theme');
+      var currentTheme = null;
+      try {
+        currentTheme = localStorage.getItem('rc-theme');
+      } catch (error) {
+        console.debug("Theme preference read is unavailable", error);
+      }
       function setTheme(theme) {
         if (theme === 'light') {
           document.documentElement.dataset.theme = 'light';
@@ -2359,7 +2368,11 @@
           delete document.documentElement.dataset.theme;
           if (themeToggleBtn) themeToggleBtn.textContent = '☀️';
         }
-        localStorage.setItem('rc-theme', theme);
+        try {
+          localStorage.setItem('rc-theme', theme);
+        } catch (error) {
+          console.debug("Theme preference write is unavailable", error);
+        }
         // Sync hCaptcha if present
         var hc = document.querySelector('.h-captcha');
         if (hc) {
@@ -2392,7 +2405,12 @@
       }
 
       var urlLanguage = getLangFromUrl();
-      var savedLanguage = localStorage.getItem("preferred-language");
+      var savedLanguage = null;
+      try {
+        savedLanguage = localStorage.getItem("preferred-language");
+      } catch (error) {
+        console.debug("Preferred-language read is unavailable", error);
+      }
       var initialLanguage = urlLanguage || savedLanguage || "lv";
       if (!languageFiles[initialLanguage]) initialLanguage = "lv";
       // Pin hCaptcha's language to the site language (not the browser locale)
