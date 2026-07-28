@@ -210,6 +210,17 @@
         #gogridas-crm .proto-gallery picture { align-items: flex-start; }
         #gogridas-crm .proto-gallery img { height: 140px; }
         .proto-gallery img:hover { transform: translateY(-2px); }
+
+        /* The screens that show what the owner gets out of the system, as opposed to
+           how data is entered — deliberately larger, so the figures are readable. */
+        .proto-subhead { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--proto-meta-color); margin: 22px 0 12px; }
+        .proto-gallery--value { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 20px; }
+        .proto-gallery--value figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+        .proto-gallery--value picture { display: block; }
+        /* 2x2: the two money reports on top, the two operational ones below.
+           Fixed height keeps the captions on a common baseline. */
+        #gogridas-crm .proto-gallery--value img { max-width: none; width: 100%; height: 290px; object-fit: cover; object-position: center top; }
+        .proto-gallery--value figcaption { color: var(--proto-meta-color); font-size: 14px; line-height: 1.5; }
         .proto-meta { color: var(--proto-meta-color); font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
         .proto-copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 18px; }
         .proto-benefits { margin: 0 0 16px 0; padding-left: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 20px; }
@@ -354,6 +365,7 @@
           .proto-gallery--five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
           .proto-gallery--five img { height: 240px; }
           #gogridas-crm .proto-gallery img { height: 130px; }
+          #gogridas-crm .proto-gallery--value img { height: 240px; }
         }
         @media (max-width: 960px) {
           .top-controls { position: static; backdrop-filter: none; }
@@ -380,12 +392,20 @@
           .proto-section {
             display: grid;
           }
+          /* Explicit order for every direct child: anything left at the default 0
+             would jump above these. Numbered with gaps so the value block and its
+             heading stay glued together, ahead of the day-to-day gallery. */
           .proto-section > h2 { order: 1; }
           .proto-section > .proto-meta { order: 2; margin-bottom: 14px; }
           .proto-section > .proto-meta-chips { order: 3; }
-          .proto-section > .proto-gallery { order: 4; }
-          .proto-section > .proto-copy-grid { order: 5; }
-          .proto-section > .proto-benefits { order: 6; }
+          .proto-section > #estr-value-head { order: 4; }
+          /* Doubled class on purpose: this element also matches the plain
+             .proto-gallery rule below, which would otherwise win on source order. */
+          .proto-section > .proto-gallery.proto-gallery--value { order: 5; }
+          .proto-section > #estr-daily-head { order: 6; }
+          .proto-section > .proto-gallery { order: 7; }
+          .proto-section > .proto-copy-grid { order: 8; }
+          .proto-section > .proto-benefits { order: 9; }
           .proto-gallery {
             flex-wrap: nowrap;
             overflow-x: auto;
@@ -410,6 +430,15 @@
           .proto-gallery--five { display: flex; grid-template-columns: none; }
           .proto-gallery--five img { height: auto; max-height: 260px; }
           #gogridas-crm .proto-gallery img { max-height: 140px; }
+          /* Same horizontal snap-scroller as the other galleries on narrow screens,
+             just wider cards so the caption under each one still reads. */
+          .proto-gallery.proto-gallery--value { display: flex; grid-template-columns: none; }
+          .proto-gallery--value figure {
+            flex: 0 0 min(80vw, 300px);
+            width: min(80vw, 300px);
+            scroll-snap-align: start;
+          }
+          #gogridas-crm .proto-gallery--value img { height: 170px; }
           #page-title { max-width: 100%; }
           .lightbox-close {
             position: fixed;
@@ -511,14 +540,58 @@
     <section id="gogridas-crm" class="proto-section">
         <h2 id="estr-title">Go Gridas — CRM būvniecības un remonta uzņēmumiem</h2>
         <p id="gallery-hint-estr" class="swipe-hint gallery-swipe-hint">Pavelciet, lai skatītu ekrānus</p>
+
+        <h3 class="proto-subhead" id="estr-value-head">Ko īpašnieks redz</h3>
+        <p class="proto-lead" id="estr-value-lead">Vairums mazo uzņēmumu vadās pēc sajūtas: šķiet, ka Rīgā darba visvairāk, ka viena brigāde strādā labāk, ka materiāls izmaksā apmēram tik. Kamēr skaitļi ir galvā un uz papīra, tos nevar pārbaudīt. Šie četri pārskati salasās paši no ikdienas datiem un atbild uz jautājumiem, uz kuriem citādi atbild minējums.</p>
+        <div class="proto-gallery proto-gallery--value">
+            <figure>
+                <picture>
+                    <source srcset="./assets/prototypes/estrich/gogridas-value-profitability.webp" type="image/webp">
+                    <img src="./assets/prototypes/estrich/gogridas-value-profitability.png" alt="Go Gridas rentabilitāte pa pilsētām" loading="lazy" decoding="async" width="1600" height="852">
+                </picture>
+                <figcaption>
+                    <strong class="value-q" id="estr-value-q-1">Kur nauda tiešām nopelnās?</strong>
+                    <span id="estr-value-t-1">Apgrozījums viens pats neko nepasaka. Rīgā 41 darbs dod 29.5% rentabilitāti, Jūrmalā 7 darbi — 21.9%. Kamēr šie skaitļi nav atdalīti, reklāmas budžets un laiks tiek dalīts akli. Ar sadalījumu redzams, kur ir vērts spiest vairāk, kur celt cenu un kur labāk atteikties.</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <picture>
+                    <source srcset="./assets/prototypes/estrich/gogridas-value-cashflow.webp" type="image/webp">
+                    <img src="./assets/prototypes/estrich/gogridas-value-cashflow.png" alt="Go Gridas naudas plūsma pa mēnešiem" loading="lazy" decoding="async" width="1600" height="852">
+                </picture>
+                <figcaption>
+                    <strong class="value-q" id="estr-value-q-2">Vai nākamajā mēnesī pietiks naudas?</strong>
+                    <span id="estr-value-t-2">Peļņa uz papīra un nauda kontā nav viens un tas pats. Februārī pie 22 156 € ieplūdes izmaksas darbiniekiem bija 34 881 € — gandrīz 15 000 € mīnusā vienā mēnesī. Galvā tādu bedri nepamana, kamēr nav ar ko samaksāt. Sadalīts pa mēnešiem, iztrūkums redzams laikus: var pārcelt iepirkumu, prasīt avansu vai neņemt objektu tieši tajā brīdī.</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <picture>
+                    <source srcset="./assets/prototypes/estrich/gogridas-value-productivity.webp" type="image/webp">
+                    <img src="./assets/prototypes/estrich/gogridas-value-productivity.png" alt="Go Gridas darbinieku produktivitāte" loading="lazy" decoding="async" width="1600" height="852">
+                </picture>
+                <figcaption>
+                    <strong class="value-q" id="estr-value-q-3">Kurš tur uzņēmumu uz pleciem?</strong>
+                    <span id="estr-value-t-3">Īpašnieks parasti atceras, kurš ir labs darbinieks, bet neatceras skaitļus. Kad izstrāde un izmaksātais ir blakus, prēmijas pārstāj būt attiecību jautājums: redzams, kuru var piekraut vairāk, kuram vajag palīdzēt un vai tiešām vajag jaunu cilvēku — varbūt pietiek pārdalīt slodzi.</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <picture>
+                    <source srcset="./assets/prototypes/estrich/gogridas-value-materials.webp" type="image/webp">
+                    <img src="./assets/prototypes/estrich/gogridas-value-materials.png" alt="Go Gridas iztērētie materiāli" loading="lazy" decoding="async" width="1600" height="852">
+                </picture>
+                <figcaption>
+                    <strong class="value-q" id="estr-value-q-4">Cik materiāla pirkt nākamajai sezonai?</strong>
+                    <span id="estr-value-t-4">541 ieraksts par 12 materiālu veidiem 74 objektos — to galvā nenoturēs neviens. Kad patēriņš ir piesaistīts darba veidam un platībai, sezonas iepirkumu var izrēķināt, nevis uzminēt: mazāk naudas iesaldēts noliktavā un mazāk apstāšanos tāpēc, ka materiāls beidzies objekta vidū.</span>
+                </figcaption>
+            </figure>
+        </div>
+
+        <h3 class="proto-subhead" id="estr-daily-head">Ikdienas darbs sistēmā</h3>
+        <p class="proto-lead" id="estr-daily-lead">Neviens no šiem pārskatiem nav atsevišķs darbs. Tie salasās no tā paša, ko brigāde jebkurā gadījumā pieraksta: kāds darbs, cik kvadrātmetru, kāda likme, kurš strādāja. Dati tiek ievadīti vienreiz — turpat, kur darbs notiek — un paši saskaitās pārskatos.</p>
         <div class="proto-gallery">
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.07.53.png" alt="Go Gridas Pārskats" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.08.33.png" alt="Go Gridas Padarītais darbs" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.09.53.png" alt="Go Gridas Ienākumi" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.10.49.png" alt="Go Gridas Izdevumi" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.11.53.png" alt="Go Gridas Darbinieki" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.12.56.png" alt="Go Gridas Izmaksas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.13.55.png" alt="Go Gridas Pārskats darbinieki" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.11.53.png" alt="Go Gridas padarītā darba detaļas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.12.56.png" alt="Go Gridas brigādes informācija un izmaksas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.07.53.png" alt="Go Gridas pārskats" loading="lazy" decoding="async" width="2880" height="1666"></picture>
         </div>
         <div id="estr-meta" class="proto-meta">Pašmitināta CRM sistēma, kas seko līdzi katram darbam no sākuma līdz izmaksai — kādi darbi veikti, kuros objektos, kuras brigādes, kādi izdevumi un cik katram darbiniekam jāizmaksā.</div>
         <div class="proto-meta-chips">
@@ -751,6 +824,12 @@
           tierC6: "<strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.",
           estrTitle: "Go Gridas — CRM būvniecības un remonta uzņēmumiem",
           estrMeta: "Pašmitināta CRM sistēma, kas seko līdzi katram darbam no sākuma līdz izmaksai — kādi darbi veikti, kuros objektos, kuras brigādes, kādi izdevumi un cik katram darbiniekam jāizmaksā.",
+          estrValueHead: "Ko īpašnieks redz",
+          estrDailyHead: "Ikdienas darbs sistēmā",
+          estrValueCap1: "Kuras pilsētas nes peļņu — tur ir vērts ieguldīt reklāmā un ņemt vairāk darbu",
+          estrValueCap2: "Kurš cik izstrādā — pamats prēmijām, slodzes pārdalei un lēmumam par jauniem cilvēkiem",
+          estrValueCap3: "Cik materiāla aiziet katram darba veidam — pamats nākamās sezonas iepirkumu plānam",
+          estrValueCap4: "Cik naudas paliek pēc algām un izdevumiem — redzams jau laikus, kuros mēnešos veidojas iztrūkums",
           estrB1: "Pārskats — centrālais panelis ar datumu filtriem un kopsavilkumiem",
           estrB2: "Padarītais darbs — 3-soļu vednis darbu reģistrācijai ar automātisku izmaksu aprēķinu",
           estrB3: "Ienākumi un izdevumi — visu finanšu plūsmu uzskaite ar kategorijām un kopsummām",
@@ -816,6 +895,12 @@
           tierC6: "<strong>Какую проблему решает:</strong> Снижает потерянные звонки, ошибки в записи и пустые окна в расписании.",
           estrTitle: "Go Gridas — CRM для строительных и ремонтных компаний",
           estrMeta: "Собственная CRM-система, которая отслеживает каждую работу от начала до выплаты — какие работы выполнены, на каких объектах, какими бригадами, какие расходы и сколько нужно выплатить каждому сотруднику.",
+          estrValueHead: "Что видит владелец",
+          estrDailyHead: "Ежедневная работа в системе",
+          estrValueCap1: "Какие города реально приносят прибыль — туда есть смысл вкладывать рекламу и брать больше заказов",
+          estrValueCap2: "Кто из бригады сколько выработал — основание для премий, перераспределения нагрузки и найма",
+          estrValueCap3: "Сколько материала уходит на каждый вид работ — основа плана закупок на следующий сезон",
+          estrValueCap4: "Сколько денег остаётся после зарплат и расходов — заранее видно, в какие месяцы будет кассовый разрыв",
           estrB1: "Обзор — центральная панель с фильтрами по датам и сводными итогами",
           estrB2: "Выполненные работы — 3-шаговый мастер для регистрации работ с автоматическим расчётом выплат",
           estrB3: "Доходы и расходы — учёт всех финансовых потоков с категориями и итоговыми суммами",
@@ -881,6 +966,12 @@
           tierC6: "<strong>What problem it solves:</strong> It reduces missed calls, booking mistakes, and empty time slots.",
           estrTitle: "Go Gridas — CRM for Construction & Renovation Companies",
           estrMeta: "A self-hosted CRM that tracks every job from start to payout — what work was done, at which property, by which crew, what was spent, what was earned, and what each employee gets paid.",
+          estrValueHead: "What the owner sees",
+          estrDailyHead: "Day-to-day work in the system",
+          estrValueCap1: "Which cities actually turn a profit — where the ad budget and extra jobs should go",
+          estrValueCap2: "Who produced how much — the basis for bonuses, workload balancing and hiring",
+          estrValueCap3: "How much material each job type consumes — the basis for next season's purchasing plan",
+          estrValueCap4: "What is left after wages and expenses — you see in advance which months run a cash gap",
           estrB1: "Overview — central dashboard with date-range filtering, summary totals, and tabbed tables across all data types",
           estrB2: "Work Done — 3-step wizard for recording completed jobs with automatic payout calculation",
           estrB3: "Income & Expenses — track all financial flows with categories and running totals",
@@ -992,6 +1083,12 @@
 
         setText("estr-title", copy.estrTitle);
         setText("estr-meta", copy.estrMeta);
+        setText("estr-value-head", copy.estrValueHead);
+        setText("estr-daily-head", copy.estrDailyHead);
+        setText("estr-value-cap-1", copy.estrValueCap1);
+        setText("estr-value-cap-2", copy.estrValueCap2);
+        setText("estr-value-cap-3", copy.estrValueCap3);
+        setText("estr-value-cap-4", copy.estrValueCap4);
         setText("estr-benefit-1", copy.estrB1);
         setText("estr-benefit-2", copy.estrB2);
         setText("estr-benefit-3", copy.estrB3);
