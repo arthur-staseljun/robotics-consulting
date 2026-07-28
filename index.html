@@ -1483,6 +1483,30 @@
           }
         }
     </style>
+    <!-- Analytics helper. Everything is gated on the production hostname so that
+         local development never sends events to the live Pixel / Ads account —
+         off-prod the events are logged to the console instead, which doubles as
+         the way to verify them without polluting the funnel data. -->
+    <script>
+        var rcIsProd = globalThis.location.hostname === "www.sia-robotics-consulting.eu";
+
+        function rcTrack(name, params, opts) {
+          if (!rcIsProd) {
+            console.debug("[track]", name, params || "");
+            return;
+          }
+          try {
+            if (typeof fbq === "function") {
+              fbq(opts && opts.custom ? "trackCustom" : "track", name, params);
+            }
+            if (opts && opts.gaEvent && typeof gtag === "function") {
+              gtag("event", opts.gaEvent, params);
+            }
+          } catch (error) {
+            console.debug("Tracking is unavailable", error);
+          }
+        }
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18116557749">
     </script>
@@ -1491,28 +1515,35 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'AW-18116557749');
+        if (rcIsProd) {
+          gtag('config', 'AW-18116557749');
+        }
     </script>
     <!-- Meta Pixel -->
     <script>
-        (function (f, b, e, v) {
-            if (f.fbq) return;
-            var n = f.fbq = function () {
-                n.callMethod ? n.callMethod(...arguments) : n.queue.push(arguments);
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = true;
-            n.version = "2.0";
-            n.queue = [];
-            var t = b.createElement(e);
-            t.async = true;
-            t.src = v;
-            var s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s);
-        })(globalThis, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-        fbq("init", "1264801605722112");
-        fbq("track", "PageView");
+        if (rcIsProd) {
+          (function (f, b, e, v) {
+              if (f.fbq) return;
+              var n = f.fbq = function () {
+                  n.callMethod ? n.callMethod(...arguments) : n.queue.push(arguments);
+              };
+              if (!f._fbq) f._fbq = n;
+              n.push = n;
+              n.loaded = true;
+              n.version = "2.0";
+              n.queue = [];
+              var t = b.createElement(e);
+              t.async = true;
+              t.src = v;
+              var s = b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t, s);
+          })(globalThis, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+          fbq("init", "1264801605722112");
+        }
+        // Outside the guard on purpose: rcTrack already gates the actual send, so
+        // off-prod this still logs to the console and PageView stays visible when
+        // debugging the funnel.
+        rcTrack("PageView");
     </script>
     <noscript><img height="1" width="1" style="display:none" alt=""
         src="https://www.facebook.com/tr?id=1264801605722112&ev=PageView&noscript=1"
@@ -2368,6 +2399,29 @@
       } catch (error) {
         console.debug("Theme preference read is unavailable", error);
       }
+      // Split out of setTheme: re-rendering a third-party widget is its own concern,
+      // and keeping it inline pushed setTheme over the cognitive-complexity limit.
+      function syncCaptchaTheme(theme) {
+        var hc = document.querySelector('.h-captcha');
+        if (!hc) return;
+        var hcTheme = theme === 'light' ? 'light' : 'dark';
+        hc.dataset.theme = hcTheme;
+        // Once hCaptcha has auto-rendered, changing the attribute alone has no
+        // effect (the theme is baked into the widget's iframe at render time),
+        // so the widget has to be torn down and re-rendered to pick it up.
+        if (!hc.dataset.sitekey || !globalThis.hcaptcha || typeof globalThis.hcaptcha.render !== "function") return;
+        try {
+          globalThis.hcaptcha.remove();
+          globalThis.hcaptcha.render(hc, {
+            sitekey: hc.dataset.sitekey,
+            theme: hcTheme,
+            hl: hc.dataset.hl || fallbackLanguage
+          });
+        } catch (error) {
+          console.debug("hCaptcha re-render on theme change failed", error);
+        }
+      }
+
       function setTheme(theme) {
         if (theme === 'light') {
           document.documentElement.dataset.theme = 'light';
@@ -2381,28 +2435,7 @@
         } catch (error) {
           console.debug("Theme preference write is unavailable", error);
         }
-        // Sync hCaptcha if present
-        var hc = document.querySelector('.h-captcha');
-        if (hc) {
-          var isLight = theme === 'light';
-          var hcTheme = isLight ? 'light' : 'dark';
-          hc.dataset.theme = hcTheme;
-          // Once hCaptcha has auto-rendered, changing the attribute alone has no
-          // effect (the theme is baked into the widget's iframe at render time),
-          // so the widget has to be torn down and re-rendered to pick it up.
-          if (hc.dataset.sitekey && globalThis.hcaptcha && typeof globalThis.hcaptcha.render === "function") {
-            try {
-              globalThis.hcaptcha.remove();
-              globalThis.hcaptcha.render(hc, {
-                sitekey: hc.dataset.sitekey,
-                theme: hcTheme,
-                hl: hc.dataset.hl || fallbackLanguage
-              });
-            } catch (error) {
-              console.debug("hCaptcha re-render on theme change failed", error);
-            }
-          }
-        }
+        syncCaptchaTheme(theme);
       }
       if (currentTheme === 'light') setTheme('light');
       if (themeToggleBtn) {
@@ -2457,8 +2490,7 @@
         var whatsappLink = document.getElementById("whatsapp-contact-link");
         if (whatsappLink) {
           whatsappLink.addEventListener("click", function () {
-            if (typeof fbq === "function") fbq("track", "Contact");
-            if (typeof gtag === "function") gtag("event", "generate_lead", { method: "whatsapp" });
+            rcTrack("Contact", { method: "whatsapp" }, { gaEvent: "generate_lead" });
           });
         }
 
@@ -2497,8 +2529,7 @@
                 status.classList.add("is-success");
                 status.textContent = t("contact_success", "Thanks — your message is on its way.");
                 form.reset();
-                if (typeof fbq === "function") fbq("track", "Lead");
-                if (typeof gtag === "function") gtag("event", "generate_lead");
+                rcTrack("Lead", undefined, { gaEvent: "generate_lead" });
               } else {
                 console.error("Web3Forms rejected the submission:", data);
                 showError();
@@ -2576,6 +2607,70 @@
       }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" });
       revealNodes.forEach(function (node) {
         observer.observe(node);
+      });
+    })();
+
+    // Engagement funnel: PageView -> Scroll50 -> ViewContent -> CTAClick/FormStart -> Lead.
+    // Without these middle steps there is no way to tell "visitors never reach the
+    // form" from "they reach it and don't want it" — opposite problems.
+    //
+    // Deliberately its own IIFE *after* the main one: the block above returns early
+    // for reduced-motion users, and keeping this separate also means a failure here
+    // can never take down the contact form's setup, which runs earlier.
+    (function initEngagementTracking() {
+      var fired = {};
+
+      function once(key, name, params, opts) {
+        if (fired[key]) return;
+        fired[key] = true;
+        rcTrack(name, params, opts);
+      }
+
+      function onScroll() {
+        var doc = document.documentElement;
+        var scrollable = doc.scrollHeight - globalThis.innerHeight;
+        if (scrollable <= 0) return;
+        if ((doc.scrollTop || document.body.scrollTop) / scrollable >= 0.5) {
+          once("scroll50", "Scroll50", undefined, { custom: true });
+          globalThis.removeEventListener("scroll", onScroll);
+        }
+      }
+      globalThis.addEventListener("scroll", onScroll, { passive: true });
+
+      var contactSection = document.getElementById("contact");
+      if (contactSection && typeof IntersectionObserver === "function") {
+        var contactObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            once("viewContact", "ViewContent", { content_name: "contact-section" });
+            contactObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.3 });
+        contactObserver.observe(contactSection);
+      }
+
+      var contactForm = document.getElementById("contact-form");
+      if (contactForm) {
+        contactForm.addEventListener("focusin", function () {
+          once("formStart", "FormStart", undefined, { custom: true });
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        var node = event.target;
+        if (!node || typeof node.closest !== "function") return;
+        var link = node.closest("a, button");
+        if (!link) return;
+
+        if (link.id === "leadmag-link" || link.id === "hero-leadmag-link") {
+          once("checklist", "ChecklistDownload", undefined, { custom: true, gaEvent: "file_download" });
+          return;
+        }
+
+        if (link.classList.contains("btn") && link.closest(".cta, .cta-box, .mobile-cta-bar")) {
+          once("ctaClick", "CTAClick", { cta: (link.textContent || "").trim().slice(0, 60) },
+               { custom: true, gaEvent: "select_content" });
+        }
       });
     })();
 </script>

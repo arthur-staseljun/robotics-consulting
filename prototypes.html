@@ -427,6 +427,29 @@
           .lightbox-next { right: 12px; }
         }
     </style>
+    <!-- Analytics helper — kept identical to index.html so both pages behave the
+         same: everything is gated on the production hostname, and off-prod the
+         events go to the console instead of the live Pixel / Ads account. -->
+    <script>
+        var rcIsProd = globalThis.location.hostname === "www.sia-robotics-consulting.eu";
+
+        function rcTrack(name, params, opts) {
+          if (!rcIsProd) {
+            console.debug("[track]", name, params || "");
+            return;
+          }
+          try {
+            if (typeof fbq === "function") {
+              fbq(opts && opts.custom ? "trackCustom" : "track", name, params);
+            }
+            if (opts && opts.gaEvent && typeof gtag === "function") {
+              gtag("event", opts.gaEvent, params);
+            }
+          } catch (error) {
+            console.debug("Tracking is unavailable", error);
+          }
+        }
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18116557749">
     </script>
@@ -435,7 +458,36 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'AW-18116557749');
+        if (rcIsProd) {
+          gtag('config', 'AW-18116557749');
+        }
+    </script>
+    <!-- Meta Pixel. This page had none, so anyone who clicked through from the
+         hero's "see examples" dropped off the Pixel's radar entirely. -->
+    <script>
+        if (rcIsProd) {
+          (function (f, b, e, v) {
+              if (f.fbq) return;
+              var n = f.fbq = function () {
+                  n.callMethod ? n.callMethod(...arguments) : n.queue.push(arguments);
+              };
+              if (!f._fbq) f._fbq = n;
+              n.push = n;
+              n.loaded = true;
+              n.version = "2.0";
+              n.queue = [];
+              var t = b.createElement(e);
+              t.async = true;
+              t.src = v;
+              var s = b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t, s);
+          })(globalThis, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+          fbq("init", "1264801605722112");
+        }
+        // Outside the guard on purpose: rcTrack already gates the actual send, so
+        // off-prod this still logs to the console and PageView stays visible when
+        // debugging the funnel.
+        rcTrack("PageView");
     </script>
 </head>
 <body>
@@ -644,8 +696,7 @@
             <p id="cta-sub">Saņemiet praktisku novērtējumu pirms ieguldāt dārgās iekārtās vai programmatūrā.</p>
         </div>
         <div class="cta-actions">
-            <a id="cta-button" class="btn btn-main" href="index.html#contact">Pieteikt iepazīšanās
-                zvanu</a>
+            <a id="cta-button" class="btn btn-main" href="index.html#contact">Pieteikt bezmaksas auditu</a>
         </div>
     </section>
 
@@ -719,7 +770,7 @@
           ctaTitle: "Apsverat automatizāciju, bet nezināt, ar ko sākt?",
           ctaTitleMobile: "Neesat pārliecināti, ar ko sākt?",
           ctaSub: "Saņemiet praktisku novērtējumu pirms ieguldāt dārgās iekārtās vai programmatūrā.",
-          ctaButton: "Pieteikt iepazīšanās zvanu",
+          ctaButton: "Pieteikt bezmaksas auditu",
           close: "Aizvērt",
           prev: "Iepriekšējais attēls",
           next: "Nākamais attēls",
@@ -784,7 +835,7 @@
           ctaTitle: "Рассматриваете автоматизацию, но не знаете, с чего начать?",
           ctaTitleMobile: "Не знаете, с чего начать?",
           ctaSub: "Получите практичную оценку до вложений в дорогое оборудование или софт.",
-          ctaButton: "Записаться на бесплатный ознакомительный звонок",
+          ctaButton: "Записаться на бесплатный аудит",
           close: "Закрыть",
           prev: "Предыдущее изображение",
           next: "Следующее изображение",
@@ -849,7 +900,7 @@
           ctaTitle: "Considering Automation But Unsure Where to Start?",
           ctaTitleMobile: "Unsure where to start?",
           ctaSub: "Get a practical assessment before committing to expensive equipment or software.",
-          ctaButton: "Book a Free Intro Call",
+          ctaButton: "Book a Free Audit",
           close: "Close",
           prev: "Previous image",
           next: "Next image",
@@ -1142,6 +1193,20 @@
       if (savedTheme === "light" || savedTheme === "dark") {
         setTheme(savedTheme);
       }
+    })();
+
+    // Own IIFE so a failure here can't take down anything above it.
+    // Tracks the one action that matters on this page: browsing the examples and
+    // then heading back to the contact form.
+    (function initEngagementTracking() {
+      var ctaButton = document.getElementById("cta-button");
+      if (!ctaButton) return;
+      var fired = false;
+      ctaButton.addEventListener("click", function () {
+        if (fired) return;
+        fired = true;
+        rcTrack("CTAClick", { cta: "prototypes-page" }, { custom: true, gaEvent: "select_content" });
+      });
     })();
 </script>
 </body>
