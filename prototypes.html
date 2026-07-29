@@ -227,10 +227,11 @@
         .proto-gallery--value { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 20px; }
         .proto-gallery--value figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
         .proto-gallery--value picture { display: block; }
-        /* 2x2: the two money reports on top, the two operational ones below.
-           Fixed height keeps the captions on a common baseline. */
+        /* Fixed height keeps the captions on a common baseline. */
         #gogridas-crm .proto-gallery--value img { max-width: none; width: 100%; height: 290px; object-fit: cover; object-position: center top; }
         .proto-gallery--value figcaption { color: var(--proto-meta-color); font-size: 14px; line-height: 1.5; }
+        /* Closing card spans both columns to stand out as the section's takeaway. */
+        .proto-gallery--value figure:last-child { grid-column: 1 / -1; }
         .proto-meta { color: var(--proto-meta-color); font-size: 15px; line-height: 1.55; margin-bottom: 10px; }
         .proto-copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 12px 0 18px; }
         .proto-benefits { margin: 0 0 16px 0; padding-left: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 20px; }
@@ -558,7 +559,7 @@
         <p id="gallery-hint-estr" class="swipe-hint gallery-swipe-hint">Pavelciet, lai skatītu ekrānus</p>
 
         <h3 class="proto-subhead" id="estr-value-head">Jūsu bizness</h3>
-        <p class="proto-lead" id="estr-value-lead">Vairums mazo uzņēmumu vadās pēc sajūtas: šķiet, ka Rīgā darba visvairāk, ka viena brigāde strādā labāk, ka materiāls izmaksā apmēram tik. Kamēr skaitļi ir galvā un uz papīra, tos nevar pārbaudīt. Šie astoņi pārskati salasās paši no ikdienas datiem un atbild uz jautājumiem, uz kuriem citādi atbild minējums.</p>
+        <p class="proto-lead" id="estr-value-lead">Vairums mazo uzņēmumu vadās pēc sajūtas: šķiet, ka Rīgā darba visvairāk, ka viena brigāde strādā labāk, ka materiāls izmaksā apmēram tik. Kamēr skaitļi ir galvā un uz papīra, tos nevar pārbaudīt. Šie deviņi pārskati salasās paši no ikdienas datiem un atbild uz jautājumiem, uz kuriem citādi atbild minējums.</p>
         <div class="proto-gallery proto-gallery--value">
             <figure>
                 <picture>
@@ -638,6 +639,16 @@
                 <figcaption>
                     <strong class="value-q" id="estr-value-q-8">Cik materiāla pirkt nākamajai sezonai?</strong>
                     <span id="estr-value-t-8">541 ieraksts par 12 materiālu veidiem 74 objektos — to galvā nenoturēs neviens. Kad patēriņš ir piesaistīts darba veidam un platībai, sezonas iepirkumu var izrēķināt, nevis uzminēt: mazāk naudas iesaldēts noliktavā un mazāk apstāšanos tāpēc, ka materiāls beidzies objekta vidū.</span>
+                </figcaption>
+            </figure>
+            <figure>
+                <picture>
+                    <source srcset="./assets/prototypes/estrich/gogridas-value-price-discipline.webp" type="image/webp">
+                    <img src="./assets/prototypes/estrich/gogridas-value-price-discipline.png" alt="Go Gridas cenu disciplīna" loading="lazy" decoding="async" width="1600" height="852">
+                </picture>
+                <figcaption>
+                    <strong class="value-q" id="estr-value-q-9">Cik naudas pazūd nepamanītās cenu novirzēs?</strong>
+                    <span id="estr-value-t-9">Vienam un tam pašam darba veidam (piemēram, Estrich) likme dažādos objektos svārstās no €3,06 līdz €25,00 par m². Gada laikā sistēma automātiski atrod 65 pozīcijas, kas norēķinātas zem 60% no sava darba veida vidējās likmes — kopā €10 287,64 negūtā ieņēmumā, vairāk nekā 4% no gada peļņas. Bez izsekošanas šīs novirzes neviens nepamana.</span>
                 </figcaption>
             </figure>
         </div>
@@ -884,7 +895,7 @@
           demoNote: "Ekrānuzņēmumos redzami demonstrācijas dati — vārdi, adreses un summas ir izdomātas.",
           estrValueHead: "Jūsu bizness",
           estrDailyHead: "Ikdienas darbs sistēmā",
-          estrValueLead: "Vairums mazo uzņēmumu vadās pēc sajūtas: šķiet, ka Rīgā darba visvairāk, ka viena brigāde strādā labāk, ka materiāls izmaksā apmēram tik. Kamēr skaitļi ir galvā un uz papīra, tos nevar pārbaudīt. Šie astoņi pārskati salasās paši no ikdienas datiem un atbild uz jautājumiem, uz kuriem citādi atbild minējums.",
+          estrValueLead: "Vairums mazo uzņēmumu vadās pēc sajūtas: šķiet, ka Rīgā darba visvairāk, ka viena brigāde strādā labāk, ka materiāls izmaksā apmēram tik. Kamēr skaitļi ir galvā un uz papīra, tos nevar pārbaudīt. Šie deviņi pārskati salasās paši no ikdienas datiem un atbild uz jautājumiem, uz kuriem citādi atbild minējums.",
           estrDailyLead: "Neviens no šiem pārskatiem nav atsevišķs darbs. Tie salasās no tā paša, ko brigāde jebkurā gadījumā pieraksta: kurš objekts, kāds darbs, cik kvadrātmetru, kāda likme, kurš strādāja. Dati tiek ievadīti vienreiz — turpat, kur darbs notiek — un paši saskaitās pārskatos.",
           estrValueQ1: "Kur nauda tiešām nopelnās?",
           estrValueT1: "Apgrozījums viens pats neko nepasaka. Rīgā 41 darbs dod 29.5% rentabilitāti, Jūrmalā 7 darbi — 21.9%. Kamēr šie skaitļi nav atdalīti, reklāmas budžets un laiks tiek dalīts akli. Ar sadalījumu redzams, kur ir vērts spiest vairāk, kur celt cenu un kur labāk atteikties.",
@@ -902,6 +913,8 @@
           estrValueT7: "Kamēr brigāde ir viena, katra izstrādi un ieturējumus vēl var noturēt galvā. Ar divām tas jau ir sasprindzinājums, ar trim vairs nestrādā — un prēmijas kļūst par attiecību, nevis skaitļu jautājumu. Kad izstrāde un izmaksātais ir blakus, redzams, kuru piekraut vairāk, kuram vajag palīdzēt un vai tiešām vajag jaunu cilvēku. Tieši tas ļauj izaugt pāri tam, ko īpašnieks spēj noturēt personīgi.",
           estrValueQ8: "Cik materiāla pirkt nākamajai sezonai?",
           estrValueT8: "541 ieraksts par 12 materiālu veidiem 74 objektos — to galvā nenoturēs neviens. Kad patēriņš ir piesaistīts darba veidam un platībai, sezonas iepirkumu var izrēķināt, nevis uzminēt: mazāk naudas iesaldēts noliktavā un mazāk apstāšanos tāpēc, ka materiāls beidzies objekta vidū.",
+          estrValueQ9: "Cik naudas pazūd nepamanītās cenu novirzēs?",
+          estrValueT9: "Vienam un tam pašam darba veidam (piemēram, Estrich) likme dažādos objektos svārstās no €3,06 līdz €25,00 par m². Gada laikā sistēma automātiski atrod 65 pozīcijas, kas norēķinātas zem 60% no sava darba veida vidējās likmes — kopā €10 287,64 negūtā ieņēmumā, vairāk nekā 4% no gada peļņas. Bez izsekošanas šīs novirzes neviens nepamana.",
           estrB1: "Pārskats — centrālais panelis ar datumu filtriem un kopsavilkumiem",
           estrB2: "Padarītais darbs — 3-soļu vednis darbu reģistrācijai ar automātisku izmaksu aprēķinu",
           estrB3: "Ienākumi un izdevumi — visu finanšu plūsmu uzskaite ar kategorijām un kopsummām",
@@ -970,7 +983,7 @@
           demoNote: "На скриншотах демонстрационные данные — имена, адреса и суммы вымышленные.",
           estrValueHead: "Ваш бизнес",
           estrDailyHead: "Ежедневная работа в системе",
-          estrValueLead: "Большинство небольших компаний работают по ощущениям: кажется, что в Риге заказов больше всего, что одна бригада работает лучше, что материал стоит примерно столько. Пока цифры в голове и на бумаге, их нельзя проверить. Эти восемь отчётов собираются сами из ежедневных данных и отвечают на вопросы, на которые иначе отвечает догадка.",
+          estrValueLead: "Большинство небольших компаний работают по ощущениям: кажется, что в Риге заказов больше всего, что одна бригада работает лучше, что материал стоит примерно столько. Пока цифры в голове и на бумаге, их нельзя проверить. Эти девять отчётов собираются сами из ежедневных данных и отвечают на вопросы, на которые иначе отвечает догадка.",
           estrDailyLead: "Ни один из этих отчётов не отдельная работа. Они собираются из того же, что бригада и так записывает: какой объект, какая работа, сколько квадратных метров, какая ставка, кто работал. Данные вводятся один раз — там же, где идёт работа, — и сами складываются в отчёты.",
           estrValueQ1: "Где деньги на самом деле зарабатываются?",
           estrValueT1: "Оборот сам по себе не говорит ничего. В Риге 41 объект даёт 29.5% рентабельности, в Юрмале 7 объектов — 21.9%. Пока эти цифры не разделены, рекламный бюджет и время распределяются вслепую. С разбивкой видно, где стоит давить сильнее, где поднимать цену, а от чего лучше отказаться.",
@@ -988,6 +1001,8 @@
           estrValueT7: "Пока бригада одна, выработку и удержания по каждому ещё реально держать в голове. С двумя это уже напряжение, с тремя не работает — и премии становятся вопросом отношений, а не цифр. Когда выработка и выплаты лежат рядом, видно, кого догрузить, кому нужна помощь и нужен ли новый человек. Именно это позволяет вырасти за пределы того, что владелец удерживает лично.",
           estrValueQ8: "Сколько материала закупать на следующий сезон?",
           estrValueT8: "541 запись по 12 видам материалов на 74 объектах — этого не удержит в голове никто. Когда расход привязан к виду работ и площади, закупку на сезон можно посчитать, а не угадать: меньше денег заморожено на складе и меньше простоев из-за того, что материал кончился посреди объекта.",
+          estrValueQ9: "Сколько денег теряется в незамеченных отклонениях цены?",
+          estrValueT9: "Для одного и того же вида работ (например, Estrich) ставка на разных объектах отличается от €3,06 до €25,00 за m². За год система автоматически находит 65 позиций, оплаченных ниже 60% от средней ставки своего вида работ — суммарно €10 287,64 недополученного дохода, больше 4% годовой прибыли. Без отслеживания эти отклонения никто не замечает.",
           estrB1: "Обзор — центральная панель с фильтрами по датам и сводными итогами",
           estrB2: "Выполненные работы — 3-шаговый мастер для регистрации работ с автоматическим расчётом выплат",
           estrB3: "Доходы и расходы — учёт всех финансовых потоков с категориями и итоговыми суммами",
@@ -1056,7 +1071,7 @@
           demoNote: "Screenshots use demo data — names, addresses and figures are made up.",
           estrValueHead: "Your business",
           estrDailyHead: "Day-to-day work in the system",
-          estrValueLead: "Most small companies run on gut feel: it seems like Rīga brings the most work, that one crew performs better, that materials cost about this much. As long as the numbers live in someone's head and on paper, none of it can be checked. These eight reports build themselves from everyday data and answer questions that otherwise get answered by guesswork.",
+          estrValueLead: "Most small companies run on gut feel: it seems like Rīga brings the most work, that one crew performs better, that materials cost about this much. As long as the numbers live in someone's head and on paper, none of it can be checked. These nine reports build themselves from everyday data and answer questions that otherwise get answered by guesswork.",
           estrDailyLead: "None of these reports is extra work. They come from what the crew records anyway: which site, what job, how many square metres, at what rate, who worked on it. The data goes in once, right where the work happens, and adds itself up into the reports.",
           estrValueQ1: "Where is the money actually made?",
           estrValueT1: "Turnover on its own tells you nothing. In Rīga 41 jobs return 29.5%; in Jūrmala 7 jobs return 21.9%. Until those numbers are separated, ad budget and time get spread blindly. Split out, it shows where to push harder, where to raise prices, and what to walk away from.",
@@ -1074,6 +1089,8 @@
           estrValueT7: "With one crew you can still keep everyone's output and deductions in your head. With two it gets tight; with three it stops working — and bonuses become a matter of relations rather than numbers. With output and payouts side by side, it shows who can take on more, who needs help, and whether a new hire is needed. That is exactly what lets the company grow past what one person can hold personally.",
           estrValueQ8: "How much material to buy for next season?",
           estrValueT8: "541 entries across 12 material types and 74 sites — nobody keeps that in their head. When consumption is tied to job type and area, the season's purchasing can be calculated instead of guessed: less cash frozen in the warehouse, and fewer stoppages because material ran out mid-job.",
+          estrValueQ9: "How much money leaks through unnoticed pricing deviations?",
+          estrValueT9: "For the same type of work (say, Estrich), the rate charged across sites ranges from €3.06 to €25.00 per m². Over a year the system automatically finds 65 line items billed below 60% of that work type's average rate — €10,287.64 in lost revenue combined, over 4% of annual profit. Without tracking, nobody notices these gaps.",
           estrB1: "Overview — central dashboard with date-range filtering, summary totals, and tabbed tables across all data types",
           estrB2: "Work Done — 3-step wizard for recording completed jobs with automatic payout calculation",
           estrB3: "Income & Expenses — track all financial flows with categories and running totals",
@@ -1206,6 +1223,8 @@
         setText("estr-value-t-7", copy.estrValueT7);
         setText("estr-value-q-8", copy.estrValueQ8);
         setText("estr-value-t-8", copy.estrValueT8);
+        setText("estr-value-q-9", copy.estrValueQ9);
+        setText("estr-value-t-9", copy.estrValueT9);
         setText("estr-benefit-1", copy.estrB1);
         setText("estr-benefit-2", copy.estrB2);
         setText("estr-benefit-3", copy.estrB3);
@@ -1302,6 +1321,8 @@
         lightboxNext.disabled = disabled || currentImageIndex === images.length - 1;
       }
 
+      var galleryViewFired = false;
+
       function openLightbox(index) {
         currentImageIndex = index;
         var img = images[currentImageIndex];
@@ -1314,6 +1335,10 @@
         lightbox.setAttribute("aria-hidden", "false");
         document.body.classList.add("lightbox-open");
         updateLightboxNav();
+        if (!galleryViewFired) {
+          galleryViewFired = true;
+          rcTrack("GalleryView", undefined, { custom: true });
+        }
       }
 
       function showAdjacentImage(step) {
@@ -1410,16 +1435,56 @@
     })();
 
     // Own IIFE so a failure here can't take down anything above it.
-    // Tracks the one action that matters on this page: browsing the examples and
-    // then heading back to the contact form.
+    // Mirrors index.html's engagement funnel (PageView -> Scroll50 -> ViewContent ->
+    // CTAClick), adapted to this page's content: no contact form or WhatsApp link here,
+    // so ViewContent watches the CTA box instead, and the checklist download is its
+    // own conversion signal.
     (function initEngagementTracking() {
-      var ctaButton = document.getElementById("cta-button");
-      if (!ctaButton) return;
-      var fired = false;
-      ctaButton.addEventListener("click", function () {
-        if (fired) return;
-        fired = true;
-        rcTrack("CTAClick", { cta: "prototypes-page" }, { custom: true, gaEvent: "select_content" });
+      var fired = {};
+
+      function once(key, name, params, opts) {
+        if (fired[key]) return;
+        fired[key] = true;
+        rcTrack(name, params, opts);
+      }
+
+      function onScroll() {
+        var doc = document.documentElement;
+        var scrollable = doc.scrollHeight - globalThis.innerHeight;
+        if (scrollable <= 0) return;
+        if ((doc.scrollTop || document.body.scrollTop) / scrollable >= 0.5) {
+          once("scroll50", "Scroll50", undefined, { custom: true });
+          globalThis.removeEventListener("scroll", onScroll);
+        }
+      }
+      globalThis.addEventListener("scroll", onScroll, { passive: true });
+
+      var ctaBox = document.querySelector(".cta-box");
+      if (ctaBox && typeof IntersectionObserver === "function") {
+        var ctaObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            once("viewCta", "ViewContent", { content_name: "prototypes-cta-section" });
+            ctaObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.3 });
+        ctaObserver.observe(ctaBox);
+      }
+
+      document.addEventListener("click", function (event) {
+        var node = event.target;
+        if (!node || typeof node.closest !== "function") return;
+        var link = node.closest("a, button");
+        if (!link) return;
+
+        if (link.id === "leadmag-link") {
+          once("checklist", "ChecklistDownload", undefined, { custom: true, gaEvent: "file_download" });
+          return;
+        }
+
+        if (link.id === "cta-button") {
+          once("ctaClick", "CTAClick", { cta: "prototypes-page" }, { custom: true, gaEvent: "select_content" });
+        }
       });
     })();
 </script>
