@@ -21,6 +21,7 @@
           expC6: "<strong>Kādu problēmu tas atrisina:</strong> Novērš pazudušus čekus, manuālu pārrakstīšanu un kavētu izmaksu uzskaiti.",
           tierTitle: "Riepu servisa pierakstu automatizācija",
           tierMeta: "Pārvērš ienākošos zvanus pierakstos un vienā vietā parāda noslodzi, brīvos laikus un pieprasījumu.",
+          tierStatus: "Statuss: prototips, veidots kā piedāvājums servisa uzņēmumam; darījums nenotika.",
           tierB1: "Pieraksts zvana laikā",
           tierB2: "Mazāk kļūdu, ātrāka apkalpošana",
           tierB3: "Eksports uz Excel/Google Sheets/BI",
@@ -34,6 +35,7 @@
           tierC6: "<strong>Kādu problēmu tas atrisina:</strong> Samazina pazaudētus zvanus, kļūdas un tukšos logus grafikā.",
           estrTitle: "Go Gridas — CRM būvniecības un remonta uzņēmumiem",
           estrMeta: "Pašmitināta CRM sistēma, kas seko līdzi katram darbam no sākuma līdz izmaksai — kādi darbi veikti, kuros objektos, kuras brigādes, kādi izdevumi un cik katram darbiniekam jāizmaksā.",
+          estrStatus: "Statuss: izstrādē, top pirmā ieviešana pie klienta.",
           demoNote: "Ekrānuzņēmumos redzami demonstrācijas dati — vārdi, adreses un summas ir izdomātas.",
           estrValueHead: "Jūsu bizness",
           estrDailyHead: "Ikdienas darbs sistēmā",
@@ -109,6 +111,7 @@
           expC6: "<strong>Какую проблему решает:</strong> Убирает потерянные чеки, ручной перенос данных и задержки в учёте расходов.",
           tierTitle: "Планировщик шиномонтажника",
           tierMeta: "Превращает входящие звонки в записи и в одной системе показывает загрузку, свободные окна и спрос.",
+          tierStatus: "Статус: прототип, сделан как предложение сервисному бизнесу; сделка не состоялась.",
           tierB1: "Запись прямо во время звонка",
           tierB2: "Меньше ошибок, быстрее обслуживание",
           tierB3: "Экспорт в Excel/Google Sheets/BI",
@@ -122,6 +125,7 @@
           tierC6: "<strong>Какую проблему решает:</strong> Снижает потерянные звонки, ошибки в записи и пустые окна в расписании.",
           estrTitle: "Go Gridas — CRM для строительных и ремонтных компаний",
           estrMeta: "Собственная CRM-система, которая отслеживает каждую работу от начала до выплаты — какие работы выполнены, на каких объектах, какими бригадами, какие расходы и сколько нужно выплатить каждому сотруднику.",
+          estrStatus: "Статус: в разработке, готовится первое внедрение у клиента.",
           demoNote: "На скриншотах демонстрационные данные — имена, адреса и суммы вымышленные.",
           estrValueHead: "Ваш бизнес",
           estrDailyHead: "Ежедневная работа в системе",
@@ -197,6 +201,7 @@
           expC6: "<strong>What problem it solves:</strong> It prevents lost receipts, removes manual re-entry, and speeds up expense reporting.",
           tierTitle: "Tire Service Scheduler",
           tierMeta: "Turns incoming calls into bookings and shows workload, open slots, and demand in one system.",
+          tierStatus: "Status: prototype, built as a proposal for a service business; the deal did not go through.",
           tierB1: "Bookings during the call",
           tierB2: "Fewer mistakes, faster service",
           tierB3: "Export to Excel/Google Sheets/BI",
@@ -210,6 +215,7 @@
           tierC6: "<strong>What problem it solves:</strong> It reduces missed calls, booking mistakes, and empty time slots.",
           estrTitle: "Go Gridas — CRM for Construction & Renovation Companies",
           estrMeta: "A self-hosted CRM that tracks every job from start to payout — what work was done, at which property, by which crew, what was spent, what was earned, and what each employee gets paid.",
+          estrStatus: "Status: in development, first client rollout is being prepared.",
           demoNote: "Screenshots use demo data — names, addresses and figures are made up.",
           estrValueHead: "Your business",
           estrDailyHead: "Day-to-day work in the system",
@@ -330,6 +336,7 @@
 
         setText("tier-title", copy.tierTitle);
         setText("tier-meta", copy.tierMeta);
+        setText("tier-status", copy.tierStatus);
         setText("tier-benefit-1", copy.tierB1);
         setText("tier-benefit-2", copy.tierB2);
         setText("tier-benefit-3", copy.tierB3);
@@ -344,6 +351,7 @@
 
         setText("estr-title", copy.estrTitle);
         setText("estr-meta", copy.estrMeta);
+        setText("estr-status", copy.estrStatus);
         setText("estr-value-head", copy.estrValueHead);
         setText("estr-daily-head", copy.estrDailyHead);
         setText("demo-note", copy.demoNote);

@@ -8,7 +8,7 @@
       };
       const fallbackLanguage = "lv";
       const languageCache = {};
-      const heroUnderlineWords = { lv: "pirkstiem", en: "cracks", ru: "по пути" };
+      const heroUnderlineWords = { lv: "vienā sistēmā", en: "in one system", ru: "в одной системе" };
       const soulUnderlineSvg = '<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg>';
 
       function escapeHtml(str) {
@@ -275,6 +275,10 @@
           });
       }
 
+      function setHrefIfPresent(el, href) {
+        if (el && href) el.href = href;
+      }
+
       function applyLanguage(lang) {
         let selected = languageFiles[lang] ? lang : fallbackLanguage;
         return loadLanguage(selected).catch(function () {
@@ -287,6 +291,7 @@
         const leadmagLink = document.getElementById("leadmag-link");
         const heroLeadmagLink = document.getElementById("hero-leadmag-link");
         const aiImplementationLink = document.getElementById("offer-ai-link");
+        const aboutCvLink = document.getElementById("about-cv-link");
         const menuToggle = document.querySelector(".menu-toggle");
         document.documentElement.lang = selected;
         document.title = copy.page_title;
@@ -316,17 +321,10 @@
           });
         }
 
-        if (leadmagLink && copy.leadmag_href) {
-          leadmagLink.href = copy.leadmag_href;
-        }
-
-        if (heroLeadmagLink && copy.leadmag_href) {
-          heroLeadmagLink.href = copy.leadmag_href;
-        }
-
-        if (aiImplementationLink && copy.ai_doc_href) {
-          aiImplementationLink.href = copy.ai_doc_href;
-        }
+        setHrefIfPresent(leadmagLink, copy.leadmag_href);
+        setHrefIfPresent(heroLeadmagLink, copy.leadmag_href);
+        setHrefIfPresent(aiImplementationLink, copy.ai_doc_href);
+        setHrefIfPresent(aboutCvLink, copy.about_cv_href);
 
         if (menuToggle && copy.nav_menu) {
           menuToggle.setAttribute("aria-label", copy.nav_menu);

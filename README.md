@@ -2,6 +2,24 @@
 
 Static marketing site hosted on GitHub Pages.
 
+## Local Development
+
+No build step — it's plain HTML/CSS/JS. To preview changes:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000/`.
+
+**Nothing here is live until it's committed and pushed.** GitHub Pages serves whatever is on the deployed branch, so checking `www.sia-robotics-consulting.eu` while iterating locally will show the old site — always verify against `localhost`, not the production URL, while a change is still uncommitted.
+
+### Cache-busting
+
+`index.html` loads `locales/*.json` (via the `i18n-version` meta tag) and `assets/css/main.css` with a `?v=YYYY-MM-DD-NN` query param specifically so browsers don't serve a stale cached copy after an edit. **When editing either**, bump the corresponding `?v=` value (the `i18n-version` meta tag for JSON, the `main.css` link's query string for CSS) — otherwise a hard refresh (`Cmd+Shift+R`, or DevTools → Network → "Disable cache") may be needed to see the change even after reloading.
+
+This convention is *not* applied consistently: `assets/css/prototypes.css` and none of the `assets/js/*.js` files are cache-busted at all. Editing those currently relies on the browser's normal reload behavior (or a hard refresh) to pick up changes — worth fixing the same way if it causes confusion again.
+
 ## Visitor Counter Backend
 
 GitHub Pages cannot run backend code, so the counter API is deployed separately as a Cloudflare Worker.
