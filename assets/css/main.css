@@ -320,6 +320,19 @@
           display: block;
         }
 
+        /* The company name reads as robotics; this line tells a construction
+           owner within one glance that the site is about their kind of work. */
+        .brand-descriptor {
+          max-width: 15ch;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1.25;
+          letter-spacing: 0;
+          color: var(--muted);
+          border-left: 1px solid var(--panel-border);
+          padding-left: 10px;
+        }
+
         .brand .logo-light { display: none; }
 
         [data-theme="light"] .brand .logo-dark { display: none; }
@@ -1191,11 +1204,19 @@
 
           .brand {
             width: 100%;
-            justify-content: space-between;
+            /* Was space-between when the logo was the only child; now the
+               descriptor must stay next to it rather than fly to the edge. */
+            justify-content: flex-start;
           }
 
           .brand img {
             width: min(68px, 19vw);
+          }
+
+          .brand-descriptor {
+            font-size: 11px;
+            max-width: 18ch;
+            padding-left: 8px;
           }
 
           .header-actions {
