@@ -1434,10 +1434,11 @@
         .rc-field textarea { min-height: 120px; resize: vertical; }
         .rc-field input:focus, .rc-field textarea:focus { outline: none; border-color: var(--accent-a); }
         .rc-captcha { display: flex; justify-content: center; min-height: 78px; }
-        .rc-contact-actions { display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: center; justify-content: center; row-gap: 44px; column-gap: 22px; font-size: 14px; color: var(--muted); }
-        .rc-contact-actions .btn { white-space: nowrap; }
+        .rc-contact-actions { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; font-size: 14px; color: var(--muted); }
+        .rc-contact-actions > .btn { width: 100%; white-space: nowrap; }
         .rc-contact-actions .btn-alt { padding: 9px 16px; min-height: 40px; position: relative; }
-        .rc-contact-alt-group { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; }
+        .rc-contact-alt-group { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+        .rc-contact-alt-group .btn { flex: 1 1 0; }
         .rc-form-status { display: block; flex-basis: 100%; margin: 0; font-size: 14px; min-height: 20px; text-align: center; }
         .rc-form-status.is-success { color: #7de8a0; }
         .rc-form-status.is-error { color: #ff9a9a; }
