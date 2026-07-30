@@ -790,21 +790,33 @@
       }
       globalThis.addEventListener("scroll", onScroll, { passive: true });
 
-      const contactSection = document.getElementById("contact");
-      if (contactSection && typeof IntersectionObserver === "function") {
-        const contactObserver = new IntersectionObserver(function (entries) {
+      // Two separate ViewContent targets, because they answer different questions:
+      // "about" tells us whether the credibility block (name, track record, honest
+      // project status) is actually reached — the core bet of the current landing —
+      // while "contact" tells us whether people get as far as the form.
+      function observeSection(id, key, contentName) {
+        const section = document.getElementById(id);
+        if (!section || typeof IntersectionObserver !== "function") return;
+        const sectionObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
-            once("viewContact", "ViewContent", { content_name: "contact-section" });
-            contactObserver.unobserve(entry.target);
+            once(key, "ViewContent", { content_name: contentName });
+            sectionObserver.unobserve(entry.target);
           });
         }, { threshold: 0.3 });
-        contactObserver.observe(contactSection);
+        sectionObserver.observe(section);
       }
+
+      observeSection("about", "viewAbout", "about-section");
+      observeSection("contact", "viewContact", "contact-section");
 
       const contactForm = document.getElementById("contact-form");
       if (contactForm) {
-        contactForm.addEventListener("focusin", function () {
+        contactForm.addEventListener("focusin", function (event) {
+          // The Zvaniet / WhatsApp links sit inside <form> for layout reasons, and
+          // focusing a link is not "started filling the form" — without this guard
+          // every phone/WhatsApp click also fired FormStart and inflated the funnel.
+          if (!event.target.matches("input, textarea, select")) return;
           once("formStart", "FormStart", undefined, { custom: true });
         });
       }
@@ -817,6 +829,13 @@
 
         if (link.id === "leadmag-link" || link.id === "hero-leadmag-link") {
           once("checklist", "ChecklistDownload", undefined, { custom: true, gaEvent: "file_download" });
+          return;
+        }
+
+        // Clicking through to the full CV means someone is checking who they'd be
+        // hiring — the strongest intent signal on the page short of contacting.
+        if (link.id === "about-cv-link") {
+          once("cvClick", "CvClick", undefined, { custom: true, gaEvent: "select_content" });
           return;
         }
 

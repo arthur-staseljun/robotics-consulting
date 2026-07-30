@@ -97,15 +97,20 @@ Both `index.html` and `prototypes.html` share an identical `rcTrack(name, params
 |---|---|---|---|---|
 | `PageView` | standard | every page load | both | — |
 | `Scroll50` | custom | scrolled ≥50% of page height (once) | both | — |
-| `ViewContent` | standard | `#contact` (index) / `.cta-box` (prototypes) scrolls into view, 30% threshold (once) | both (different target section) | — |
-| `FormStart` | custom | focus enters `#contact-form` (once) | index only | — |
-| `Contact` | standard | click on WhatsApp contact link | index only | `generate_lead` |
+| `ViewContent` | standard | `#about` and `#contact` (index, separate events with different `content_name`) / `.cta-box` (prototypes) scrolls into view, 30% threshold (once each) | both | — |
+| `FormStart` | custom | focus enters an `input`/`textarea`/`select` inside `#contact-form` (once) | index only | — |
+| `Contact` | standard | click on the WhatsApp or phone contact link (`method` param distinguishes them) | index only | `generate_lead` |
+| `CvClick` | custom | click on `#about-cv-link` — the link out to the full CV (once) | index only | `select_content` |
 | `Lead` | standard | Web3Forms submit succeeds | index only | `generate_lead` |
 | `ChecklistDownload` | custom | click on `#leadmag-link` / `#hero-leadmag-link` (once) | both | `file_download` |
 | `CTAClick` | custom | click on a `.btn` inside `.cta`/`.cta-box`/`.mobile-cta-bar` (index; param = button text) or `#cta-button` (prototypes; param fixed to `"prototypes-page"`) (once) | both | `select_content` |
 | `GalleryView` | custom | first time the prototypes-page gallery lightbox opens (once) | prototypes only | — |
 
+**`FormStart` must stay scoped to real fields.** The Zvaniet / WhatsApp links live *inside* `<form id="contact-form">` for layout reasons, so a bare `focusin` listener on the form counts every phone/WhatsApp click as "started filling the form" — which silently inflates the one metric that distinguishes "nobody reaches the form" from "they reach it and don't want it". The guard in `initEngagementTracking` exists for exactly this; don't drop it if the contact markup is refactored again.
+
 Meta Events Manager shows localized display names for standard events (e.g. `ViewContent` → "Просмотр контента", `Lead` → "Лид", `Contact` → "Контакт") — same event, just translated in the UI, not a separate event in code.
 
-Rough funnel intent, useful when reading Events Manager reports: `PageView` → `Scroll50` / `ViewContent` / `GalleryView` (engagement) → `CTAClick` / `ChecklistDownload` (intent) → `Lead` / `Contact` (conversion).
+Rough funnel intent, useful when reading Events Manager reports: `PageView` → `Scroll50` / `ViewContent` / `GalleryView` (engagement) → `CTAClick` / `ChecklistDownload` / `CvClick` (intent) → `Lead` / `Contact` (conversion).
+
+`ViewContent (about-section)` and `CvClick` exist to test the current landing's core bet — that the problem was an anonymous seller, not a weak offer. `about-section` says how many visitors reach the credibility block at all; `CvClick` says how many cared enough to go verify the track record. If reach is high but `CvClick` is ~0, the block is being seen and skipped; if reach itself is low, the page is losing people before the argument even starts. Those call for opposite fixes, which is why they are tracked separately.
 
