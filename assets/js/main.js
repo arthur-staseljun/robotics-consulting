@@ -1,15 +1,15 @@
     (function () {
-      var i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
-      var i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-03";
-      var languageFiles = {
+      const i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
+      const i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-03";
+      const languageFiles = {
         lv: "./locales/lv.json",
         ru: "./locales/ru.json",
         en: "./locales/en.json"
       };
-      var fallbackLanguage = "lv";
-      var languageCache = {};
-      var heroUnderlineWords = { lv: "pirkstiem", en: "cracks", ru: "по пути" };
-      var soulUnderlineSvg = '<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg>';
+      const fallbackLanguage = "lv";
+      const languageCache = {};
+      const heroUnderlineWords = { lv: "pirkstiem", en: "cracks", ru: "по пути" };
+      const soulUnderlineSvg = '<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg>';
 
       function escapeHtml(str) {
         return str.replace(/[&<>"']/g, function (c) {
@@ -18,53 +18,53 @@
       }
 
       function renderHeroTitle(node, text, lang) {
-        var word = heroUnderlineWords[lang];
-        var idx = word ? text.indexOf(word) : -1;
+        const word = heroUnderlineWords[lang];
+        const idx = word ? text.indexOf(word) : -1;
         if (idx === -1) {
           node.textContent = text;
           return;
         }
-        var before = escapeHtml(text.slice(0, idx));
-        var after = escapeHtml(text.slice(idx + word.length));
+        const before = escapeHtml(text.slice(0, idx));
+        const after = escapeHtml(text.slice(idx + word.length));
         node.innerHTML = before + '<span class="soul-underline">' + escapeHtml(word) + soulUnderlineSvg + "</span>" + after;
       }
-      var siteOrigin = "https://www.sia-robotics-consulting.eu";
-      var canonicalPath = "/";
+      const siteOrigin = "https://www.sia-robotics-consulting.eu";
+      const canonicalPath = "/";
 
       function langUrl(lang) {
         return siteOrigin + canonicalPath + (lang === fallbackLanguage ? "" : "?lang=" + lang);
       }
 
       function getLangFromUrl() {
-        var params = new URLSearchParams(globalThis.location.search || "");
-        var urlLang = params.get("lang");
+        const params = new URLSearchParams(globalThis.location.search || "");
+        const urlLang = params.get("lang");
         return languageFiles[urlLang] ? urlLang : null;
       }
 
       function syncLangUrl(lang) {
-        var params = new URLSearchParams(globalThis.location.search || "");
+        const params = new URLSearchParams(globalThis.location.search || "");
         if (lang === fallbackLanguage) {
           params.delete("lang");
         } else {
           params.set("lang", lang);
         }
-        var query = params.toString();
-        var newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+        const query = params.toString();
+        const newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
         globalThis.history.replaceState(null, "", newUrl);
       }
-      var counterStartConfigPath = "./assets/counter.json";
-      var counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
+      const counterStartConfigPath = "./assets/counter.json";
+      const counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
       // rcTurnstileToken, rcTurnstileResolvers, rcOnTurnstileToken defined in <head>
-      var counterStartCache;
-      var ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
-      var counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
-      var ownerCounterStorageKey = "rc-owner-counter-enabled";
-      var visitorCounterWrap = document.getElementById("visitor-counter");
-      var visitorCountNode = document.getElementById("visitor-count-value");
+      let counterStartCache;
+      const ownerCounterToken = "rc-owner-2026-05-14-v7p9k3";
+      const counterLastKnownStorageKey = "rc-counter-last-known-v7p9k3";
+      const ownerCounterStorageKey = "rc-owner-counter-enabled";
+      const visitorCounterWrap = document.getElementById("visitor-counter");
+      const visitorCountNode = document.getElementById("visitor-count-value");
 
       function isOwnerCounterEnabled() {
-        var params = new URLSearchParams(globalThis.location.search || "");
-        var providedToken = params.get("counter_access");
+        const params = new URLSearchParams(globalThis.location.search || "");
+        const providedToken = params.get("counter_access");
 
         if (providedToken && providedToken === ownerCounterToken) {
           try {
@@ -74,8 +74,8 @@
           }
 
           params.delete("counter_access");
-          var query = params.toString();
-          var cleanUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+          const query = params.toString();
+          const cleanUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
           globalThis.history.replaceState(null, "", cleanUrl);
           return true;
         }
@@ -104,9 +104,9 @@
 
       function getStoredCounterValue() {
         try {
-          var raw = localStorage.getItem(counterLastKnownStorageKey);
+          const raw = localStorage.getItem(counterLastKnownStorageKey);
           if (raw === null) return null;
-          var parsed = Number(raw);
+          const parsed = Number(raw);
           return Number.isFinite(parsed) ? parsed : null;
         } catch (error) {
           console.debug("Counter last-known-value read is unavailable", error);
@@ -126,8 +126,8 @@
       function getTurnstileToken() {
         if (rcTurnstileToken) return Promise.resolve(rcTurnstileToken);
         return new Promise(function (resolve, reject) {
-          var timer = setTimeout(function () {
-            var idx = rcTurnstileResolvers.indexOf(onToken);
+          const timer = setTimeout(function () {
+            const idx = rcTurnstileResolvers.indexOf(onToken);
             if (idx !== -1) rcTurnstileResolvers.splice(idx, 1);
             reject(new Error("Turnstile timeout"));
           }, 15000);
@@ -138,7 +138,7 @@
 
       function hasConfiguredCounterEndpoint() {
         if (typeof counterApiEndpoint !== "string") return false;
-        var endpoint = counterApiEndpoint.trim();
+        const endpoint = counterApiEndpoint.trim();
         if (!endpoint) return false;
         if (endpoint.includes("replace-with-your-worker.workers.dev")) return false;
         return endpoint.includes("/api/counter");
@@ -163,7 +163,7 @@
 
       function handleCounterFetchError(isOwnerView) {
         if (!isOwnerView) return;
-        var lastKnownValue = getStoredCounterValue();
+        const lastKnownValue = getStoredCounterValue();
         if (lastKnownValue !== null) {
           setVisitorCount(lastKnownValue);
           return;
@@ -179,7 +179,7 @@
       }
 
       function doCounterFetch(mode, tsToken, isOwnerView, hasVisited, localFlag) {
-        var fetchUrl = counterApiEndpoint + "?mode=" + encodeURIComponent(mode);
+        let fetchUrl = counterApiEndpoint + "?mode=" + encodeURIComponent(mode);
         if (tsToken) fetchUrl += "&ts_token=" + encodeURIComponent(tsToken);
         return fetch(fetchUrl)
           .then(function (response) {
@@ -206,9 +206,9 @@
       }
 
       function updateUniqueVisitorCount() {
-        var localFlag = "rc-unique-visitor-v3";
-        var hasVisited = false;
-        var isOwnerView = isOwnerCounterEnabled();
+        const localFlag = "rc-unique-visitor-v3";
+        let hasVisited = false;
+        const isOwnerView = isOwnerCounterEnabled();
 
         try {
           hasVisited = localStorage.getItem(localFlag) === "1";
@@ -222,7 +222,7 @@
 
           console.warn("Visitor counter backend is not configured. Set counterApiEndpoint to your deployed Worker URL.");
 
-          var fallbackValue = getStoredCounterValue();
+          const fallbackValue = getStoredCounterValue();
           if (fallbackValue !== null) {
             setVisitorCount(fallbackValue);
             return;
@@ -241,7 +241,7 @@
 
         if (!isOwnerView && hasVisited) return;
 
-        var mode = hasVisited ? "get" : "hit";
+        const mode = hasVisited ? "get" : "hit";
 
         if (mode === "hit") {
           getTurnstileToken()
@@ -261,7 +261,7 @@
       }
 
       function loadLanguage(lang) {
-        var selected = languageFiles[lang] ? lang : fallbackLanguage;
+        const selected = languageFiles[lang] ? lang : fallbackLanguage;
         if (languageCache[selected]) return Promise.resolve(languageCache[selected]);
 
         return fetch(buildLanguageUrl(selected))
@@ -276,18 +276,18 @@
       }
 
       function applyLanguage(lang) {
-        var selected = languageFiles[lang] ? lang : fallbackLanguage;
+        let selected = languageFiles[lang] ? lang : fallbackLanguage;
         return loadLanguage(selected).catch(function () {
           if (selected === fallbackLanguage) return null;
           selected = fallbackLanguage;
           return loadLanguage(fallbackLanguage);
         }).then(function (copy) {
           if (!copy) return;
-        var descriptionMeta = document.querySelector('meta[name="description"]');
-        var leadmagLink = document.getElementById("leadmag-link");
-        var heroLeadmagLink = document.getElementById("hero-leadmag-link");
-        var aiImplementationLink = document.getElementById("offer-ai-link");
-        var menuToggle = document.querySelector(".menu-toggle");
+        const descriptionMeta = document.querySelector('meta[name="description"]');
+        const leadmagLink = document.getElementById("leadmag-link");
+        const heroLeadmagLink = document.getElementById("hero-leadmag-link");
+        const aiImplementationLink = document.getElementById("offer-ai-link");
+        const menuToggle = document.querySelector(".menu-toggle");
         document.documentElement.lang = selected;
         document.title = copy.page_title;
         if (descriptionMeta) descriptionMeta.setAttribute("content", copy.page_desc);
@@ -295,7 +295,7 @@
         globalThis.rcCopy = copy;
 
         document.querySelectorAll("[data-i18n]").forEach(function (node) {
-          var key = node.dataset.i18n;
+          const key = node.dataset.i18n;
           if (!Object.hasOwn(copy, key)) return;
           if (key === "hero_title") {
             renderHeroTitle(node, copy[key], selected);
@@ -305,13 +305,13 @@
         });
 
         document.querySelectorAll("[data-i18n-placeholder]").forEach(function (node) {
-          var phKey = node.dataset.i18nPlaceholder;
+          const phKey = node.dataset.i18nPlaceholder;
           if (phKey && Object.hasOwn(copy, phKey)) node.setAttribute("placeholder", copy[phKey]);
         });
 
         if (globalThis.innerWidth <= 760) {
           document.querySelectorAll("[data-i18n-mobile]").forEach(function (node) {
-            var mobileKey = node.dataset.i18nMobile;
+            const mobileKey = node.dataset.i18nMobile;
             if (mobileKey && Object.hasOwn(copy, mobileKey)) node.textContent = copy[mobileKey];
           });
         }
@@ -333,14 +333,14 @@
         }
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
-          var isActive = btn.dataset.lang === selected;
+          const isActive = btn.dataset.lang === selected;
           btn.classList.toggle("active", isActive);
           btn.setAttribute("aria-pressed", String(isActive));
         });
 
-        var canonicalLink = document.querySelector('link[rel="canonical"]');
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
         if (canonicalLink) canonicalLink.setAttribute("href", langUrl(selected));
-        var ogUrlMeta = document.querySelector('meta[property="og:url"]');
+        const ogUrlMeta = document.querySelector('meta[property="og:url"]');
         if (ogUrlMeta) ogUrlMeta.setAttribute("content", langUrl(selected));
 
         try {
@@ -358,9 +358,9 @@
         });
       });
 
-      var header = document.querySelector("header");
-      var menuToggle = document.querySelector(".menu-toggle");
-      var miniNav = document.querySelector(".mini-nav");
+      const header = document.querySelector("header");
+      const menuToggle = document.querySelector(".menu-toggle");
+      const miniNav = document.querySelector(".mini-nav");
       if (miniNav) miniNav.id = "mobile-site-nav";
 
       function closeMenu() {
@@ -370,8 +370,8 @@
         setMobileCtaHidden(false);
       }
 
-      var mobileCtaBar = document.querySelector(".mobile-cta-bar");
-      var lastScrollY = 0;
+      const mobileCtaBar = document.querySelector(".mobile-cta-bar");
+      let lastScrollY = 0;
 
       function setMobileCtaHidden(hidden) {
         if (!mobileCtaBar) return;
@@ -380,7 +380,7 @@
 
       if (menuToggle && header) {
         menuToggle.addEventListener("click", function () {
-          var isOpen = header.classList.toggle("menu-open");
+          const isOpen = header.classList.toggle("menu-open");
           menuToggle.setAttribute("aria-expanded", String(isOpen));
           setMobileCtaHidden(isOpen);
         });
@@ -397,15 +397,15 @@
         link.addEventListener("click", closeMenu);
       });
 
-      var faqItems = Array.from(document.querySelectorAll(".faq-item"));
+      const faqItems = Array.from(document.querySelectorAll(".faq-item"));
       faqItems.forEach(function (item) {
-        var toggle = item.querySelector(".faq-toggle");
+        const toggle = item.querySelector(".faq-toggle");
         if (!toggle) return;
         toggle.addEventListener("click", function () {
-          var shouldOpen = !item.classList.contains("is-open");
+          const shouldOpen = !item.classList.contains("is-open");
           faqItems.forEach(function (other) {
             other.classList.remove("is-open");
-            var otherToggle = other.querySelector(".faq-toggle");
+            const otherToggle = other.querySelector(".faq-toggle");
             if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
           });
           if (!shouldOpen) return;
@@ -414,13 +414,13 @@
         });
       });
 
-      var serviceCards = Array.from(document.querySelectorAll(".service-card--collapsible"));
+      const serviceCards = Array.from(document.querySelectorAll(".service-card--collapsible"));
 
       function syncServiceCards() {
-        var isMobile = globalThis.innerWidth <= 760;
+        const isMobile = globalThis.innerWidth <= 760;
         serviceCards.forEach(function (card) {
-          var toggle = card.querySelector(".service-toggle");
-          var body = card.querySelector(".service-card-body");
+          const toggle = card.querySelector(".service-toggle");
+          const body = card.querySelector(".service-card-body");
           if (!toggle || !body) return;
 
           if (!isMobile) {
@@ -430,18 +430,18 @@
           }
 
 
-          var isOpen = card.classList.contains("is-open");
+          const isOpen = card.classList.contains("is-open");
           body.hidden = !isOpen;
           toggle.setAttribute("aria-expanded", String(isOpen));
         });
       }
 
       serviceCards.forEach(function (card) {
-        var toggle = card.querySelector(".service-toggle");
+        const toggle = card.querySelector(".service-toggle");
         if (!toggle) return;
         toggle.addEventListener("click", function () {
           if (globalThis.innerWidth > 760) return;
-          var shouldOpen = !card.classList.contains("is-open");
+          const shouldOpen = !card.classList.contains("is-open");
           serviceCards.forEach(function (other) {
             other.classList.remove("is-open");
           });
@@ -460,7 +460,7 @@
 
       globalThis.addEventListener("scroll", function () {
         if (!mobileCtaBar || globalThis.innerWidth > 760) return;
-        var currentY = globalThis.scrollY || 0;
+        const currentY = globalThis.scrollY || 0;
         if (Math.abs(currentY - lastScrollY) < 8) return;
         if (currentY < 72) {
           setMobileCtaHidden(false);
@@ -472,12 +472,12 @@
       }, { passive: true });
 
       document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && header && header.classList.contains("menu-open")) closeMenu();
+        if (event.key === "Escape" && header?.classList.contains("menu-open")) closeMenu();
       });
 
       // Theme toggle
-      var themeToggleBtn = document.getElementById('theme-toggle-btn');
-      var currentTheme = null;
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      let currentTheme = null;
       try {
         currentTheme = localStorage.getItem('rc-theme');
       } catch (error) {
@@ -486,9 +486,9 @@
       // Split out of setTheme: re-rendering a third-party widget is its own concern,
       // and keeping it inline pushed setTheme over the cognitive-complexity limit.
       function syncCaptchaTheme(theme) {
-        var hc = document.querySelector('.h-captcha');
+        const hc = document.querySelector('.h-captcha');
         if (!hc) return;
-        var hcTheme = theme === 'light' ? 'light' : 'dark';
+        const hcTheme = theme === 'light' ? 'light' : 'dark';
         hc.dataset.theme = hcTheme;
         // Once hCaptcha has auto-rendered, changing the attribute alone has no
         // effect (the theme is baked into the widget's iframe at render time),
@@ -524,46 +524,46 @@
       if (currentTheme === 'light') setTheme('light');
       if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', function() {
-          var isLight = document.documentElement.dataset.theme === 'light';
+          const isLight = document.documentElement.dataset.theme === 'light';
           setTheme(isLight ? 'dark' : 'light');
         });
       }
 
-      var urlLanguage = getLangFromUrl();
-      var savedLanguage = null;
+      const urlLanguage = getLangFromUrl();
+      let savedLanguage = null;
       try {
         savedLanguage = localStorage.getItem("preferred-language");
       } catch (error) {
         console.debug("Preferred-language read is unavailable", error);
       }
-      var initialLanguage = urlLanguage || savedLanguage || "lv";
+      let initialLanguage = urlLanguage || savedLanguage || "lv";
       if (!languageFiles[initialLanguage]) initialLanguage = "lv";
       // Pin hCaptcha's language to the site language (not the browser locale)
       // before Web3Forms' async script renders the widget.
-      var hcaptchaEl = document.querySelector(".h-captcha");
+      const hcaptchaEl = document.querySelector(".h-captcha");
       if (hcaptchaEl) hcaptchaEl.dataset.hl = initialLanguage;
       applyLanguage(initialLanguage);
 
-      var isOwnerView = isOwnerCounterEnabled();
+      const isOwnerView = isOwnerCounterEnabled();
       setVisitorCounterVisible(isOwnerView);
       updateUniqueVisitorCount();
 
       (function initContactForm() {
-        var form = document.getElementById("contact-form");
-        var status = document.getElementById("contact-status");
+        const form = document.getElementById("contact-form");
+        const status = document.getElementById("contact-status");
         if (!form || !status) return;
-        var submitBtn = form.querySelector('button[type="submit"]');
+        const submitBtn = form.querySelector('button[type="submit"]');
 
         function t(key, fallback) {
-          var copy = globalThis.rcCopy;
-          return (copy && copy[key]) || fallback;
+          const copy = globalThis.rcCopy;
+          return (copy?.[key]) || fallback;
         }
 
-        var CONTACT_EMAIL = "latvia.robotics@gmail.com";
+        const CONTACT_EMAIL = "latvia.robotics@gmail.com";
         function showError() {
           status.className = "rc-form-status is-error";
-          var msg = t("contact_error", "Something went wrong sending that. Please try again, or {email}.");
-          var link = '<a href="mailto:' + CONTACT_EMAIL + '">' + t("contact_error_link", "email me directly") + '</a>';
+          const msg = t("contact_error", "Something went wrong sending that. Please try again, or {email}.");
+          const link = '<a href="mailto:' + CONTACT_EMAIL + '">' + t("contact_error_link", "email me directly") + '</a>';
           if (msg.includes("{email}")) {
             status.innerHTML = msg.replace("{email}", link);
           } else {
@@ -571,14 +571,14 @@
           }
         }
 
-        var whatsappLink = document.getElementById("whatsapp-contact-link");
+        const whatsappLink = document.getElementById("whatsapp-contact-link");
         if (whatsappLink) {
           whatsappLink.addEventListener("click", function () {
             rcTrack("Contact", { method: "whatsapp" }, { gaEvent: "generate_lead" });
           });
         }
 
-        var phoneLink = document.getElementById("phone-contact-link");
+        const phoneLink = document.getElementById("phone-contact-link");
         if (phoneLink) {
           phoneLink.addEventListener("click", function () {
             rcTrack("Contact", { method: "phone" }, { gaEvent: "generate_lead" });
@@ -590,20 +590,20 @@
           status.className = "rc-form-status";
           status.textContent = "";
 
-          var accessKey = form.querySelector('input[name="access_key"]');
-          if (!accessKey || !accessKey.value || accessKey.value === "YOUR_WEB3FORMS_ACCESS_KEY") {
+          const accessKey = form.querySelector('input[name="access_key"]');
+          if (!accessKey?.value || accessKey.value === "YOUR_WEB3FORMS_ACCESS_KEY") {
             showError();
             return;
           }
 
-          var hcaptchaField = form.querySelector('textarea[name="h-captcha-response"]');
+          const hcaptchaField = form.querySelector('textarea[name="h-captcha-response"]');
           if (hcaptchaField && !hcaptchaField.value) {
             status.className = "rc-form-status is-error";
             status.textContent = t("contact_turnstile", "Please complete the verification and try again.");
             return;
           }
 
-          var originalLabel = submitBtn ? submitBtn.textContent : "";
+          const originalLabel = submitBtn ? submitBtn.textContent : "";
           if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.textContent = t("contact_sending", "Sending…");
@@ -616,7 +616,7 @@
           })
             .then(function (response) { return response.json(); })
             .then(function (data) {
-              if (data && data.success) {
+              if (data?.success) {
                 status.classList.add("is-success");
                 status.textContent = t("contact_success", "Thanks — your message is on its way.");
                 form.reset();
@@ -643,18 +643,18 @@
       })();
 
       (function initFrameReveal() {
-        var cards = document.querySelectorAll(".frame-reveal");
+        const cards = document.querySelectorAll(".frame-reveal");
         if (!cards.length) return;
-        var reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const reduceMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         function sizeFrame(card) {
-          var svg = card.querySelector(".frame-reveal-svg");
-          var rect = svg && svg.querySelector("rect");
+          const svg = card.querySelector(".frame-reveal-svg");
+          const rect = svg?.querySelector("rect");
           if (!rect) return;
-          var w = card.clientWidth;
-          var h = card.clientHeight;
+          const w = card.clientWidth;
+          const h = card.clientHeight;
           svg.setAttribute("viewBox", "0 0 " + w + " " + h);
-          var inset = 1;
+          const inset = 1;
           rect.setAttribute("x", inset);
           rect.setAttribute("y", inset);
           rect.setAttribute("width", Math.max(0, w - inset * 2));
@@ -666,7 +666,7 @@
         cards.forEach(sizeFrame);
 
         if (typeof ResizeObserver === "function") {
-          var resizeObserver = new ResizeObserver(function (entries) {
+          const resizeObserver = new ResizeObserver(function (entries) {
             entries.forEach(function (entry) { sizeFrame(entry.target); });
           });
           cards.forEach(function (card) { resizeObserver.observe(card); });
@@ -677,7 +677,7 @@
           return;
         }
 
-        var frameObserver = new IntersectionObserver(function (entries) {
+        const frameObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
             entry.target.classList.add("in-view");
@@ -688,8 +688,8 @@
       })();
 
       if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      var revealNodes = document.querySelectorAll(".reveal");
-      var observer = new IntersectionObserver(function (entries) {
+      const revealNodes = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           entry.target.classList.add("in-view");
@@ -709,7 +709,7 @@
     // for reduced-motion users, and keeping this separate also means a failure here
     // can never take down the contact form's setup, which runs earlier.
     (function initEngagementTracking() {
-      var fired = {};
+      const fired = {};
 
       function once(key, name, params, opts) {
         if (fired[key]) return;
@@ -718,8 +718,8 @@
       }
 
       function onScroll() {
-        var doc = document.documentElement;
-        var scrollable = doc.scrollHeight - globalThis.innerHeight;
+        const doc = document.documentElement;
+        const scrollable = doc.scrollHeight - globalThis.innerHeight;
         if (scrollable <= 0) return;
         if ((doc.scrollTop || document.body.scrollTop) / scrollable >= 0.5) {
           once("scroll50", "Scroll50", undefined, { custom: true });
@@ -728,9 +728,9 @@
       }
       globalThis.addEventListener("scroll", onScroll, { passive: true });
 
-      var contactSection = document.getElementById("contact");
+      const contactSection = document.getElementById("contact");
       if (contactSection && typeof IntersectionObserver === "function") {
-        var contactObserver = new IntersectionObserver(function (entries) {
+        const contactObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
             once("viewContact", "ViewContent", { content_name: "contact-section" });
@@ -740,7 +740,7 @@
         contactObserver.observe(contactSection);
       }
 
-      var contactForm = document.getElementById("contact-form");
+      const contactForm = document.getElementById("contact-form");
       if (contactForm) {
         contactForm.addEventListener("focusin", function () {
           once("formStart", "FormStart", undefined, { custom: true });
@@ -748,9 +748,9 @@
       }
 
       document.addEventListener("click", function (event) {
-        var node = event.target;
+        const node = event.target;
         if (!node || typeof node.closest !== "function") return;
-        var link = node.closest("a, button");
+        const link = node.closest("a, button");
         if (!link) return;
 
         if (link.id === "leadmag-link" || link.id === "hero-leadmag-link") {

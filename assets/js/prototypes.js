@@ -1,5 +1,5 @@
     (function () {
-      var i18n = {
+      const i18n = {
         lv: {
           pageTitle: "Praktiski piemēri mazam biznesam",
           htmlTitle: "Praktiski piemēri mazam biznesam | Robotics Consulting",
@@ -267,47 +267,47 @@
       };
 
       function setText(id, value) {
-        var el = document.getElementById(id);
+        const el = document.getElementById(id);
         if (el) el.textContent = value;
       }
 
       function setHtml(id, value) {
-        var el = document.getElementById(id);
+        const el = document.getElementById(id);
         if (el) el.innerHTML = value;
       }
 
-      var siteOrigin = "https://www.sia-robotics-consulting.eu";
-      var canonicalPath = "/prototypes.html";
+      const siteOrigin = "https://www.sia-robotics-consulting.eu";
+      const canonicalPath = "/prototypes.html";
 
       function langUrl(lang) {
         return siteOrigin + canonicalPath + (lang === "lv" ? "" : "?lang=" + lang);
       }
 
       function getLangFromUrl() {
-        var params = new URLSearchParams(globalThis.location.search || "");
-        var urlLang = params.get("lang");
+        const params = new URLSearchParams(globalThis.location.search || "");
+        const urlLang = params.get("lang");
         return i18n[urlLang] ? urlLang : null;
       }
 
       function syncLangUrl(lang) {
-        var params = new URLSearchParams(globalThis.location.search || "");
+        const params = new URLSearchParams(globalThis.location.search || "");
         if (lang === "lv") {
           params.delete("lang");
         } else {
           params.set("lang", lang);
         }
-        var query = params.toString();
-        var newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+        const query = params.toString();
+        const newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
         globalThis.history.replaceState(null, "", newUrl);
       }
 
       function applyLanguage(lang) {
-        var selected = i18n[lang] ? lang : "lv";
-        var copy = i18n[selected];
+        const selected = i18n[lang] ? lang : "lv";
+        const copy = i18n[selected];
 
         document.documentElement.lang = selected;
         document.title = copy.htmlTitle;
-        var descriptionMeta = document.querySelector('meta[name="description"]');
+        const descriptionMeta = document.querySelector('meta[name="description"]');
         if (descriptionMeta) descriptionMeta.setAttribute("content", copy.pageDesc);
 
         setText("page-title", copy.pageTitle);
@@ -384,7 +384,7 @@
         setText("cta-title", globalThis.innerWidth <= 760 && copy.ctaTitleMobile ? copy.ctaTitleMobile : copy.ctaTitle);
         setText("cta-sub", copy.ctaSub);
         setText("cta-button", copy.ctaButton);
-        var leadmagLink = document.getElementById("leadmag-link");
+        const leadmagLink = document.getElementById("leadmag-link");
         if (leadmagLink) {
           leadmagLink.textContent = copy.leadmagBtn;
           leadmagLink.href = copy.leadmagHref;
@@ -410,64 +410,64 @@
         setText("exp-chip-integration", copy.expIntegration);
 
         // update complexity chip color classes
-        var complexityMap = { tier: "low", estr: "medium", exp: "low" };
+        const complexityMap = { tier: "low", estr: "medium", exp: "low" };
         Object.keys(complexityMap).forEach(function(prefix) {
-          var chip = document.getElementById(prefix + "-chip-complexity");
-          if (chip && chip.parentElement) {
+          const chip = document.getElementById(prefix + "-chip-complexity");
+          if (chip?.parentElement) {
             chip.parentElement.className = "proto-chip proto-chip--" + complexityMap[prefix];
           }
         });
 
         document.querySelectorAll(".lang-btn").forEach(function (btn) {
-          var isActive = btn.dataset.lang === selected;
+          const isActive = btn.dataset.lang === selected;
           btn.classList.toggle("active", isActive);
           btn.setAttribute("aria-pressed", String(isActive));
         });
 
-        var canonicalLink = document.querySelector('link[rel="canonical"]');
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
         if (canonicalLink) canonicalLink.setAttribute("href", langUrl(selected));
-        var ogUrlMeta = document.querySelector('meta[property="og:url"]');
+        const ogUrlMeta = document.querySelector('meta[property="og:url"]');
         if (ogUrlMeta) ogUrlMeta.setAttribute("content", langUrl(selected));
 
         localStorage.setItem("preferred-language", selected);
         syncLangUrl(selected);
       }
 
-      var images = Array.from(document.querySelectorAll(".proto-gallery img"));
-      var lightbox = document.getElementById("lightbox");
-      var lightboxImage = document.getElementById("lightboxImage");
-      var lightboxCaption = document.getElementById("lightboxCaption");
-      var lightboxCounter = document.getElementById("lightboxCounter");
-      var lightboxClose = document.getElementById("lightboxClose");
-      var lightboxPrev = document.getElementById("lightboxPrev");
-      var lightboxNext = document.getElementById("lightboxNext");
-      var currentImageIndex = -1;
-      var touchStartX = 0;
-      var touchEndX = 0;
+      const images = Array.from(document.querySelectorAll(".proto-gallery img"));
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const lightboxCounter = document.getElementById("lightboxCounter");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const lightboxPrev = document.getElementById("lightboxPrev");
+      const lightboxNext = document.getElementById("lightboxNext");
+      let currentImageIndex = -1;
+      let touchStartX = 0;
+      let touchEndX = 0;
 
       function describeImage(img) {
-        var section = img.closest(".proto-section");
-        var title = section ? section.querySelector("h2") : null;
-        var galleryImages = section ? Array.from(section.querySelectorAll(".proto-gallery img")) : [];
-        var imageIndex = Math.max(0, galleryImages.indexOf(img));
-        var selected = i18n[document.documentElement.lang] ? document.documentElement.lang : "lv";
-        var copy = i18n[selected];
-        var baseTitle = title ? title.textContent.trim() : "";
-        var slideTitle = copy.slideLabel + " " + (imageIndex + 1);
+        const section = img.closest(".proto-section");
+        const title = section ? section.querySelector("h2") : null;
+        const galleryImages = section ? Array.from(section.querySelectorAll(".proto-gallery img")) : [];
+        const imageIndex = Math.max(0, galleryImages.indexOf(img));
+        const selected = i18n[document.documentElement.lang] ? document.documentElement.lang : "lv";
+        const copy = i18n[selected];
+        const baseTitle = title ? title.textContent.trim() : "";
+        const slideTitle = copy.slideLabel + " " + (imageIndex + 1);
         return baseTitle ? baseTitle + " · " + slideTitle : slideTitle;
       }
 
       function updateLightboxNav() {
-        var disabled = currentImageIndex < 0;
+        const disabled = currentImageIndex < 0;
         lightboxPrev.disabled = disabled || currentImageIndex === 0;
         lightboxNext.disabled = disabled || currentImageIndex === images.length - 1;
       }
 
-      var galleryViewFired = false;
+      let galleryViewFired = false;
 
       function openLightbox(index) {
         currentImageIndex = index;
-        var img = images[currentImageIndex];
+        const img = images[currentImageIndex];
         if (!img) return;
         lightboxImage.src = img.currentSrc || img.src;
         lightboxImage.alt = describeImage(img);
@@ -484,7 +484,7 @@
       }
 
       function showAdjacentImage(step) {
-        var nextIndex = currentImageIndex + step;
+        const nextIndex = currentImageIndex + step;
         if (nextIndex < 0 || nextIndex >= images.length) return;
         openLightbox(nextIndex);
       }
@@ -540,8 +540,8 @@
       applyLanguage(getLangFromUrl() || localStorage.getItem("preferred-language") || "lv");
 
       /* ---- Theme toggle ---- */
-      var themeToggleBtn = document.getElementById("theme-toggle-btn");
-      var htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById("theme-toggle-btn");
+      const htmlEl = document.documentElement;
 
       function setTheme(theme) {
         htmlEl.dataset.theme = theme;
@@ -556,7 +556,7 @@
       }
 
       function toggleTheme() {
-        var current = htmlEl.dataset.theme || "dark";
+        const current = htmlEl.dataset.theme || "dark";
         setTheme(current === "dark" ? "light" : "dark");
       }
 
@@ -565,7 +565,7 @@
       }
 
       // Restore saved theme preference
-      var savedTheme = null;
+      let savedTheme = null;
       try {
         savedTheme = localStorage.getItem("rc-theme");
       } catch (e) {
@@ -582,7 +582,7 @@
     // so ViewContent watches the CTA box instead, and the checklist download is its
     // own conversion signal.
     (function initEngagementTracking() {
-      var fired = {};
+      const fired = {};
 
       function once(key, name, params, opts) {
         if (fired[key]) return;
@@ -591,8 +591,8 @@
       }
 
       function onScroll() {
-        var doc = document.documentElement;
-        var scrollable = doc.scrollHeight - globalThis.innerHeight;
+        const doc = document.documentElement;
+        const scrollable = doc.scrollHeight - globalThis.innerHeight;
         if (scrollable <= 0) return;
         if ((doc.scrollTop || document.body.scrollTop) / scrollable >= 0.5) {
           once("scroll50", "Scroll50", undefined, { custom: true });
@@ -601,9 +601,9 @@
       }
       globalThis.addEventListener("scroll", onScroll, { passive: true });
 
-      var ctaBox = document.querySelector(".cta-box");
+      const ctaBox = document.querySelector(".cta-box");
       if (ctaBox && typeof IntersectionObserver === "function") {
-        var ctaObserver = new IntersectionObserver(function (entries) {
+        const ctaObserver = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
             once("viewCta", "ViewContent", { content_name: "prototypes-cta-section" });
@@ -614,9 +614,9 @@
       }
 
       document.addEventListener("click", function (event) {
-        var node = event.target;
+        const node = event.target;
         if (!node || typeof node.closest !== "function") return;
-        var link = node.closest("a, button");
+        const link = node.closest("a, button");
         if (!link) return;
 
         if (link.id === "leadmag-link") {

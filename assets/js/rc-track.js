@@ -1,5 +1,5 @@
         (function () {
-          var rcDebugParam = new URLSearchParams(globalThis.location.search || "").get("rc_debug");
+          const rcDebugParam = new URLSearchParams(globalThis.location.search || "").get("rc_debug");
           if (rcDebugParam === "1" || rcDebugParam === "0") {
             try {
               if (rcDebugParam === "1") localStorage.setItem("rc-debug-mode", "1");
@@ -10,7 +10,7 @@
           }
         })();
 
-        var rcDebugMode = (function () {
+        const rcDebugMode = (function () {
           try {
             return localStorage.getItem("rc-debug-mode") === "1";
           } catch (error) {
@@ -19,7 +19,7 @@
           }
         })();
 
-        var rcIsProd = globalThis.location.hostname === "www.sia-robotics-consulting.eu" && !rcDebugMode;
+        const rcIsProd = globalThis.location.hostname === "www.sia-robotics-consulting.eu" && !rcDebugMode;
 
         function rcTrack(name, params, opts) {
           if (!rcIsProd) {
@@ -28,9 +28,9 @@
           }
           try {
             if (typeof fbq === "function") {
-              fbq(opts && opts.custom ? "trackCustom" : "track", name, params);
+              fbq(opts?.custom ? "trackCustom" : "track", name, params);
             }
-            if (opts && opts.gaEvent && typeof gtag === "function") {
+            if (opts?.gaEvent && typeof gtag === "function") {
               gtag("event", opts.gaEvent, params);
             }
           } catch (error) {
