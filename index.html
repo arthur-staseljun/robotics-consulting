@@ -1882,7 +1882,7 @@
         .rc-form-status.is-error { color: #ff9a9a; }
         .rc-form-status a { color: inherit; text-decoration: underline; }
         .rc-hp { position: absolute; left: -9999px; width: 0; height: 0; overflow: hidden; }
-        .rc-contact-alt { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px auto 0; max-width: 460px; font-size: 14px; color: var(--muted); }
+        .rc-contact-alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 12px auto 0; max-width: 460px; font-size: 14px; color: var(--muted); }
         .rc-contact-alt .btn { padding: 9px 16px; min-height: 40px; }
         @media (max-width: 480px) {
           .rc-contact-form { flex-direction: column; }
@@ -1894,7 +1894,7 @@
     <section id="contact" class="glass section-card frame-reveal frame-reveal-reverse" style="--reveal-delay: 2600ms;">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="cta_title" data-i18n-mobile="cta_title_mobile">Neesat pārliecināti, ar ko sākt?</h2>
-        <p class="section-sub" data-i18n="contact_sub">Atstājiet savu e-pastu — atbildēšu, lai norunātu īsu zvanu.</p>
+        <p class="section-sub" data-i18n="contact_sub">Atstājiet savu e-pastu — bez spiediena, bez pārdošanas. Vienkārši parunāsim.</p>
         <form id="contact-form" class="rc-contact-form" novalidate>
             <!-- Web3Forms access key (public by design; only permits sending to your verified email) -->
             <input type="hidden" name="access_key" value="2bc7037a-14d8-47df-9866-2a7804e2a575">
@@ -1916,9 +1916,11 @@
             <output class="rc-form-status" id="contact-status"></output>
         </form>
         <div class="rc-contact-alt">
+            <a id="phone-contact-link" class="btn btn-alt" href="tel:+37126843654">
+                <span data-i18n="contact_call_btn">Zvaniet</span>
+            </a>
             <span data-i18n="contact_or">vai</span>
-            <a id="whatsapp-contact-link" class="btn btn-alt frame-reveal" href="https://wa.me/37126843654" target="_blank" rel="noopener">
-                <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
+            <a id="whatsapp-contact-link" class="btn btn-alt" href="https://wa.me/37126843654" target="_blank" rel="noopener">
                 <span data-i18n="contact_whatsapp_btn">Rakstiet WhatsApp</span>
             </a>
         </div>
@@ -2515,6 +2517,13 @@
         if (whatsappLink) {
           whatsappLink.addEventListener("click", function () {
             rcTrack("Contact", { method: "whatsapp" }, { gaEvent: "generate_lead" });
+          });
+        }
+
+        var phoneLink = document.getElementById("phone-contact-link");
+        if (phoneLink) {
+          phoneLink.addEventListener("click", function () {
+            rcTrack("Contact", { method: "phone" }, { gaEvent: "generate_lead" });
           });
         }
 
