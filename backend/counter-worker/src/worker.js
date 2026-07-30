@@ -55,6 +55,22 @@ async function setCurrentValue(env, value) {
   await env.COUNTER_KV.put(key, String(value));
 }
 
+function dailyKeyFor(date) {
+  return "daily:" + date.toISOString().slice(0, 10);
+}
+
+async function getDailyValue(env, dateStr) {
+  const raw = await env.COUNTER_KV.get("daily:" + dateStr);
+  return toNumber(raw, 0);
+}
+
+async function incrementDailyValue(env, date) {
+  const key = dailyKeyFor(date);
+  const current = toNumber(await env.COUNTER_KV.get(key), 0) + 1;
+  await env.COUNTER_KV.put(key, String(current));
+  return current;
+}
+
 export default {
   async fetch(request, env) {
 	const url = new URL(request.url);
@@ -78,6 +94,17 @@ export default {
 
 	try {
 	  const mode = url.searchParams.get("mode") || "get";
+
+	if (mode === "daily") {
+		const dateParam = url.searchParams.get("date");
+		const dateStr = dateParam || new Date().toISOString().slice(0, 10);
+		if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+		  return json({ error: "Invalid date, expected YYYY-MM-DD" }, 400, origin);
+		}
+		const value = await getDailyValue(env, dateStr);
+		return json({ date: dateStr, value }, 200, origin);
+	  }
+
 	  let current = await getCurrentValue(env);
 
 	if (mode === "hit") {
@@ -90,6 +117,7 @@ export default {
 		}
 		current += 1;
 		await setCurrentValue(env, current);
+		await incrementDailyValue(env, new Date());
 	  } else if (mode !== "get") {
 		return json({ error: "Unsupported mode" }, 400, origin);
 	  }

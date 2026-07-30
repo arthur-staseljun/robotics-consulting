@@ -56,13 +56,24 @@ Check the backend directly:
 ```bash
 curl "https://<your-worker>.workers.dev/api/counter?mode=get"
 curl "https://<your-worker>.workers.dev/api/counter?mode=hit"
+curl "https://<your-worker>.workers.dev/api/counter?mode=daily"
 ```
 
 Then open the site in owner mode and confirm the footer counter is visible and updates.
 
+### Daily breakdown
+
+`?mode=daily` (optional `&date=YYYY-MM-DD`, defaults to today UTC) returns `{ "date": "...", "value": N }` — how many unique visitors first hit on that specific day, as opposed to `?mode=get`'s single running total. Useful for lining up a specific day's real traffic against that day's ad/funnel numbers. See `backend/counter-worker/README.md` for details on how it's stored.
+
+### What is Wrangler?
+
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/) is Cloudflare's CLI for developing and deploying Workers/Pages — it's already a dependency of `backend/counter-worker` (`npm install` there is enough, no global install needed). `npx wrangler login` opens a browser tab to authorize the CLI against your Cloudflare account; once granted, `npm run deploy` (which wraps `wrangler deploy`) can push code and read/write KV from your terminal.
+
 ## Analytics / Tracking Events
 
-Both `index.html` and `prototypes.html` share an identical `rcTrack(name, params, opts)` helper (`index.html:1490-1509`, `prototypes.html:477-496`) that sends events to the Meta Pixel (`fbq`) and, optionally, Google Ads (`gtag`). Sends only happen when `location.hostname === "www.sia-robotics-consulting.eu"` (`rcIsProd`); everywhere else (local dev, previews) events just log to the console via `console.debug("[track]", ...)`, so testing never pollutes the real ad accounts.
+Both `index.html` and `prototypes.html` share an identical `rcTrack(name, params, opts)` helper that sends events to the Meta Pixel (`fbq`) and, optionally, Google Ads (`gtag`). Sends only happen when `location.hostname === "www.sia-robotics-consulting.eu"` (`rcIsProd`); everywhere else (local dev, previews) events just log to the console via `console.debug("[track]", ...)`, so testing on localhost/preview never pollutes the real ad accounts.
+
+**Testing on the live prod domain itself** (e.g. clicking through the real site to verify a new trigger fires correctly) still hits `rcIsProd`, so it *would* normally send real events to Meta/Ads. To test there without polluting the stats, open the site once with `?rc_debug=1` — this sets a `localStorage` flag (`rc-debug-mode`) that forces the same console-only behavior as off-prod, even on the real domain, until you clear it with `?rc_debug=0`. Neither the Meta Pixel nor `gtag('config', ...)` load at all while the flag is set (both are gated on the same `rcIsProd`).
 
 | Event | Meta type | Fires on | Page(s) | GA/Ads event |
 |---|---|---|---|---|

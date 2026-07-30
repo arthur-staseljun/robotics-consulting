@@ -18,6 +18,20 @@ def replace_page_image(page: "fitz.Page", new_image_path: str, image_index: int 
     page.replace_image(xref, filename=new_image_path)
 
 
+def _find_text_span(page: "fitz.Page", match: str) -> dict:
+    """Find the text span containing `match` on `page`."""
+    target = None
+    for block in page.get_text("dict")["blocks"]:
+        for line in block.get("lines", []):
+            for span in line["spans"]:
+                if match in span["text"]:
+                    target = span
+                    break
+    if not target:
+        raise ValueError(f"No text span containing {match!r} found on page {page.number}")
+    return target
+
+
 def replace_text_span(
     page: "fitz.Page",
     match: str,
@@ -34,16 +48,7 @@ def replace_text_span(
     Returns the bounding rect of the newly inserted text (handy for
     re-attaching a link annotation over it).
     """
-    target = None
-    for block in page.get_text("dict")["blocks"]:
-        for line in block.get("lines", []):
-            for span in line["spans"]:
-                if match in span["text"]:
-                    target = span
-                    break
-    if not target:
-        raise ValueError(f"No text span containing {match!r} found on page {page.number}")
-
+    target = _find_text_span(page, match)
     rect = fitz.Rect(target["bbox"])
 
     # Already applied (e.g. a re-run): skip redacting/reinserting so we don't

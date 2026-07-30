@@ -474,9 +474,33 @@
     </style>
     <!-- Analytics helper — kept identical to index.html so both pages behave the
          same: everything is gated on the production hostname, and off-prod the
-         events go to the console instead of the live Pixel / Ads account. -->
+         events go to the console instead of the live Pixel / Ads account.
+         ?rc_debug=1 forces the same off-prod (console-only) behavior even on
+         the prod hostname, for testing directly on the live site; persists via
+         localStorage until cleared with ?rc_debug=0. -->
     <script>
-        var rcIsProd = globalThis.location.hostname === "www.sia-robotics-consulting.eu";
+        (function () {
+          var rcDebugParam = new URLSearchParams(globalThis.location.search || "").get("rc_debug");
+          if (rcDebugParam === "1" || rcDebugParam === "0") {
+            try {
+              if (rcDebugParam === "1") localStorage.setItem("rc-debug-mode", "1");
+              else localStorage.removeItem("rc-debug-mode");
+            } catch (error) {
+              console.debug("rc_debug localStorage is unavailable", error);
+            }
+          }
+        })();
+
+        var rcDebugMode = (function () {
+          try {
+            return localStorage.getItem("rc-debug-mode") === "1";
+          } catch (error) {
+            console.debug("Debug-mode localStorage read is unavailable", error);
+            return false;
+          }
+        })();
+
+        var rcIsProd = globalThis.location.hostname === "www.sia-robotics-consulting.eu" && !rcDebugMode;
 
         function rcTrack(name, params, opts) {
           if (!rcIsProd) {
@@ -1110,7 +1134,7 @@
           ctaTitle: "Considering Automation But Unsure Where to Start?",
           ctaTitleMobile: "Unsure where to start?",
           ctaSub: "Get a practical assessment before committing to expensive equipment or software.",
-          ctaButton: "Book a Free Audit",
+          ctaButton: "Let's have a call",
           close: "Close",
           prev: "Previous image",
           next: "Next image",
