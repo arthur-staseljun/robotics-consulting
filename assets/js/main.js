@@ -687,6 +687,70 @@
         cards.forEach(function (card) { frameObserver.observe(card); });
       })();
 
+      (function initContactButtonsReveal() {
+        const contactRect = document.querySelector("#contact.frame-reveal .frame-reveal-svg rect");
+        const callLink = document.getElementById("phone-contact-link");
+        const waLink = document.getElementById("whatsapp-contact-link");
+        if (!contactRect || !callLink || !waLink) return;
+        if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        function sizeButtonOutline(link) {
+          const svg = link.querySelector(".btn-outline-svg");
+          const rect = svg?.querySelector("rect");
+          if (!rect) return;
+          const w = link.clientWidth;
+          const h = link.clientHeight;
+          svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+          const inset = 1;
+          rect.setAttribute("x", inset);
+          rect.setAttribute("y", inset);
+          rect.setAttribute("width", Math.max(0, w - inset * 2));
+          rect.setAttribute("height", Math.max(0, h - inset * 2));
+          rect.setAttribute("rx", Number.parseFloat(getComputedStyle(link).borderRadius) || 11);
+          rect.style.setProperty("--dash-length", rect.getTotalLength());
+        }
+
+        [callLink, waLink].forEach(sizeButtonOutline);
+        if (typeof ResizeObserver === "function") {
+          const buttonResizeObserver = new ResizeObserver(function (entries) {
+            entries.forEach(function (entry) { sizeButtonOutline(entry.target); });
+          });
+          buttonResizeObserver.observe(callLink);
+          buttonResizeObserver.observe(waLink);
+        }
+
+        const HIGHLIGHT_PAUSE_MS = 700;
+
+        function wait(ms) {
+          return new Promise(function (resolve) { setTimeout(resolve, ms); });
+        }
+
+        // Each rect only ever carries the one frameDraw keyframe from CSS, so
+        // any animationend on it *is* that draw finishing — no need to filter
+        // by animationName or target.
+        function waitForAnimationEnd(el) {
+          return new Promise(function (resolve) {
+            el.addEventListener("animationend", resolve, { once: true });
+          });
+        }
+
+        // Draws the button's outline, waits for it to finish, holds briefly,
+        // then drops the highlight — resolves only after the class is removed
+        // so callers can chain the next button's draw right after.
+        function drawOutline(link) {
+          const rect = link.querySelector(".btn-outline-svg rect");
+          link.classList.add("btn-outline-draw");
+          return waitForAnimationEnd(rect)
+            .then(function () { return wait(HIGHLIGHT_PAUSE_MS); })
+            .then(function () { link.classList.remove("btn-outline-draw"); });
+        }
+
+        function onContactFrameDrawn() {
+          drawOutline(callLink).then(function () { return drawOutline(waLink); });
+        }
+        contactRect.addEventListener("animationend", onContactFrameDrawn, { once: true });
+      })();
+
       if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const revealNodes = document.querySelectorAll(".reveal");
       const observer = new IntersectionObserver(function (entries) {
