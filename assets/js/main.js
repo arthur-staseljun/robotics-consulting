@@ -784,8 +784,8 @@
       });
     })();
 
-    // Engagement funnel: PageView -> Scroll50 -> ViewContent -> ContactIntentClick/
-    // PrototypesClick/CvClick/DemoOpen/FormStart -> Lead.
+    // Engagement funnel: PageView -> ScrolledHalfPage -> ViewContent -> ClickedContactButton/
+    // ClickedPortfolioLink/ClickedPricingLink/OpenedFullCV/OpenedDemoServer/StartedContactForm -> Lead.
     // Without these middle steps there is no way to tell "visitors never reach the
     // form" from "they reach it and don't want it" — opposite problems.
     //
@@ -806,7 +806,7 @@
         const scrollable = doc.scrollHeight - globalThis.innerHeight;
         if (scrollable <= 0) return;
         if ((doc.scrollTop || document.body.scrollTop) / scrollable >= 0.5) {
-          once("scroll50", "Scroll50", undefined, { custom: true });
+          once("scroll50", "ScrolledHalfPage", undefined, { custom: true });
           globalThis.removeEventListener("scroll", onScroll);
         }
       }
@@ -839,7 +839,7 @@
           // focusing a link is not "started filling the form" — without this guard
           // every phone/WhatsApp click also fired FormStart and inflated the funnel.
           if (!event.target.matches("input, textarea, select")) return;
-          once("formStart", "FormStart", undefined, { custom: true });
+          once("formStart", "StartedContactForm", undefined, { custom: true });
         });
       }
 
@@ -848,11 +848,12 @@
         if (!node || typeof node.closest !== "function") return;
         const link = node.closest("a, button");
         if (!link) return;
+        const href = link.getAttribute("href") || "";
 
         // Clicking through to the full CV means someone is checking who they'd be
         // hiring — the strongest intent signal on the page short of contacting.
         if (link.id === "about-cv-link") {
-          once("cvClick", "CvClick", undefined, { custom: true, gaEvent: "select_content" });
+          once("cvClick", "OpenedFullCV", undefined, { custom: true, gaEvent: "select_content" });
           return;
         }
 
@@ -860,22 +861,33 @@
         // gate) — a dedicated event so the funnel shows how many people
         // actually opened it, distinct from the generic CTAClick bucket.
         if (link.id === "demo-cta-link") {
-          once("demoOpen", "DemoOpen", undefined, { custom: true, gaEvent: "select_content" });
+          once("demoOpen", "OpenedDemoServer", undefined, { custom: true, gaEvent: "select_content" });
           return;
         }
 
-        // "Skatīt, ko es daru" is the only hero CTA pointing away from the
-        // contact form — someone wanting to see the portfolio, not to talk yet.
-        if (link.id === "hero-cta-alt") {
-          once("prototypesClick", "PrototypesClick", undefined, { custom: true, gaEvent: "select_content" });
+        // Every link pointing at the portfolio page — hero CTA, the concept-board
+        // button, the work-strip thumbnails, the top-nav item — is the same signal
+        // (wants to see examples, not talk yet), so they share one event regardless
+        // of which link on the page triggered it.
+        if (href.startsWith("./prototypes.html") || href.startsWith("prototypes.html")) {
+          once("portfolioClick", "ClickedPortfolioLink", { source: link.id || link.className || "unlabeled" },
+               { custom: true, gaEvent: "select_content" });
           return;
         }
 
-        // Same "Rakstiet man" intent shows up in three places (hero, mid-page
-        // CTA, sticky mobile bar) — one event, not three, since it's one
-        // signal (wants to contact) regardless of which copy triggered it.
-        if (link.id === "hero-cta-main" || link.id === "cta-mid-btn" || link.id === "mobile-cta-bar-btn") {
-          once("contactIntent", "ContactIntentClick", { source: link.id },
+        // Someone clicking through from a service card to the full price table —
+        // a pricing-interest signal distinct from "wants to contact".
+        if (link.classList.contains("price-link")) {
+          once("pricingClick", "ClickedPricingLink", undefined, { custom: true, gaEvent: "select_content" });
+          return;
+        }
+
+        // Same "Rakstiet man" intent shows up in four places (hero, demo
+        // section, mid-page CTA, sticky mobile bar) — one event, not four,
+        // since it's one signal (wants to contact) regardless of which copy
+        // triggered it.
+        if (link.id === "hero-cta-main" || link.id === "demo-contact-link" || link.id === "cta-mid-btn" || link.id === "mobile-cta-bar-btn") {
+          once("contactIntent", "ClickedContactButton", { source: link.id },
                { custom: true, gaEvent: "select_content" });
         }
       });
