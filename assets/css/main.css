@@ -62,8 +62,6 @@
           --pricing-bg: rgba(20, 44, 22, 0.55);
           --pricing-main: #7de8a0;
           --pricing-meta: #8ecba4;
-          --leadmag-h3: #ffd36f;
-          --leadmag-bg: rgba(16, 26, 46, 0.9);
           --bg-grad-1: rgba(43, 169, 241, 0.18);
           --swipe-hint-color: #9db7df;
           --cta-box-border: #395b90;
@@ -152,8 +150,6 @@
           --pricing-bg: rgba(240, 248, 240, 0.85);
           --pricing-main: #2d6e3a;
           --pricing-meta: #4a7a55;
-          --leadmag-h3: #d6931f;
-          --leadmag-bg: rgba(255, 255, 255, 0.7);
           --bg-grad-1: rgba(26, 127, 209, 0.1);
           --swipe-hint-color: #606d85;
           --cta-box-border: #c8d2e4;
@@ -761,17 +757,6 @@
           color: var(--offer-pill-color);
         }
 
-        .offer-pill-ai {
-          border-color: #c98f17;
-          background: linear-gradient(120deg, #f3ac2d, #ffd36f);
-          color: #1d2433;
-        }
-
-        .offer-pill-ai:hover {
-          filter: brightness(1.03);
-          transform: translateY(-1px);
-        }
-
         main { padding-bottom: 48px; }
 
         .mobile-cta-bar {
@@ -1048,29 +1033,6 @@
           display: block;
         }
 
-        .leadmag-box {
-          margin-top: 16px;
-          padding: 24px 28px;
-          border-radius: 18px;
-          border: 1px solid var(--cta-box-border);
-          background: radial-gradient(600px 200px at 0% 50%, var(--bg-grad-1), transparent 60%),
-            var(--leadmag-bg);
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 18px;
-          flex-wrap: wrap;
-        }
-
-        .leadmag-box .leadmag-icon {
-          font-size: 36px;
-          flex-shrink: 0;
-        }
-
-        .leadmag-box .leadmag-text { flex: 1; min-width: 200px; }
-        .leadmag-box h3 { margin: 0 0 6px; font-size: 18px; color: var(--leadmag-h3); }
-        .leadmag-box p { margin: 0; color: var(--muted); font-size: 14px; }
-
         .cta-box {
           margin-top: 16px;
           padding: 24px;
@@ -1094,6 +1056,64 @@
           flex-wrap: wrap;
           margin-left: auto;
           justify-content: flex-end;
+        }
+
+        /* Demo block — a .cta-box that also carries body copy, so it stacks
+           instead of centring its two halves. */
+        .demo-box { align-items: flex-start; }
+        .demo-box .demo-body { flex: 1; min-width: 260px; }
+
+        .demo-points {
+          margin: 12px 0 0;
+          padding-left: 20px;
+          color: var(--muted);
+          font-size: 15px;
+        }
+
+        .demo-points li { margin-bottom: 6px; }
+        .demo-points li:last-child { margin-bottom: 0; }
+
+        .demo-box .demo-caveat {
+          flex-basis: 100%;
+          margin: 6px 0 0;
+          padding-top: 14px;
+          border-top: 1px solid var(--cta-box-border);
+          font-size: 14px;
+          opacity: .85;
+        }
+
+        /* #about layout — photo left, text right, wraps to a single column
+           on mobile. */
+        .about-layout {
+          display: flex;
+          align-items: flex-start;
+          gap: 22px;
+          margin-top: 4px;
+        }
+
+        .about-photo {
+          flex-shrink: 0;
+          display: block;
+          width: 140px;
+          border-radius: 14px;
+          overflow: hidden;
+          border: 1px solid var(--panel-border);
+        }
+
+        .about-photo img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top center;
+        }
+
+        .about-body { flex: 1; min-width: 240px; }
+
+        @media (max-width: 560px) {
+          .about-layout { flex-direction: column; align-items: center; text-align: center; }
+          .about-photo { width: 120px; }
+          .about-body { min-width: 0; }
         }
 
         .reveal {
@@ -1275,8 +1295,7 @@
           }
 
           .cta .btn,
-          .cta-actions .btn,
-          .leadmag-box .btn {
+          .cta-actions .btn {
             width: 100%;
           }
 
@@ -1286,8 +1305,7 @@
           }
 
           .section-card,
-          .cta-box,
-          .leadmag-box {
+          .cta-box {
             padding: 18px;
           }
 

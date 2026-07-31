@@ -19,7 +19,7 @@
     <title>Darbu, objektu un izmaksu uzskaite brigādēm | Robotics Consulting</title>
     <meta name="description"
           content="Veidoju uzskaites sistēmas nelieliem uzņēmumiem, kur darbs notiek objektos: būvniecība un remonts, apdare, montāža, izbraukuma pakalpojumi. Darbi pa objektiem, izdevumi, materiāli un brigāžu izmaksu aprēķins — vietā Excel un WhatsApp. Rīga, Latvija.">
-    <meta name="i18n-version" content="2026-07-31-02">
+    <meta name="i18n-version" content="2026-07-31-10">
     <meta name="keywords"
           content="construction crew tracking, job costing software, site and crew payout tracking, building company CRM Latvia, būvniecības uzskaite, brigāžu izmaksu uzskaite Rīga">
     <link rel="canonical" href="https://www.sia-robotics-consulting.eu/">
@@ -67,7 +67,7 @@
       }
     </script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=rcOnTurnstileLoad" async defer></script>
-    <link rel="stylesheet" href="./assets/css/main.css?v=2026-07-31-03">
+    <link rel="stylesheet" href="./assets/css/main.css?v=2026-07-31-08">
     <!-- Analytics helper. Everything is gated on the production hostname so that
          local development never sends events to the live Pixel / Ads account —
          off-prod the events are logged to the console instead, which doubles as
@@ -183,9 +183,9 @@
             <div class="kpi">
                 <div class="kpi-head">
                     <div class="kpi-icon"><svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-                    <strong data-i18n="kpi_2_title">2–3 dienās</strong>
+                    <strong data-i18n="kpi_2_title">Запуск, а не разработка</strong>
                 </div>
-                <p data-i18n="kpi_2_sub">līdz pirmajam ekrānam, ko brigāde var aizpildīt uz reāliem datiem — nevis līdz visai sistēmai. Redzēsiet to, pirms lemsiet maksāt par lielo.</p>
+                <p data-i18n="kpi_2_sub">система уже написана и разворачивается одной командой — под вас она настраивается, а не пишется с нуля</p>
             </div>
             <div class="kpi">
                 <div class="kpi-head">
@@ -194,11 +194,18 @@
                 </div>
                 <p data-i18n="kpi_3_sub">rezultātā ir darbojoša sistēma, nevis prezentācija</p>
             </div>
+            <div class="kpi">
+                <div class="kpi-head">
+                    <div class="kpi-icon"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <strong data-i18n="kpi_4_title">Бригада не уходит зимой</strong>
+                </div>
+                <p data-i18n="kpi_4_sub">Система умеет откладывать 4–10% с каждой выплаты в резерв — зимой бригаде есть с чего получить деньги, и люди не уходят на другую работу.</p>
+            </div>
             <div class="offer-card">
-                <div class="offer-pill" data-i18n="offer_1">Darbu un objektu uzskaite</div>
-                <div class="offer-pill" data-i18n="offer_2">Brigāžu izmaksu aprēķins</div>
-                <div class="offer-pill" data-i18n="offer_3">Izdevumi, čeki un materiāli</div>
-                <a class="offer-pill offer-pill-ai" id="offer-ai-link" data-i18n="offer_4" href="./assets/ai-implementation/[LV] Kā mākslīgais intelekts uzlabo digitalizācijas ieviešanu.pdf" download>AI: kā to ievieš (PDF)</a>
+                <div class="offer-pill" data-i18n="offer_1">Видно, где реально прибыль</div>
+                <div class="offer-pill" data-i18n="offer_2">Ловит заниженные ставки</div>
+                <div class="offer-pill" data-i18n="offer_3">Ни один чек не теряется</div>
+                <div class="offer-pill" data-i18n="offer_4">Видно, когда готовиться к сезону</div>
             </div>
         </aside>
     </section>
@@ -216,89 +223,127 @@
         <p class="section-note" data-i18n="problem_note" style="margin-top:14px; opacity:.8;">Tieši to es risinu — parasti ar vienu sistēmu, kur dati tiek ievadīti tur, kur notiek darbs.</p>
     </section>
 
+    <!-- Demo block. Copy authored in RU for this pass; lv/en carry the RU source
+         and still need translating (see "_translation_todo" in the locale files). -->
+    <section id="demo" class="cta-box demo-box frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
+        <div class="demo-body">
+            <h2 data-i18n="demo_title">Систему можно потрогать до того, как платить</h2>
+            <p data-i18n="demo_lead" data-i18n-mobile="demo_lead_mobile">Objecty — CRM для учёта работ, объектов и выплат бригадам — уже написана и развёрнута на тестовом сервере с демонстрационными данными. Это не макеты и не презентация, а работающая система, в которую можно зайти.</p>
+            <ul class="demo-points">
+                <li data-i18n="demo_point_1">Напишите — дам доступ. Заведёте объект, бригаду и вид работ сами</li>
+                <li data-i18n="demo_point_2">Увидите, как считаются выплаты и что из этого попадает в отчёты</li>
+                <li class="mobile-hide-on-phone" data-i18n="demo_point_3">Запуск под вас — настройка готовой системы, а не разработка с нуля</li>
+            </ul>
+        </div>
+        <div class="cta-actions">
+            <a class="btn btn-main" id="demo-cta-link" href="#contact" data-i18n="demo_btn">Попросить доступ к демо</a>
+        </div>
+        <p class="demo-caveat" data-i18n="demo_note">Честно про границы: система выросла из реального бизнеса — стяжка и полы, расчёт по м² и м³. Виды работ, единицы и ставки настраиваются под вас, поэтому кровля, фасад, монтаж или клининг ложатся на тот же движок. А если у вас учёт устроен не вокруг объектов и бригад — это уже другая система, и я скажу об этом сразу.</p>
+    </section>
+
     <section id="about" class="glass section-card frame-reveal">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="about_title">Kas to dara</h2>
-        <p class="about-name" data-i18n="about_name" style="font-weight:600; margin:0 0 8px;">Artūrs Staseļūns — Senior Java backend developer, Rīga</p>
-        <p class="section-sub" data-i18n="about_lead">16 gadi IT, no tiem 9 — backend izstrāde Java. Pēdējos gados būvēju sistēmas, kur kļūdas cena mērāma miljonos: apdrošināšanas platformas ASV, Lielbritānijai un Ķīnai. Pirms tam vadīju izstrādes komandu Accenture britu Channel 4.</p>
-        <ul class="services-list">
-            <li data-i18n="about_fact_1">Exigen Insurance Systems — Senior Backend Developer, 2022–2026</li>
-            <li data-i18n="about_fact_2">Accenture — Java Team Lead, 2017–2022</li>
-            <li data-i18n="about_fact_3">MSc datorzinātnēs, Latvijas Universitāte</li>
-            <li class="mobile-hide-on-phone" data-i18n="about_fact_4">AWS Certified Cloud Practitioner · Oracle Certified Java Programmer</li>
-        </ul>
-        <a class="btn btn-alt" id="about-cv-link" href="https://arthur-staseljun.github.io/curriculum-vitae/" target="_blank" rel="noopener" data-i18n="about_cv_link" style="margin-top:12px;">Pilns CV un projekti →</a>
-        <p class="about-honest" data-i18n="about_honest" style="margin-top:16px; opacity:.8; font-size:14px;">Go Gridas — CRM būvniecības uzņēmumiem — pašlaik izstrādē, top pirmā ieviešana. Skaitļi ekrānuzņēmumos ir demonstrācijas dati: reālus klientu datus nerādu.</p>
+        <div class="about-layout">
+            <picture class="about-photo">
+                <source srcset="./assets/photo/arturs-staseluns.webp" type="image/webp">
+                <img src="./assets/photo/arturs-staseluns.jpg" alt="Artūrs Staseļūns" loading="lazy" decoding="async" width="480" height="640">
+            </picture>
+            <div class="about-body">
+                <p class="about-name" data-i18n="about_name" style="font-weight:600; margin:0 0 8px;">Artūrs Staseļūns — Senior Java backend developer, Rīga</p>
+                <p class="section-sub" data-i18n="about_lead">16 gadi IT, no tiem 9 — backend izstrāde Java. Pēdējos gados būvēju sistēmas, kur kļūdas cena mērāma miljonos: apdrošināšanas platformas ASV, Lielbritānijai un Ķīnai. Pirms tam vadīju izstrādes komandu Accenture britu Channel 4.</p>
+                <ul class="services-list">
+                    <li data-i18n="about_fact_1">Exigen Insurance Systems — Senior Backend Developer, 2022–2026</li>
+                    <li data-i18n="about_fact_2">Accenture — Java Team Lead, 2017–2022</li>
+                    <li data-i18n="about_fact_3">MSc datorzinātnēs, Latvijas Universitāte</li>
+                    <li class="mobile-hide-on-phone" data-i18n="about_fact_4">AWS Certified Cloud Practitioner · Oracle Certified Java Programmer</li>
+                </ul>
+                <a class="btn btn-alt" id="about-cv-link" href="https://arthur-staseljun.github.io/curriculum-vitae/" target="_blank" rel="noopener" data-i18n="about_cv_link" style="margin-top:12px;">Pilns CV un projekti →</a>
+                <p class="about-mode" data-i18n="about_mode" style="margin-top:16px;">Сейчас разработка таких систем — моя основная работа, а не подработка по вечерам. Отвечаю в тот же рабочий день, на созвон выхожу в рабочее время и при необходимости приезжаю на объект.</p>
+                <p class="about-honest" data-i18n="about_honest" style="margin-top:16px; opacity:.8; font-size:14px;">Objecty вырос из Go Gridas — CRM, которую я строю для реальной строительной фирмы; их внедрение ещё не завершено, поэтому цифры на скриншотах демонстрационные, реальных данных клиента я не показываю.</p>
+            </div>
+        </div>
     </section>
 
     <section id="pakalpojumi" class="glass section-card frame-reveal">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="services_title">Kā es palīdzu</h2>
-        <p class="section-sub" data-i18n="services_sub" data-i18n-mobile="services_sub_mobile">No jūsu uzskaites izpētes līdz darbojošai sistēmai. Sākt var ar mazu.</p>
+        <p class="section-sub" data-i18n="services_sub" data-i18n-mobile="services_sub_mobile">Начать можно с нуля: демо, потом месяц на ваших данных. Платите, когда бригада реально начнёт этим пользоваться.</p>
         <div class="grid grid-3">
             <article class="panel reveal service-card--collapsible is-open" style="--reveal-delay: 40ms;">
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="true" aria-controls="service-card-1-body">
-                        <span class="service-toggle-title" data-i18n="services_card_1_title">Uzskaites izpēte</span>
+                        <span class="service-toggle-title" data-i18n="services_card_1_title">Objecty — готовая система</span>
                         <span class="service-toggle-icon" aria-hidden="true"></span>
                     </button>
                 </h3>
                 <div id="service-card-1-body" class="service-card-body">
-                    <p data-i18n="services_card_1_sub" data-i18n-mobile="services_card_1_sub_mobile">Paskatos, kā tagad tiek skaitīti objekti, izstrāde un izmaksas, un kur tieši zūd nauda un laiks.</p>
+                    <p data-i18n="services_card_1_sub" data-i18n-mobile="services_card_1_sub_mobile">Разворачиваю на вашем сервере то, что уже работает. Первый месяц — на ваших данных и бесплатно.</p>
                     <ul class="service-includes">
-                        <li data-i18n="services_card_1_i1">Procesu izpēte objektā un birojā</li>
-                        <li data-i18n="services_card_1_i2">Kur dati pazūd un dublējas</li>
-                        <li data-i18n="services_card_1_i3">Konkrēti varianti, ko labot</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i4">Efekta un pūļu novērtējums</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i5">Skaidri nākamie soļi</li>
+                        <li data-i18n="services_card_1_i1">Демо до оплаты — покликаете сами</li>
+                        <li data-i18n="services_card_1_i2">Ваши бригады, ставки и виды работ</li>
+                        <li data-i18n="services_card_1_i3">Перенос данных из Excel</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i4">Обучение бригадиров на объекте</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i5">Девять отчётов работают сразу</li>
                     </ul>
-                    <p data-i18n="services_card_1_price">Pirmā saruna bez maksas</p>
-                    <p class="mobile-hide-on-phone" data-i18n="services_card_1_scope">Apjoms, termiņš un cena — pirms darba sākuma</p>
+                    <div class="service-pricing">
+                        <span class="price-main" data-i18n="services_card_1_price">€0 запуск · первый месяц бесплатно</span>
+                        <span class="price-meta" data-i18n="services_card_1_scope">Дальше €250/мес. Данные ваши, выгрузка в любой момент, уйти можно когда захотите.</span>
+                    </div>
                 </div>
             </article>
             <article class="panel reveal service-card--collapsible" style="--reveal-delay: 110ms;">
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="false" aria-controls="service-card-2-body">
-                        <span class="service-toggle-title" data-i18n="services_card_2_title">Pirmā darbojošā versija</span>
+                        <span class="service-toggle-title" data-i18n="services_card_2_title">Система под вашу отрасль</span>
                         <span class="service-toggle-icon" aria-hidden="true"></span>
                     </button>
                 </h3>
                 <div id="service-card-2-body" class="service-card-body">
-                    <p data-i18n="services_card_2_sub" data-i18n-mobile="services_card_2_sub_mobile">Uzbūvēju vienu lietu, ko var sākt lietot uzreiz — pirms ķeraties pie visas sistēmas.</p>
+                    <p data-i18n="services_card_2_sub" data-i18n-mobile="services_card_2_sub_mobile">Тот же движок под ваши виды работ: кровля, фасад, монтаж, клининг.</p>
                     <ul class="service-includes">
-                        <li data-i18n="services_card_2_i1">Viens process: darbu pieņemšana, izdevumi vai izmaksas</li>
-                        <li data-i18n="services_card_2_i2">Strādā no telefona tieši objektā</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_2_i3">Pārbaudām uz reāliem datiem nedēļas laikā</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_2_i4">Tālāk paplašinām tikai to, kas iesakņojās</li>
+                        <li data-i18n="services_card_2_i1">Ваши виды работ, единицы и ставки</li>
+                        <li data-i18n="services_card_2_i2">Те же объекты, бригады и выплаты</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_2_i3">Те же отчёты на ваших данных</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_2_i4">Интерфейс на вашем языке</li>
                     </ul>
+                    <div class="service-pricing">
+                        <span class="price-main" data-i18n="services_card_2_price">€1 500 запуск</span>
+                        <span class="price-meta" data-i18n="services_card_2_scope">Дальше €250/мес. Объём и цена фиксируются до начала работ.</span>
+                    </div>
                 </div>
             </article>
             <article class="panel reveal service-card--collapsible" style="--reveal-delay: 180ms;">
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="false" aria-controls="service-card-3-body">
-                        <span class="service-toggle-title" data-i18n="services_card_3_title">Pilna uzskaites sistēma</span>
+                        <span class="service-toggle-title" data-i18n="services_card_3_title">Автоматизации и интеграции</span>
                         <span class="service-toggle-icon" aria-hidden="true"></span>
                     </button>
                 </h3>
                 <div id="service-card-3-body" class="service-card-body">
-                    <p data-i18n="services_card_3_sub" data-i18n-mobile="services_card_3_sub_mobile">Darbi, objekti, izdevumi, materiāli un izmaksas vienā vietā, ar pārskatiem īpašniekam.</p>
+                    <p data-i18n="services_card_3_sub" data-i18n-mobile="services_card_3_sub_mobile">Отдельная задача без всей системы — связать, перенести, автоматизировать.</p>
                     <ul class="service-includes">
-                        <li data-i18n="services_card_3_i1">Darbu uzskaite pa objektiem un brigādēm</li>
-                        <li data-i18n="services_card_3_i2">Automātisks izmaksu aprēķins</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_3_i3">Izdevumi, čeki un materiāli</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_3_i4">Pārskati: rentabilitāte, sezonalitāte, likmes</li>
+                        <li data-i18n="services_card_3_i1">Связать с бухгалтерией — Horizon, Jumis, Tildes Jumis</li>
+                        <li data-i18n="services_card_3_i2">Перенести данные из Excel и проверить на ошибки</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_3_i3">Автоматизировать счета и повторяющиеся документы</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_3_i4">Отчёты под ваши вопросы, а не типовые</li>
                     </ul>
+                    <div class="service-pricing">
+                        <span class="price-main" data-i18n="services_card_3_price">от €1 500</span>
+                        <span class="price-meta" data-i18n="services_card_3_scope">Фиксированная цена и срок до начала работ. Без подписки.</span>
+                    </div>
                 </div>
             </article>
         </div>
         <div class="services-help" style="margin-top:20px;">
-            <strong data-i18n="services_help_title" style="display:block; margin-bottom:8px;">Varu palīdzēt arī ar:</strong>
+            <strong data-i18n="services_help_title" style="display:block; margin-bottom:8px;">С чего начать</strong>
             <ul class="services-list">
-                <li data-i18n="services_li_1">Savienot sistēmu ar grāmatvedības programmu — Horizon, Jumis, Tildes Jumis vai citu</li>
-                <li data-i18n="services_li_2">Pārnest datus no Excel un pārbaudīt kļūdas</li>
-                <li data-i18n="services_li_3">Automatizēt rēķinus un atkārtotus dokumentus</li>
-                <li data-i18n="services_li_4">Sagatavot pārskatus pēc jūsu jautājumiem, nevis tipveida</li>
-                <li data-i18n="services_li_5">Palīdzēt ar uzskaiti noliktavā vai ražošanā</li>
+                <li data-i18n="services_li_1">Первый разговор — бесплатно, около получаса</li>
+                <li data-i18n="services_li_2">Дам доступ к демо — покликаете сами, без обязательств</li>
+                <li data-i18n="services_li_3">Подходит Objecty — запуск бесплатный, и первый месяц тоже</li>
+                <li data-i18n="services_li_4">Отрасль другая — разбор учёта с выездом, €500, засчитывается в стоимость запуска</li>
+                <li data-i18n="services_li_5">Автоматизировать нечего — так и скажу</li>
             </ul>
         </div>
     </section>
@@ -392,26 +437,18 @@
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-8"><span data-i18n="faq_q8">Kas sistēmu uzturēs pēc palaišanas?</span></button></h3>
                 <p id="faq-answer-8" class="faq-answer" data-i18n="faq_a8">Atbalsts un turpmākie uzlabojumi tiek atrunāti atsevišķi: pēc palaišanas vienojamies, kādā apjomā un ar kādu atsaucību tie jums vajadzīgi, un to fiksējam. Pajautājiet par to uzreiz pirmajā sarunā — to labāk noskaidrot pirms darba sākuma, nevis pēc.</p>
             </article>
+            <article class="panel faq-item reveal" style="--reveal-delay:430ms;">
+                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-9"><span data-i18n="faq_q9">А если вы пропадёте?</span></button></h3>
+                <p id="faq-answer-9" class="faq-answer" data-i18n="faq_a9">Справедливый вопрос, отвечаю конкретно. Система стоит на вашем сервере, а не на моём: база с вашими объектами, бригадами и выплатами — у вас, и выгрузить её вы можете в любой момент, без моего участия и без моего разрешения. Доступы к серверу у вас с первого дня. Стек намеренно самый обычный — Java, Spring Boot, PostgreSQL, Docker, — чтобы администрировать и переносить это мог любой разработчик, а не только я. Исходный код остаётся моим; если для вас критично получить и его, это условие можно обсудить и записать в договор до начала работ.</p>
+            </article>
         </div>
     </section>
-
-    <div class="leadmag-box frame-reveal">
-        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
-        <div class="leadmag-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f3ac2d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-        <div class="leadmag-text">
-            <h3 data-i18n="leadmag_title">Bezmaksas: kontrolsaraksts — kas jāskaita darbā objektos, kas nē</h3>
-            <p data-i18n="leadmag_sub" data-i18n-mobile="leadmag_sub_mobile">Praktisks PDF, lai saprastu, kur jūsu uzskaitē ir caurums, pirms kaut ko pasūtāt.</p>
-        </div>
-        <a id="leadmag-link" class="btn btn-alt"
-           href="./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf"
-           download data-i18n="leadmag_btn">Lejupielādēt bezmaksas kontrolsarakstu</a>
-    </div>
 
 
     <section id="contact" class="glass section-card frame-reveal frame-reveal-reverse" style="--reveal-delay: 2600ms;">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <h2 class="section-title" data-i18n="cta_title" data-i18n-mobile="cta_title_mobile">Neesat pārliecināti, ar ko sākt?</h2>
-        <p class="section-sub" data-i18n="contact_sub">Uzrakstiet dažās rindās, kas pie jums notiek. Atbildēšu tajā pašā darba dienā — un godīgi pateikšu, ja automatizācija nav vajadzīga.</p>
+        <p class="section-sub" data-i18n="contact_sub">Uzrakstiet dažās rindās, kas pie jums notiek. Atbildēšu tajā pašā darba dienā un godīgi pateikšu, ja atsevišķa CRM sistēma jums nav piemērota un risinājums ir vienkāršāks.</p>
         <form id="contact-form" class="rc-contact-form" novalidate>
             <!-- Web3Forms access key (public by design; only permits sending to your verified email) -->
             <input type="hidden" name="access_key" value="2bc7037a-14d8-47df-9866-2a7804e2a575">
@@ -454,7 +491,7 @@
 </div>
 
 <footer>
-    <span data-i18n="footer_text">Rīga, Latvija · Uzskaites sistēmas uzņēmumiem, kas strādā objektos · Strādāju Latvijā un attālināti visā Eiropā</span>
+    <span data-i18n="footer_text">Рига, Латвия · Учёт работ, выплат и отчётов для бригад · Работаю в Латвии и удалённо по всей Европе</span>
 
     <div id="visitor-counter" class="visitor-counter" hidden>
         <span data-i18n="visitor_counter_label">Unikālie apmeklētāji:</span>

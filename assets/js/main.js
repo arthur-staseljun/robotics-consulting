@@ -288,9 +288,6 @@
         }).then(function (copy) {
           if (!copy) return;
         const descriptionMeta = document.querySelector('meta[name="description"]');
-        const leadmagLink = document.getElementById("leadmag-link");
-        const heroLeadmagLink = document.getElementById("hero-leadmag-link");
-        const aiImplementationLink = document.getElementById("offer-ai-link");
         const aboutCvLink = document.getElementById("about-cv-link");
         const menuToggle = document.querySelector(".menu-toggle");
         document.documentElement.lang = selected;
@@ -321,9 +318,6 @@
           });
         }
 
-        setHrefIfPresent(leadmagLink, copy.leadmag_href);
-        setHrefIfPresent(heroLeadmagLink, copy.leadmag_href);
-        setHrefIfPresent(aiImplementationLink, copy.ai_doc_href);
         setHrefIfPresent(aboutCvLink, copy.about_cv_href);
 
         if (menuToggle && copy.nav_menu) {
@@ -826,11 +820,6 @@
         if (!node || typeof node.closest !== "function") return;
         const link = node.closest("a, button");
         if (!link) return;
-
-        if (link.id === "leadmag-link" || link.id === "hero-leadmag-link") {
-          once("checklist", "ChecklistDownload", undefined, { custom: true, gaEvent: "file_download" });
-          return;
-        }
 
         // Clicking through to the full CV means someone is checking who they'd be
         // hiring — the strongest intent signal on the page short of contacting.

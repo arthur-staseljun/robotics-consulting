@@ -3,3 +3,5 @@
 /backend/counter-worker/
 /backend/counter-worker/package-lock.json
 /scripts/pdf-tools/.venv/
+.DS_Store
+**/__pycache__/
