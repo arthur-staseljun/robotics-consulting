@@ -19,7 +19,7 @@
     <title>Darbu, objektu un izmaksu uzskaite brigādēm | Robotics Consulting</title>
     <meta name="description"
           content="Veidoju uzskaites sistēmas nelieliem uzņēmumiem, kur darbs notiek objektos: būvniecība un remonts, apdare, montāža, izbraukuma pakalpojumi. Darbi pa objektiem, izdevumi, materiāli un brigāžu izmaksu aprēķins — vietā Excel un WhatsApp. Rīga, Latvija.">
-    <meta name="i18n-version" content="2026-07-31-10">
+    <meta name="i18n-version" content="2026-07-31-15">
     <meta name="keywords"
           content="construction crew tracking, job costing software, site and crew payout tracking, building company CRM Latvia, būvniecības uzskaite, brigāžu izmaksu uzskaite Rīga">
     <link rel="canonical" href="https://www.sia-robotics-consulting.eu/">
@@ -67,7 +67,7 @@
       }
     </script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=rcOnTurnstileLoad" async defer></script>
-    <link rel="stylesheet" href="./assets/css/main.css?v=2026-07-31-08">
+    <link rel="stylesheet" href="./assets/css/main.css?v=2026-07-31-10">
     <!-- Analytics helper. Everything is gated on the production hostname so that
          local development never sends events to the live Pixel / Ads account —
          off-prod the events are logged to the console instead, which doubles as
@@ -128,6 +128,7 @@
         </div>
         <div class="header-actions">
             <nav class="mini-nav">
+                <a href="#cenas" data-i18n="nav_pricing">Цены</a>
                 <a href="#faq" data-i18n="nav_faq">FAQ</a>
                 <a href="./prototypes.html?v=2026-05-11-04" data-i18n="nav_prototypes">Ko es daru</a>
             </nav>
@@ -148,8 +149,8 @@
             <h1 data-i18n="hero_title">Kurš ko izdarīja, kurā objektā un cik kuram maksāt — <span class="soul-underline">vienā sistēmā<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg></span></h1>
             <p class="lead" data-i18n="hero_lead" data-i18n-mobile="hero_lead_mobile">Mani sauc Artūrs Staseļūns. 16 gadi izstrādē: vadīju komandu Accenture, būvēju apdrošināšanas platformas ASV, Lielbritānijai un Ķīnai. Tagad veidoju līdzīgas sistēmas nelieliem uzņēmumiem Latvijā, kur darbs notiek objektos, — lai brigāžu darbs, izdevumi un izmaksas vairs nedzīvotu Excel, WhatsApp un uz papīra.</p>
             <div class="cta">
-                <a class="btn btn-main" href="#contact" data-i18n="hero_cta_main">Rakstiet man</a>
-                <a class="btn btn-alt" href="./prototypes.html?v=2026-05-11-04" data-i18n="hero_cta_alt">Skatīt, ko es daru</a>
+                <a class="btn btn-main" id="hero-cta-main" href="#contact" data-i18n="hero_cta_main">Rakstiet man</a>
+                <a class="btn btn-alt" id="hero-cta-alt" href="./prototypes.html?v=2026-05-11-04" data-i18n="hero_cta_alt">Skatīt, ko es daru</a>
             </div>
             <div class="work-strip">
                 <a href="./prototypes.html?v=2026-05-11-04#gogridas-crm"><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2017.49.26.png" alt="Go Gridas CRM" loading="lazy" decoding="async"></a>
@@ -223,8 +224,6 @@
         <p class="section-note" data-i18n="problem_note" style="margin-top:14px; opacity:.8;">Tieši to es risinu — parasti ar vienu sistēmu, kur dati tiek ievadīti tur, kur notiek darbs.</p>
     </section>
 
-    <!-- Demo block. Copy authored in RU for this pass; lv/en carry the RU source
-         and still need translating (see "_translation_todo" in the locale files). -->
     <section id="demo" class="cta-box demo-box frame-reveal">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <div class="demo-body">
@@ -233,11 +232,21 @@
             <ul class="demo-points">
                 <li data-i18n="demo_point_1">Напишите — дам доступ. Заведёте объект, бригаду и вид работ сами</li>
                 <li data-i18n="demo_point_2">Увидите, как считаются выплаты и что из этого попадает в отчёты</li>
-                <li class="mobile-hide-on-phone" data-i18n="demo_point_3">Запуск под вас — настройка готовой системы, а не разработка с нуля</li>
+                <li data-i18n="demo_point_3">Запуск под вас — настройка готовой системы, а не разработка с нуля</li>
             </ul>
-        </div>
-        <div class="cta-actions">
-            <a class="btn btn-main" id="demo-cta-link" href="#contact" data-i18n="demo_btn">Попросить доступ к демо</a>
+            <div class="cta-actions">
+                <a class="btn btn-main" id="demo-cta-link" href="http://204.168.182.220/" target="_blank" rel="noopener" data-i18n="demo_btn">Открыть демо-сервер</a>
+                <a class="cta-secondary-link" id="demo-contact-link" href="#contact" data-i18n="demo_contact_link">Есть вопросы — напишите мне</a>
+            </div>
+            <figure class="demo-shot">
+                <picture>
+                    <source srcset="./assets/prototypes/estrich/objecty-work-entry.webp" type="image/webp">
+                    <img src="./assets/prototypes/estrich/objecty-work-entry.png"
+                         alt="Objecty — padarītā darba ievade: darba veids, platība, likme un aprēķinātā brigādes peļņa"
+                         loading="lazy" decoding="async" width="1665" height="1395">
+                </picture>
+                <figcaption data-i18n="demo_shot_caption">Именно этот экран заполняет бригадир на объекте: вид работ, площадь, ставка — выработка и выплата считаются сами.</figcaption>
+            </figure>
         </div>
         <p class="demo-caveat" data-i18n="demo_note">Честно про границы: система выросла из реального бизнеса — стяжка и полы, расчёт по м² и м³. Виды работ, единицы и ставки настраиваются под вас, поэтому кровля, фасад, монтаж или клининг ложатся на тот же движок. А если у вас учёт устроен не вокруг объектов и бригад — это уже другая система, и я скажу об этом сразу.</p>
     </section>
@@ -271,7 +280,7 @@
         <h2 class="section-title" data-i18n="services_title">Kā es palīdzu</h2>
         <p class="section-sub" data-i18n="services_sub" data-i18n-mobile="services_sub_mobile">Начать можно с нуля: демо, потом месяц на ваших данных. Платите, когда бригада реально начнёт этим пользоваться.</p>
         <div class="grid grid-3">
-            <article class="panel reveal service-card--collapsible is-open" style="--reveal-delay: 40ms;">
+            <article class="panel reveal service-card--collapsible service-card--primary is-open" style="--reveal-delay: 40ms;">
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="true" aria-controls="service-card-1-body">
                         <span class="service-toggle-title" data-i18n="services_card_1_title">Objecty — готовая система</span>
@@ -285,15 +294,16 @@
                         <li data-i18n="services_card_1_i2">Ваши бригады, ставки и виды работ</li>
                         <li data-i18n="services_card_1_i3">Перенос данных из Excel</li>
                         <li class="mobile-hide-on-phone" data-i18n="services_card_1_i4">Обучение бригадиров на объекте</li>
-                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i5">Девять отчётов работают сразу</li>
+                        <li class="mobile-hide-on-phone" data-i18n="services_card_1_i5">Рентабельность, денежный поток, дисциплина по ставкам — сразу</li>
                     </ul>
                     <div class="service-pricing">
                         <span class="price-main" data-i18n="services_card_1_price">€0 запуск · первый месяц бесплатно</span>
                         <span class="price-meta" data-i18n="services_card_1_scope">Дальше €250/мес. Данные ваши, выгрузка в любой момент, уйти можно когда захотите.</span>
+                        <a class="price-link" href="#cenas" data-i18n="services_price_link">Все цены и доработки →</a>
                     </div>
                 </div>
             </article>
-            <article class="panel reveal service-card--collapsible" style="--reveal-delay: 110ms;">
+            <article class="panel reveal service-card--collapsible service-card--secondary" style="--reveal-delay: 110ms;">
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="false" aria-controls="service-card-2-body">
                         <span class="service-toggle-title" data-i18n="services_card_2_title">Система под вашу отрасль</span>
@@ -311,10 +321,11 @@
                     <div class="service-pricing">
                         <span class="price-main" data-i18n="services_card_2_price">€1 500 запуск</span>
                         <span class="price-meta" data-i18n="services_card_2_scope">Дальше €250/мес. Объём и цена фиксируются до начала работ.</span>
+                        <a class="price-link" href="#cenas" data-i18n="services_price_link">Все цены и доработки →</a>
                     </div>
                 </div>
             </article>
-            <article class="panel reveal service-card--collapsible" style="--reveal-delay: 180ms;">
+            <article class="panel reveal service-card--collapsible service-card--secondary" style="--reveal-delay: 180ms;">
                 <h3 class="service-card-heading">
                     <button class="service-toggle" type="button" aria-expanded="false" aria-controls="service-card-3-body">
                         <span class="service-toggle-title" data-i18n="services_card_3_title">Автоматизации и интеграции</span>
@@ -332,6 +343,7 @@
                     <div class="service-pricing">
                         <span class="price-main" data-i18n="services_card_3_price">от €1 500</span>
                         <span class="price-meta" data-i18n="services_card_3_scope">Фиксированная цена и срок до начала работ. Без подписки.</span>
+                        <a class="price-link" href="#cenas" data-i18n="services_price_link">Все цены и доработки →</a>
                     </div>
                 </div>
             </article>
@@ -348,13 +360,103 @@
         </div>
     </section>
 
+    <section id="cenas" class="glass section-card frame-reveal">
+        <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
+        <h2 class="section-title" data-i18n="pricing_title">Сколько это стоит</h2>
+        <p class="section-sub" data-i18n="pricing_lead" data-i18n-mobile="pricing_lead_mobile">Все цены сразу и на одной странице — чтобы не пришлось писать мне, чтобы их узнать.</p>
+        <div class="pricing-table-wrap">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th scope="col" data-i18n="pricing_h_what">Что платите</th>
+                        <th scope="col" class="is-primary" data-i18n="pricing_h_objecty">Objecty как есть</th>
+                        <th scope="col" data-i18n="pricing_h_industry">Под вашу отрасль</th>
+                        <th scope="col" data-i18n="pricing_h_automation">Отдельная задача</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" data-i18n="pricing_r1_label">Запуск</th>
+                        <td class="is-primary">
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_objecty">Objecty как есть</span>
+                            <span class="cell-value">
+                                <s class="price-was" data-i18n="pricing_r1_objecty_old">€1 500</s>
+                                <strong class="price-now" data-i18n="pricing_r1_objecty_new">€0</strong>
+                                <span class="price-note" data-i18n="pricing_r1_objecty_note">для первых трёх внедрений</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_industry">Под вашу отрасль</span>
+                            <span class="cell-value" data-i18n="pricing_r1_industry">€1 500</span>
+                        </td>
+                        <td>
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_automation">Отдельная задача</span>
+                            <span class="cell-value" data-i18n="pricing_r1_automation">от €1 500</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-i18n="pricing_r2_label">Подписка</th>
+                        <td class="is-primary">
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_objecty">Objecty как есть</span>
+                            <span class="cell-value" data-i18n="pricing_r2_objecty">€250/мес — до 3 бригад
+€450/мес — до 8 бригад
+больше — по договорённости</span>
+                        </td>
+                        <td>
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_industry">Под вашу отрасль</span>
+                            <span class="cell-value" data-i18n="pricing_r2_industry">Та же, что у Objecty</span>
+                        </td>
+                        <td>
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_automation">Отдельная задача</span>
+                            <span class="cell-value" data-i18n="pricing_r2_automation">Нет</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" data-i18n="pricing_r3_label">Доработки после запуска</th>
+                        <td class="is-primary">
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_objecty">Objecty как есть</span>
+                            <span class="cell-value" data-i18n="pricing_r3_objecty">Мелкие правки не считаю.
+Изменение — €300–800
+фиксированной ценой</span>
+                        </td>
+                        <td>
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_industry">Под вашу отрасль</span>
+                            <span class="cell-value" data-i18n="pricing_r3_industry">Так же</span>
+                        </td>
+                        <td>
+                            <span class="cell-label" aria-hidden="true" data-i18n="pricing_h_automation">Отдельная задача</span>
+                            <span class="cell-value" data-i18n="pricing_r3_automation">Входят в проект</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="pricing-footnote" data-i18n="pricing_note_visit">Если у вас не стяжка и полы, перед запуском разбираю ваш учёт с выездом на объект: €500, и эта сумма засчитывается в стоимость запуска.</p>
+        <div class="pricing-why-block">
+            <button class="pricing-why-toggle" type="button" aria-expanded="true" aria-controls="pricing-why-body">
+                <span data-i18n="pricing_why_toggle">Почему так устроено</span>
+                <span class="pricing-why-icon" aria-hidden="true"></span>
+            </button>
+            <div id="pricing-why-body" class="pricing-explain">
+                <div class="pricing-explain-item">
+                    <strong data-i18n="pricing_why_title">Почему €250, а не €2 500</strong>
+                    <p data-i18n="pricing_why" data-i18n-mobile="pricing_why_mobile">Потому что это не цена разработки. Разработка уже оплачена: Objecty написан и работает, вы разворачиваете у себя готовую систему, а не заказываете новую — поэтому база и такая низкая. Дальше цена растёт с числом бригад не из-за сервера, а из-за объёма: больше людей и объектов — больше данных и вопросов от бригадиров, которые я поддерживаю лично. Каждая ступень зафиксирована договором и не растёт в одностороннем порядке.</p>
+                </div>
+                <div class="pricing-explain-item">
+                    <strong data-i18n="pricing_time_title">И честно про бесплатный месяц</strong>
+                    <p data-i18n="pricing_time" data-i18n-mobile="pricing_time_mobile">Бесплатен мой месяц, а не ваш. С вас — 2–4 часа в неделю лично: сверить ставки и виды работ, поднять данные из Excel, пройти с бригадирами первую неделю. Это настоящая цена входа, и она не в евро. Зато через месяц вы решаете, платить ли, глядя на свои объекты в системе, а не на моё обещание.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="cta-box cta-mid frame-reveal" style="margin-top:16px;">
         <svg class="frame-reveal-svg" aria-hidden="true"><rect></rect></svg>
         <div>
             <h2 data-i18n="cta_mid_title">Vēlaties saprast, kur tieši aizplūst nauda?</h2>
         </div>
         <div class="cta-actions">
-            <a class="btn btn-main" href="#contact" data-i18n="cta_mid_btn">Rakstiet man</a>
+            <a class="btn btn-main" id="cta-mid-btn" href="#contact" data-i18n="cta_mid_btn">Rakstiet man</a>
         </div>
     </section>
 
@@ -413,17 +515,13 @@
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-2"><span data-i18n="faq_q2">Cik tas maksā?</span></button></h3>
                 <p id="faq-answer-2" class="faq-answer" data-i18n="faq_a2">Atkarīgs no apjoma, un es to turu caurspīdīgi: pirms darba sākuma saņemat fiksētu apjomu, termiņu un cenu — nevis atvērtu rēķinu. Pirmā saruna ir bez maksas.</p>
             </article>
-            <article class="panel faq-item reveal" style="--reveal-delay:130ms;">
+            <article class="panel faq-item reveal" style="--reveal-delay:180ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-3"><span data-i18n="faq_q3">Vai mums jau jābūt izvēlētām sistēmām vai piegādātājiem?</span></button></h3>
                 <p id="faq-answer-3" class="faq-answer" data-i18n="faq_a3">Nē. Varu sākt no nulles — izvēloties pareizos rīkus, uzlabojot to, kas jau ir, vai vienkārši saprotot, ar ko sākt. Neesmu piesaistīts nevienam piegādātājam, tāpēc padoms ir par to, kas der jūsu situācijai.</p>
             </article>
-            <article class="panel faq-item reveal" style="--reveal-delay:180ms;">
+            <article class="panel faq-item reveal" style="--reveal-delay:230ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-4"><span data-i18n="faq_q4">Vai varat strādāt ar mūsu esošajām sistēmām?</span></button></h3>
                 <p id="faq-answer-4" class="faq-answer" data-i18n="faq_a4">Jā — un parasti tā ir visa būtība. Vairums darbu ir par to, lai savienotu vai uzlabotu to, kas jau darbojas, nevis izmestu un sāktu no nulles. Integrācijas uz esošo sistēmu bāzes ir mana galvenā joma.</p>
-            </article>
-            <article class="panel faq-item reveal" style="--reveal-delay:230ms;">
-                <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-5"><span data-i18n="faq_q5">Ko darīt, ja mani cilvēki to nelietos?</span></button></h3>
-                <p id="faq-answer-5" class="faq-answer" data-i18n="faq_a5">Tas ir galvenais iemesls, kāpēc šādas sistēmas neizdodas, un to risina nevis pierunāšana, bet tas, kā sistēma veidota. Datu ievadei jānotiek tur, kur notiek darbs: brigadieris aizpilda dažus ekrānus no telefona objektā, nevis atskaiti birojā vakarā. Sākam ar vienu procesu un pārbaudām reālas nedēļas laikā — ja brigāde to nelieto, tas redzams uzreiz, nevis pēc pusgada un lielas naudas. Un es palieku līdzās, kamēr paradums nostiprinās.</p>
             </article>
             <article class="panel faq-item reveal" style="--reveal-delay:280ms;">
                 <h3 class="faq-heading"><button class="faq-toggle" type="button" aria-expanded="false" aria-controls="faq-answer-6"><span data-i18n="faq_q6">Kas notiks, ja izrādīsies, ka nekas nav jāautomatizē?</span></button></h3>
@@ -487,7 +585,7 @@
 </main>
 
 <div class="mobile-cta-bar" aria-label="Quick contact">
-    <a class="btn btn-main" href="#contact" data-i18n="hero_cta_main">Rakstiet man</a>
+    <a class="btn btn-main" id="mobile-cta-bar-btn" href="#contact" data-i18n="hero_cta_main">Rakstiet man</a>
 </div>
 
 <footer>
@@ -498,7 +596,7 @@
         <strong id="visitor-count-value" aria-live="polite">...</strong>
     </div>
 </footer>
-<script src="./assets/js/main.js"></script>
+<script src="./assets/js/main.js?v=2026-07-31-02"></script>
 <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>

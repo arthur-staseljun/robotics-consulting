@@ -906,6 +906,7 @@
 
         .faq-answer {
           margin-top: 0;
+          white-space: pre-line;
         }
 
         .faq-heading {
@@ -1000,9 +1001,232 @@
           color: var(--pricing-meta);
         }
 
+        .price-link {
+          flex-basis: 100%;
+          font-size: 12px;
+          color: var(--accent-a);
+          text-decoration: none;
+        }
+
+        .price-link:hover,
+        .price-link:focus-visible {
+          text-decoration: underline;
+        }
+
+        .pricing-table-wrap {
+          overflow-x: auto;
+          margin-top: 18px;
+        }
+
+        .pricing-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 14px;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+          text-align: left;
+          padding: 12px 14px;
+          border: 1px solid var(--line);
+          vertical-align: top;
+        }
+
+        .pricing-table thead th {
+          font-weight: 700;
+          color: var(--text);
+          background: var(--bg-soft);
+        }
+
+        .pricing-table tbody th {
+          font-weight: 600;
+          color: var(--muted);
+          white-space: nowrap;
+        }
+
+        .pricing-table td.is-primary,
+        .pricing-table th.is-primary {
+          border-color: var(--pricing-border);
+          background: var(--pricing-bg);
+        }
+
+        .pricing-table .cell-value {
+          display: block;
+          white-space: pre-line;
+          color: var(--muted);
+        }
+
+        .pricing-table td.is-primary .cell-value {
+          color: var(--pricing-meta);
+        }
+
+        .pricing-table .price-was {
+          color: var(--muted);
+          opacity: .65;
+          margin-right: 6px;
+        }
+
+        .pricing-table .price-now {
+          color: var(--pricing-main);
+          font-size: 16px;
+        }
+
+        .pricing-table .price-note {
+          display: block;
+          font-size: 12px;
+          color: var(--pricing-meta);
+          margin-top: 2px;
+        }
+
+        .pricing-table .cell-label {
+          display: none;
+        }
+
+        .pricing-footnote {
+          margin-top: 12px;
+          font-size: 13px;
+          color: var(--muted);
+          opacity: .85;
+        }
+
+        .pricing-why-block {
+          margin-top: 20px;
+        }
+
+        .pricing-why-toggle {
+          width: 100%;
+          border: 0;
+          background: transparent;
+          color: inherit;
+          padding: 0;
+          text-align: left;
+          font: inherit;
+          font-size: 15px;
+          font-weight: 700;
+          cursor: default;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .pricing-why-icon {
+          display: none;
+        }
+
+        @media (max-width: 760px) {
+          .pricing-why-toggle {
+            cursor: pointer;
+            min-height: 48px;
+          }
+
+          .pricing-why-icon {
+            display: inline-block;
+            flex-shrink: 0;
+            font-size: 22px;
+            line-height: 1;
+            color: var(--faq-toggle-color);
+          }
+
+          .pricing-why-icon::after {
+            content: "+";
+          }
+
+          .pricing-why-block.is-open .pricing-why-icon::after {
+            content: "\2212";
+          }
+        }
+
+        .pricing-explain {
+          margin-top: 20px;
+          display: grid;
+          gap: 14px;
+        }
+
+        .pricing-explain-item strong {
+          display: block;
+          margin-bottom: 4px;
+          font-size: 15px;
+        }
+
+        .pricing-explain-item p {
+          margin: 0;
+          color: var(--muted);
+        }
+
+        @media (min-width: 641px) {
+          .pricing-explain {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 640px) {
+          .pricing-table-wrap {
+            overflow-x: visible;
+          }
+
+          .pricing-table thead {
+            display: none;
+          }
+
+          .pricing-table, .pricing-table tbody, .pricing-table tr, .pricing-table th, .pricing-table td {
+            display: block;
+            width: 100%;
+          }
+
+          .pricing-table tr {
+            margin-bottom: 10px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+          }
+
+          .pricing-table tbody th {
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            background: var(--bg-soft);
+            white-space: normal;
+          }
+
+          .pricing-table td {
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+          }
+
+          .pricing-table td:last-child {
+            border-bottom: 0;
+          }
+
+          .pricing-table .cell-label {
+            display: block;
+            flex: 0 0 auto;
+            font-weight: 600;
+            color: var(--text);
+          }
+
+          .pricing-table .cell-value {
+            text-align: right;
+          }
+        }
+
         .service-card-heading {
           margin: 0 0 8px;
         }
+
+        /* One offer should read first on a phone: Objecty is the default path,
+           the other two are for people who already know they don't fit it. */
+        .service-card--primary {
+          border-color: var(--accent-a);
+          box-shadow: 0 0 0 1px var(--accent-a) inset;
+        }
+
+        .service-card--secondary { opacity: .72; }
+        .service-card--secondary:hover,
+        .service-card--secondary:focus-within,
+        .service-card--secondary.is-open { opacity: 1; }
 
         .service-toggle {
           width: 100%;
@@ -1058,10 +1282,24 @@
           justify-content: flex-end;
         }
 
-        /* Demo block — a .cta-box that also carries body copy, so it stacks
-           instead of centring its two halves. */
-        .demo-box { align-items: flex-start; }
-        .demo-box .demo-body { flex: 1; min-width: 260px; }
+        .cta-secondary-link {
+          align-self: center;
+          color: var(--muted);
+          text-decoration: underline;
+          font-size: 14px;
+        }
+
+        /* Demo block — a .cta-box that also carries body copy and a
+           screenshot, so it stacks full-width instead of sitting side by
+           side with the buttons like the plain heading+button .cta-box. */
+        .demo-box { flex-direction: column; align-items: stretch; }
+        .demo-box .demo-body { width: 100%; }
+        .demo-box .cta-actions {
+          width: 100%;
+          margin-left: 0;
+          margin-top: 16px;
+          justify-content: flex-start;
+        }
 
         .demo-points {
           margin: 12px 0 0;
@@ -1073,8 +1311,31 @@
         .demo-points li { margin-bottom: 6px; }
         .demo-points li:last-child { margin-bottom: 0; }
 
+        /* The whole offer rests on "data is entered where the work happens",
+           so show that screen instead of only describing it. */
+        .demo-shot {
+          margin: 16px 0 0;
+          border: 1px solid var(--cta-box-border);
+          border-radius: 12px;
+          overflow: hidden;
+          line-height: 0;
+        }
+
+        .demo-shot img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        .demo-shot figcaption {
+          line-height: 1.4;
+          padding: 10px 14px;
+          font-size: 13px;
+          color: var(--muted);
+          border-top: 1px solid var(--cta-box-border);
+        }
+
         .demo-box .demo-caveat {
-          flex-basis: 100%;
           margin: 6px 0 0;
           padding-top: 14px;
           border-top: 1px solid var(--cta-box-border);
@@ -1297,6 +1558,12 @@
           .cta .btn,
           .cta-actions .btn {
             width: 100%;
+          }
+
+          .cta-secondary-link {
+            display: block;
+            text-align: center;
+            margin-top: 4px;
           }
 
           .hero-side .concept-board,

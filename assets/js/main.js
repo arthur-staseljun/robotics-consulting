@@ -444,10 +444,38 @@
 
       syncServiceCards();
 
+      const pricingWhyBlock = document.querySelector(".pricing-why-block");
+      const pricingWhyToggle = pricingWhyBlock && pricingWhyBlock.querySelector(".pricing-why-toggle");
+      const pricingWhyBody = pricingWhyBlock && pricingWhyBlock.querySelector(".pricing-explain");
+
+      function syncPricingWhy() {
+        if (!pricingWhyBlock || !pricingWhyToggle || !pricingWhyBody) return;
+        const isMobile = globalThis.innerWidth <= 760;
+        if (!isMobile) {
+          pricingWhyBody.hidden = false;
+          pricingWhyToggle.setAttribute("aria-expanded", "true");
+          return;
+        }
+        const isOpen = pricingWhyBlock.classList.contains("is-open");
+        pricingWhyBody.hidden = !isOpen;
+        pricingWhyToggle.setAttribute("aria-expanded", String(isOpen));
+      }
+
+      if (pricingWhyToggle) {
+        pricingWhyToggle.addEventListener("click", function () {
+          if (globalThis.innerWidth > 760) return;
+          pricingWhyBlock.classList.toggle("is-open");
+          syncPricingWhy();
+        });
+      }
+
+      syncPricingWhy();
+
       globalThis.addEventListener("resize", function () {
         if (globalThis.innerWidth > 760) closeMenu();
         applyLanguage(document.documentElement.lang || fallbackLanguage);
         syncServiceCards();
+        syncPricingWhy();
       });
 
       globalThis.addEventListener("scroll", function () {
@@ -757,7 +785,8 @@
       });
     })();
 
-    // Engagement funnel: PageView -> Scroll50 -> ViewContent -> CTAClick/FormStart -> Lead.
+    // Engagement funnel: PageView -> Scroll50 -> ViewContent -> ContactIntentClick/
+    // PrototypesClick/CvClick/DemoOpen/FormStart -> Lead.
     // Without these middle steps there is no way to tell "visitors never reach the
     // form" from "they reach it and don't want it" — opposite problems.
     //
@@ -828,8 +857,26 @@
           return;
         }
 
-        if (link.classList.contains("btn") && link.closest(".cta, .cta-box, .mobile-cta-bar")) {
-          once("ctaClick", "CTAClick", { cta: (link.textContent || "").trim().slice(0, 60) },
+        // The demo link now opens the live server directly (no contact-form
+        // gate) — a dedicated event so the funnel shows how many people
+        // actually opened it, distinct from the generic CTAClick bucket.
+        if (link.id === "demo-cta-link") {
+          once("demoOpen", "DemoOpen", undefined, { custom: true, gaEvent: "select_content" });
+          return;
+        }
+
+        // "Skatīt, ko es daru" is the only hero CTA pointing away from the
+        // contact form — someone wanting to see the portfolio, not to talk yet.
+        if (link.id === "hero-cta-alt") {
+          once("prototypesClick", "PrototypesClick", undefined, { custom: true, gaEvent: "select_content" });
+          return;
+        }
+
+        // Same "Rakstiet man" intent shows up in three places (hero, mid-page
+        // CTA, sticky mobile bar) — one event, not three, since it's one
+        // signal (wants to contact) regardless of which copy triggered it.
+        if (link.id === "hero-cta-main" || link.id === "cta-mid-btn" || link.id === "mobile-cta-bar-btn") {
+          once("contactIntent", "ContactIntentClick", { source: link.id },
                { custom: true, gaEvent: "select_content" });
         }
       });
