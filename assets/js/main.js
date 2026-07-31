@@ -421,7 +421,6 @@
             return;
           }
 
-
           const isOpen = card.classList.contains("is-open");
           body.hidden = !isOpen;
           toggle.setAttribute("aria-expanded", String(isOpen));
@@ -445,8 +444,8 @@
       syncServiceCards();
 
       const pricingWhyBlock = document.querySelector(".pricing-why-block");
-      const pricingWhyToggle = pricingWhyBlock && pricingWhyBlock.querySelector(".pricing-why-toggle");
-      const pricingWhyBody = pricingWhyBlock && pricingWhyBlock.querySelector(".pricing-explain");
+      const pricingWhyToggle = pricingWhyBlock?.querySelector(".pricing-why-toggle");
+      const pricingWhyBody = pricingWhyBlock?.querySelector(".pricing-explain");
 
       function syncPricingWhy() {
         if (!pricingWhyBlock || !pricingWhyToggle || !pricingWhyBody) return;
