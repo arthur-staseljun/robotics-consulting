@@ -590,19 +590,18 @@
           }
         }
 
-        const whatsappLink = document.getElementById("whatsapp-contact-link");
-        if (whatsappLink) {
-          whatsappLink.addEventListener("click", function () {
-            rcTrack("Contact", { method: "whatsapp" }, { gaEvent: "generate_lead" });
-          });
-        }
-
-        const phoneLink = document.getElementById("phone-contact-link");
-        if (phoneLink) {
-          phoneLink.addEventListener("click", function () {
-            rcTrack("Contact", { method: "phone" }, { gaEvent: "generate_lead" });
-          });
-        }
+        // Delegated rather than bound by id: calling is now offered in the hero
+        // and the sticky bar too, and every one of those is the same signal.
+        document.addEventListener("click", function (event) {
+          const link = event.target?.closest?.("a[href]");
+          if (!link) return;
+          const href = link.getAttribute("href") || "";
+          if (href.startsWith("tel:")) {
+            rcTrack("Contact", { method: "phone", source: link.id || "unlabeled" }, { gaEvent: "generate_lead" });
+          } else if (href.includes("wa.me")) {
+            rcTrack("Contact", { method: "whatsapp", source: link.id || "unlabeled" }, { gaEvent: "generate_lead" });
+          }
+        });
 
         form.addEventListener("submit", function (event) {
           event.preventDefault();

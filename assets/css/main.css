@@ -782,7 +782,22 @@
         }
 
         .mobile-cta-bar .btn {
-          width: 100%;
+          flex: 1 1 0;
+          min-width: 0;
+          justify-content: center;
+        }
+
+        /* Owners on site call rather than fill in forms — the phone stays a
+           peer of "write to me", not a fallback hidden at the bottom. */
+        #mobile-cta-bar-call {
+          flex: 0 1 auto;
+          gap: 6px;
+          white-space: nowrap;
+        }
+
+        #mobile-cta-bar-call .svg-icon {
+          width: 16px;
+          height: 16px;
         }
 
         .swipe-hint {
@@ -1705,7 +1720,14 @@
           }
 
           .mobile-cta-bar {
-            display: block;
+            display: flex;
+            gap: 8px;
+          }
+
+          /* The sticky bar already carries the phone on mobile — a third
+             full-width button in the hero would just push the page down. */
+          #hero-cta-call {
+            display: none;
           }
         }
 
