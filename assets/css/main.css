@@ -871,43 +871,6 @@
           color: var(--muted);
         }
 
-        .work-strip {
-          display: flex;
-          gap: 10px;
-          margin-top: 14px;
-        }
-
-        .work-strip a {
-          display: block;
-          flex: 1 1 0;
-          min-width: 0;
-          border-radius: 10px;
-          overflow: hidden;
-          border: 1px solid var(--panel-border);
-          transition: 160ms ease;
-        }
-
-        .work-strip a:hover { transform: translateY(-2px); }
-
-        .work-strip img {
-          display: block;
-          width: 100%;
-          height: 150px;
-          object-fit: cover;
-          object-position: top center;
-          background: var(--panel-bg);
-          filter: saturate(0.45) brightness(0.9);
-          transition: filter 160ms ease;
-        }
-
-        .work-strip a:hover img {
-          filter: saturate(1) brightness(1);
-        }
-
-        @media (max-width: 480px) {
-          .work-strip img { height: 90px; }
-        }
-
         .faq-toggle {
           width: 100%;
           border: 0;
@@ -1570,9 +1533,13 @@
             margin-top: 18px;
           }
 
-          .cta .btn,
           .cta-actions .btn {
             width: 100%;
+          }
+
+          .cta .btn {
+            flex: 1 1 0;
+            min-width: 0;
           }
 
           .cta-secondary-link {
@@ -1722,12 +1689,6 @@
           .mobile-cta-bar {
             display: flex;
             gap: 8px;
-          }
-
-          /* The sticky bar already carries the phone on mobile — a third
-             full-width button in the hero would just push the page down. */
-          #hero-cta-call {
-            display: none;
           }
         }
 
