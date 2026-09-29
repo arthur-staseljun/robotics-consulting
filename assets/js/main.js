@@ -849,13 +849,6 @@
         if (!link) return;
         const href = link.getAttribute("href") || "";
 
-        // Clicking through to the full CV means someone is checking who they'd be
-        // hiring — the strongest intent signal on the page short of contacting.
-        if (link.id === "about-cv-link") {
-          once("cvClick", "OpenedFullCV", undefined, { custom: true, gaEvent: "select_content" });
-          return;
-        }
-
         // The demo link now opens the live server directly (no contact-form
         // gate) — a dedicated event so the funnel shows how many people
         // actually opened it, distinct from the generic CTAClick bucket.
