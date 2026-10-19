@@ -843,6 +843,13 @@
       observeSection("about", "viewAbout", "about-section");
       observeSection("contact", "viewContact", "contact-section");
 
+      document.getElementById("audit-cta-link")?.addEventListener("click", function () {
+        const message = document.getElementById("cf-message");
+        if (message && !message.value.trim()) {
+          message.value = globalThis.rcCopy?.audit_prefill || "Website audit: ";
+        }
+      });
+
       const contactForm = document.getElementById("contact-form");
       if (contactForm) {
         contactForm.addEventListener("focusin", function (event) {

@@ -1252,6 +1252,8 @@
           font-size: 14px;
         }
 
+        .audit-box .audit-body { flex: 1 1 320px; }
+
         /* Demo block — a .cta-box that also carries body copy and a
            screenshot, so it stacks full-width instead of sitting side by
            side with the buttons like the plain heading+button .cta-box. */
@@ -1315,8 +1317,6 @@
           color: var(--muted);
           border-top: 1px solid var(--cta-box-border);
         }
-
-        .demo-hint { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
 
         .demo-box .demo-caveat {
           margin: 6px 0 0;
