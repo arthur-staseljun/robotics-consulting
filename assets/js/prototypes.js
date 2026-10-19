@@ -76,7 +76,7 @@
           leadmagSub: "Īss pašnovērtējuma tests ar 12 jautājumiem un punktu sistēmu: uzzināsiet, vai tagad ir vērts ieguldīt automatizācijā, vai vispirms sakārtot procesus.",
           leadmagSubMobile: "12 jautājumu tests: vai esat gatavi automatizācijai.",
           leadmagBtn: "Lejupielādēt bezmaksas kontrolsarakstu",
-          leadmagHref: "./assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf",
+          leadmagHref: "/assets/self-assesment-checklist/[LV] Praktiska automatizācijas gatavības pārbaudes lapa mazajiem un vidējiem uzņēmumiem.pdf",
           ctaTitle: "Vai atpazināt šeit savu situāciju?",
           ctaTitleMobile: "Vai atpazināt savu situāciju?",
           ctaSub: "Uzrakstiet dažās rindās, kas pie jums notiek. Atbildēsim tajā pašā darba dienā.",
@@ -168,7 +168,7 @@
           leadmagSub: "Короткий самотест на 12 вопросов с системой баллов: посчитаете, стоит ли вам вкладываться в автоматизацию прямо сейчас или сначала навести порядок в процессах.",
           leadmagSubMobile: "Тест на 12 вопросов: готовы ли вы к автоматизации.",
           leadmagBtn: "Скачать бесплатный чеклист",
-          leadmagHref: "./assets/self-assesment-checklist/[RU] Практический контрольный список по готовности к автоматизации для малых и средних предприятий.pdf",
+          leadmagHref: "/assets/self-assesment-checklist/[RU] Практический контрольный список по готовности к автоматизации для малых и средних предприятий.pdf",
           ctaTitle: "Узнали в этом свою ситуацию?",
           ctaTitleMobile: "Узнали свою ситуацию?",
           ctaSub: "Напишите в двух строках, что у вас происходит. Ответим в тот же рабочий день.",
@@ -260,7 +260,7 @@
           leadmagSub: "A short 12-question self-scoring test: find out whether it's worth investing in automation now, or whether you should tidy up your processes first.",
           leadmagSubMobile: "A 12-question test: are you ready for automation.",
           leadmagBtn: "Download Free Checklist",
-          leadmagHref: "./assets/self-assesment-checklist/[EN] Practical Automation Readiness Checklist for SMEs.pdf",
+          leadmagHref: "/assets/self-assesment-checklist/[EN] Practical Automation Readiness Checklist for SMEs.pdf",
           ctaTitle: "Recognise your own situation here?",
           ctaTitleMobile: "Recognise your situation?",
           ctaSub: "Write a couple of lines about what's going on at your company. We'll reply the same working day.",
@@ -291,11 +291,19 @@
       const siteOrigin = "https://www.sia-robotics-consulting.eu";
       const canonicalPath = "/prototypes.html";
 
+      // Languages live at /prototypes.html, /ru/prototypes.html and /en/prototypes.html
+      // (pre-rendered at build time); ?lang= is still honoured for old links.
+      function langPath(lang) {
+        return lang === "lv" ? canonicalPath : "/" + lang + canonicalPath;
+      }
+
       function langUrl(lang) {
-        return siteOrigin + canonicalPath + (lang === "lv" ? "" : "?lang=" + lang);
+        return siteOrigin + langPath(lang);
       }
 
       function getLangFromUrl() {
+        const pathMatch = /^\/(ru|en)\/prototypes\.html$/.exec(globalThis.location.pathname || "");
+        if (pathMatch) return pathMatch[1];
         const params = new URLSearchParams(globalThis.location.search || "");
         const urlLang = params.get("lang");
         return i18n[urlLang] ? urlLang : null;
@@ -303,13 +311,9 @@
 
       function syncLangUrl(lang) {
         const params = new URLSearchParams(globalThis.location.search || "");
-        if (lang === "lv") {
-          params.delete("lang");
-        } else {
-          params.set("lang", lang);
-        }
+        params.delete("lang");
         const query = params.toString();
-        const newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+        const newUrl = langPath(lang) + (query ? "?" + query : "") + globalThis.location.hash;
         globalThis.history.replaceState(null, "", newUrl);
       }
 

@@ -82,6 +82,51 @@ function render(lang) {
     }
   });
 
+  localizeLinks(doc, lang);
+  return dom.serialize();
+}
+
+// Point internal page links at the same language version (/ru/prototypes.html
+// instead of /prototypes.html, "/" -> "/ru/" ...).
+function localizeLinks(doc, lang) {
+  const base = langs[lang];
+  doc.querySelectorAll("a[href]").forEach((a) => {
+    const href = a.getAttribute("href");
+    if (href.startsWith("/prototypes.html")) {
+      a.setAttribute("href", base + href.slice(1).replace(/\?v=[^#]*/, ""));
+    } else if (href === "/" || href.startsWith("/#")) {
+      a.setAttribute("href", base + href.slice(1));
+    }
+  });
+}
+
+// prototypes.html gets its text from prototypes.js at runtime, so run that
+// script once per language inside jsdom and keep the resulting DOM.
+function renderPrototypes(lang) {
+  const html = readFileSync(join(root, "prototypes.html"), "utf8");
+  const script = readFileSync(join(root, "assets/js/prototypes.js"), "utf8");
+  const dom = new JSDOM(html, {
+    url: origin + (lang === "lv" ? "/prototypes.html" : `/${lang}/prototypes.html`),
+    runScripts: "outside-only",
+    pretendToBeVisual: true,
+  });
+  const { window } = dom;
+  window.rcTrack = () => {};
+  try {
+    window.eval(script);
+  } catch (error) {
+    // The engagement-tracking part (IntersectionObserver etc.) isn't available
+    // in jsdom; it runs after the text has been applied.
+    console.log(`  note: prototypes.js stopped after text was applied: ${error.message}`);
+  }
+  const doc = window.document;
+  doc.querySelectorAll("[href], [src], [srcset]").forEach((node) => {
+    for (const attr of ["href", "src", "srcset"]) {
+      const value = node.getAttribute(attr);
+      if (value?.startsWith("./")) node.setAttribute(attr, value.slice(1));
+    }
+  });
+  localizeLinks(doc, lang);
   return dom.serialize();
 }
 
@@ -90,4 +135,6 @@ for (const [lang, path] of Object.entries(langs)) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, "index.html"), render(lang));
   console.log(`built ${path}index.html (${lang})`);
+  writeFileSync(join(dir, "prototypes.html"), renderPrototypes(lang));
+  console.log(`built ${path}prototypes.html (${lang})`);
 }

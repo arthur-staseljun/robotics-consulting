@@ -115,7 +115,7 @@
   "contact_call_btn": "Zvaniet",
   "contact_whatsapp_btn": "Rakstiet WhatsApp",
   "contact_sending": "Sūta…",
-  "contact_success": "Paldies — ziņa ir ceļā. Drīz atbildēsim e-pastā.",
+  "contact_success": "Paldies — ziņa ir ceļā. Drīz sazināsimies.",
   "contact_error": "Nosūtot radās kļūda. Lūdzu, mēģiniet vēlreiz vai {email}.",
   "contact_error_link": "rakstiet mums tieši",
   "contact_turnstile": "Lūdzu, pabeidziet drošības pārbaudi un mēģiniet vēlreiz.",

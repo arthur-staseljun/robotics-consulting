@@ -873,7 +873,7 @@
         // button, the work-strip thumbnails, the top-nav item — is the same signal
         // (wants to see examples, not talk yet), so they share one event regardless
         // of which link on the page triggered it.
-        if (href.startsWith("./prototypes.html") || href.startsWith("/prototypes.html") || href.startsWith("prototypes.html")) {
+        if (/(^|\/)prototypes\.html/.test(href)) {
           once("portfolioClick", "ClickedPortfolioLink", { source: link.id || link.className || "unlabeled" },
                { custom: true, gaEvent: "select_content" });
           return;
