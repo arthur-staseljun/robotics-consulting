@@ -2,14 +2,12 @@
       const i18nVersionMeta = document.querySelector('meta[name="i18n-version"]');
       const i18nVersion = i18nVersionMeta ? i18nVersionMeta.getAttribute("content") : "2026-05-14-03";
       const languageFiles = {
-        lv: "./locales/lv.json",
-        ru: "./locales/ru.json",
-        en: "./locales/en.json"
+        lv: "/locales/lv.json",
+        ru: "/locales/ru.json",
+        en: "/locales/en.json"
       };
       const fallbackLanguage = "lv";
       const languageCache = {};
-      const heroUnderlineWords = { lv: "vienā sistēmā", en: "in one system", ru: "в одной системе" };
-      const soulUnderlineSvg = '<svg class="soul-underline-svg" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C30,2 50,12 80,6 C100,2 110,8 118,6"/></svg>';
 
       function escapeHtml(str) {
         return str.replace(/[&<>"']/g, function (c) {
@@ -17,25 +15,22 @@
         });
       }
 
-      function renderHeroTitle(node, text, lang) {
-        const word = heroUnderlineWords[lang];
-        const idx = word ? text.indexOf(word) : -1;
-        if (idx === -1) {
-          node.textContent = text;
-          return;
-        }
-        const before = escapeHtml(text.slice(0, idx));
-        const after = escapeHtml(text.slice(idx + word.length));
-        node.innerHTML = before + '<span class="soul-underline">' + escapeHtml(word) + soulUnderlineSvg + "</span>" + after;
-      }
       const siteOrigin = "https://www.sia-robotics-consulting.eu";
       const canonicalPath = "/";
 
+      // Languages live at /, /ru/ and /en/ (the build pre-renders each one so
+      // crawlers get real text); ?lang= is still honoured for old links.
+      function langPath(lang) {
+        return canonicalPath + (lang === fallbackLanguage ? "" : lang + "/");
+      }
+
       function langUrl(lang) {
-        return siteOrigin + canonicalPath + (lang === fallbackLanguage ? "" : "?lang=" + lang);
+        return siteOrigin + langPath(lang);
       }
 
       function getLangFromUrl() {
+        const pathMatch = /^\/(ru|en)\/?$/.exec(globalThis.location.pathname || "");
+        if (pathMatch) return pathMatch[1];
         const params = new URLSearchParams(globalThis.location.search || "");
         const urlLang = params.get("lang");
         return languageFiles[urlLang] ? urlLang : null;
@@ -43,16 +38,12 @@
 
       function syncLangUrl(lang) {
         const params = new URLSearchParams(globalThis.location.search || "");
-        if (lang === fallbackLanguage) {
-          params.delete("lang");
-        } else {
-          params.set("lang", lang);
-        }
+        params.delete("lang");
         const query = params.toString();
-        const newUrl = globalThis.location.pathname + (query ? "?" + query : "") + globalThis.location.hash;
+        const newUrl = langPath(lang) + (query ? "?" + query : "") + globalThis.location.hash;
         globalThis.history.replaceState(null, "", newUrl);
       }
-      const counterStartConfigPath = "./assets/counter.json";
+      const counterStartConfigPath = "/assets/counter.json";
       const counterApiEndpoint = "https://robotics-counter-worker.sia-robotics-consulting.workers.dev/api/counter";
       // rcTurnstileToken, rcTurnstileResolvers, rcOnTurnstileToken defined in <head>
       let counterStartCache;
@@ -293,17 +284,24 @@
         document.documentElement.lang = selected;
         document.title = copy.page_title;
         if (descriptionMeta) descriptionMeta.setAttribute("content", copy.page_desc);
+        const socialMeta = {
+          'meta[property="og:title"]': copy.page_title,
+          'meta[name="twitter:title"]': copy.page_title,
+          'meta[property="og:description"]': copy.page_desc,
+          'meta[name="twitter:description"]': copy.page_desc,
+          'meta[property="og:locale"]': { lv: "lv_LV", ru: "ru_RU", en: "en_US" }[selected]
+        };
+        Object.keys(socialMeta).forEach(function (selector) {
+          const node = document.querySelector(selector);
+          if (node) node.setAttribute("content", socialMeta[selector]);
+        });
 
         globalThis.rcCopy = copy;
 
         document.querySelectorAll("[data-i18n]").forEach(function (node) {
           const key = node.dataset.i18n;
           if (!Object.hasOwn(copy, key)) return;
-          if (key === "hero_title") {
-            renderHeroTitle(node, copy[key], selected);
-          } else {
-            node.textContent = copy[key];
-          }
+          node.textContent = copy[key];
         });
 
         document.querySelectorAll("[data-i18n-placeholder]").forEach(function (node) {
@@ -621,16 +619,30 @@
             return;
           }
 
+          const contactField = form.querySelector('input[name="contact"]');
+          const contactValue = contactField ? contactField.value.trim() : "";
+          if (!contactValue) {
+            status.className = "rc-form-status is-error";
+            status.textContent = t("contact_required", "Please add a phone number or email so we can reply.");
+            contactField?.focus();
+            return;
+          }
+
           const originalLabel = submitBtn ? submitBtn.textContent : "";
           if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.textContent = t("contact_sending", "Sending…");
           }
 
+          // Web3Forms uses the "email" field as the reply-to address, so pass
+          // it along only when the visitor actually gave an email.
+          const formData = new FormData(form);
+          if (contactValue.includes("@")) formData.set("email", contactValue);
+
           fetch("https://api.web3forms.com/submit", {
             method: "POST",
             headers: { "Accept": "application/json" },
-            body: new FormData(form)
+            body: formData
           })
             .then(function (response) { return response.json(); })
             .then(function (data) {
@@ -861,7 +873,7 @@
         // button, the work-strip thumbnails, the top-nav item — is the same signal
         // (wants to see examples, not talk yet), so they share one event regardless
         // of which link on the page triggered it.
-        if (href.startsWith("./prototypes.html") || href.startsWith("prototypes.html")) {
+        if (href.startsWith("./prototypes.html") || href.startsWith("/prototypes.html") || href.startsWith("prototypes.html")) {
           once("portfolioClick", "ClickedPortfolioLink", { source: link.id || link.className || "unlabeled" },
                { custom: true, gaEvent: "select_content" });
           return;

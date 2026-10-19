@@ -4,13 +4,25 @@ Static marketing site hosted on GitHub Pages.
 
 ## Local Development
 
-No build step — it's plain HTML/CSS/JS. To preview changes:
+The source is plain HTML/CSS/JS and works without a build. To preview changes:
 
 ```bash
 python3 -m http.server 8000
 ```
 
 Then open `http://localhost:8000/`.
+
+### Deployment build
+
+GitHub Actions runs `scripts/build/build.mjs` before publishing. It bakes `locales/*.json` into static HTML so crawlers and link previews see real text: `/` (LV), `/ru/`, `/en/`. The output goes to `_site/` (git-ignored). To try it locally:
+
+```bash
+npm install --prefix scripts/build
+node scripts/build/build.mjs
+python3 -m http.server 8000 --directory _site
+```
+
+Locally from source, `/ru/` and `/en/` don't exist; switch language with the buttons or `?lang=ru` instead.
 
 **Nothing here is live until it's committed and pushed.** GitHub Pages serves whatever is on the deployed branch, so checking `www.sia-robotics-consulting.eu` while iterating locally will show the old site — always verify against `localhost`, not the production URL, while a change is still uncommitted.
 

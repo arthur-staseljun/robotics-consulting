@@ -26,24 +26,22 @@
     <meta name="twitter:title" content="Automatizācijas piemēri | Robotics Consulting">
     <meta name="twitter:description" content="Reāli automatizācijas un rīku piemēri maziem un augošiem uzņēmumiem.">
     <meta name="twitter:image" content="https://www.sia-robotics-consulting.eu/assets/og-image.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/prototypes.css">
+    <link rel="stylesheet" href="./assets/css/fonts.css?v=2026-10-19-01">
+    <link rel="stylesheet" href="./assets/css/prototypes.css?v=2026-10-19-03">
     <!-- Analytics helper — kept identical to index.html so both pages behave the
          same: everything is gated on the production hostname, and off-prod the
          events go to the console instead of the live Pixel / Ads account.
          ?rc_debug=1 forces the same off-prod (console-only) behavior even on
          the prod hostname, for testing directly on the live site; persists via
          localStorage until cleared with ?rc_debug=0. -->
-    <script src="./assets/js/rc-track.js"></script>
+    <script src="./assets/js/rc-track.js?v=2026-10-19-01"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18116557749">
     </script>
-    <script src="./assets/js/gtag-init.js"></script>
+    <script src="./assets/js/gtag-init.js?v=2026-10-19-01"></script>
     <!-- Meta Pixel. This page had none, so anyone who clicked through from the
          hero's "see examples" dropped off the Pixel's radar entirely. -->
-    <script src="./assets/js/meta-pixel-init.js"></script>
+    <script src="./assets/js/meta-pixel-init.js?v=2026-10-19-01"></script>
 </head>
 <body>
 <div class="container">
@@ -61,7 +59,12 @@
         </div>
     </div>
 <h1 id="page-title">Praktiski piemēri mazam biznesam</h1>
-    <p class="demo-note" id="demo-note">Ekrānuzņēmumos redzami demonstrācijas dati — vārdi, adreses un summas ir izdomātas; reālus klientu skaitļus nerādu. Katrai sistēmai zemāk norādīts godīgs statuss: kas jau tiek ieviests un kas palicis prototipa līmenī.</p>
+    <p class="demo-note" id="demo-note">Ekrānuzņēmumos redzami demonstrācijas dati — vārdi, adreses un summas ir izdomātas; reālus klientu skaitļus nerādām. Katrai sistēmai zemāk norādīts godīgs statuss: kas jau tiek ieviests un kas palicis prototipa līmenī.</p>
+    <nav class="proto-toc" aria-label="Piemēri">
+        <a href="#gogridas-crm" data-toc="estr-title"></a>
+        <a href="#expense-tracker" data-toc="exp-title"></a>
+        <a href="#tier-scheduler" data-toc="tier-title"></a>
+    </nav>
 
     <!-- Objecty CRM Section (case: Go Gridas) -->
     <section id="gogridas-crm" class="proto-section">
@@ -71,10 +74,10 @@
         <h3 class="proto-subhead" id="estr-daily-head">Ikdienas darbs sistēmā</h3>
         <p class="proto-lead" id="estr-daily-lead">Sāksim ar to, kas notiek katru dienu. Brigadieris telefonā ievada objektu, padarīto darbu, platību, likmi un brigādes sastāvu — turpat, kur darbs notiek. Dati tiek ievadīti vienreiz, un izmaksas tiek aprēķinātas automātiski.</p>
         <div class="proto-gallery">
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.10.49.png" alt="Go Gridas objekta informācija" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.11.53.png" alt="Go Gridas padarītā darba detaļas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.12.56.png" alt="Go Gridas brigādes informācija un izmaksas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
-            <picture><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.07.53.png" alt="Go Gridas pārskats" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><source srcset="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.10.49.webp" type="image/webp"><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.10.49.png" alt="Go Gridas objekta informācija" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><source srcset="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.11.53.webp" type="image/webp"><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.11.53.png" alt="Go Gridas padarītā darba detaļas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><source srcset="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.12.56.webp" type="image/webp"><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.12.56.png" alt="Go Gridas brigādes informācija un izmaksas" loading="lazy" decoding="async" width="2880" height="1666"></picture>
+            <picture><source srcset="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.07.53.webp" type="image/webp"><img src="./assets/prototypes/estrich/Screenshot%202026-07-01%20at%2019.07.53.png" alt="Go Gridas pārskats" loading="lazy" decoding="async" width="2880" height="1666"></picture>
         </div>
         <h3 class="proto-subhead" id="estr-value-head">Jūsu bizness</h3>
         <p class="proto-lead" id="estr-value-lead">No tiem pašiem datiem — bez atsevišķa darba — salasās pārskati. Vairums mazo uzņēmumu vadās pēc sajūtas: šķiet, ka Rīgā darba visvairāk, ka viena brigāde strādā labāk, ka materiāls izmaksā apmēram tik. Kamēr skaitļi ir galvā un uz papīra, tos nevar pārbaudīt. Šie deviņi pārskati atbild uz jautājumiem, uz kuriem citādi atbild minējums. Skaitļi zemāk ir no demonstrācijas datu komplekta, bet jautājumi un aprēķina loģika ir īsti.</p>
@@ -199,7 +202,7 @@
                 <strong>Kāpēc tas atmaksājas biznesam:</strong> Deviņi pārskati atbild uz jautājumiem, ko citādi var tikai minēt — kur bizness tiešām pelna, vai nākamajā mēnesī pietiks naudas, cik ļoti ienākumi atkarīgi no sezonas. Lēmumi par cenām, komandas lielumu un iepirkumiem balstās skaitļos, nevis sajūtā.
             </div>
             <div id="estr-copy-2" class="proto-readme">
-                <strong>Ko sistēma pārbauda:</strong> Katru pozīciju tā salīdzina ar sava darba veida vidējo likmi un iezīmē tās, kas norēķinātas krietni zemāk. Bez izsekošanas šādas novirzes pamana tikai gada beigās, kad tās vairs nevar labot — ar brīdinājumu tās var apturēt, kamēr darbs vēl notiek. Klāt nāk mazāk manuālu kļūdu algu aprēķinos un ātrāka mēneša noslēguma sagatavošana. Cik tas ir naudā, ir atkarīgs no jūsu apjoma; skaitļus, ko es neesmu mērījis pie klienta, es nesolīšu.
+                <strong>Ko sistēma pārbauda:</strong> Katru pozīciju tā salīdzina ar sava darba veida vidējo likmi un iezīmē tās, kas norēķinātas krietni zemāk. Bez izsekošanas šādas novirzes pamana tikai gada beigās, kad tās vairs nevar labot — ar brīdinājumu tās var apturēt, kamēr darbs vēl notiek. Klāt nāk mazāk manuālu kļūdu algu aprēķinos un ātrāka mēneša noslēguma sagatavošana. Cik tas ir naudā, ir atkarīgs no jūsu apjoma; skaitļus, ko mēs neesam mērījuši pie klienta, mēs nesolīsim.
             </div>
             <div id="estr-copy-3" class="proto-readme">
                 <strong>Kā tas izskatās ikdienā:</strong> Brigadieris ievada padarīto darbu caur 3-soļu vedni — objekts, darbu veidi, brigādes sastāvs — un izmaksas tiek aprēķinātas automātiski.
@@ -256,7 +259,7 @@
                 no dažādiem kanāliem.
             </div>
             <div id="exp-copy-2" class="proto-readme">
-                <strong>Aplēstais efekts:</strong> Pēc maniem aprēķiniem komanda ar 10 darbiniekiem ietaupa ap
+                <strong>Aplēstais efekts:</strong> Pēc mūsu aprēķiniem komanda ar 10 darbiniekiem ietaupa ap
                 100 minūtēm dienā uz administratīvo darbu. Tā ir aplēse, nevis mērījums pie klienta.
             </div>
             <div id="exp-copy-3" class="proto-readme">
@@ -356,10 +359,10 @@
     <section class="cta-box">
         <div>
             <h2 id="cta-title">Vai atpazināt šeit savu situāciju?</h2>
-            <p id="cta-sub">Uzrakstiet dažās rindās, kas pie jums notiek. Atbildēšu tajā pašā darba dienā.</p>
+            <p id="cta-sub">Uzrakstiet dažās rindās, kas pie jums notiek. Atbildēsim tajā pašā darba dienā.</p>
         </div>
         <div class="cta-actions">
-            <a id="cta-button" class="btn btn-main" href="index.html#contact">Rakstiet man</a>
+            <a id="cta-button" class="btn btn-main" href="index.html#contact">Rakstiet mums</a>
         </div>
     </section>
 
@@ -377,7 +380,7 @@
     </div>
 </div>
 
-<script src="./assets/js/prototypes.js"></script>
+<script src="./assets/js/prototypes.js?v=2026-10-19-03"></script>
 </body>
 </html>
 

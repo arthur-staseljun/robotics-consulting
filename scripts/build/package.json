@@ -1,0 +1,7 @@
+{
+  "name": "robotics-consulting-build",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "jsdom": "26.1.0" }
+}

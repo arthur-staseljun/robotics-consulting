@@ -5,3 +5,5 @@
 /scripts/pdf-tools/.venv/
 .DS_Store
 **/__pycache__/
+/_site/
+node_modules/
