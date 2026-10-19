@@ -1316,6 +1316,8 @@
           border-top: 1px solid var(--cta-box-border);
         }
 
+        .demo-hint { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+
         .demo-box .demo-caveat {
           margin: 6px 0 0;
           padding-top: 14px;

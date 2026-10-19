@@ -133,5 +133,6 @@
   "faq_q10": "Cik ātri var sākt?",
   "faq_a10": "Objecty — apmēram mēnesis: sakārtojam jūsu likmes, pārnesam datus no Excel, apmācām brigadierus. Individuāliem projektiem termiņu nosaucam pēc uzdevuma izpētes.",
   "faq_q11": "Vai jāpērk vai jāuzstāda kaut kas?",
-  "faq_a11": "Nē. Serveri un apkalpošanu uzņemamies mēs — vajag tikai pārlūku vai telefonu."
+  "faq_a11": "Nē. Serveri un apkalpošanu uzņemamies mēs — vajag tikai pārlūku vai telefonu.",
+  "demo_hint": "Ērtāk atvērt datorā."
 }
